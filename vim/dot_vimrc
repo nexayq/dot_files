@@ -1,0 +1,1660 @@
+
+" TODO
+    "* Make vimrc backups often
+        " DONE - Search tags by filename
+        " DONE - Open Netrw files in custom window, stay in netrw
+        " DONE - edit remote files
+        " DONE - undo history percent sign replace
+        " DONE - vim compatibility or switches
+        " DONE - Go to definition of variable and list all matches - "[i", "[I" - /ref/ - http://usevim.com/2013/08/02/include-file-searches/
+        " DONE - Open tags in vertical split and remain focus on active window
+        " DONE - Add installation requirements for Linux and Windows
+        " DONE - Unite open with external app - <C-x>
+        " DONE - Setup GVIM for MS Windows
+        " DONE - Install Unite (Greate Plugin!) and use instead of CtrlP
+        " DONE - Fixed autocomplete colors
+        " DONE - Set backup and swap directories
+        " DONE - Search and replace in directories
+        " DONE - Search and replace in buffers - http://www.thegeekstuff.com/2009/04/vi-vim-editor-search-and-replace-examples/
+        " DONE - Copy/Paste shortcuts <leader>c , <leader>v
+        " DONE - tags
+        " DONE - Code folding
+        " DONE - gundo
+        " DONE - Shift + Arrow insert mode
+
+" Installation
+    " Linux
+        " - Install "Vundle" or "Neobundle"
+            " - Vundle - "https://github.com/VundleVim/Vundle.vim"
+                " - "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.v"
+                " - Copy your custom vimrc to "~/.vimrc"
+                " - Run "gvim" and run command ":PluginInstall"
+                " - Restart "gvim"
+            " - Neobundle - "https://github.com/Shougo/neobundle.vim"
+                " - $ curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > install.sh
+                " - $ sh ./install.sh
+            " - Syntastic
+                " - If you want parser for verilog, download "verilator"
+                " - Support - "https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers"
+
+    " Windows
+        " - Install "cygwin", - https://cygwin.com/install.html
+                  " "git",  - https://git-scm.com/download/win
+                  " "MinGW" - http://sourceforge.net/projects/mingw-w64/
+        " - Add "bin" directories to "%PATH%", "MinGW" before "cygwin" and "git" because of "gcc"
+
+        " - Install "Vundle" or "Neobundle" (see in Linux section) - requires "curl", available in git bin
+        " - Download aldmeris (oblivion like) colorscheme from - https://github.com/veloce/vim-aldmeris
+        " - "Syntastic" - (Requires MinGWCheck "gcc" on sample file "a.c" from terminal before trying syntastic - "gcc a.c"
+        "               - In "%PATH%" make sure "MinGW bin" is before "cygwin" and "git" bins because of "gcc"
+        "               - Support - "https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers"
+
+" Good examples and practices
+    "        http://learnvimscriptthehardway.stevelosh.com/
+    "        http://dougblack.io/words/a-good-vimrc.html
+    "        https://github.com/osfameron/vimrc/blob/master/.vimrc
+    "        https://github.com/gabriellima/dotvim/blob/master/vimrc
+    "        http://amix.dk/vim/vimrc.html
+    "        https://github.com/search?utf8=%E2%9C%93&q=vimrc
+    "        https://github.com/VundleVim/Vundle.vim/wiki/Examples
+    "        https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+
+" Cheatsheets
+    " http://www.fprintf.net/vimCheatSheet.html
+
+" Special OS keys
+    " Ctrl-I      Tab
+    " Ctrl-[      Esc
+    " Ctrl-M      Enter
+    " Ctrl-H      Backspace
+
+" Set leader key
+    let mapleader=" "
+    " nnoremap <leader> :echo("\<leader\> works! It is set to <leader>")<CR>
+
+" .vim directory unix and vimfiles ms ws
+    if has("unix")
+        let g:nk_vim_dir = $HOME."/.vim"
+    else
+        let g:nk_vim_dir  = $HOME."/vimfiles"
+    endif
+
+" Vundle
+    " Install plugins from command line
+    " vim +PluginInstall +qall
+
+    " Put this at the top of your `.vimrc` to use Vundle. Remove plugins you don't need, they are for illustration purposes.
+    set nocompatible              " be iMproved, required
+    filetype off                  " required
+
+    " set the runtime path to include Vundle and initialize
+if has("unix")
+    set rtp+=$HOME/.vim/bundle/Vundle.vim
+    call vundle#begin()
+else
+    set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
+    call vundle#begin('$USERPROFILE/vimfiles/bundle/')
+endif
+    " alternatively, pass a path where Vundle should install plugins
+    "call vundle#begin('~/some/path/here')
+
+    " let Vundle manage Vundle, required
+    Plugin 'VundleVim/Vundle.vim'
+
+    " The following are examples of different formats supported.
+    " Keep Plugin commands between vundle#begin/end.
+    " plugin on GitHub repo
+    "Plugin 'tpope/vim-fugitive'
+    " plugin from http://vim-scripts.org/vim/scripts.html
+    "Plugin 'L9'
+    " Git plugin not hosted on GitHub
+    "Plugin 'git://git.wincent.com/command-t.git'
+    " git repos on your local machine (i.e. when working on your own plugin)
+    "Plugin 'file:///home/gmarik/path/to/plugin'
+    " The sparkup vim script is in a subdirectory of this repo called vim.
+    " Pass the path to set the runtimepath properly.
+    "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+    " Avoid a name conflict with L9
+    "Plugin 'user/L9', {'name': 'newL9'}
+
+    "Airline plugin
+        Plugin 'vim-airline/vim-airline'
+        " Enable the list of buffers
+        let g:airline#extensions#tabline#enabled = 1
+
+        " Dont show tabs
+        " enable/disable displaying tabs, regardless of number. >
+        let g:airline#extensions#tabline#show_tabs = 0
+
+        " Show just the filename and buffer number
+        let g:airline#extensions#tabline#fnamemod = ':t'
+        let g:airline#extensions#tabline#buffer_nr_show = 1
+
+        " Buffer line extension
+        let g:airline#extensions#bufferline#enabled = 0
+
+        " Show current working directory on the right side - https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt#L219
+        " let g:airline_section_b = '%.40{getcwd()}'
+        let g:airline_section_b = '%.50{getcwd()}'
+        " let g:airline_section_c = '%{expand('%:t')'
+        let g:airline_section_y = '%{&fileformat}'
+
+        " let g:airline_left_sep='>'
+
+            " Set '>' as separator
+            " let g:airline#extensions#tabline#left_sep = ' '
+            " let g:airline#extensions#tabline#right_sep = '>'
+            " let g:airline#extensions#tabline#left_alt_sep = '|'
+
+
+                " /ref/ http://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
+
+    " Syntastic - for MS Windows install MinGW c compiler - /ref/ http://sourceforge.net/projects/mingw-w64/?source=typ_redirect
+        " syntastic does basic QuickFix stuffs, and integrates nicely with Powerline
+        Plugin 'scrooloose/syntastic'
+
+        " Show warnings for C files
+        let g:syntastic_c_compiler_options = "-Wall"
+
+        " Show warnings for CPP files
+        let g:syntastic_cpp_compiler_options = "-Wall"
+
+        let g:syntastic_error_symbol = "!"
+
+        "Disable syntastic check
+            " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+            " :SyntasticToggleMode
+                " /ref/ http://stackoverflow.com/a/21434697/2450748
+                " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+                " nnoremap <F11> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+                nnoremap <leader>vs :SyntasticToggleMode<CR>
+
+    " CtrlP
+   " Plugin 'kien/ctrlp.vim'
+   " let g:ctrlp_extensions = ['tag']
+   "     " /ref/ https://github.com/ctrlpvim/ctrlp.vim#once-ctrlp-is-open
+   "     " /ref/ https://www.youtube.com/watch?v=8XGueeQJsrA
+   "     "
+   "     " map <leader>f :CtrlPMixed<CR>
+   "     " map <leader>l :CtrlPLine<CR>
+   "     " map <leader>b :CtrlPBuffer<CR>
+   "     " map <leader>b :CtrlPBookmarkDir<CR>
+
+   " let g:ctrlp_max_files=0
+   " let g:ctrlp_max_depth=0
+   " let g:ctrlp_regexp = 1
+   " let g:ctrlp_follow_symlinks = 1
+   " let g:ctrlp_show_hidden = 1
+   "     " let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+   "     " Setup some default ignores
+   "     " let g:ctrlp_custom_ignore = {
+   "     "  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+   "     "  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+   "     " \}
+   " let g:ctrlp_working_path_mode = 0
+
+    " Unite
+        Plugin 'Shougo/unite.vim'
+        " Plugin 'tsukkee/unite-tag'
+
+        " nnoremap <buffer> <C-]> :<C-u>UniteWithCursorWord -immediately tag<CR>
+
+        " Get help - type g? in normal mode
+        " g?
+
+        " Close
+        " <C-g> or "q" in normal mode, "Q" to close all Unite windows
+
+        " <C-j> - auto preview
+
+        " <C-f> - Expand directory and search for files
+
+        " <Space> - Select multiple files and open them
+
+        " b - bookmark file/directory
+
+        " cd - (normal mode) Change current directory to selected directory - Great one
+
+        " let g:unite_source_history_yank_enable = 1
+        " let g:unite_source_grep_command = 'grep'
+
+        " all commands are in normal mode by default - interesting
+        map <leader>b :Unite buffer -smartcase -vertical-preview<CR>i
+        " map <leader>f :Unite buffer file<CR>i
+        map <leader>ff :Unite file_rec -start-insert -smartcase -vertical-preview -keep-focus -no-quit<CR>
+        " map <leader>ft :Unite file -start-insert -smartcase -keep-focus -no-quit<CR>
+        map <leader>ft :Unite file -start-insert -smartcase -keep-focus -no-quit<CR>
+        map <leader>fb :Unite bookmark -start-insert -smartcase<CR>
+        " /ref/ http://stackoverflow.com/questions/21878402/how-to-navigate-results-candidates-in-unite-vim
+        map <leader>fr :UniteResume<CR>
+        map <leader>fc :UniteClose<CR>
+        " map <leader>f :Unite -smartcase -start-insert buffer file_rec/async:!<CR>
+        " map <leader>f :Unite file_rec buffer <CR>i**/
+
+    " let g:unite_source_file_rec_max_cache_files = 0
+
+            " Unite window settings
+            autocmd FileType unite call s:unite_my_settings()
+            function! s:unite_my_settings()"{{{
+                " Overwrite settings.
+
+            " Default action - Enter replace with C-l"
+                " imap <buffer> <C-l>     <Plug>(unite_do_default_action)
+            " Important for backward path in tree mode"
+                nmap <buffer> [     <Plug>(unite_delete_backward_path)
+                " You probably wont use [ for file names so it is ok to stay also in insert mode"
+                imap <buffer> [     <Plug>(unite_delete_backward_path)
+            "Vertical split"
+                imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+            "Copy to command line in order to open using external application
+                nmap <silent><buffer><expr> <C-x> unite#do_action('ex')
+                imap <silent><buffer><expr> <C-x> unite#do_action('ex')
+            " Change current directory, or local for window (lcd)
+                nnoremap <silent><buffer><expr> <C-d>     unite#do_action('cd')
+                inoremap <silent><buffer><expr> <C-d>     unite#do_action('cd')
+                nnoremap <silent><buffer><expr> lcd     unite#do_action('lcd')
+                " nnoremap <silent><buffer><expr> cd     unite#do_action('cd')
+            " Expand directory and search files
+                inoremap <silent><buffer><expr> <C-a>     unite#do_action('rec_parent')
+                nnoremap <silent><buffer><expr> <C-a>     unite#do_action('rec_parent')
+                inoremap <silent><buffer><expr> <C-f>     unite#do_action('rec')
+                nnoremap <silent><buffer><expr> <C-f>     unite#do_action('rec')
+
+                nmap <buffer> '     <Plug>(unite_input_directory)
+
+
+                nmap <buffer> <C-p>     <Plug>(unite_toggle_auto_preview)
+                imap <buffer> <C-p>     <Plug>(unite_toggle_auto_preview)
+
+                imap <buffer> jj      <Plug>(unite_insert_leave)
+                "imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
+
+                imap <buffer><expr> j unite#smart_map('j', '')
+                " imap <buffer> <TAB>   <Plug>(unite_select_next_line)
+                imap <buffer> '     <Plug>(unite_quick_match_default_action)
+                nmap <buffer> '     <Plug>(unite_quick_match_default_action)
+                imap <buffer><expr> x
+                        \ unite#smart_map('x', "\<Plug>(unite_quick_match_jump)")
+                nmap <buffer> x     <Plug>(unite_quick_match_jump)
+                nmap <buffer> <C-r>     <Plug>(unite_toggle_transpose_window)
+                imap <buffer> <C-r>     <Plug>(unite_toggle_transpose_window)
+                " nmap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
+                " imap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
+                " nnoremap <silent><buffer><expr> l
+                "       \ unite#smart_map('l', unite#do_action('default'))
+
+                let unite = unite#get_current_unite()
+                if unite.profile_name ==# 'search'
+                  nnoremap <silent><buffer><expr> r     unite#do_action('replace')
+                else
+                  nnoremap <silent><buffer><expr> r     unite#do_action('rename')
+                endif
+
+                nnoremap <buffer><expr> S      unite#mappings#set_current_filters(
+                        \ empty(unite#mappings#get_current_filters()) ?
+                        \ ['sorter_reverse'] : [])
+
+                " Runs "split" action by <C-s>.
+                imap <silent><buffer><expr> <C-s>     unite#do_action('split')
+            endfunction"}}}
+
+        " let g:unite_source_codesearch_ignore_case = 1
+
+        " Make search case insensitive - :
+        " call unite#custom#profile('ignorecase','context.ignorecase',1)
+        " call unite#custom#profile('source/command',
+        "  \ 'context', {
+        "  \   'smartcase': 1,
+        "  \ })
+        " call unite#custom#profile('ignorecase','smartcase',1)
+
+    " Vimfiler
+        Plugin 'Shougo/vimfiler.vim'
+        " /ref/ https://github.com/Shougo/vimfiler.vim/blob/master/doc/vimfiler.txt
+
+        noremap <leader>ee :VimFiler           -buffer-name=@cwd_vf     -no-quit -split -direction=<CR>
+        noremap <leader>ew :VimFilerCurrentDir -buffer-name=@cwd_vf     -no-quit -split -direction=<CR>
+        noremap <leader>eb :VimFilerBufferDir  -buffer-name=@buffer_vf  -no-quit -split -direction=<CR>
+
+        " nnoremap <silent><buffer><expr> <C-x>     unite#do_action('cd')
+        " nnoremap <C-x> <Plug>(vimfiler_switch_to_history_directory)
+        autocmd FileType vimfiler nunmap <buffer> <C-j>
+        autocmd FileType vimfiler nunmap <buffer> <CR>
+        autocmd FileType vimfiler nunmap <buffer> <Space>
+        " /ref/ https://github.com/Shougo/vimfiler.vim/issues/178
+        " autocmd FileType vimfiler unmap  <C-j>
+        autocmd FileType vimfiler nmap  <C-h> <Plug>(vimfiler_switch_to_history_directory)
+        autocmd FileType vimfiler nmap  [ <Plug>(vimfiler_cd_or_edit)
+        autocmd FileType vimfiler nmap  <CR> <Plug>(vimfiler_expand_tree)
+        autocmd FileType vimfiler nmap  s <Plug>(vimfiler_toggle_mark_current_line)
+
+        " autocmd FileType vimfiler nmap <buffer> <C-R>  <Plug>(vimfiler_redraw_screen)
+        " autocmd FileType vimfiler nmap  <C-j> :bn!<CR>
+        " noremap <C-j> :bn!<CR>
+        " t, T  -> expand directory, recursively
+        " gs    -> Exit/enter safe mode
+        " gc    -> Change current working directory (pwd)
+        " <C-l> -> refresh directories/files
+        " a,s   -> choose window after enter
+            " /ref/ https://github.com/Shougo/vimfiler.vim/issues/157
+
+    " Vimshell Shougo
+        " Plugin 'Shougo/vimshell.vim'
+
+    " SuperTab
+        Plugin 'ervandew/supertab'
+        let g:SuperTabDefaultCompletionType = 'context'
+
+    " vim-move - Move lines up down
+        Bundle 'matze/vim-move'
+        " Use Ctrl instead of Alt
+        let g:move_key_modifier = 'S'
+        " Use <C-v> to select multiple lines
+        " <C-k>   Move current line/selections up
+        " <C-j>   Move current line/selections down
+
+    " Gundo - changes history - not working in MS Windows because "Gundo requires Vim to be compiled with Python 2.4+"
+    " Use 'undotree' plugin in Windows instead
+    " if has("unix")
+        " Plugin 'sjl/gundo.vim'
+            " " /ref/ http://sjl.bitbucket.org/gundo.vim/
+
+            " " NK - Last acitve file not showing history immediatly, but switch to other buffer and go back and
+            " "      everything will be fine
+
+            " nnoremap <leader>ut :GundoToggle<CR>
+            " " Stay in gundo tree when applying revert changes
+            " let g:gundo_return_on_revert = 0
+            " let g:gundo_playback_delay = 1000
+    " else
+
+    " Undo tree
+        Plugin 'mbbill/undotree'
+
+        let g:undotree_SetFocusWhenToggle = 1
+        nnoremap <leader>ut :UndotreeToggle<CR>
+
+        " Use "J" and "K" to switch states
+        " Use "T" to show absolute timestamps
+
+    " endif
+
+    " vim-bookmarks
+        Plugin 'MattesGroeger/vim-bookmarks'
+        " let g:bookmark_highlight_lines = 1
+            " :BookmarkSave
+            " :BookmarkLoad
+        " autocmd VimLeave * call QuitBookmarkSave()
+        " autocmd VimEnter * call EnterBookmarkLoad()
+            " autocmd VimLeave * :BookmarkSave ~/.vim/a.bookmarks.vim
+            " let session_nk = ".g:session_dir."/".s.".session.vim"
+        " let g:bookmark_highlight_lines = 1
+        " highlight BookmarkLine ctermbg=darkcyan ctermfg=blue
+        " let g:bookmark_highlight_lines = 1
+
+        let g:bookmark_no_default_key_mappings = 1
+        if has("win32") || has("win16")
+            let g:bookmark_sign = '*'
+        endif
+
+        nnoremap <leader>ma :Unite vim_bookmarks -start-insert -smartcase<CR>
+        nnoremap <leader>mm :BookmarkToggle<CR>
+        nnoremap <leader>mi :BookmarkAnnotate<CR>
+        " nnoremap <leader>ma :BookmarkShowAll<CR>
+        nnoremap <leader>mn :BookmarkNext<CR>
+        nnoremap <leader>mp :BookmarkPrev<CR>
+        nnoremap <leader>mc :BookmarkClear<CR>
+        nnoremap <leader>mx :BookmarkClearAll<CR>
+        nnoremap <leader>mkk :BookmarkMoveUp<CR>
+        nnoremap <leader>mjj :BookmarkMoveDown<CR>
+        " vnoremap mn :BookmarkNext<CR>
+        " vnoremap mp :BookmarkPrev<CR>
+
+    " Grep
+        Plugin 'yegappan/grep'
+        let Grep_Default_Options = '-i -R'
+        " or use built in :cw
+        " :grep promena *
+        " :cw
+        "    or
+        " :vimgrep promena *
+        " :cw
+        " :cn, :cp, ...
+        " :cnefile
+        " /ref/ http://stackoverflow.com/questions/7880372/how-to-jump-between-patterns-when-using-vimgrep-quickfix-list
+
+    " Tabularize
+        Plugin 'godlygeek/tabular'
+
+        noremap <leader>a=  :Tabularize /=<CR>
+        noremap <leader>af= :Tabularize /=.*<CR>
+        " /ref/ http://stackoverflow.com/questions/11497593/vim-tabular-only-on-the-first-match-on-the-line
+
+        noremap <leader>a: :Tabularize /:<CR>
+        noremap <leader>a. :Tabularize /\.<CR>
+        " ,/l0r1 - 0 spaces on the left side of "," and 1 space on right side of ","
+        " noremap <leader>a, :Tabularize /,/l0r1<CR>
+        noremap <leader>a, :Tabularize /,<CR>
+        noremap <leader>a( :Tabularize /(<CR>
+        noremap <leader>a< :Tabularize /<<CR>
+        noremap <leader>a> :Tabularize /><CR>
+
+        " Align by digits/numbers
+        noremap <leader>an :Tabularize /[0-9]<CR>
+
+    " Align - not working in MS Windows
+        "Plugin 'vim-scripts/Align'
+
+        " nnoremap <leader>a= :Align /=<CR>
+        " nnoremap <leader>a= :Align /=<CR>
+
+    " NERD commenter
+        Plugin 'scrooloose/nerdcommenter'
+
+        " *'NERDCreateDefaultMappings'*
+        " /ref/ http://ruderich.org/simon/config/vimrc
+        map <leader><leader> <plug>NERDCommenterToggle
+        " map ,t <plug>NERDCommenterToggleComment
+        " map ,omg <plug>NERDCommenterComment
+        " let g:NERDCreateDefaultMappings = 0
+        let g:NERDSpaceDelims = 1
+        " let g:NERDRemoveAltComs = 1
+        " let NERD_c_alt_style=0
+
+    " Yank Ring
+        Plugin 'vim-scripts/YankRing.vim'
+
+        let g:yankring_history_dir = g:nk_vim_dir
+        let g:yankring_history_file = 'yankring_history'
+        nnoremap <leader>yr :YRShow<CR>
+
+    " TagBar
+        Plugin 'majutsushi/tagbar'
+        " Additional languages
+        " https://github.com/majutsushi/tagbar/wiki
+
+        nnoremap <leader>tt :TagbarToggle<CR>
+
+        " Vim built in - Use "[i" to show variable declaration
+        let g:tagbar_autofocus = 1
+        let g:tagbar_sort = 0
+        " Use "s" to change sorting method
+        " let g:tagbar_show_linenumbers = 1
+
+        let g:tagbar_map_showproto = "i"
+        " Use "i" to show function prototype
+
+        " Use "o" to collapse/expand functions, classes, ...
+
+        " /ref/ http://www.farseer.cn/config/2013/08/02/replace-deprecated-vim-plugins-with-modern-alternatives/
+        let g:tagbar_type_vhdl = {
+             \ 'ctagstype': 'vhdl',
+             \ 'kinds' : [
+             \'d:prototypes',
+             \'b:package bodies',
+             \'e:entities',
+             \'a:architectures',
+             \'C:components',
+             \'i:instances',
+             \'p:processes',
+             \'t:types',
+             \'f:functions',
+             \'r:procedures',
+             \'c:constants',
+             \'T:subtypes',
+             \'r:records',
+             \'P:packages',
+             \'l:locals'
+             \],
+             \}
+             " \'sro': ' ',
+             " \ 'kind2scope' : {
+             " \ 'entities'      : 'e',
+             " \ 'architectures' : 'a',
+             " \ }
+             " \ }
+
+        let g:tagbar_type_systemverilog = {
+            \ 'ctagstype' : 'systemverilog',
+            \ 'kinds'     : [
+            \'c:classes',
+            \'t:tasks',
+            \'f:functions',
+            \'m:modules',
+            \'i:interfaces',
+            \'v:variables',
+            \'d:defines',
+            \'e:typedefs',
+            \'a:parameters'
+            \]
+            \}
+
+        let g:tagbar_type_verilog = {
+            \ 'ctagstype' : 'verilog',
+            \ 'kinds'     : [
+            \'p:ports',
+            \'m:modules',
+            \'f:functions',
+            \'r:registers',
+            \'n:nets',
+            \'e:events',
+            \'t:tasks'
+            \]
+            \}
+
+    " Delete other buffers
+        Plugin 'vim-scripts/BufOnly.vim'
+
+    " Colorscheme approximation in terminals
+        Plugin 'godlygeek/csapprox'
+
+        set t_Co=256
+            " /ref/ https://github.com/spf13/spf13-vim/issues/90
+            " let g:CSApprox_hook_post = ['hi Normal  ctermbg=NONE ctermfg=NONE',
+                                " \ 'hi NonText ctermbg=NONE ctermfg=NONE' ]
+
+    " Bufferline bottom
+        " Plugin 'bling/vim-bufferline'
+
+         " scrolling with fixed current buffer position
+         " let g:bufferline_rotate = 1
+
+         " let g:bufferline_echo = 0
+
+
+    " SystemVerilog highlight, like verilog
+        " Plugin 'nachumk/systemverilog.vim'
+
+    " Taglist
+        " Plugin 'vim-scripts/taglist.vim'
+        " let s:tlist_def_vhdl_settings = 'vhdl;h:using;e:entity;a:architecture;c:configuration;p:package;m:component;f:function;d:procedure;l:process;k:block;t:type;u:subtype;s:signal;v:variable;o:constant;b:attribute'
+
+    " systemverilog
+        " Plugin 'vhda/verilog_systemverilog.vim'
+
+    " Vim VHDL
+        " Plugin 'salinasv/vim-vhdl'
+
+    " Select region
+       " Plugin 'terryma/vim-expand-region'
+
+    " ShowMarks
+    "    Plugin 'vim-scripts/ShowMarks'
+
+    " CommandT
+        " Plugin 'wincent/command-t'
+        " https://www.youtube.com/watch?v=knSFZCKMy20
+
+    " LustyExplorer
+        " Plugin 'sjbach/lusty'
+        " https://www.youtube.com/watch?v=knSFZCKMy20
+
+
+
+    " NeoComplete
+        " Plugin 'Shougo/neocomplete.vim'
+        " source ~/.vim/neocomplete.vim
+
+    " SnipMate
+        " Plugin 'honza/vim-snippets'
+
+    " YouCompleteMe
+        " Plugin 'Valloric/YouCompleteMe'
+
+
+    " ack.vim
+        " Plugin 'mileszs/ack.vim'
+        " https://www.youtube.com/watch?v=knSFZCKMy20
+
+
+
+    "NERDTRee
+        " Plugin 'scrooloose/nerdTree'
+        " http://vi.stackexchange.com/questions/3930/cannot-install-nerdtree-pluging-with-vundle
+        " nmap <C-N> :NERDTreeToggle <Bar> wincmd =<CR>
+        " autocmd VimEnter * NERDTree
+
+
+
+    "Vimfiler
+        " Plugin 'Shougo/vimfiler.vim'
+
+    " Sessions
+        " Plugin 'xolox/vim-session'
+
+    " Session obsession
+        " Plugin 'tpope/vim-obsession'
+        " https://github.com/tpope/vim-obsession.git
+
+
+    " FuzzyFinder
+        "    Bundle "L9"
+        "    Bundle "FuzzyFinder"
+
+        " All of your Plugins must be added before the following line
+        call vundle#end()            " required
+        filetype plugin indent on    " required
+        " To ignore plugin indent changes, instead use:
+        filetype plugin on
+        "
+        " Brief help
+        " :PluginList       - lists configured plugins
+        " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+        " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+        " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+        "
+        " see :h vundle for more details or wiki for FAQ
+        " Put your non-Plugin stuff after this line
+
+" NK functions
+    let g:nk_sessiondir  = g:nk_vim_dir."/sessions"
+
+    " Session save options - Dont save key mappings and blank documents, save tabpages
+    set sessionoptions-=blank sessionoptions+=tabpages sessionoptions-=folds sessionoptions-=options sessionoptions+=globals " sessionoptions+=winsize sessionoptions+=globals sessionoptions+=resize
+
+    " Create session directory
+    function! NK_CreateSessionDir()
+        if !isdirectory(g:nk_sessiondir)
+            call mkdir(g:nk_sessiondir, "p")
+            echo "Session directory created: ".g:nk_sessiondir
+        endif
+    endfunc
+
+    " Save bookmarks
+    function NK_BookmarkSave()
+        let server      = v:servername
+        let bookmarks   = g:nk_sessiondir."/".server.".bookmarks.vim"
+
+        call NK_CreateSessionDir()
+        execute "BookmarkSave ".bookmarks
+        echo "Bookmarks saved to: ".bookmarks
+    endfunction
+
+    " Save session
+    function! NK_SaveSession()
+        let server      = v:servername
+        let session = g:nk_sessiondir."/".server.".session.vim"
+
+        call NK_CreateSessionDir()
+        execute "mksession! ".session
+        " Comment args for files opened from krusader
+        " if has("unix")
+            " execute "!sed -i 's/^args/\" args/g' " . session
+        " endif
+        " Delete arguments list if there are any, in order not to reopen them if closed
+        if argc() != 0
+            execute "argd *"
+        endif
+        echo "Session saved to: ".session
+    endfunction
+
+    " Save during quit
+    function! NK_QuitSaveAll()
+        call NK_BookmarkSave()
+        call NK_SaveSession()
+    endfunc
+
+    " Load
+
+    " Load session
+    function! NK_LoadSession()
+        let server  = v:servername
+        let session = g:nk_sessiondir."/".server.".session.vim"
+
+        if filereadable(session)
+            execute "source ".session
+            echo 'Session opened: '.session
+        endif
+    endfunction
+
+    " Load bookmarks
+    function! NK_BookmarkLoad()
+        let server      = v:servername
+        let bookmarks   = g:nk_sessiondir."/".server.".bookmarks.vim"
+
+        if filereadable(bookmarks)
+            execute "BookmarkLoad ".bookmarks
+            echo 'Bookmarks loaded from: '.bookmarks
+        endif
+    endfunction
+
+    function! NK_DeleteVimfilerBuffers()
+        " if (bufexists("*@"))
+            execute "silent! bd *@b"
+            execute "silent! bd *@c"
+        " endif
+    endfunc
+
+    " Load during enter
+    function! NK_EnterLoadAll()
+        call NK_LoadSession()
+        " call NK_BookmarkLoad()
+        call NK_SetUndoDir()
+        " call NK_SetBackupSwapDirs()
+        call NK_DeleteVimfilerBuffers()
+    endfunc
+
+    "  function! NK_EnterSessionLoad()
+
+    "      " get the server (session) name
+    "      let server = v:servername
+
+    "      let bookmarks = g:session_dir."/".server.".bookmarks.vim"
+    "      " echo bookmarks
+    "      " load boookmarks using the server name
+    "      if filereadable(file)
+    "          execute "source ".file
+    "          echo 'Session opened!'
+    "      endif
+
+    "      if filereadable(file)
+    "          execute "BookmarkLoad ".bookmarks
+    "          echo 'Bookmarks loaded from: '.bookmarks
+    "      endif
+
+    "  endfunc
+
+    autocmd VimLeave * call NK_QuitSaveAll()
+    autocmd VimEnter * nested call NK_EnterLoadAll()
+
+" For netrw
+    " filetype plugin on
+
+" Reload vim by using
+    " :source ~/.vimrc
+
+" YouCompleteMe - YCM
+    " let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
+" Map Enter in normal mode to new line
+    nnoremap <S-CR> o<Esc>
+
+" Delete to the begining of line and go up to the end of previous line
+    " d0 - delete to the begining of line
+    " x  - delete current char
+    " k  - go up
+    " $  - go to the end of line
+    " nnoremap <S-BS> :s/^$//<CR> <Bar> d0xk$
+    " nnoremap <S-BS> :s/^$//<CR>
+
+" Clean trailing whitespaces
+    " nnoremap <leader>k :%s/\s\+$//<CR>
+    nnoremap <leader>k :call NK_CleanTrailingChars()<CR>
+
+    function! NK_CleanTrailingChars()
+        let ln_number = line(".")
+        execute '%s/\s\+$//'
+        execute 'normal '.ln_number.'G'
+    endfunc
+
+
+" Show if file is modified
+    set statusline+=%F
+    set laststatus=2
+
+" Open new window split on right side, down side
+    set splitright
+    set splitbelow
+    " /ref/ http://stackoverflow.com/a/7207769/2450748
+
+" Tab width
+    " Exception for Makefiles - Already done in Vim implementation
+    " autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
+
+    " filetype plugin indent on
+    set expandtab       " Expand TABs to spaces
+    set tabstop=4       " The width of a TAB is set to 4.
+    set softtabstop=4       " The width of a TAB is set to 4.
+    set shiftwidth=4
+    set smarttab
+                        " Still it is a \t. It is just that
+                        " Vim will interpret it to be having
+                        " a width of 4.
+
+    " /ref/ http://stackoverflow.com/a/1878984/2450748
+    " /ref/ http://stackoverflow.com/a/21323445/2450748
+
+" Colorscheme
+    syntax enable
+    set background=dark
+    " colorscheme solarized
+    " colorscheme darkblue
+    " colorscheme darkspectrum
+    " colorscheme aldmeris
+
+    colorscheme desert
+
+    " Set darker background color for windows
+    " if has("win32") || has("win16")
+    " if has("gui_running")
+        " highlight Normal guibg=#191919
+    " else
+        highlight Normal guibg=#000000
+    " endif
+        " highlight Normal guibg=#000000
+        " highlight Normal ctermbg=1
+        " highlight Normal termbg=1
+        " highlight Normal guibg=#000000
+    " endif
+
+    "Use same color for background and in empty part
+    hi NonText guibg=bg
+    hi NonText guifg=bg
+    " /ref/ http://stackoverflow.com/a/9406825/2450748
+
+    " /ref/ https://github.com/altercation/Vim-colors-solarized
+    "       http://ethanschoonover.com/solarized
+    "       http://www.vim.org/scripts/script.php?script_id=3673
+
+" Whitespace characters
+    set list
+    set listchars=tab:>-,trail:~,extends:>,precedes:<
+    " /ref/ http://stackoverflow.com/a/1675752/2450748
+
+    function! NK_ToggleWhitespaces()
+        if(&list == 1)
+            set nolist
+        else
+            set list
+        endif
+    endfunc
+
+    nnoremap <leader>vw :call NK_ToggleWhitespaces()<CR>
+
+" Incremental search
+    set incsearch
+    set hlsearch
+    nnoremap /c :nohlsearch<CR>
+    " /ref/ https://medium.com/hacking-and-gonzo/10-vim-tricks-you-should-know-6393842b3537#.3pxco1r77
+    "       http://dougblack.io/words/a-good-vimrc.html
+
+" Separate directory for .swp files
+" No bkp and swp dirs
+    set noswapfile
+    set nobackup
+    " /ref/ http://stackoverflow.com/a/821936/2450748
+    let g:nk_swp_dir     = g:nk_vim_dir."/swp"
+    let g:nk_bkp_dir     = g:nk_vim_dir."/bkp"
+    " // - The // at the end of the directory name tells Vim to use the absolute path to the file
+    "      to create the swap file so there aren't collisions between files of the same name from different directories.
+    "      /ref/ http://vi.stackexchange.com/a/179
+
+    function! NK_CreateSwapDir()
+        let swp_dir = g:nk_swp_dir
+
+        if !isdirectory(swp_dir)
+            call mkdir(swp_dir, "p")
+        endif
+    endfunc
+
+    function! NK_CreateBackupDir()
+        let bkp_dir = g:nk_bkp_dir
+
+        if !isdirectory(bkp_dir)
+            call mkdir(bkp_dir, "p")
+        endif
+    endfunc
+
+    function! NK_SetBackupSwapDirs()
+        " let bkp_dir = g:nk_bkp_dir."//"
+        " let swp_dir = g:nk_swp_dir."//"
+
+        call NK_CreateBackupDir()
+        call NK_CreateSwapDir()
+        let &backupdir = bkp_dir
+        let &directory = swp_dir
+    endfunc
+
+    " let &backupdir = g:nk_bkp_dir;
+    " let &directory = g:nk_swp_dir;
+    " set directory=~/.vim/swp//
+
+" Use Ctrl+[ instead of Esc
+    " /ref/ http://stackoverflow.com/a/397279/2450748
+
+" Autocomplete
+    " /ref/ http://vim.wikia.com/wiki/Autocomplete_with_TAB_when_typing_words
+    " function! Tab_Or_Complete()
+    "   if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+    "     return "\<C-N>"
+    "   else
+    "     return "\<Tab>"
+    "   endif
+    " endfunction
+    " inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+
+" Save sessions
+    " let g:sessiondir = g:nk_vim_dir . "/sessions" . getcwd()
+    let g:sessiondir = g:nk_vim_dir . "/sessions"
+    let g:sessionfile = g:sessiondir . "/session.vim"
+
+
+    " Session save options - Dont save key mappings and blank documents, save tabpages
+        set sessionoptions-=blank sessionoptions-=options sessionoptions+=tabpages " sessionoptions+=winsize sessionoptions+=globals sessionoptions+=resize
+        " /ref/ https://github.com/tpope/vim-obsession
+        " /ref/ https://github.com/tpope/vim-obsession/blob/master/plugin/obsession.vim
+
+    " where do you want to save sessions?
+
+
+        let g:session_dir = g:nk_vim_dir."/sessions"
+
+    " Save sessions whenever vim closes
+        " autocmd VimLeave * call SaveSession()
+        " Always close vim with ":qa" dont use "Alt+F4" !!!
+
+    " Saves the session to session dir. Creates session dir if it doesn't
+    " yet exist. Sessions are named after servername paameter
+        function! SaveSession()
+
+            " get the server (session) name
+            let s = v:servername
+
+            " create session dir if needed
+            if !isdirectory(g:session_dir)
+                call mkdir(g:session_dir, "p")
+            endif
+
+            " let session_nk = ".g:session_dir."/".s.".session.vim"
+
+            " save session using the server name
+            execute "mksession! ".g:session_dir."/".s.".session.vim"
+
+            echo 'Session saved!'
+        endfunc
+
+        function! OpenSession()
+
+            " check if file names were passed as arguments
+            " echo 'abcd'
+            " if argc() == 0
+                " echo 'kude'
+                let sn = v:servername
+                let file = g:session_dir."/".sn.".session.vim"
+
+                " if session file exists, load it
+                if filereadable(file)
+                    execute "source ".file
+                    echo 'Session opened!'
+                endif
+            "endif
+        endfunc
+
+    " Fast save and open session
+        nnoremap <leader>n :call SaveSession()<CR>
+        " nnoremap <leader>. :call OpenSession()<CR>
+
+
+"It is better to use buffers and ls than to use Tabs !!!
+
+" Make windows equal
+    autocmd VimResized * wincmd =
+
+" Load session when vim is opened, comment if some Plugin wont work
+    " autocmd VimEnter * nested call OpenSession()
+    " autocmd VimEnter * call NK_EnterBookmarkLoad()
+
+
+" Go through windows faster - using Ctrl key -
+    " /ref/ http://vim.wikia.com/wiki/Switch_between_Vim_window_splits_easily
+    " nmap <silent> <C-k> :wincmd k<CR>
+    " nmap <silent> <C-j> :wincmd j<CR>
+    " nmap <silent> <C-h> :wincmd h<CR>
+    " nmap <silent> <C-l> :wincmd l<CR>
+
+" Relative line numbers
+    " /ref/ http://jeffkreeftmeijer.com/2013/vims-new-hybrid-line-number-mode/
+    " /ref/ https://github.com/jeffkreeftmeijer/vim-numbertoggle/blob/master/plugin/number_toggle.vim#L4
+
+    function! NumberToggle()
+        if v:version < 704
+            if(&relativenumber == 1)
+                set number
+            else
+                set relativenumber
+            endif
+        else
+            if(&relativenumber == 1)
+                set norelativenumber
+            else
+                set relativenumber
+            endif
+        endif
+    endfunc
+
+    if v:version < 704
+        set relativenumber
+        autocmd InsertEnter * :set number
+        autocmd InsertLeave * :set relativenumber
+    else
+        set relativenumber
+        set number
+    endif
+
+    nnoremap <C-n> :call NumberToggle()<CR>
+
+    " /ref/ http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
+            "
+        " :au FocusLost * :set number
+        " :au FocusGained * :set relativenumber
+
+
+" Use Tab in normal mode to indent lines
+    " Delete white spaces until first word and tabulate
+    " nnoremap <Tab> v><Esc>
+    " nnoremap <S-Tab> 0dwi<Tab><Esc>
+    " inoremap <S-Tab> 0^hd>
+
+    " /ref/ http://stackoverflow.com/a/6975491/2450748
+    " vnoremap <Tab> >
+
+" Smart-case search - case sensitive only when cappital letters are used
+    " Affects substitute command - :s, so it is no good
+    " when you want case insensitive search use:
+    "   /\ctext
+    "
+    " set ignorecase
+    " set smartcase
+    " :%s/lowercasesearch/replaceString/gI
+    "   /ref/http://stackoverflow.com/questions/2287440/how-to-do-case-insensitive-search-in-vim
+
+" Highlight current line
+    set cursorline
+    " /ref/ http://vim.wikia.com/wiki/Highlight_current_line
+
+" Escape insert mode
+    " inoremap <C-q> <Esc>
+    " vnoremap <C-q> <Esc>
+
+" Move lines
+
+" Disable automatic comment insertion
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Save files using <C-s>
+    noremap <C-s> :w<CR>
+
+" Show keystrokes
+    set showcmd
+
+" Go to next/previous buffer
+    noremap <C-j> :bn!<CR>
+    noremap <C-k> :bp!<CR>
+    noremap <C-PageDown> :tabn<CR>
+    noremap <C-PageUp> :tabp<CR>
+
+" Delete empty lines
+    function! DeleteEmptyLine()
+        let line=getline('.')
+        " echo line
+        let length = strlen(line)
+        if length == 0
+            " Delete this line into black hole register
+            :normal "_dd
+                " /ref/ http://stackoverflow.com/questions/3638542/any-way-to-delete-in-vim-without-overwriting-your-last-yank
+            " :d
+            " echo "delete this one"
+        endif
+    endfunction
+
+" Delete to the begining of line and go up to the end of previous line
+    nnoremap <S-BS> :call DeleteEmptyLine() \| :normal k<CR>
+
+" Deleted local file notify
+      " au FileChangedShell * call FCSHandler(expand("<afile>:p"))
+
+      "  function FCSHandler(name)
+      "    let msg = 'File "'.a:name.'"'
+      "    let v:fcs_choice = ''
+      "    if v:fcs_reason == "deleted"
+      "      let msg .= " no longer available - 'modified' set"
+      "      call setbufvar(expand(a:name), '&modified', '1')
+      "      echohl WarningMsg
+      "    elseif v:fcs_reason == "time"
+      "      let msg .= " timestamp changed"
+      "    elseif v:fcs_reason == "mode"
+      "      let msg .= " permissions changed"
+      "    elseif v:fcs_reason == "changed"
+      "      let msg .= " contents changed"
+      "      let v:fcs_choice = "ask"
+      "    elseif v:fcs_reason == "conflict"
+      "      let msg .= " CONFLICT --"
+      "      let msg .= " is modified, but"
+      "      let msg .= " was changed outside Vim"
+      "      let v:fcs_choice = "ask"
+      "      echohl ErrorMsg
+      "    else  " unknown values (future Vim versions?)
+      "      let msg .= " FileChangedShell reason="
+      "      let msg .= v:fcs_reason
+      "      let v:fcs_choice = "ask"
+      "      echohl ErrorMsg
+      "    endif
+      "    redraw!
+      "    echomsg msg
+      "    echohl None
+      "  endfunction
+
+" Map F5 to reload
+    nnoremap <F5> :e!<CR>
+
+" Map F2 to new file
+    noremap <F2> :enew!<CR>
+
+" Map Shift + Arrow keys in insert mode to select
+    inoremap <S-Right> <Esc>vl
+    nnoremap <S-Right> <Esc>vl
+    " inoremap <S-l> <Esc>v$
+    " nnoremap <S-l> <Esc>vl
+    inoremap <S-Left>  <Esc>vh
+    nnoremap <S-Left>  <Esc>vh
+    " inoremap <S-h>  <Esc>v^
+    " nnoremap <S-h>  <Esc>vh
+
+    nnoremap <S-Home> <Esc>v^
+    inoremap <S-Home> <Esc>v^
+    nnoremap <S-End> <Esc>v$
+    inoremap <S-End> <Esc>v$
+
+" Fold code by indent
+    set foldmethod=indent
+    " Dont fold text by default
+    autocmd BufWinEnter * silent! :%foldopen!
+        " /ref/ http://stackoverflow.com/a/23672376/2450748
+    " set nofoldenable
+    " Shortcuts
+        " zo - Expand selected section
+        " zc - Fold selected section
+        " zR - Open all sections
+        " zM - Fold all sections
+
+" Tags
+    " Search them from "CtrlP" plugin
+    " Supported languages
+        " /ref/ http://ctags.sourceforge.net/languages.html
+    " /ref/ http://usevim.com/2013/01/18/tags/
+    " 1. Install ctags from Software Center
+    "    Generate tags using:
+    "        > ctags -R
+    " 2. Set vim tags directory, searches from current one and back to the one stated after ";"
+    set tags+=tags;~
+        " /ref/ http://stackoverflow.com/questions/5017500/vim-difficulty-setting-up-ctags-source-in-subdirectories-dont-see-tags-file-i#comment19200059_5019111
+
+    " Shortcuts
+        " <C-]> - Go to tag
+        " <C-t> - Go back to original position
+
+    " Search tag pattern - /
+        " :tag /main
+
+" Change working directory to current file directory
+    " nnoremap <leader>cd :cd %:p:h<CR>
+    " Not so useful for now so commenting
+    "autocmd BufEnter * silent! lcd %:p:h
+    " set autochdir " had problems with this one!!!
+        " /ref/ http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
+
+" Netrw additional functions - replacement for NERDTree
+    " /ref/ http://codoki.com/2015/01/07/dont-use-nerdtree/
+    " /ref/ http://ivanbrennan.nyc/blog/2014/01/16/rigging-vims-netrw/
+    " /ref/ http://ivanbrennan.nyc/blog/2014/01/16/rigging-vims-netrw/
+    "" Toggle Vexplore with Ctrl-E
+    function! ToggleVExplorer(dir)
+        if exists("t:expl_buf_num")
+            let expl_win_num = bufwinnr(t:expl_buf_num)
+            if expl_win_num != -1
+                let cur_win_nr = winnr()
+                exec expl_win_num . 'wincmd w'
+                close
+                exec cur_win_nr . 'wincmd w'
+                unlet t:expl_buf_num
+            else
+                unlet t:expl_buf_num
+            endif
+        else
+            exec '1wincmd w'
+            execute "Vexplore ".a:dir
+            let t:expl_buf_num = bufnr("%")
+        endif
+        exec 'wincmd ='
+    endfunction
+
+    " map <silent> <C-e> :call ToggleVExplorer("")<CR>
+    " map <silent> <leader>e :call ToggleVExplorer(getcwd())<CR>
+    " nnoremap <C-e>     :Vexplore!<CR> :wincmd=<CR>
+    " nnoremap <leader>e :execute "Vexplore! ".getcwd()<CR> :wincmd=<CR>
+
+    " let g:netrw_silent        = 1
+
+    " let g:netrw_liststyle = 0           " thin (change to 3 for tree)
+    let g:netrw_liststyle   = 3
+    let g:netrw_banner      = 0           " no banner
+    " let g:netrw_altv      = 1           " open files on right
+    " let g:netrw_preview   = 1           " open previews verticall
+
+    "" Hit enter in the file browser to open the selected
+    "" file with :vsplit to the right of the browser.
+    let g:netrw_browse_split = 4
+    let g:netrw_altv = 1
+    let g:netrw_winsize = 20
+
+    " let g:netrw_altv          = 1
+    " let g:netrw_fastbrowse    = 2
+    " let g:netrw_keepdir       = 0
+    " let g:netrw_liststyle     = 2
+    " let g:netrw_retmap        = 1
+    " let g:netrw_silent        = 1
+    " let g:netrw_special_syntax= 1
+
+    "" Default to tree mode
+    " fun! VexToggle(dir)
+      " if exists("t:vex_buf_nr")
+        " call VexClose()
+      " else
+        " call VexOpen(a:dir)
+      " endif
+    " endf
+
+    " fun! VexOpen(dir)
+      " let g:netrw_browse_split=4    " open files in previous window
+      " let vex_width = 25
+
+      " execute "Vexplore " . a:dir
+      " let t:vex_buf_nr = bufnr("%")
+      " wincmd H
+
+      " call VexSize(vex_width)
+    " endf
+
+    " fun! VexClose()
+      " let cur_win_nr = winnr()
+      " let target_nr = ( cur_win_nr == 1 ? winnr("#") : cur_win_nr )
+
+      " 1wincmd w
+      " close
+      " unlet t:vex_buf_nr
+
+      " execute (target_nr - 1) . "wincmd w"
+      " call NormalizeWidths()
+    " endf
+
+    " fun! VexSize(vex_width)
+      " execute "vertical resize" . a:vex_width
+      " set winfixwidth
+      " call NormalizeWidths()
+    " endf
+
+    " fun! NormalizeWidths()
+      " let eadir_pref = &eadirection
+      " set eadirection=hor
+      " set equalalways! equalalways!
+      " let &eadirection = eadir_pref
+    " endf
+
+    " augroup NetrwGroup
+      " autocmd! BufEnter * call NormalizeWidths()
+    " augroup END
+
+
+" Copy/Paste
+    if has("win32") || has("win16")
+        set clipboard=unnamed
+    else
+        set clipboard=unnamedplus
+    endif
+    " /ref/ http://vim.wikia.com/wiki/Accessing_the_system_clipboard
+    " Use put to paste context from register
+        " :put +
+    " /ref/ http://vimcasts.org/episodes/comparing-buffers-with-vimdiff/
+
+    " nnoremap <leader>yy "+y
+    " vnoremap <leader>yy "+y
+
+    " nnoremap <leader>pp "+y
+    " nnoremap <leader>c "+yy
+    " vnoremap  <leader>v "+gP
+    " nnoremap  <leader>v "+gP
+    " inoremap  <C-a> <Esc>"+gPi
+
+" Jump through windows fast
+    nnoremap <leader>1 :1wincmd w<CR>
+    nnoremap <leader>2 :2wincmd w<CR>
+    nnoremap <leader>3 :3wincmd w<CR>
+    nnoremap <leader>4 :4wincmd w<CR>
+    nnoremap <leader>5 :5wincmd w<CR>
+
+    nnoremap <leader><k1> :1wincmd w<CR>
+    nnoremap <leader><k2> :2wincmd w<CR>
+    nnoremap <leader><k3> :3wincmd w<CR>
+    nnoremap <leader><k4> :4wincmd w<CR>
+    nnoremap <leader><k5> :5wincmd w<CR>
+
+" Shortcut for replace in current file, buffers, ...
+    " /ref/ http        : //www.thegeekstuff.com/2009/04/vi-vim-editor-search-and-replace-examples/
+    nnoremap <leader>ss : %s///gc<Left><Left><Left><Left>
+    vnoremap <leader>s  : s///g<Left><Left><Left>
+    nnoremap <leader>sb : bufdo! %s///gc<Left><Left><Left><Left>
+    nnoremap <leader>sw : %s/<C-R><C-W>/<C-R><C-W>/g<Left><Left>
+    " Substitute word under cursor in whole file <leader>sw, go back with <C-o>
+
+" Search remap for case insensitive search
+    nnoremap // /\c
+    " /ref/ http://stackoverflow.com/a/2287449/2450748
+
+" Quickfix window Open, Next, Previous
+    " Use with repeat command (@:) - write :cn, cp<CR>, and then <C-n>
+    " nnoremap <C-m>     :cn<CR> " <C-M> is ENTER!!!
+    nnoremap <leader>. :cn<CR>
+    nnoremap <leader>, :cp<CR>
+
+" Repeat last command from command line
+    nnoremap <C-@> @:
+
+" Search buffers directories
+    nnoremap /b :bufdo! /\c
+    nnoremap /d :Grep  *<Left><Left>
+    " nnoremap /w :call NK_SearchWord()
+    " nnoremap /w "zyiw:execute "Grep ".@z." *"
+    "# Search word under cursor in current directory
+    nnoremap /w :Grep <C-R><C-W> *
+        " /ref/ http://vim.wikia.com/wiki/Word_under_cursor_for_command
+
+    function! NK_SearchWord()
+      let w = expand("<cword>") " get the word under cursor
+      execute  ":Grep ".w." *"
+    endfunc
+
+
+" Dont lose undo when changing buffers and save undo history
+    " /ref/ http://stackoverflow.com/questions/2732267/vim-loses-undo-history-when-changing-buffers
+
+    if has("unix")
+        let g:nk_vim_undo_dir = $HOME."/.nk/vim/undo"
+    else
+        let g:nk_vim_undo_dir = $HOME."/_nk/vim/undo"
+    endif
+    " let g:nk_default_undo_dir = g:nk_vim_dir."/undo"
+
+    function! NK_SetUndoDir()
+        " /ref/ http://stackoverflow.com/a/22676189/2450748
+        let default_dir = g:nk_vim_undo_dir
+
+            if !isdirectory(default_dir)
+                call mkdir(default_dir, "p")
+            endif
+            " execute "set undodir = ".default_dir
+            let &undodir = default_dir
+    endfunc
+
+    " Persistent undo
+    " % sign bothers me
+    " set hidden
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
+
+" Undo/redo all buffer changes
+    " nnoremap <leader>uu :earlier<CR>
+    nnoremap <leader>uu :undo<CR>
+    " nnoremap <leader>ub :bufdo! e!<CR>
+    nnoremap <leader>ub :bufdo! undo<CR>
+    nnoremap <leader>uw :windo! undo<CR>
+
+    nnoremap <leader>rr :redo<CR>
+    nnoremap <leader>rb :bufdo! redo<CR>
+    nnoremap <leader>rw :windo! redo<CR>
+
+" Autocomplete background color
+    highlight Pmenu    guibg=darkcyan guifg=gray gui=bold
+    highlight PmenuSel guibg=gray guifg=darkcyan gui=bold
+
+" Increase commands history from 20 to 10000
+    " /ref/ http://stackoverflow.com/questions/8930690/what-sets-vim-history
+    set history=10000
+
+" Turn on omni autocomplete
+    " filetype plugin on
+    " set omnifunc=syntaxcomplete#Complete
+
+" Delete buffer, close window shortcut
+    " nnoremap <leader>w :bd<CR>
+    " nnoremap <leader>w :q<CR>
+    " Remove current buffer without removing window
+    nnoremap <leader>q :bn\|bd #<CR>
+    nnoremap <leader>w :wincmd c<CR>
+    " /ref/ http://stackoverflow.com/questions/4465095/vim-delete-buffer-without-losing-the-split-window
+
+" Go to previous window
+    " nnoremap <leader>p :wincmd p<CR>
+
+" Quickfix window toggle
+    " /ref/ http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
+    function! GetBufferList()
+      redir =>buflist
+      silent! ls!
+      redir END
+      return buflist
+    endfunction
+
+    function! ToggleList(bufname, pfx)
+      let buflist = GetBufferList()
+      for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+        if bufwinnr(bufnum) != -1
+          exec(a:pfx.'close')
+          return
+        endif
+      endfor
+      if a:pfx == 'l' && len(getloclist(0)) == 0
+          echohl ErrorMsg
+          echo "Location List is Empty."
+          return
+      endif
+      let winnr = winnr()
+      exec(a:pfx.'open')
+      if winnr() != winnr
+        wincmd p
+      endif
+    endfunction
+
+    " nmap <silent> <leader>q :call ToggleList("Location List", 'l')<CR>
+    " nmap <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
+    nnoremap <silent> <F7> :call ToggleList("Quickfix List", 'c')<CR>
+
+" Real delete - black hole register
+    " /ref/ http://stackoverflow.com/a/11993928
+    nnoremap <leader>d "_d
+    vnoremap <leader>d "_d
+
+" Fix backspace on windows
+    if has("win32") || has("win16")
+        set backspace=2
+        set backspace=indent,eol,start
+    endif
+
+" Set font in windows
+    if has("win32") || has("win16")
+        set guifont=consolas:h11
+    else
+        set guifont=Monospace\ 11
+    endif
+
+" Allow to open other files with unite when previous changes are not saved
+    set hidden
+    " /ref/ http://usevim.com/2012/10/19/vim101-set-hidden/
+
+" Change directory to the directory of the currently open file
+    nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+    " /ref/ http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
+
+" Copy file name/path to clipboard
+    " Convert slashes to backslashes for Windows.
+    if has("win32") || has("win16")
+      nnoremap <leader>xn :let @+=substitute(expand("%:t"), "/", "\\", "g")<CR>
+      nnoremap <leader>xx :let @+=substitute(expand("%:p:h"), "/", "\\", "g")<CR>
+      nnoremap <leader>xf :let @+=substitute(expand("%:p"), "/", "\\", "g")<CR>
+
+      " This will copy the path in 8.3 short format, for DOS and Windows 9x
+      " nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
+    else
+      " nmap ,cs :let @*=expand("%")<CR>
+      " nmap ,cl :let @*=expand("%:p")<CR>
+      nnoremap <leader>xn :let @+=expand("%:t")<CR>
+      nnoremap <leader>xx :let @+=expand("%:p:h")<CR>
+      nnoremap <leader>xf :let @+=expand("%:p")<CR>
+    endif
+
+" Tags in seperate window
+    " nnoremap <C-]> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
+    " nnoremap <F8> :let mycurf=expand("<cfile>")<CR> :echo "a"<CR> <C-w> w :execute("e ".mycurf)<CR><C-w>p
+
+    " preview window... to get it to open vert right, or horiz as desired
+    function PreviewTag(top)
+      "by MW
+      set previewheight=25
+      exe "silent! pclose"
+      if &previewwindow " don't do this in the preview window
+        return
+      endif
+      let w = expand("<cword>") " get the word under cursor
+      exe "ptjump " . w
+      " if any non False arg, open in simple horiz window so simply return
+      if a:top
+        return
+      endif
+      " otherwise, make it vertical
+      exe "silent! wincmd P"
+      if &previewwindow " if we really get there...
+        if has("folding")
+          silent! .foldopen " don't want a closed fold
+        endif
+        wincmd L " move preview window to the far right
+        " Horizontal to vertical split - http://stackoverflow.com/a/1269631/2450748
+        wincmd p " back to caller
+        " wincmd H
+        if !&previewwindow " got back
+          wincmd _
+          " make caller full size (I use minibufexplorer and for some reason
+          " the window is altered by the preview window split and manipulation
+          " so wincmd _ sets it back... your mileage may vary
+        endif
+      endif
+    endfunction
+
+    " /ref/ http://vim.wikia.com/wiki/Optionally_open_matching_or_selected_tag_in_full_height_vertical_window
+
+    " right hand window full height preview window
+    nnoremap <leader>]] :call PreviewTag(0)<CR>
+    " inoremap <leader>] <Esc>:call PreviewTag(0)<CR>
+    " simple "above the caller" preview window,
+    nnoremap <leader>][ :call PreviewTag(1)<CR>
+    " inoremap <leader>[ <Esc>:call PreviewTag(1)<CR>
+    " close preview
+    noremap <leader>]p <Esc>:pc<CR>
+
+" Jump to occurences
+    " /ref/ http://vim.wikia.com/wiki/List_lines_with_keyword_and_prompt_for_jump#References
+    " List occurrences of keyword under cursor, and
+    " jump to selected occurrence.
+    function! s:JumpOccurrence()
+      let v:errmsg = ""
+      exe "normal [I"
+      if strlen(v:errmsg) == 0
+        let nr = input("Which one: ")
+        if nr =~ '\d\+'
+          exe "normal! " . nr . "[\t"
+        endif
+      endif
+    endfunction
+
+    " List occurrences of keyword entered at prompt, and
+    " jump to selected occurrence.
+    function! s:JumpPrompt()
+      let keyword = input("Keyword to find: ")
+      if strlen(keyword) > 0
+        let v:errmsg = ""
+        exe "ilist! " . keyword
+        if strlen(v:errmsg) == 0
+          let nr = input("Which one: ")
+          if nr =~ '\d\+'
+            exe "ijump! " . nr . keyword
+          endif
+        endif
+      endif
+    endfunction
+
+    " Use "[i" to view first occurence of variable
+    nnoremap <leader>[[ [I
+    nnoremap <leader>[] :call <SID>JumpOccurrence()<CR>
+    " JumpPrompt - Regex matching
+    nnoremap <leader>[p :call <SID>JumpPrompt()<CR>
+
+" SystemVerilog highlight as verilog
+    autocmd BufNewFile,BufRead *.sv,*.vh   set syntax=verilog
+    " /ref/ http://stackoverflow.com/a/11666247/2450748
+
+" Reload file when it changes from externall application
+    set autoread
+
+" Convert file endings (end of line - EOL) to dos or unix
+    " :set ff = dos
+    " :set ff = unix
+    " /ref/ http://vim.wikia.com/wiki/File_format
+
+" Repeat last commands
+    " Repeat last text change command - Type "."
+    " Repeat last move command        - Type ";"
+    " /ref/ http://superuser.com/a/827326/292101
+
+" Turn spelling correction on/off
+    " :set spell
+    " :set nospell
+    " Turn off spell capital leters check
+        " :set spellcapcheck=
+    " Show spelling suggestions
+        " z=
+        " Use first suggestion
+        " 1z=
+
+" Switch between header and cpp
+    map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+    " /ref/ http://vim.wikia.com/wiki/Easily_switch_between_source_and_header_file
+
+" Vim navigation
+    " /ref/ http://www.thegeekstuff.com/2009/03/8-essential-vim-editor-navigation-fundamentals/
+
+" netrw - Trash instead of rm
+    " let g:netrw_localrmdir='Recycle'
+
+" Dont type in word, just show menu and then confirm with "Enter"
+    set completeopt=longest,menuone
+        " /ref/ http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+
+" Focus file when launched with vim terminal
+    " autocmd VimEnter * echo "abe"
+    if !has("gui_running")
+        autocmd VimEnter * :bfirst
+    endif
+        " /ref/ http://learnvimscriptthehardway.stevelosh.com/chapters/12.html
+
+" Synchronous scrolling - scrollbind
+    " :windo set scb
+" Exit synchronous mode
+    " :windo set noscb
+    nnoremap <leader>zss :windo set scb<CR>
+    nnoremap <leader>zsn :windo set noscb<CR>
+
+" Compare files with vim
+    " :windo diffthis
+" Exit diff mode
+    " :windo diffoff
+    " Wrap lines - not so good
+        " :windo setlocal wrap<
+    nnoremap <leader>zdd :windo diffthis<CR>
+    nnoremap <leader>zdn :windo diffoff<CR>
+    " /ref/ http://vimcasts.org/episodes/comparing-buffers-with-vimdiff/
+    " Show only differences
+        " set diffopt=filler,context:0
+
+" Open file from terminal in already running vim
+    " term1 > vim --servername SRV a.txt
+    " term2 > vim --servername SRV --remote b.txt
+        " /ref/ http://unix.stackexchange.com/questions/246419/open-file-with-started-vim-from-outside-in-terminal

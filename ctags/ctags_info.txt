@@ -1,0 +1,20 @@
+http://kaushalmodi.github.io/2014/03/09/ctags-verilog-and-emacs/
+http://ericjmritz.name/2014/03/11/teaching-exuberant-ctags-to-support-new-languages/
+
+# VHDL
+    https://github.com/salinasv/vim-vhdl/blob/master/ctags.conf
+    bkp:
+        --regex-vhdl=/^\s*([:\s*]?process)\(/\1/p,processes/i
+        --regex-vhdl=/^\s*(([\w]*\s*:\s*)?process)/\1/p,processes/i
+        --regex-vhdl=/^\s*(([\w]*\s*:\s*)?process)/\1/p,processes/i
+        --regex-vhdl=/^[ \t]*((([^ \t:]+)[ \t]*:[ \t]*)?process[ \t]*.*)/\1/p,processes/i
+
+# Sort entries(entities, processes, signals, ...) by appearance in the file
+    > ctags a.vhdl -u
+        or
+    > ctags a.vhdl --sort=no
+
+    /ref/ http://ctags.sourceforge.net/ctags.html
+
+    # Tagbar sort by appearance
+        let g:tagbar_sort = 0

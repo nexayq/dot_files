@@ -1,0 +1,37 @@
+--exclude=.git
+
+--langdef=systemverilog
+--langmap=systemverilog:.sv.svh.tv.vg.vinc
+
+--regex-systemverilog=/^\s*(\b(static|local|virtual|protected)\b)*\s*\bclass\b\s*(\b\w+\b)/\3/c,class/
+--regex-systemverilog=/^\s*(\b(static|local|virtual|protected)\b)*\s*\btask\b\s*(\b(static|automatic)\b)*\s*(\w+::)*\s*(\b\w+\b)/\6/t,task/
+--regex-systemverilog=/^\s*(\b(static|local|virtual|protected)\b)*\s*\bfunction\b\s*(\b(\w+)\b)*\s*(\w+::)*\s*(\b\w+\b)/\6/f,function/
+
+--regex-systemverilog=/^\s*\bmodule\b\s*(\b\w+\b)/\1/m,module/
+--regex-systemverilog=/^\s*\bprogram\b\s*(\b\w+\b)/\1/p,program/
+--regex-systemverilog=/^\s*\binterface\b\s*(\b\w+\b)/\1/i,interface/
+--regex-systemverilog=/^\s*\btypedef\b\s+.*\s+(\b\w+\b)\s*;/\1/e,typedef/
+--regex-systemverilog=/^\s*`define\b\s*(\w+)/`\1/d,define/
+--regex-systemverilog=/}\s*(\b\w+\b)\s*;/\1/e,typedef/
+
+--regex-systemverilog=/^\s*(\b(static|local|private|rand)\b)*\s*(\b(shortint|int|longint)\b)\s*(\bunsigned\b)?(\s*\[.+\])*\s*(\b\w+\b)/\7/v,variable/
+--regex-systemverilog=/^\s*(\b(static|local|private|rand)\b)*\s*(\b(byte|bit|logic|reg|integer|time)\b)(\s*\[.+\])*\s*(\b\w+\b)/\6/v,variable/
+--regex-systemverilog=/^\s*(\b(static|local|private)\b)*\s*(\b(real|shortreal|chandle|string|event)\b)(\s*\[.+\])*\s*(\b\w+\b)/\6/v,variable/
+--regex-systemverilog=/(\b(input|output|inout)\b)?\s*(\[.+\])*\s*(\b(wire|reg|logic)\b)\s*(\[.+\])*\s*(#(\(.+\)|\S+)\))?\s*(\b\w+\b)/\9/v,variable/
+--regex-systemverilog=/(\b(parameter|localparam)\b).+(\b\w+\b)\s*=/\3/a,parameter/
+
+--regex-systemverilog=/^\s*(inst_\w+)/\1/m,module/i
+
+--systemverilog-kinds=+ctfmpied
+
+--regex-verilog=/^\s*(inst_\w+)/\1/m,modules/i
+--regex-verilog=/^\s*(.*_post_build)\s/\1/m,modules/i
+
+
+--vhdl-kinds=+C
+
+--regex-vhdl=/^[ \t]*package[ \t]+([^ ]+) is/\1/b,packages/i
+
+--regex-vhdl=/^[ \t]*architecture[ \t]+([^ ]+) of/\1/a,architectures/i
+--regex-vhdl=/^[ \t]*((([^ \t:]+)[ \t]*:[ \t]*)?process[ \t]*.*)/\1/p,processes/i
+--regex-vhdl=/^\s*(inst_\w+)/\1/i,instances/i
