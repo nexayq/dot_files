@@ -1,5 +1,6 @@
 ./bundle/BufOnly.vim/.git
 #########
+https://github.com/vim-scripts/BufOnly.vim.git
 commit 43dd92303979bdb234a3cb2f5662847f7a3affe7
 Author: Christian J. Robinson <invalid@heptite----gmail-!-com>
 Date:   Thu Aug 26 00:00:00 2004 +0000
@@ -8,6 +9,7 @@ Date:   Thu Aug 26 00:00:00 2004 +0000
 
 ./bundle/csapprox/.git
 #########
+https://github.com/godlygeek/csapprox.git
 commit 7981dac51d8b6776985aa08cb7b5ee98ea7f2ddd
 Author: Matt Wozniski <godlygeek@gmail.com>
 Date:   Fri Jul 26 23:41:55 2013 -0400
@@ -21,6 +23,7 @@ Date:   Fri Jul 26 23:41:55 2013 -0400
 
 ./bundle/grep/.git
 #########
+https://github.com/yegappan/grep.git
 commit ac33b4e2e0cde6857d867dfa6a0bfb67692b24f1
 Author: Yegappan Lakshmanan <yegappan@yahoo.com>
 Date:   Wed Nov 13 21:03:00 2013 -0800
@@ -29,6 +32,7 @@ Date:   Wed Nov 13 21:03:00 2013 -0800
 
 ./bundle/nerdcommenter/.git
 #########
+https://github.com/scrooloose/nerdcommenter.git
 commit 1f4bfd59920c101a30a74a07b824608a6e65f3fe
 Merge: 5cc672a 0bbb2da
 Author: Martin Grenfell <martin.grenfell@gmail.com>
@@ -40,6 +44,7 @@ Date:   Thu Oct 29 23:48:39 2015 +0000
 
 ./bundle/supertab/.git
 #########
+https://github.com/ervandew/supertab.git
 commit 66511772a430a5eaad7f7d03dbb02e8f33c4a641
 Author: Lukas <me@superlukas.com>
 Date:   Sun Jan 3 16:38:28 2016 +0100
@@ -48,6 +53,7 @@ Date:   Sun Jan 3 16:38:28 2016 +0100
 
 ./bundle/syntastic/.git
 #########
+https://github.com/scrooloose/syntastic.git
 commit 1f4846fecca79fa6a56f054d40761bd8c63a236f
 Author: LCD 47 <lcd047@gmail.com>
 Date:   Sun Jan 10 18:55:59 2016 +0200
@@ -56,6 +62,7 @@ Date:   Sun Jan 10 18:55:59 2016 +0200
 
 ./bundle/tabular/.git
 #########
+https://github.com/godlygeek/tabular.git
 commit 60f25648814f0695eeb6c1040d97adca93c4e0bb
 Author: Matt Wozniski <godlygeek@gmail.com>
 Date:   Thu May 16 19:56:07 2013 -0400
@@ -69,6 +76,7 @@ Date:   Thu May 16 19:56:07 2013 -0400
 
 ./bundle/tagbar/.git
 #########
+https://github.com/majutsushi/tagbar.git
 commit 7b36c46d17d57db34fdb0adac9ba6382d0bb5e66
 Author: Jan Larres <jan@majutsushi.net>
 Date:   Fri Jun 19 11:08:47 2015 +1200
@@ -77,6 +85,7 @@ Date:   Fri Jun 19 11:08:47 2015 +1200
 
 ./bundle/undotree/.git
 #########
+https://github.com/mbbill/undotree.git
 commit 39e5cf0fc241c64e920f91d52299b444475d54df
 Merge: 74874d9 d88ecd6
 Author: Ming, Bai <mbbill@gmail.com>
@@ -88,6 +97,7 @@ Date:   Wed Dec 16 00:59:13 2015 +0800
 
 ./bundle/unite.vim/.git
 #########
+https://github.com/Shougo/unite.vim.git
 commit c9ce3b13c19352e3b791db227aa373c0b028d656
 Merge: 0022b22 e7ad13d
 Author: Shougo <Shougo.Matsu@gmail.com>
@@ -99,6 +109,7 @@ Date:   Sun Jan 17 12:02:49 2016 +0900
 
 ./bundle/vim-airline/.git
 #########
+https://github.com/vim-airline/vim-airline.git
 commit 8845f56686794823c7eb68006285c9f47cce6506
 Merge: 06723fc 17f5eaa
 Author: Christian Brabandt <cb@256bit.org>
@@ -110,6 +121,7 @@ Date:   Sat Jan 16 12:56:51 2016 +0100
 
 ./bundle/vim-bookmarks/.git
 #########
+https://github.com/MattesGroeger/vim-bookmarks.git
 commit c1cfec17fd81f51411e559ea32c97ce8f5510b0c
 Merge: 56b5baa 957d1b7
 Author: Mattes Groeger <info@mattes-groeger.de>
@@ -121,6 +133,7 @@ Date:   Thu Oct 15 19:30:10 2015 +0200
 
 ./bundle/vimfiler.vim/.git
 #########
+https://github.com/Shougo/vimfiler.vim.git
 commit 8e16d22e2c7b10d7ae778256d14d3f4b6227eaa0
 Author: Shougo Matsushita <Shougo.Matsu@gmail.com>
 Date:   Wed Feb 3 20:29:21 2016 +0900
@@ -129,6 +142,7 @@ Date:   Wed Feb 3 20:29:21 2016 +0900
 
 ./bundle/vim-move/.git
 #########
+https://github.com/matze/vim-move.git
 commit d87ac6abfd2f35943e53643b686f605cebc7d1f0
 Author: Matthias Vogelgesang <matthias.vogelgesang@gmail.com>
 Date:   Thu Dec 3 15:22:52 2015 +0100
@@ -137,6 +151,7 @@ Date:   Thu Dec 3 15:22:52 2015 +0100
 
 ./bundle/Vundle.vim/.git
 #########
+https://github.com/VundleVim/Vundle.vim.git
 commit 5f70ae6025e951f0154e3940d123138adffa4c88
 Merge: f095d2b b2d0e5b
 Author: gmarik <gmarik@users.noreply.github.com>
@@ -148,6 +163,7 @@ Date:   Wed Nov 4 21:55:02 2015 -0500
 
 ./bundle/YankRing.vim/.git
 #########
+https://github.com/vim-scripts/YankRing.vim.git
 commit 28854abef8fa4ebd3cb219aefcf22566997d8f65
 Author: David Fishburn <dfishburn.vim@gmail.com>
 Date:   Mon Jul 27 00:00:00 2015 +0000
