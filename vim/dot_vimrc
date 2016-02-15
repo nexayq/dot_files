@@ -1661,7 +1661,7 @@ endif
     " For vim in CentOS/Fedora/RHEL use "vimx" in order to use gvim "servername", "clipboard", ...
     " term1 > vimx --servername SRV a.txt
     " term2 > vimx --servername SRV --remote b.txt
-        
+
 " Calculate numerical expressions in vim
     " http://vimcasts.org/episodes/simple-calculations-with-vims-expression-register/
     " 0 	move to the start of the line
@@ -1671,5 +1671,12 @@ endif
     " <C-r>" 	paste the contents of the default register into the command line
     " <CR> 	evaluate the expression register and insert the result into the document
     " <Esc> 	return to Normal mode
-    
+
     " nnoremap Q 0yt=A<C-r>=<C-r>"<CR><Esc>
+
+" Buffer fast searching
+    noremap <leader>vb :ls<CR>:buffer<Space>
+
+" Focus text in middle - scrolloff
+    noremap <leader>vf :set scrolloff=999<CR>
+    noremap <leader>vF :set scrolloff=0<CR>
