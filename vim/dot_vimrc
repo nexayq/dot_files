@@ -1404,8 +1404,8 @@ endif
     nnoremap <leader>rw :windo! redo<CR>
 
 " Autocomplete background color
-    highlight Pmenu    guibg=darkcyan guifg=gray gui=bold
-    highlight PmenuSel guibg=gray guifg=darkcyan gui=bold
+    highlight Pmenu    guibg=darkcyan guifg=white gui=bold
+    highlight PmenuSel guibg=brown guifg=white gui=bold
 
 " Increase commands history from 20 to 10000
     " /ref/ http://stackoverflow.com/questions/8930690/what-sets-vim-history
