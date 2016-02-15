@@ -22,6 +22,11 @@
         " DONE - gundo
         " DONE - Shift + Arrow insert mode
 
+" Default mappings and explanation, default keys
+    " :help index
+" All current mappings
+    " :map
+
 " Installation
     " Linux
         " - Install "Vundle" or "Neobundle"
@@ -1080,8 +1085,13 @@ endif
 " Go to next/previous buffer
     noremap <C-j> :bn!<CR>
     noremap <C-k> :bp!<CR>
-    noremap <C-PageDown> :tabn<CR>
-    noremap <C-PageUp> :tabp<CR>
+
+    noremap <C-Down> :bn!<CR>
+    noremap <C-Up>   :bp!<CR>
+
+    " Use "gt", "gT" and "<leader>zt" for tab navigation, <C-PageUp/Down> might be used by terminal
+    " noremap <C-PageDown> :tabn<CR>
+    " noremap <C-PageUp> :tabp<CR>
 
 " Delete empty lines
     function! DeleteEmptyLine()
