@@ -1673,6 +1673,7 @@ endif
     " <Esc> 	return to Normal mode
 
     " nnoremap Q 0yt=A<C-r>=<C-r>"<CR><Esc>
+    noremap <leader>vee :echo <C-r>=<C-r>"<CR><Esc>
 
 " Buffer fast searching
     noremap <leader>vb :ls<CR>:buffer<Space>
