@@ -1,5 +1,4 @@
-# dot_files
-dot_files
+# Configuration files
 
 # Vim
 Vim configuration with plugins
