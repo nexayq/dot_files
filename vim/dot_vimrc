@@ -1658,3 +1658,18 @@ endif
     " term1 > vim --servername SRV a.txt
     " term2 > vim --servername SRV --remote b.txt
         " /ref/ http://unix.stackexchange.com/questions/246419/open-file-with-started-vim-from-outside-in-terminal
+    " For vim in CentOS/Fedora/RHEL use "vimx" in order to use gvim "servername", "clipboard", ...
+    " term1 > vimx --servername SRV a.txt
+    " term2 > vimx --servername SRV --remote b.txt
+        
+" Calculate numerical expressions in vim
+    " http://vimcasts.org/episodes/simple-calculations-with-vims-expression-register/
+    " 0 	move to the start of the line
+    " yt= 	yank from cursor position up to (but not including) the `=` sign
+    " A 	move to end of line and switch to Insert mode
+    " <C-r>= 	dial up the expression register
+    " <C-r>" 	paste the contents of the default register into the command line
+    " <CR> 	evaluate the expression register and insert the result into the document
+    " <Esc> 	return to Normal mode
+    
+    " nnoremap Q 0yt=A<C-r>=<C-r>"<CR><Esc>
