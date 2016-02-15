@@ -167,7 +167,7 @@ endif
                 " /ref/ http://stackoverflow.com/a/21434697/2450748
                 " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
                 " nnoremap <F11> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-                nnoremap <leader>vs :SyntasticToggleMode<CR>
+                nnoremap <leader>zs :SyntasticToggleMode<CR>
 
     " CtrlP
    " Plugin 'kien/ctrlp.vim'
@@ -859,7 +859,7 @@ endif
         endif
     endfunc
 
-    nnoremap <leader>vw :call NK_ToggleWhitespaces()<CR>
+    nnoremap <leader>zw :call NK_ToggleWhitespaces()<CR>
 
 " Incremental search
     set incsearch
@@ -1639,8 +1639,8 @@ endif
     " :windo set scb
 " Exit synchronous mode
     " :windo set noscb
-    nnoremap <leader>zss :windo set scb<CR>
-    nnoremap <leader>zsn :windo set noscb<CR>
+    nnoremap <leader>vs :windo set scb<CR>
+    nnoremap <leader>vS :windo set noscb<CR>
 
 " Compare files with vim
     " :windo diffthis
@@ -1648,8 +1648,8 @@ endif
     " :windo diffoff
     " Wrap lines - not so good
         " :windo setlocal wrap<
-    nnoremap <leader>zdd :windo diffthis<CR>
-    nnoremap <leader>zdn :windo diffoff<CR>
+    nnoremap <leader>zd :windo diffthis<CR>
+    nnoremap <leader>zD :windo diffoff<CR>
     " /ref/ http://vimcasts.org/episodes/comparing-buffers-with-vimdiff/
     " Show only differences
         " set diffopt=filler,context:0
@@ -1676,8 +1676,12 @@ endif
     noremap <leader>vee :echo <C-r>=<C-r>"<CR><Esc>
 
 " Buffer fast searching
-    noremap <leader>vb :ls<CR>:buffer<Space>
+    noremap <leader>zb :ls<CR>:buffer<Space>
+
+" Buffer fast searching
+    noremap <leader>zt :tabs<CR>:normal gt<Left><Left>
+        " http://vim.wikia.com/wiki/Select_tab_page_with_a_key
 
 " Focus text in middle - scrolloff
-    noremap <leader>vf :set scrolloff=999<CR>
-    noremap <leader>vF :set scrolloff=0<CR>
+    noremap <leader>zf :set scrolloff=999<CR>
+    noremap <leader>zF :set scrolloff=0<CR>
