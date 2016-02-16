@@ -1695,3 +1695,8 @@ endif
 " Focus text in middle - scrolloff
     noremap <leader>zf :set scrolloff=999<CR>
     noremap <leader>zF :set scrolloff=0<CR>
+
+" Split window vertical and open custom buffer
+    noremap <leader>vb :vert sb<Space>
+    " For horizontal split and custom buffer use
+        " ":sb"
