@@ -1144,11 +1144,13 @@ endif
       "    echohl None
       "  endfunction
 
-" Map F5 to reload
-    nnoremap <F5> :e!<CR>
+" Map to reload
+    " Dont use function keys for shortcuts as they may be used by terminal, tmux, ...
+    nnoremap <leader>vr :e!<CR>
 
 " Map F2 to new file
-    noremap <F2> :enew!<CR>
+    " Dont use function keys for shortcuts as they may be used by terminal, tmux, ...
+    noremap <leader>vn :enew!<CR>
 
 " Map Shift + Arrow keys in insert mode to select
     inoremap <S-Right> <Esc>vl
@@ -1467,7 +1469,7 @@ endif
 
     " nmap <silent> <leader>q :call ToggleList("Location List", 'l')<CR>
     " nmap <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
-    nnoremap <silent> <F7> :call ToggleList("Quickfix List", 'c')<CR>
+    nnoremap <silent> <leader>vq :call ToggleList("Quickfix List", 'c')<CR>
 
 " Real delete - black hole register
     " /ref/ http://stackoverflow.com/a/11993928
@@ -1625,7 +1627,7 @@ endif
         " 1z=
 
 " Switch between header and cpp
-    map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+    map <leader>vh :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
     " /ref/ http://vim.wikia.com/wiki/Easily_switch_between_source_and_header_file
 
 " Vim navigation
