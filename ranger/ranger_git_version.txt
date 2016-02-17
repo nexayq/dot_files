@@ -1,0 +1,9 @@
+# Git location #
+https://github.com/hut/ranger.git
+
+# I am using version #
+commit aa927918eeeaf2fb43ee16e85f3b15b1d6c3d7b0
+Author: hut <hut@lepus.uberspace.de>
+Date:   Sun Feb 14 18:20:24 2016 +0100
+
+    config/rc.conf: fix yp/yn/yd keybindings
