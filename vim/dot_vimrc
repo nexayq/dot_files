@@ -324,14 +324,14 @@ endif
         " nnoremap <silent><buffer><expr> <C-x>     unite#do_action('cd')
         " nnoremap <C-x> <Plug>(vimfiler_switch_to_history_directory)
         autocmd FileType vimfiler nunmap <buffer> <C-j>
-        autocmd FileType vimfiler nunmap <buffer> <CR>
+        autocmd FileType vimfiler nmap  h <Plug>(vimfiler_switch_to_history_directory)
+        " autocmd FileType vimfiler nunmap <buffer> <CR>
         autocmd FileType vimfiler nunmap <buffer> <Space>
+        autocmd FileType vimfiler nmap  s <Plug>(vimfiler_toggle_mark_current_line)
         " /ref/ https://github.com/Shougo/vimfiler.vim/issues/178
         " autocmd FileType vimfiler unmap  <C-j>
-        autocmd FileType vimfiler nmap  <C-h> <Plug>(vimfiler_switch_to_history_directory)
-        autocmd FileType vimfiler nmap  [ <Plug>(vimfiler_cd_or_edit)
-        autocmd FileType vimfiler nmap  <CR> <Plug>(vimfiler_expand_tree)
-        autocmd FileType vimfiler nmap  s <Plug>(vimfiler_toggle_mark_current_line)
+        " autocmd FileType vimfiler nmap  [ <Plug>(vimfiler_cd_or_edit)
+        " autocmd FileType vimfiler nmap  <CR> <Plug>(vimfiler_expand_tree)
 
         " autocmd FileType vimfiler nmap <buffer> <C-R>  <Plug>(vimfiler_redraw_screen)
         " autocmd FileType vimfiler nmap  <C-j> :bn!<CR>
@@ -1702,3 +1702,8 @@ endif
     noremap <leader>vb :vert sb<Space>
     " For horizontal split and custom buffer use
         " ":sb"
+" Remap for scroll up
+    " unmap <C-D>
+    " map <C-D> <C-Y>
+    noremap <C-D> <C-E>
+    noremap <C-E> <C-Y>
