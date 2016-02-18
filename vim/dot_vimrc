@@ -1705,5 +1705,13 @@ endif
 " Remap for scroll up
     " unmap <C-D>
     " map <C-D> <C-Y>
-    noremap <C-D> <C-E>
-    noremap <C-E> <C-Y>
+    " noremap <C-D> <C-E>
+    " noremap <C-E> <C-Y>
+    noremap <C-D> <C-Y>
+
+" Autocomplete
+    " CRTL-x CRTL-f to be very useful, it autocompletes filenames of files that are in the current directory.
+        " http://usevim.com/2012/07/06/vim101-completion/
+
+" Zoom only one window
+    nnoremap <leader>zz :on<CR>
