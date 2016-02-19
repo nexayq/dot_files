@@ -172,7 +172,8 @@ endif
                 " /ref/ http://stackoverflow.com/a/21434697/2450748
                 " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
                 " nnoremap <F11> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-                nnoremap <leader>zs :SyntasticToggleMode<CR>
+                nnoremap <leader>zss :SyntasticToggleMode<CR>
+                nnoremap <leader>zsc :SyntasticCheck<CR>
 
     " CtrlP
    " Plugin 'kien/ctrlp.vim'
@@ -342,6 +343,7 @@ endif
         " <C-l> -> refresh directories/files
         " a,s   -> choose window after enter
             " /ref/ https://github.com/Shougo/vimfiler.vim/issues/157
+        " gS    -> Hide modified date/time/size
 
     " Vimshell Shougo
         " Plugin 'Shougo/vimshell.vim'
@@ -432,8 +434,6 @@ endif
         Plugin 'godlygeek/tabular'
 
         noremap <leader>a=  :Tabularize /=<CR>
-        noremap <leader>af= :Tabularize /=.*<CR>
-        " /ref/ http://stackoverflow.com/questions/11497593/vim-tabular-only-on-the-first-match-on-the-line
 
         noremap <leader>a: :Tabularize /:<CR>
         noremap <leader>a. :Tabularize /\.<CR>
@@ -446,6 +446,17 @@ endif
 
         " Align by digits/numbers
         noremap <leader>an :Tabularize /[0-9]<CR>
+
+        " Align only on first occurence
+        noremap <leader>a1= :Tabularize /=.*<CR>
+        noremap <leader>a1: :Tabularize /:.*<CR>
+        noremap <leader>a1. :Tabularize /\..*<CR>
+        noremap <leader>a1( :Tabularize /(.*<CR>
+        noremap <leader>a1< :Tabularize /<.*<CR>
+        noremap <leader>a1> :Tabularize />.*<CR>
+        noremap <leader>a1n :Tabularize /[0-9].*<CR>
+            " /ref/ http://stackoverflow.com/questions/11497593/vim-tabular-only-on-the-first-match-on-the-line
+            " http://stackoverflow.com/questions/23071787/how-to-match-against-only-first-in-vim-using-tabular-ignoring
 
     " Align - not working in MS Windows
         "Plugin 'vim-scripts/Align'
@@ -557,6 +568,12 @@ endif
             " /ref/ https://github.com/spf13/spf13-vim/issues/90
             " let g:CSApprox_hook_post = ['hi Normal  ctermbg=NONE ctermfg=NONE',
                                 " \ 'hi NonText ctermbg=NONE ctermfg=NONE' ]
+
+    " Rainbow parentheses
+        " Plugin 'kien/rainbow_parentheses.vim'
+        Plugin 'luochen1990/rainbow'
+            let g:rainbow_active = 1
+                                 " 0 if you want to enable it later via :RainbowToggle
 
     " Bufferline bottom
         " Plugin 'bling/vim-bufferline'
@@ -698,6 +715,10 @@ endif
         call NK_BookmarkSave()
         call NK_SaveSession()
     endfunc
+
+
+    " Map for session and bookmarks save
+        nnoremap <leader>ns :call NK_QuitSaveAll()<CR>
 
     " Load
 
@@ -986,7 +1007,7 @@ endif
         endfunc
 
     " Fast save and open session
-        nnoremap <leader>n :call SaveSession()<CR>
+        " nnoremap <leader>n :call SaveSession()<CR>
         " nnoremap <leader>. :call OpenSession()<CR>
 
 
@@ -1419,6 +1440,9 @@ endif
     highlight Pmenu    guibg=darkcyan guifg=white gui=bold
     highlight PmenuSel guibg=brown guifg=white gui=bold
 
+    highlight Pmenu    ctermbg=darkcyan ctermfg=white gui=bold
+    highlight PmenuSel ctermbg=brown ctermfg=white gui=bold
+
 " Increase commands history from 20 to 10000
     " /ref/ http://stackoverflow.com/questions/8930690/what-sets-vim-history
     set history=10000
@@ -1676,13 +1700,13 @@ endif
 
 " Calculate numerical expressions in vim
     " http://vimcasts.org/episodes/simple-calculations-with-vims-expression-register/
-    " 0 	move to the start of the line
-    " yt= 	yank from cursor position up to (but not including) the `=` sign
-    " A 	move to end of line and switch to Insert mode
-    " <C-r>= 	dial up the expression register
-    " <C-r>" 	paste the contents of the default register into the command line
-    " <CR> 	evaluate the expression register and insert the result into the document
-    " <Esc> 	return to Normal mode
+    " 0     move to the start of the line
+    " yt=   yank from cursor position up to (but not including) the `=` sign
+    " A     move to end of line and switch to Insert mode
+    " <C-r>=    dial up the expression register
+    " <C-r>"    paste the contents of the default register into the command line
+    " <CR>  evaluate the expression register and insert the result into the document
+    " <Esc>     return to Normal mode
 
     " nnoremap Q 0yt=A<C-r>=<C-r>"<CR><Esc>
     noremap <leader>vee :echo <C-r>=<C-r>"<CR><Esc>
@@ -1715,3 +1739,36 @@ endif
 
 " Zoom only one window
     nnoremap <leader>zz :on<CR>
+
+" Exchange : and ; keys
+    " noremap ; :
+    " noremap : ;
+
+" Map :W to save
+    command W w
+        " https://coderwall.com/p/nckasg/map-w-to-w-in-vim
+
+" CTRL-O - in insert mode
+    " CTRL-O        execute one command, return to Insert mode   *i_CTRL-O
+        " http://stackoverflow.com/questions/1737163/traversing-text-in-insert-mode
+
+" ESC delay
+    set timeoutlen=1000 ttimeoutlen=0
+        " http://www.johnhawthorn.com/2012/09/vi-escape-delays/
+
+" Marker at line 80
+
+    highlight ColorColumn ctermbg = DarkGreen
+    highlight ColorColumn guibg   = DarkGreen
+
+    nnoremap <leader>vl :call NK_LineWidthMarker()<CR>
+    nnoremap <leader>vL :call NK_NoLineWidthMarker()<CR>
+
+
+    function! NK_LineWidthMarker()
+        set colorcolumn=80
+    endfunc
+
+    function! NK_NoLineWidthMarker()
+        set colorcolumn=
+    endfunc
