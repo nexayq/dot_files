@@ -727,11 +727,14 @@ endif
         let server  = v:servername
         let session = g:nk_sessiondir."/".server.".session.vim"
 
-        if filereadable(session)
-            execute "source ".session
-            echo 'Session opened: '.session
+        if !empty(server)
+            if filereadable(session)
+                execute "source ".session
+                echo 'Session opened: '.session
+            endif
         endif
     endfunction
+        " http://www.ibm.com/developerworks/library/l-vim-script-1/
 
     " Load bookmarks
     function! NK_BookmarkLoad()
@@ -1664,10 +1667,12 @@ endif
     set completeopt=longest,menuone
         " /ref/ http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 
-" Focus file when launched with vim terminal
+" Focus file when launched with vim terminal if file is specified
     " autocmd VimEnter * echo "abe"
     if !has("gui_running")
-        autocmd VimEnter * :bfirst
+        if argc() != 0
+            autocmd VimEnter * :bfirst
+        endif
     endif
         " /ref/ http://learnvimscriptthehardway.stevelosh.com/chapters/12.html
 
@@ -1772,3 +1777,34 @@ endif
     function! NK_NoLineWidthMarker()
         set colorcolumn=
     endfunc
+
+" Wrap text at line 80
+    " set textwidth=80
+    " set autoindent "in order to indent new lines like previous ones"
+        " http://stackoverflow.com/a/22002014/2450748
+
+    nnoremap <leader>vw :call NK_TextWrap()<CR>
+    nnoremap <leader>vW :call NK_NoTextWrap()<CR>
+
+    function! NK_TextWrap()
+        set textwidth=80
+        set autoindent
+    endfunc
+
+    function! NK_NoTextWrap()
+        set textwidth=0
+        set noautoindent
+    endfunc
+
+" Check your custom mappings - Great!
+    " :map <C-d> "<C-d> is used to present all autocomplete combinations"
+    " Because "Space" is custom character you have to press "C-v" twice (command mode) first and then "Space" for your leader
+    " Example:
+        " :map <C-v><C-v><Space> zz<C-d>
+            " n  <Space>zz   * :on<CR>
+
+" Copy command mode output to yank register
+    " :redir @+
+    "   :echo "bcd"
+    " :redir END
+        " http://superuser.com/questions/167352/how-do-i-copy-command-output-in-vim
