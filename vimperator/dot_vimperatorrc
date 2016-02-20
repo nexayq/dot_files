@@ -1,0 +1,4 @@
+" unmap <M-<F4>>
+
+" Save session when using Alt+F4 or qall command
+    command! qall xall
