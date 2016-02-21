@@ -1,0 +1,27 @@
+
+; > git config user.name  "name"
+; > git config user.email "email@provider.com"
+
+[color]
+    diff        = auto
+    status      = auto
+    branch      = auto
+    interactive = auto
+    ui          = auto
+
+[push]
+    default = simple
+
+[diff]
+    ; external = meld
+    tool = vimdiff
+
+[merge]
+    tool = vimdiff
+
+[alias]
+    ci       = commit -v
+    st       = status -s
+    in       = !git fetch && git log ..origin/master
+    incoming = in
+    alias    = config --get-regexp alias
