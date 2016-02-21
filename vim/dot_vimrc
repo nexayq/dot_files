@@ -575,6 +575,9 @@ endif
             let g:rainbow_active = 1
                                  " 0 if you want to enable it later via :RainbowToggle
 
+    " Hg plugin - Vim mercenary
+        " Plugin 'jlfwong/vim-mercenary'
+
     " Bufferline bottom
         " Plugin 'bling/vim-bufferline'
 
@@ -1669,12 +1672,11 @@ endif
 
 " Focus file when launched with vim terminal if file is specified
     " autocmd VimEnter * echo "abe"
-    if !has("gui_running")
-        if argc() != 0
-            autocmd VimEnter * :bfirst
-        endif
+    if !has("gui_running") && (argc() != 0) && (!&diff)
+        autocmd VimEnter * :bfirst
     endif
         " /ref/ http://learnvimscriptthehardway.stevelosh.com/chapters/12.html
+        " /ref/ http://stackoverflow.com/questions/1944476/using-vimdiff-with-a-different-vimrc
 
 " Synchronous scrolling - scrollbind
     " :windo set scb
