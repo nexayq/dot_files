@@ -14,3 +14,9 @@ Terminal multiplexer
 
 # Vimperator
 Firefox add-on that provides Vim like experience
+
+# Git
+Git settings and aliases
+
+# Hg (Mercurial)
+Hg settings and aliases
