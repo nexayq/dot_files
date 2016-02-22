@@ -575,6 +575,9 @@ endif
             let g:rainbow_active = 1
                                  " 0 if you want to enable it later via :RainbowToggle
 
+    " Log files highlight
+        Plugin 'dzeban/vim-log-syntax'
+
     " Hg plugin - Vim mercenary
         " Plugin 'jlfwong/vim-mercenary'
 
