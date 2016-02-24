@@ -317,10 +317,11 @@ endif
     " Vimfiler
         Plugin 'Shougo/vimfiler.vim'
         " /ref/ https://github.com/Shougo/vimfiler.vim/blob/master/doc/vimfiler.txt
+        let g:vimfiler_as_default_explorer = 1
 
-        noremap <leader>ee :VimFiler           -buffer-name=@cwd_vf     -no-quit -split -direction=<CR>
-        noremap <leader>ew :VimFilerCurrentDir -buffer-name=@cwd_vf     -no-quit -split -direction=<CR>
-        noremap <leader>eb :VimFilerBufferDir  -buffer-name=@buffer_vf  -no-quit -split -direction=<CR>
+        noremap <leader>ee :VimFiler           -buffer-name=@cwd_vf     -no-quit -split -direction= -simple<CR>
+        noremap <leader>ew :VimFilerCurrentDir -buffer-name=@cwd_vf     -no-quit -split -direction= -simple<CR>
+        noremap <leader>eb :VimFilerBufferDir  -buffer-name=@buffer_vf  -no-quit -split -direction= -simple<CR>
 
         " nnoremap <silent><buffer><expr> <C-x>     unite#do_action('cd')
         " nnoremap <C-x> <Plug>(vimfiler_switch_to_history_directory)
@@ -469,10 +470,10 @@ endif
 
         " *'NERDCreateDefaultMappings'*
         " /ref/ http://ruderich.org/simon/config/vimrc
-        map <leader><leader> <plug>NERDCommenterToggle
+        map <leader>cc <plug>NERDCommenterToggle
         " map ,t <plug>NERDCommenterToggleComment
         " map ,omg <plug>NERDCommenterComment
-        " let g:NERDCreateDefaultMappings = 0
+        let g:NERDCreateDefaultMappings = 0
         let g:NERDSpaceDelims = 1
         " let g:NERDRemoveAltComs = 1
         " let NERD_c_alt_style=0
@@ -577,6 +578,9 @@ endif
 
     " Log files highlight
         Plugin 'dzeban/vim-log-syntax'
+
+    " Compare directories with vimdiff
+        Plugin 'will133/vim-dirdiff'
 
     " Hg plugin - Vim mercenary
         " Plugin 'jlfwong/vim-mercenary'
@@ -1094,8 +1098,10 @@ endif
     "   /ref/http://stackoverflow.com/questions/2287440/how-to-do-case-insensitive-search-in-vim
 
 " Highlight current line
-    set cursorline
-    " /ref/ http://vim.wikia.com/wiki/Highlight_current_line
+    if !&diff
+        set cursorline
+    endif
+        " /ref/ http://vim.wikia.com/wiki/Highlight_current_line
 
 " Escape insert mode
     " inoremap <C-q> <Esc>
@@ -1375,7 +1381,9 @@ endif
     nnoremap <leader>ss : %s///gc<Left><Left><Left><Left>
     vnoremap <leader>s  : s///g<Left><Left><Left>
     nnoremap <leader>sb : bufdo! %s///gc<Left><Left><Left><Left>
-    nnoremap <leader>sw : %s/<C-R><C-W>/<C-R><C-W>/g<Left><Left>
+    nnoremap <leader>sww : %s/<C-R><C-W>/<C-R><C-W>/g<Left><Left>
+    nnoremap <leader>swa : windo! %s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left>
+    nnoremap <leader>swb : bufdo! %s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left>
     " Substitute word under cursor in whole file <leader>sw, go back with <C-o>
 
 " Search remap for case insensitive search
@@ -1813,3 +1821,21 @@ endif
     "   :echo "bcd"
     " :redir END
         " http://superuser.com/questions/167352/how-do-i-copy-command-output-in-vim
+
+" Indent block of lines
+    " Select block of lines in visual mode
+        " Indent by 4 spaces
+        " :le 4
+
+" Reindent lines
+    " Select lines, and type:
+        " ==
+
+" Use vim as pager
+    " echo abe | vim -
+        " https://technotales.wordpress.com/2009/05/24/using-vim-as-a-pager/
+
+
+" Set syntax for txt files to be bash
+    autocmd BufNewFile,BufRead *.txt   set syntax=sh
+        " /ref/ http://stackoverflow.com/a/11666247/2450748
