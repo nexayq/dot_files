@@ -1,6 +1,5 @@
 ;git guides
     ; http://rogerdudler.github.io/git-guide/
-    
 ;Example configs
     ; https://github.com/alikins/gitconfig/blob/master/gitconfig
 
@@ -25,7 +24,8 @@
     deleted = red
 
 [push]
-    default = simple
+    ; default = simple
+    default = matching
 
 [diff]
     ; external = meld
@@ -40,3 +40,5 @@
     in       = !git fetch && git log ..origin/master
     incoming = in
     alias    = config --get-regexp alias
+    out      = log @{u}..
+    outgoing = out
