@@ -470,7 +470,7 @@ endif
 
         " *'NERDCreateDefaultMappings'*
         " /ref/ http://ruderich.org/simon/config/vimrc
-        map <leader>cc <plug>NERDCommenterToggle
+        map <leader><leader> <plug>NERDCommenterToggle
         " map ,t <plug>NERDCommenterToggleComment
         " map ,omg <plug>NERDCommenterComment
         let g:NERDCreateDefaultMappings = 0
@@ -1379,12 +1379,14 @@ endif
 " Shortcut for replace in current file, buffers, ...
     " /ref/ http        : //www.thegeekstuff.com/2009/04/vi-vim-editor-search-and-replace-examples/
     nnoremap <leader>ss : %s///gc<Left><Left><Left><Left>
-    vnoremap <leader>s  : s///g<Left><Left><Left>
     nnoremap <leader>sb : bufdo! %s///gc<Left><Left><Left><Left>
     nnoremap <leader>sww : %s/<C-R><C-W>/<C-R><C-W>/g<Left><Left>
     nnoremap <leader>swa : windo! %s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left>
     nnoremap <leader>swb : bufdo! %s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left>
     " Substitute word under cursor in whole file <leader>sw, go back with <C-o>
+    vnoremap <leader>ss  : s///g<Left><Left><Left>
+    " sw Only works for one line, not for V
+    vnoremap <leader>sw  : s/<C-R><C-W>/<C-R><C-W>/g<Left><Left>
 
 " Search remap for case insensitive search
     nnoremap // /\c
@@ -1733,8 +1735,14 @@ endif
     noremap <leader>zb :ls<CR>:buffer<Space>
 
 " Buffer fast searching
-    noremap <leader>zt :tabs<CR>:normal gt<Left><Left>
+    noremap <leader>gt :tabs<CR>:normal gt<Left><Left>
         " http://vim.wikia.com/wiki/Select_tab_page_with_a_key
+    " Move tab to first place
+        " :tabmove 0
+    " Move tab to second place
+        " :tabmove 1
+    " Move tab to last place
+        " :tabmove
 
 " Focus text in middle - scrolloff
     noremap <leader>zf :set scrolloff=999<CR>
@@ -1839,3 +1847,25 @@ endif
 " Set syntax for txt files to be bash
     autocmd BufNewFile,BufRead *.txt   set syntax=sh
         " /ref/ http://stackoverflow.com/a/11666247/2450748
+
+" Set tabwidth to 2 for yaml files
+    autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
+        " https://docs.saltstack.com/en/latest/topics/troubleshooting/yaml_idiosyncrasies.html
+
+" DiffColors
+    highlight DiffAdd      guibg=DarkGreen guifg=White
+    highlight DiffDelete   guibg=DarkRed   guifg=White
+    highlight DiffChange   guibg=DarkBlue  guifg=White
+    highlight DiffText     guibg=Blue      guifg=White
+        " http://stackoverflow.com/questions/2019281/load-different-colorscheme-when-using-vimdiff
+        " http://blog.sanctum.geek.nz/unix-as-ide-editing/
+        " http://usevim.com/2012/03/21/git-and-vimdiff/
+
+    " highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+    " highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+    " highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+    " highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+
+" Increment/Decrement number at or after the cursor
+    " CTRL-A - Increment number
+    " CTRL-X - Decrement number
