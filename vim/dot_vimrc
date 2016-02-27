@@ -352,6 +352,7 @@ endif
     " SuperTab
         Plugin 'ervandew/supertab'
         let g:SuperTabDefaultCompletionType = 'context'
+        " let b:SuperTabDisabled = 1
 
     " vim-move - Move lines up down
         Bundle 'matze/vim-move'
@@ -581,6 +582,10 @@ endif
 
     " Compare directories with vimdiff
         Plugin 'will133/vim-dirdiff'
+
+    " Neocomplcache
+        " Plugin 'Shougo/neocomplete.vim'
+        " let g:neocomplete#enable_at_startup = 1
 
     " Hg plugin - Vim mercenary
         " Plugin 'jlfwong/vim-mercenary'
@@ -903,9 +908,6 @@ endif
 " Incremental search
     set incsearch
     set hlsearch
-    nnoremap /c :nohlsearch<CR>
-    " /ref/ https://medium.com/hacking-and-gonzo/10-vim-tricks-you-should-know-6393842b3537#.3pxco1r77
-    "       http://dougblack.io/words/a-good-vimrc.html
 
 " Separate directory for .swp files
 " No bkp and swp dirs
@@ -1098,7 +1100,9 @@ endif
     "   /ref/http://stackoverflow.com/questions/2287440/how-to-do-case-insensitive-search-in-vim
 
 " Highlight current line
-    if !&diff
+    if &diff
+        set scrolloff=999
+    else
         set cursorline
     endif
         " /ref/ http://vim.wikia.com/wiki/Highlight_current_line
@@ -1388,10 +1392,6 @@ endif
     " sw Only works for one line, not for V
     vnoremap <leader>sw  : s/<C-R><C-W>/<C-R><C-W>/g<Left><Left>
 
-" Search remap for case insensitive search
-    nnoremap // /\c
-    " /ref/ http://stackoverflow.com/a/2287449/2450748
-
 " Quickfix window Open, Next, Previous
     " Use with repeat command (@:) - write :cn, cp<CR>, and then <C-n>
     " nnoremap <C-m>     :cn<CR> " <C-M> is ENTER!!!
@@ -1402,12 +1402,19 @@ endif
     nnoremap <C-@> @:
 
 " Search buffers directories
-    nnoremap /b :bufdo! /\c
-    nnoremap /d :Grep  *<Left><Left>
+    " Search remap for case insensitive search
+    " nnoremap // /\c
+    nnoremap <leader>// /\c
+    nnoremap <leader>/c :nohlsearch<CR>
+    " /ref/ https://medium.com/hacking-and-gonzo/10-vim-tricks-you-should-know-6393842b3537#.3pxco1r77
+    "       http://dougblack.io/words/a-good-vimrc.html
+    " /ref/ http://stackoverflow.com/a/2287449/2450748
+    nnoremap <leader>/b :bufdo! /\c
+    nnoremap <leader>/d :Grep  *<Left><Left>
     " nnoremap /w :call NK_SearchWord()
     " nnoremap /w "zyiw:execute "Grep ".@z." *"
     "# Search word under cursor in current directory
-    nnoremap /w :Grep <C-R><C-W> *
+    nnoremap <leader>/w :Grep <C-R><C-W> *
         " /ref/ http://vim.wikia.com/wiki/Word_under_cursor_for_command
 
     function! NK_SearchWord()
