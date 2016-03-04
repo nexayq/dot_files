@@ -12,3 +12,11 @@ opts.vimdiff = '+next' '+execute "DirDiff" fnameescape(argv(0)) fnameescape(argv
 # opts.vimdiff = '+next' '+execute "DirDiff" fnameescape(argv(0)) fnameescape(argv(1))' '+execute "4wincmd w"' '+execute "wincmd c"' '+execute "bd 1"' '+execute "bd 2"'
 # opts.vimdiff = '+next' '+execute "DirDiff" fnameescape(argv(0)) fnameescape(argv(1))' '+execute "bd 1"' '+execute "bd 2"'
 
+# Set vimdiff as merge tool
+[ui]
+merge = vimdiff
+
+[merge-tools]
+vimdiff.executable = vim
+# vimdiff.args = -d $base $local $output $other +close +close
+vimdiff.args = -d $base $local $output $other -c "wincmd J"
