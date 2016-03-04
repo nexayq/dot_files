@@ -317,6 +317,17 @@ endif
     " Vimfiler
         Plugin 'Shougo/vimfiler.vim'
         " /ref/ https://github.com/Shougo/vimfiler.vim/blob/master/doc/vimfiler.txt
+
+        " t, T  -> expand directory, recursively
+        " gs    -> Exit/enter safe mode
+        " gc    -> Change current working directory (pwd)
+        " <C-l> -> refresh directories/files
+        " a,s   -> choose window after enter
+            " /ref/ https://github.com/Shougo/vimfiler.vim/issues/157
+        " gS    -> Hide modified date/time/size
+        " S     -> Select sort type - size, name, extension, ...
+        " E     -> Open(edit) file in vertical split
+
         let g:vimfiler_as_default_explorer = 1
 
         noremap <leader>ee :VimFiler           -buffer-name=@cwd_vf     -no-quit -split -direction= -simple<CR>
@@ -338,13 +349,6 @@ endif
         " autocmd FileType vimfiler nmap <buffer> <C-R>  <Plug>(vimfiler_redraw_screen)
         " autocmd FileType vimfiler nmap  <C-j> :bn!<CR>
         " noremap <C-j> :bn!<CR>
-        " t, T  -> expand directory, recursively
-        " gs    -> Exit/enter safe mode
-        " gc    -> Change current working directory (pwd)
-        " <C-l> -> refresh directories/files
-        " a,s   -> choose window after enter
-            " /ref/ https://github.com/Shougo/vimfiler.vim/issues/157
-        " gS    -> Hide modified date/time/size
 
     " Vimshell Shougo
         " Plugin 'Shougo/vimshell.vim'
@@ -582,6 +586,9 @@ endif
 
     " Compare directories with vimdiff
         Plugin 'will133/vim-dirdiff'
+
+    " Syntax for mercurial
+        " Plugin 'DasIch/vim-mercurial'
 
     " Neocomplcache
         " Plugin 'Shougo/neocomplete.vim'
@@ -1348,7 +1355,8 @@ endif
 
 
 " Copy/Paste
-    if has("win32") || has("win16")
+        " http://codeyarns.com/2013/07/26/how-to-check-for-cygwin-in-vim/
+    if has("win32") || has("win16") || has("win32unix")
         set clipboard=unnamed
     else
         set clipboard=unnamedplus
@@ -1550,18 +1558,18 @@ endif
 " Copy file name/path to clipboard
     " Convert slashes to backslashes for Windows.
     if has("win32") || has("win16")
-      nnoremap <leader>xn :let @+=substitute(expand("%:t"), "/", "\\", "g")<CR>
-      nnoremap <leader>xx :let @+=substitute(expand("%:p:h"), "/", "\\", "g")<CR>
-      nnoremap <leader>xf :let @+=substitute(expand("%:p"), "/", "\\", "g")<CR>
+      nnoremap <leader>xn :let @+=substitute(expand("%:t"), "/", "\\", "g") <CR>  <bar> :echo expand("%:t")<CR>
+      nnoremap <leader>xp :let @+=substitute(expand("%:p:h"), "/", "\\", "g")<CR> <bar> :echo expand("%:p:h")<CR>
+      nnoremap <leader>xf :let @+=substitute(expand("%:p"), "/", "\\", "g")<CR>   <bar> :echo expand("%:p")<CR>
 
       " This will copy the path in 8.3 short format, for DOS and Windows 9x
       " nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
     else
       " nmap ,cs :let @*=expand("%")<CR>
       " nmap ,cl :let @*=expand("%:p")<CR>
-      nnoremap <leader>xn :let @+=expand("%:t")<CR>
-      nnoremap <leader>xx :let @+=expand("%:p:h")<CR>
-      nnoremap <leader>xf :let @+=expand("%:p")<CR>
+      nnoremap <leader>xn :let @+=expand("%:t")<CR>   <bar> :echo expand("%:t")<CR>
+      nnoremap <leader>xp :let @+=expand("%:p:h")<CR> <bar> :echo expand("%:p:h")<CR>
+      nnoremap <leader>xf :let @+=expand("%:p")<CR>   <bar> :echo expand("%:p")<CR>
     endif
 
 " Tags in seperate window
