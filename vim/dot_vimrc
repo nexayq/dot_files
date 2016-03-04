@@ -16,7 +16,6 @@
         " DONE - Set backup and swap directories
         " DONE - Search and replace in directories
         " DONE - Search and replace in buffers - http://www.thegeekstuff.com/2009/04/vi-vim-editor-search-and-replace-examples/
-        " DONE - Copy/Paste shortcuts <leader>c , <leader>v
         " DONE - tags
         " DONE - Code folding
         " DONE - gundo
@@ -1193,11 +1192,11 @@ endif
 
 " Map to reload
     " Dont use function keys for shortcuts as they may be used by terminal, tmux, ...
-    nnoremap <leader>vr :e!<CR>
+    nnoremap <leader>zr :e!<CR>
 
 " Map F2 to new file
     " Dont use function keys for shortcuts as they may be used by terminal, tmux, ...
-    noremap <leader>vn :enew!<CR>
+    noremap <leader>zn :enew!<CR>
 
 " Map Shift + Arrow keys in insert mode to select
     inoremap <S-Right> <Esc>vl
@@ -1527,7 +1526,7 @@ endif
 
     " nmap <silent> <leader>q :call ToggleList("Location List", 'l')<CR>
     " nmap <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
-    nnoremap <silent> <leader>vq :call ToggleList("Quickfix List", 'c')<CR>
+    nnoremap <silent> <leader>zq :call ToggleList("Quickfix List", 'c')<CR>
 
 " Real delete - black hole register
     " /ref/ http://stackoverflow.com/a/11993928
@@ -1685,7 +1684,7 @@ endif
         " 1z=
 
 " Switch between header and cpp
-    map <leader>vh :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+    map <leader>zh :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
     " /ref/ http://vim.wikia.com/wiki/Easily_switch_between_source_and_header_file
 
 " Vim navigation
@@ -1744,7 +1743,7 @@ endif
     " <Esc>     return to Normal mode
 
     " nnoremap Q 0yt=A<C-r>=<C-r>"<CR><Esc>
-    noremap <leader>vee :echo <C-r>=<C-r>"<CR><Esc>
+    noremap <leader>zee :echo <C-r>=<C-r>"<CR><Esc>
 
 " Buffer fast searching
     noremap <leader>zb :ls<CR>:buffer<Space>
@@ -1802,8 +1801,8 @@ endif
     highlight ColorColumn ctermbg = DarkGreen
     highlight ColorColumn guibg   = DarkGreen
 
-    nnoremap <leader>vl :call NK_LineWidthMarker()<CR>
-    nnoremap <leader>vL :call NK_NoLineWidthMarker()<CR>
+    nnoremap <leader>zl :call NK_LineWidthMarker()<CR>
+    nnoremap <leader>zL :call NK_NoLineWidthMarker()<CR>
 
 
     function! NK_LineWidthMarker()
