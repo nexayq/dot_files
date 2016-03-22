@@ -1422,6 +1422,7 @@ endif
     " nnoremap /w "zyiw:execute "Grep ".@z." *"
     "# Search word under cursor in current directory
     nnoremap <leader>/w :Grep <C-R><C-W> *
+    nnoremap <leader>/c :Grep <C-R><C-W> %:p --no-filename
         " /ref/ http://vim.wikia.com/wiki/Word_under_cursor_for_command
 
     function! NK_SearchWord()
@@ -1555,6 +1556,9 @@ endif
     " /ref/ http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
 
 " Copy file name/path to clipboard
+    " Echo full path to command line
+      nnoremap <leader>xx :echo expand("%:p")<CR>
+
     " Convert slashes to backslashes for Windows.
     if has("win32") || has("win16")
       nnoremap <leader>xn :let @+=substitute(expand("%:t"), "/", "\\", "g") <CR>  <bar> :echo expand("%:t")<CR>
@@ -1684,6 +1688,7 @@ endif
         " 1z=
 
 " Switch between header and cpp
+    map <leader>zH :vsp %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
     map <leader>zh :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
     " /ref/ http://vim.wikia.com/wiki/Easily_switch_between_source_and_header_file
 
@@ -1883,3 +1888,6 @@ endif
 " Increment/Decrement number at or after the cursor
     " CTRL-A - Increment number
     " CTRL-X - Decrement number
+
+" Enable mouse in terminal vim
+    set mouse=a
