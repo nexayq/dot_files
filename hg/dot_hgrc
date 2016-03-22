@@ -5,6 +5,8 @@ graphlog =
 hgext.extdiff =
 # https://www.mercurial-scm.org/wiki/ExtdiffExtension
 hgext.churn=
+# Rebase
+rebase =
 
 [extdiff]
 cmd.vimdiff = vimdiff
