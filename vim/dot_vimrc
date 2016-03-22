@@ -1421,8 +1421,8 @@ endif
     " nnoremap /w :call NK_SearchWord()
     " nnoremap /w "zyiw:execute "Grep ".@z." *"
     "# Search word under cursor in current directory
-    nnoremap <leader>/w :Grep <C-R><C-W> *
-    nnoremap <leader>/c :Grep <C-R><C-W> %:p --no-filename
+    nnoremap <leader>/g :Grep <C-R><C-W> *
+    nnoremap <leader>/w :Grep <C-R><C-W> %:p --no-filename
         " /ref/ http://vim.wikia.com/wiki/Word_under_cursor_for_command
 
     function! NK_SearchWord()
