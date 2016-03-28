@@ -1,0 +1,3 @@
+
+# Path to zathurarc
+    ~/.config/zathura/zathurarc

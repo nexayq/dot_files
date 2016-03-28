@@ -1,0 +1,9 @@
+
+map [normal]     <F11> toggle_fullscreen
+map [fullscreen] <F11> toggle_fullscreen
+
+map [normal]     e scroll down
+map [fullscreen] e scroll down
+
+map <C-i> zoom in
+map <C-o> zoom out
