@@ -7,3 +7,4 @@ map [fullscreen] e scroll down
 
 map <C-i> zoom in
 map <C-o> zoom out
+" Only one key for shortcut works, for example "zi" is not allowed to be mapped
