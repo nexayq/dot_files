@@ -13,6 +13,8 @@ cmd.vimdiff = vimdiff
 opts.vimdiff = '+next' '+execute "DirDiff" fnameescape(argv(0)) fnameescape(argv(1))'
 # opts.vimdiff = '+next' '+execute "DirDiff" fnameescape(argv(0)) fnameescape(argv(1))' '+execute "4wincmd w"' '+execute "wincmd c"' '+execute "bd 1"' '+execute "bd 2"'
 # opts.vimdiff = '+next' '+execute "DirDiff" fnameescape(argv(0)) fnameescape(argv(1))' '+execute "bd 1"' '+execute "bd 2"'
+# View unversioned files with vim
+# > vim $(hg st -un)
 
 # Set vimdiff as merge tool
 [ui]
