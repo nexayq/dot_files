@@ -329,6 +329,7 @@ endif
         " K     -> Make create directory
         " N     -> New file
         " dd    -> delete file
+        " H     -> open shell, exit shell by typing "exit"
 
         let g:vimfiler_as_default_explorer = 1
 
@@ -888,7 +889,7 @@ endif
 " Open new window split on right side, down side
     set splitright
     set splitbelow
-    " /ref/ http://stackoverflow.com/a/7207769/2450748
+        " /ref/ http://stackoverflow.com/a/7207769/2450748
 
 " Tab width
     " Exception for Makefiles - Already done in Vim implementation
@@ -1430,6 +1431,12 @@ endif
     nnoremap <leader><k4> :4wincmd w<CR>
     nnoremap <leader><k5> :5wincmd w<CR>
 
+    " C-W L -> move window to far right
+    " C-W H -> move window to far left
+    " C-W J -> move window to very bottom
+    " C-W K -> move window to very top
+        " http://stackoverflow.com/questions/4556184/vim-move-window-left-right
+
 " Shortcut for replace in current file, buffers, ...
     " /ref/ http        : //www.thegeekstuff.com/2009/04/vi-vim-editor-search-and-replace-examples/
     nnoremap <leader>ss : %s///gc<Left><Left><Left><Left>
@@ -1951,3 +1958,12 @@ endif
 " Paste from last yanked register
     noremap <leader>pp "0p
         " http://benmccormick.org/2014/07/28/learning-vim-in-2014-copy-and-paste-the-vim-way/
+
+" Open file at specific line/search
+    " > vim +70 ~/.bashrc
+    " > vim +/alias ~/.bashrc
+        " http://www.cyberciti.biz/faq/linux-unix-command-open-file-linenumber-function/
+
+" Autocomplete
+    set wildmode=longest:list
+        " http://blog.sanctum.geek.nz/lazier-tab-completion/
