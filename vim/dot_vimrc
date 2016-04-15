@@ -362,9 +362,14 @@ endif
         " let b:SuperTabDisabled = 1
 
     " vim-move - Move lines up down
+        " Join lines
+        noremap <leader>j J
+            " http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim?rq=1
+
         Bundle 'matze/vim-move'
         " Use Ctrl instead of Alt
         let g:move_key_modifier = 'S'
+        let g:move_auto_indent = 0
         " Use <C-v> to select multiple lines
         " <C-k>   Move current line/selections up
         " <C-j>   Move current line/selections down
@@ -1967,3 +1972,15 @@ endif
 " Autocomplete
     set wildmode=longest:list
         " http://blog.sanctum.geek.nz/lazier-tab-completion/
+
+" Print current file percentage, file name and number of lines in command prompt - Useful on small displays
+    " <C-g> - Print file percentage in command prompt
+
+" Change inside <>
+    set matchpairs+=<:>
+        " http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim?rq=1
+        " :help matchpairs
+
+" Map to reload
+    nnoremap <leader>zv :set nowrap<CR>
+    nnoremap <leader>zV :set wrap<CR>
