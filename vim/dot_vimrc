@@ -936,6 +936,8 @@ endif
         " highlight Normal guibg=#000000
     " endif
 
+
+
     "Use same color for background and in empty part
     hi NonText guibg=bg
     hi NonText guifg=bg
@@ -944,6 +946,8 @@ endif
     " /ref/ https://github.com/altercation/Vim-colors-solarized
     "       http://ethanschoonover.com/solarized
     "       http://www.vim.org/scripts/script.php?script_id=3673
+
+    hi CursorLine guibg=#424949
 
 " Whitespace characters
     set list
@@ -1453,6 +1457,9 @@ endif
     vnoremap <leader>ss  : s///g<Left><Left><Left>
     " sw Only works for one line, not for V
     vnoremap <leader>sw  : s/<C-R><C-W>/<C-R><C-W>/g<Left><Left>
+    " Substitute Windows EOL (^M) with Unix EOL
+    noremap <leader>se :%s/\r/\r/g<CR>
+        " http://stackoverflow.com/questions/811193/how-to-convert-the-m-linebreak-to-normal-linebreak-in-a-file-opened-in-vim
 
 " Quickfix window Open, Next, Previous
     " Use with repeat command (@:) - write :cn, cp<CR>, and then <C-n>
@@ -1984,3 +1991,21 @@ endif
 " Map to reload
     nnoremap <leader>zv :set nowrap<CR>
     nnoremap <leader>zV :set wrap<CR>
+
+" Save clipboard on exit
+    autocmd VimLeave * call system("xclip -selection clipboard", getreg('+'))
+        " http://stackoverflow.com/questions/6453595/prevent-vim-from-clearing-the-clipboard-on-exit
+
+" Set Cygwin block cursor
+    " rightclick on bar > Options > Looks > Cursor > Cursor radio button
+        " http://superuser.com/questions/634326/how-can-i-get-a-block-cursor-in-vim-in-the-cygwin-terminal
+
+
+" Show background color for current line
+    set cursorline
+
+" Change Color when entering Insert Mode
+    autocmd InsertEnter * highlight  CursorLine ctermbg=17
+" Revert Color to default when leaving Insert Mode
+    autocmd InsertLeave * highlight  CursorLine ctermbg=237
+    " http://stackoverflow.com/questions/7614546/vim-cursorline-color-change-in-insert-mode
