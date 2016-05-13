@@ -604,6 +604,8 @@ endif
 
     " Compare directories with vimdiff
         Plugin 'will133/vim-dirdiff'
+        " Example:
+            " :DirDiff dir_a/ dir_b/
 
     " Syntax for wikidoc
         Plugin 'vim-scripts/Wikidoc-syntax-highlighting'
@@ -1457,9 +1459,13 @@ endif
     vnoremap <leader>ss  : s///g<Left><Left><Left>
     " sw Only works for one line, not for V
     vnoremap <leader>sw  : s/<C-R><C-W>/<C-R><C-W>/g<Left><Left>
-    " Substitute Windows EOL (^M) with Unix EOL
+    " Substitute Windows EOL (^M) with Unix EOL, or just hide "^M"
     noremap <leader>se :%s/\r/\r/g<CR>
+    noremap <leader>he :e ++ff=dos<CR>
+    noremap <leader>hE :e ++ff=unix<CR>
         " http://stackoverflow.com/questions/811193/how-to-convert-the-m-linebreak-to-normal-linebreak-in-a-file-opened-in-vim
+        " http://stackoverflow.com/questions/799417/gvim-showing-carriage-return-m-even-when-file-mode-is-explicitly-dos
+        " http://vim.wikia.com/wiki/File_format
 
 " Quickfix window Open, Next, Previous
     " Use with repeat command (@:) - write :cn, cp<CR>, and then <C-n>
