@@ -54,6 +54,7 @@
         "               - Support - "https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers"
 
 " Good examples and practices
+    "        https://www.youtube.com/watch?v=rfl9KQb_HVk
     "        http://learnvimscriptthehardway.stevelosh.com/
     "        http://dougblack.io/words/a-good-vimrc.html
     "        https://github.com/osfameron/vimrc/blob/master/.vimrc
@@ -1974,7 +1975,7 @@ endif
     set mouse=a
 
 " Paste from last yanked register
-    noremap <leader>pp "0p
+    " noremap <leader>pp "0p
         " http://benmccormick.org/2014/07/28/learning-vim-in-2014-copy-and-paste-the-vim-way/
 
 " Open file at specific line/search
@@ -2015,3 +2016,11 @@ endif
 " Revert Color to default when leaving Insert Mode
     autocmd InsertLeave * highlight  CursorLine ctermbg=237
     " http://stackoverflow.com/questions/7614546/vim-cursorline-color-change-in-insert-mode
+
+" Print current line in command bar(down)
+    nnoremap <leader>pl :echo getline(".")<CR>
+
+" Highlight lines (red for "Title") that contain specific text
+    nnoremap <leader>vh :match Title /.**./<Left><Left><Left>
+    nnoremap <leader>vH :match None<CR>
+        " http://lardcave.net/text/Highlighting%20arbitrary%20lines%20in%20Vim.html 
