@@ -2021,6 +2021,6 @@ endif
     nnoremap <leader>pl :echo getline(".")<CR>
 
 " Highlight lines (red for "Title") that contain specific text
-    nnoremap <leader>vh :match Title /.**./<Left><Left><Left>
+    nnoremap <leader>vh :match Title /.*.*/<Left><Left><Left>
     nnoremap <leader>vH :match None<CR>
         " http://lardcave.net/text/Highlighting%20arbitrary%20lines%20in%20Vim.html 
