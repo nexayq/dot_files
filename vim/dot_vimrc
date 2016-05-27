@@ -514,7 +514,7 @@ endif
         " Additional languages
         " https://github.com/majutsushi/tagbar/wiki
 
-        nnoremap <leader>tt :TagbarToggle<CR>
+        nnoremap <leader>zt :TagbarToggle<CR>
 
         " Vim built in - Use "[i" to show variable declaration
         let g:tagbar_autofocus = 1
@@ -1461,7 +1461,7 @@ endif
     " sw Only works for one line, not for V
     vnoremap <leader>sw  : s/<C-R><C-W>/<C-R><C-W>/g<Left><Left>
     " Substitute Windows EOL (^M) with Unix EOL, or just hide "^M"
-    noremap <leader>se :%s/\r/\r/g<CR>
+    noremap <leader>se :%s/\r//g<CR>
     noremap <leader>he :e ++ff=dos<CR>
     noremap <leader>HE :e ++ff=unix<CR>
         " http://stackoverflow.com/questions/811193/how-to-convert-the-m-linebreak-to-normal-linebreak-in-a-file-opened-in-vim
@@ -2022,5 +2022,32 @@ endif
 
 " Highlight lines (red for "Title") that contain specific text
     nnoremap <leader>vh :match Title /.*.*/<Left><Left><Left>
+                             " DiffAdd - green
     nnoremap <leader>vH :match None<CR>
-        " http://lardcave.net/text/Highlighting%20arbitrary%20lines%20in%20Vim.html 
+    " Example, multiple highlighting
+        " :match DiffChange /.*Constructor.*\|.*Variable.*/
+        " http://lardcave.net/text/Highlighting%20arbitrary%20lines%20in%20Vim.html
+
+" Neovim tutorials
+    " https://www.youtube.com/watch?v=LRQGAnPtNdM
+    " https://github.com/nicknisi/dotfiles/blob/master/config/nvim/init.vim
+
+" Neovim configuration - init files
+    " > ln -s ~/.vim ~/.config/nvim
+    " > ln -s ~/.vimrc ~/.config/nvim/init.vim
+        " https://wiki.archlinux.org/index.php/Neovim
+
+" Neovim terminal open
+    if has('nvim')
+        nnoremap <leader>tt :vsp\|terminal<CR>
+        nnoremap <leader>te :sp\|terminal<CR>
+        " TERMINAL mode -great
+        " tnoremap <Esc> <C-\><C-n>gg
+        tnoremap <Esc> <C-\><C-n>?\$<CR>
+        " nnoremap <leader>tc :normal <C-\><C-n>
+            " https://neovim.io/doc/user/nvim_terminal_emulator.html
+    endif
+
+" Neovim copy from console output - mapped to <Esc>
+    " <C-\><C-n>
+        " https://github.com/neovim/neovim/issues/2293
