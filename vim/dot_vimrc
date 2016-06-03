@@ -54,6 +54,7 @@
         "               - Support - "https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers"
 
 " Good examples and practices
+    "        https://bitbucket.org/sjl/dotfiles/src/cbbbc897e9b3/vim/vimrc?fileviewer=file-view-default
     "        https://www.youtube.com/watch?v=rfl9KQb_HVk
     "        http://learnvimscriptthehardway.stevelosh.com/
     "        http://dougblack.io/words/a-good-vimrc.html
@@ -637,6 +638,9 @@ endif
             " :hardcopy > file.ps
         " Print to printer
             " :hardcopy
+        " Print to HTML
+            " :TOhtml
+                " http://stackoverflow.com/a/8557573/2450748
 
     " Syntax for mercurial
         " Plugin 'DasIch/vim-mercurial'
@@ -1457,9 +1461,9 @@ endif
     nnoremap <leader>swa : windo! %s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left><Left>
     nnoremap <leader>swb : bufdo! %s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left>
     " Substitute word under cursor in whole file <leader>sw, go back with <C-o>
-    vnoremap <leader>ss  : s///g<Left><Left><Left>
+    vnoremap <leader>ss  : s/\%V//g<Left><Left><Left>
     " sw Only works for one line, not for V
-    vnoremap <leader>sw  : s/<C-R><C-W>/<C-R><C-W>/g<Left><Left>
+    vnoremap <leader>sw  : s/\%V<C-R><C-W>/<C-R><C-W>/g<Left><Left>
     " Substitute Windows EOL (^M) with Unix EOL, or just hide "^M"
     noremap <leader>se :%s/\r//g<CR>
     noremap <leader>he :e ++ff=dos<CR>
@@ -2051,3 +2055,8 @@ endif
 " Neovim copy from console output - mapped to <Esc>
     " <C-\><C-n>
         " https://github.com/neovim/neovim/issues/2293
+
+" Count number of selected lines in visual mode
+    " Select lines in Visual mode and then press
+    " 'g C-g'
+        " http://stackoverflow.com/a/7262572/2450748
