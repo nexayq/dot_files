@@ -2060,3 +2060,16 @@ endif
     " Select lines in Visual mode and then press
     " 'g C-g'
         " http://stackoverflow.com/a/7262572/2450748
+
+" Print line above/bellow with custom args
+    function! NK_PrintAboveMatch(sstring, direction)
+        if !a:direction
+            let match = search(a:sstring, 'bnW')
+        else
+            let match = search(a:sstring, 'nW')
+        endif
+        echo match.": ".getline(match)
+    endfunction
+
+    nnoremap <leader>pm :call NK_PrintAboveMatch("",0)<Left><Left><Left><Left>
+    " http://vimdoc.sourceforge.net/htmldoc/eval.html#search%28%29
