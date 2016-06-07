@@ -36,9 +36,17 @@
 
 [alias]
     ci       = commit -v
+    co       = checkout
     st       = status -s
-    in       = !git fetch && git log ..origin/master
+    br       = branch
+    ; in       = !git fetch && git log ..origin/master
+    ; for current branch only
+    in       = !git log ..origin/\"$(git rev-parse --abbrev-ref HEAD)\"
+    ; http://stackoverflow.com/a/18782415/2450748
     incoming = in
     alias    = config --get-regexp alias
-    out      = log @{u}..
+    ; out      = log @{u}..
+    out       = !git log origin/\"$(git rev-parse --abbrev-ref HEAD)\"..
     outgoing = out
+    glog     = log --graph --all --decorate
+    ; glog     = log --graph --all --decorate --stat
