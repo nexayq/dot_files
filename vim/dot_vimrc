@@ -1761,8 +1761,12 @@ endif
         " 1z=
 
 " Switch between header and cpp
-    map <leader>zH :vsp %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
-    map <leader>zh :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+    autocmd FileType cpp map <leader>zH :vsp %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+    autocmd FileType cpp map <leader>zh :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+
+    autocmd FileType c map <leader>zH :vsp %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
+    autocmd FileType c map <leader>zh :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
+        " .h is in vim by default cpp file type so switch from .h to .c wont work, only to .cpp
     " /ref/ http://vim.wikia.com/wiki/Easily_switch_between_source_and_header_file
 
 " Vim navigation
@@ -1777,7 +1781,10 @@ endif
 
 " Focus file when launched with vim terminal if file is specified
     " autocmd VimEnter * echo "abe"
-    if !has("gui_running") && (argc() != 0) && (!&diff)
+    " ~/.gitconfig
+    " cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE --cmd \"let g:nk_diff=1\"
+
+    if !has("gui_running") && (argc() != 0) && (!&diff) && !exists("g:nk_diff")
         autocmd VimEnter * :bfirst
     endif
         " /ref/ http://learnvimscriptthehardway.stevelosh.com/chapters/12.html
