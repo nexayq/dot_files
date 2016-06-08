@@ -18,7 +18,7 @@ override_git_prompt_colors() {
     # gp_set_window_title "$PS1"
     gp_set_window_title "$PS1_user$PS1_dir"
     # echo -n "${BoldGreen}[${PS1}]${ResetColor}"
-    echo -n "${BoldGreen}[${PS1_user}${BoldWhite}${PS1_dir}]${ResetColor}"
+    echo -n "${BoldYellow}[${PS1_user}${BoldWhite}${PS1_dir}]${ResetColor}"
     # echo -n "[${PS1}]"
   }
 
@@ -32,7 +32,7 @@ override_git_prompt_colors() {
   # GIT_PROMPT_SEPARATOR="|"              # separates each item
 
   # GIT_PROMPT_BRANCH="${Magenta}"        # the git branch that is active in the current directory
-  GIT_PROMPT_BRANCH="${BoldCyan}"      # the git branch that is active in the current directory
+  GIT_PROMPT_BRANCH="${BoldMagenta}"      # the git branch that is active in the current directory
   # GIT_PROMPT_STAGED="${Red}●"           # the number of staged files/directories
   # GIT_PROMPT_CONFLICTS="${Red}✖ "       # the number of files in conflict
   # GIT_PROMPT_CHANGED="${Blue}✚ "        # the number of changed files
