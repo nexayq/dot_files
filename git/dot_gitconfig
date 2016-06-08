@@ -1,5 +1,10 @@
+;git GUIs
+; > gitg
+
 ;git guides
+    ; https://www.atlassian.com/git/tutorials/
     ; http://rogerdudler.github.io/git-guide/
+    ; http://laputa.io/blog/2012/07/11/a-simple-git-cheat-sheet-and-tips/
 ;Example configs
     ; https://github.com/alikins/gitconfig/blob/master/gitconfig
 
@@ -34,8 +39,19 @@
 [merge]
     tool = vimdiff
 
+[log]
+    ; date = relative
+    ; negative influence on stash
+        ; shows 'stash@{10 minutes ago}' instead of 'stash@{0}'
+
+[format]
+    ; pretty = format:%h %Cblue%ad%Creset %ae %Cgreen%s%Creset
+    pretty = format:%C(yellow)%h %Cblue%ad %Cgreen%aN%Cred%d %Creset%s
+    ; http://stackoverflow.com/a/9463536/2450748
+
 [alias]
     ci       = commit -v
+    logr     = log --date=relative
     co       = checkout
     st       = status -s
     br       = branch
@@ -48,5 +64,5 @@
     ; out      = log @{u}..
     out       = !git log origin/\"$(git rev-parse --abbrev-ref HEAD)\"..
     outgoing = out
-    glog     = log --graph --all --decorate
+    glog     = log --graph --all --decorate --date=relative
     ; glog     = log --graph --all --decorate --stat
