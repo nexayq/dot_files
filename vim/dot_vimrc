@@ -1783,6 +1783,9 @@ endif
     " autocmd VimEnter * echo "abe"
     " ~/.gitconfig
     " cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE --cmd \"let g:nk_diff=1\"
+    " --cmd - {command} will be executed before processing any vimrc file.
+        " http://vimdoc.sourceforge.net/htmldoc/starting.html#--cmd
+        " https://neovim.io/doc/user/starting.html#--cmd
 
     if !has("gui_running") && (argc() != 0) && (!&diff) && !exists("g:nk_diff")
         autocmd VimEnter * :bfirst
