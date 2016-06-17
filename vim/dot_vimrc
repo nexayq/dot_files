@@ -1,4 +1,28 @@
 
+" Basic vim setup - Linux and Win
+    " Colors
+        " colorscheme desert
+
+    " " Various
+        " syntax on
+        " set clipboard=unnamedplus
+
+    " " Tab
+        " filetype plugin indent on
+        " set expandtab       " Expand TABs to spaces
+        " set tabstop=4       " The width of a TAB is set to 4.
+        " set softtabstop=4
+        " set shiftwidth=4
+        " set smarttab
+
+    " " Swap
+        " set noswapfile
+        " set nobackup
+
+    " " Whitespace characters
+        " set list
+        " set listchars=tab:>-,trail:~,extends:>,precedes:<
+
 " TODO
     "* Make vimrc backups often
         " DONE - Search tags by filename
@@ -2083,3 +2107,7 @@ endif
 
     nnoremap <leader>pm :call NK_PrintAboveMatch("",0)<Left><Left><Left><Left>
     " http://vimdoc.sourceforge.net/htmldoc/eval.html#search%28%29
+
+" Gvim for Centos
+    " Gvim package for CentOS is called "vim-X11"
+
