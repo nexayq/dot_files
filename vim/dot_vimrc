@@ -165,7 +165,10 @@ endif
 
         " Show current working directory on the right side - https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt#L219
         " let g:airline_section_b = '%.40{getcwd()}'
+        " let g:airline_section_y = g:airline_section_b
         let g:airline_section_b = '%.50{getcwd()}'
+        " let g:airline_section_d = 'fugitive#head()'
+        " let g:airline_section_c = '%.50{getcwd()}'
         " let g:airline_section_c = '%{expand('%:t')'
         let g:airline_section_y = '%{&fileformat}'
 
@@ -646,6 +649,26 @@ endif
             " https://vimeo.com/63116209
             " http://tilvim.com/2014/03/13/dispatch.html
 
+    " Git fugitive
+        Plugin 'tpope/vim-fugitive'
+
+            nnoremap <leader>gs :Gstatus<CR>
+            nnoremap <leader>gd :Gdiff<CR>
+                " http://stackoverflow.com/a/28916959/2450748
+
+            " ":help fugitive"
+
+            " ":Gdiff" - show diff against repo file
+            " ":Gstatus" - show current status: modified files, branch ahead/behind
+                " "D" - show diff for selected file
+                " "-" - stage/unstage files
+                " "cc" - commit staged files
+                " http://stackoverflow.com/a/27341232/2450748
+
+            " ":Git <custom_cmd> "- run git custom command, aliases work!
+                " "Git log"
+                " "Git glog"
+
     " Print file
         " Plugin 'vim-scripts/Printer-Dialog'
         " let &printexpr="(v:cmdarg=='' ? ".
@@ -786,7 +809,12 @@ endif
     " Save bookmarks
     function NK_BookmarkSave()
         let server      = v:servername
-        let bookmarks   = g:nk_sessiondir."/".server.".bookmarks.vim"
+        if has('nvim')
+            " neovim at the moment doesn't support clientserver like vim
+            let bookmarks   = g:nk_sessiondir."/"."nvim.bookmarks.vim"
+        else
+            let bookmarks   = g:nk_sessiondir."/".server.".bookmarks.vim"
+        endif
 
         call NK_CreateSessionDir()
         execute "BookmarkSave ".bookmarks
@@ -796,7 +824,12 @@ endif
     " Save session
     function! NK_SaveSession()
         let server      = v:servername
-        let session = g:nk_sessiondir."/".server.".session.vim"
+        if has('nvim')
+            " neovim at the moment doesn't support clientserver like vim
+            let session = g:nk_sessiondir."/"."nvim.session.vim"
+        else
+            let session = g:nk_sessiondir."/".server.".session.vim"
+        endif
 
         call NK_CreateSessionDir()
         execute "mksession! ".session
@@ -1861,7 +1894,7 @@ endif
     noremap <leader>zb :ls<CR>:buffer<Space>
 
 " Buffer fast searching
-    noremap <leader>gt :tabs<CR>:normal gt<Left><Left>
+    noremap <leader>nt :tabs<CR>:normal gt<Left><Left>
         " http://vim.wikia.com/wiki/Select_tab_page_with_a_key
     " Move tab to first place
         " :tabmove 0
@@ -1908,7 +1941,7 @@ endif
     set timeoutlen=1000 ttimeoutlen=0
         " http://www.johnhawthorn.com/2012/09/vi-escape-delays/
 
-" Marker at line 80
+" Marker at line 80, vertical marker for wrap
 
     highlight ColorColumn ctermbg = DarkGreen
     highlight ColorColumn guibg   = DarkGreen
@@ -1924,6 +1957,7 @@ endif
     function! NK_NoLineWidthMarker()
         set colorcolumn=
     endfunc
+    " https://bbs.archlinux.org/viewtopic.php?id=35966
 
 " Wrap text at line 80
     " set textwidth=80
