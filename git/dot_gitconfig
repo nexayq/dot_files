@@ -42,6 +42,7 @@
 [difftool "git-difftool"]
   ; cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
     cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE --cmd \"let g:nk_diff=1\"
+    ; http://stackoverflow.com/a/8163934/2450748
     ; git-difall
     ; git-diffall a47e fcce
     ; git diffall --copy-back
