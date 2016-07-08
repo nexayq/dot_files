@@ -52,6 +52,7 @@
 
 " Installation
     " Linux
+        " - Install "gvim" or "vim-X11"
         " - Install "Vundle" or "Neobundle"
             " - Vundle - "https://github.com/VundleVim/Vundle.vim"
                 " - "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.v"
@@ -66,6 +67,7 @@
                 " - Support - "https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers"
 
     " Windows
+        " - Install "gvim"
         " - Install "cygwin", - https://cygwin.com/install.html
                   " "git",  - https://git-scm.com/download/win
                   " "MinGW" - http://sourceforge.net/projects/mingw-w64/
@@ -551,6 +553,13 @@ endif
         " let g:tagbar_show_linenumbers = 1
 
         let g:tagbar_map_showproto = "i"
+        set updatetime=500 " general vim config that affects TagBar refresh rate
+        " set updatetime=4000 " default
+            " TODO: low 'updatetime' can cause vim glitches, watch out
+            " https://github.com/airblade/vim-gitgutter#when-are-the-signs-updated
+            " https://github.com/fatih/vim-go/blob/master/ftplugin/go.vim#L43
+            " :help updatetime
+
         " Use "i" to show function prototype
 
         " Use "o" to collapse/expand functions, classes, ...
@@ -668,6 +677,10 @@ endif
             " ":Git <custom_cmd> "- run git custom command, aliases work!
                 " "Git log"
                 " "Git glog"
+
+    " Bash support
+        " Plugin 'vim-scripts/bash-support.vim'
+        " https://github.com/vim-scripts/bash-support.vim
 
     " Print file
         " Plugin 'vim-scripts/Printer-Dialog'
@@ -962,7 +975,8 @@ endif
 
 " Tab width
     " Exception for Makefiles - Already done in Vim implementation
-    " autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
+    " autocmd FileType make set tabstop=4 shiftwidth=4 softtabstop=0 noexpandtab nosmarttab
+    " autocmd FileType make setlocal noexpandtab
 
     " filetype plugin indent on
     set expandtab       " Expand TABs to spaces
@@ -1619,7 +1633,6 @@ endif
 
 " Delete buffer, close window shortcut
     " nnoremap <leader>w :bd<CR>
-    " nnoremap <leader>w :q<CR>
     " Remove current buffer without removing window
     nnoremap <leader>q :bn\|bd #<CR>
     nnoremap <leader>w :wincmd c<CR>
@@ -1793,7 +1806,7 @@ endif
     nnoremap <leader>[p :call <SID>JumpPrompt()<CR>
 
 " SystemVerilog highlight as verilog
-    autocmd BufNewFile,BufRead *.sv,*.vh   set syntax=verilog
+    autocmd BufNewFile,BufRead *.sv,*.vh,*.svh   set syntax=verilog
     " /ref/ http://stackoverflow.com/a/11666247/2450748
 
 " Reload file when it changes from externall application
@@ -2158,3 +2171,12 @@ endif
     " Dont use xargs and pipes(|) with vim!
     " Solution:
         " > vim $(find -type f)
+
+" Search font color
+    " location of color schemes:
+    " /usr/share/vim/vim73/colors/desert.vim
+        " https://www.linux.com/learn/weekend-project-take-control-vims-color-scheme
+
+    " hi Search        guibg=peru guifg=brown
+    hi Search        guibg=khaki guifg=brown
+    hi IncSearch     guibg=yellow guifg=brown
