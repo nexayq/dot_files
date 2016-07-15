@@ -19,6 +19,7 @@ override_git_prompt_colors() {
     gp_set_window_title "$PS1_user$PS1_dir"
     # echo -n "${BoldGreen}[${PS1}]${ResetColor}"
     echo -n "${BoldYellow}[${PS1_user}${BoldWhite}${PS1_dir}]${ResetColor}"
+    # echo -n "${BoldYellow}[>${BoldWhite}test]${ResetColor}"
     # echo -n "[${PS1}]"
   }
 
