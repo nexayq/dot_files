@@ -67,7 +67,7 @@
 
 [alias]
     ci       = commit -v
-    logr     = log --date=relative
+    logr     = log --date=relative --all
     co       = checkout
     st       = status -s
     br       = branch
