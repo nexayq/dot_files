@@ -205,6 +205,11 @@ endif
                 nnoremap <leader>zss :SyntasticToggleMode<CR>
                 nnoremap <leader>zsc :SyntasticCheck<CR>
 
+        " python checker
+            let g:syntastic_python_checkers = ['python']
+            " let g:syntastic_python_checkers = ['pylint']
+                " https://github.com/scrooloose/syntastic#faqcheckers
+
     " CtrlP
    " Plugin 'kien/ctrlp.vim'
    " let g:ctrlp_extensions = ['tag']
@@ -493,6 +498,7 @@ endif
         noremap <leader>a( :Tabularize /(<CR>
         noremap <leader>a< :Tabularize /<<CR>
         noremap <leader>a> :Tabularize /><CR>
+        noremap <leader>a- :Tabularize /- <CR>
 
         " Align by digits/numbers
         noremap <leader>an :Tabularize /[0-9]<CR>
@@ -505,6 +511,7 @@ endif
         noremap <leader>a1< :Tabularize /<.*<CR>
         noremap <leader>a1> :Tabularize />.*<CR>
         noremap <leader>a1n :Tabularize /[0-9].*<CR>
+        noremap <leader>a1- :Tabularize /- .*<CR>
             " /ref/ http://stackoverflow.com/questions/11497593/vim-tabular-only-on-the-first-match-on-the-line
             " http://stackoverflow.com/questions/23071787/how-to-match-against-only-first-in-vim-using-tabular-ignoring
 
@@ -677,6 +684,9 @@ endif
             " ":Git <custom_cmd> "- run git custom command, aliases work!
                 " "Git log"
                 " "Git glog"
+
+    " Markdown plugin
+        Plugin 'plasticboy/vim-markdown'
 
     " Bash support
         " Plugin 'vim-scripts/bash-support.vim'
