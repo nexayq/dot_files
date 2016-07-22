@@ -1,11 +1,14 @@
 
-" Basic vim setup - Linux and Win
-    " Colors
+" <<<Basic vim setup - Linux and Win
+    " " Colors
         " colorscheme desert
 
     " " Various
         " syntax on
         " set clipboard=unnamedplus
+
+    " " Set leader key
+        " let mapleader=" "
 
     " " Tab
         " filetype plugin indent on
@@ -22,6 +25,31 @@
     " " Whitespace characters
         " set list
         " set listchars=tab:>-,trail:~,extends:>,precedes:<
+
+    " " Map :W to :w
+        " command W w
+        " command Q q
+        " command Qa qa
+
+    " " Clean trailing characters
+        " nnoremap <leader>k :call NK_CleanTrailingChars()<CR>
+
+        " function! NK_CleanTrailingChars()
+            " let ln_number = line(".")
+            " execute '%s/\s\+$//'
+            " execute 'normal '.ln_number.'G'
+        " endfunc
+
+    " " Clean search
+        " nnoremap <leader>/c :nohlsearch<CR>
+
+    " " Incremental search
+        " set incsearch
+
+    " " Save clipboard on exit
+            " autocmd VimLeave * call system("xclip -selection clipboard", getreg('+'))
+
+" Basic vim setup - Linux and Win>>>
 
 " TODO
     "* Make vimrc backups often
@@ -188,6 +216,7 @@ endif
         " syntastic does basic QuickFix stuffs, and integrates nicely with Powerline
         Plugin 'scrooloose/syntastic'
 
+
         " Show warnings for C files
         let g:syntastic_c_compiler_options = "-Wall"
 
@@ -195,6 +224,13 @@ endif
         let g:syntastic_cpp_compiler_options = "-Wall"
 
         let g:syntastic_error_symbol = "!"
+
+        " - If you want parser for verilog, download "verilator"
+        " - Support - "https://github.com/scrooloose/syntastic/wiki/Verilog:---verilator"
+        " Parse as SystemVerilog files
+            let g:syntastic_verilog_compiler_options = "-sv"
+            " let g:syntastic_verilog_compiler = "iverilog"
+            " let g:syntastic_verilog_compiler = "verilator"
 
         "Disable syntastic check
             " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
@@ -353,6 +389,7 @@ endif
         Plugin 'Shougo/vimfiler.vim'
         " /ref/ https://github.com/Shougo/vimfiler.vim/blob/master/doc/vimfiler.txt
 
+        " Alt key bugy colapses directory if it is a symbolic link! (probably refresh is run)
         " t, T  -> expand directory, recursively
         " gs    -> Exit/enter safe mode
         " gc    -> Change current working directory (pwd)
@@ -496,6 +533,7 @@ endif
         " noremap <leader>a, :Tabularize /,/l0r1<CR>
         noremap <leader>a, :Tabularize /,<CR>
         noremap <leader>a( :Tabularize /(<CR>
+        noremap <leader>a) :Tabularize /)<CR>
         noremap <leader>a< :Tabularize /<<CR>
         noremap <leader>a> :Tabularize /><CR>
         noremap <leader>a- :Tabularize /- <CR>
@@ -508,6 +546,7 @@ endif
         noremap <leader>a1: :Tabularize /:.*<CR>
         noremap <leader>a1. :Tabularize /\..*<CR>
         noremap <leader>a1( :Tabularize /(.*<CR>
+        noremap <leader>a1) :Tabularize /).*<CR>
         noremap <leader>a1< :Tabularize /<.*<CR>
         noremap <leader>a1> :Tabularize />.*<CR>
         noremap <leader>a1n :Tabularize /[0-9].*<CR>
@@ -942,6 +981,22 @@ endif
 
     autocmd VimLeave * call NK_QuitSaveAll()
     autocmd VimEnter * nested call NK_EnterLoadAll()
+
+" Regex(regex) examples, regular expressions
+    " \v - Turn on magic, dont have to escape special characters for regex * ( [
+
+    " Find specific word, not preceded or followed by letters
+        " \v<primer>
+
+    " Negative lookbehind
+        " Match strings "primer" not preceded by "abe"
+            " \(abe\)\@<!primer
+                " or with magic
+            " \v(a)@<!be
+        " Match strings "ss" not preceded by letters (alpha - [a-z])
+            " \([a-z]\)\@<!ss
+                " or just use '*' to find "ss" :)
+    " https://www.inputoutput.io/lookbehind-lookahead-regex-in-vim/
 
 " For netrw
     " filetype plugin on
@@ -1543,6 +1598,25 @@ endif
     nnoremap <leader>swb : bufdo! %s,<C-R><C-W>,<C-R><C-W>,gc<Left><Left>
     " Substitute word under cursor in whole file <leader>sw, go back with <C-o>
     vnoremap <leader>ss  : s,\%V,,g<Left><Left><Left>
+    " increment decimal visual block
+    vnoremap <leader>sn  : s,\%V\(\d\+\),\=submatch(1)+1,g<Left><Left>
+    " increment hexadecimal visual block
+    " vnoremap <leader>sh  : s/\%V\(0[xX]\)[0-9a-fA-F]\+/\=printf("%s%X", submatch(1) ,submatch(0)+1)/g<Left><Left><Left>
+    vnoremap <leader>sh  :call NK_IncrementHex("X",2,1)
+        " To print without leading zeros use:
+            " call NK_IncrementHex("X","",1)
+        " :call NK_IncrementHex("X","",1)
+        " :call NK_IncrementHex("x",4,1)
+
+    function! NK_IncrementHex(small_big, format, increment)
+        " :call NK_IncrementHex("X",4,1) " big letters, 4 digits, num+1
+        " supports "0xAB" and "7'hAB" (verilog)
+        s/\%V\(0[xX]\|'h\)\([0-9a-fA-F]\+\)/\=printf("%s%0".a:format.a:small_big, submatch(1) ,"0x".submatch(2)+a:increment)
+    endfunc
+        " http://vim.wikia.com/wiki/Convert_between_hex_and_decimal
+        " http://stackoverflow.com/a/1118642/2450748
+        " http://stackoverflow.com/a/9221391/2450748
+        " http://unix.stackexchange.com/a/72062/156466
     " sw Only works for one line, not for V
     vnoremap <leader>sw  : s,\%V<C-R><C-W>,<C-R><C-W>,g<Left><Left>
     " Substitute Windows EOL (^M) with Unix EOL, or just hide "^M"
@@ -1566,7 +1640,7 @@ endif
 
 " Search buffers directories
     " Search remap for case insensitive search
-    " nnoremap // /\c
+    nnoremap / /\c
     nnoremap <leader>// /\c
     nnoremap <leader>/c :nohlsearch<CR>
     " /ref/ https://medium.com/hacking-and-gonzo/10-vim-tricks-you-should-know-6393842b3537#.3pxco1r77
@@ -1954,8 +2028,11 @@ endif
     " noremap ; :
     " noremap : ;
 
-" Map :W to save
+" Map :W to save, quit Qa
     command W w
+    command Q q
+    command Qa qa
+
         " https://coderwall.com/p/nckasg/map-w-to-w-in-vim
 
 " CTRL-O - in insert mode
@@ -2190,3 +2267,30 @@ endif
     " hi Search        guibg=peru guifg=brown
     hi Search        guibg=khaki guifg=brown
     hi IncSearch     guibg=yellow guifg=brown
+
+" Increment number 07 to 08, dont use octal
+    set nrformats-=octal
+    " http://usevim.com/2015/07/03/visual-increment/
+
+" Visual increment numbers
+    " http://unix.stackexchange.com/a/72062/156466
+
+" Get Unicode and ASCII value of character
+    " ga - Get ASCII(ascii) value for character under the cursor
+    " g8 - Get unicode (utf-8) value for character under the cursor
+
+" Copy command
+    " :<C-f> - Then you can copy your commands
+        " http://vim.wikia.com/wiki/Copy,_cut_and_paste
+" Disable Alt key in Gvim - Causes vimfiller tree toggle
+    " set guioptions-=m
+    " set guioptions-=M
+        " http://vim.1045645.n5.nabble.com/Disabling-Alt-keys-menu-keys-in-Windows-gVim-td1162473.html
+
+" Diff ignore whitespace
+    " set diffopt+=iwhite
+    " :help diffopt
+        " http://vim.wikia.com/wiki/Ignore_white_space_in_vimdiff
+    " ignore case
+        " set diffopt+=icase
+
