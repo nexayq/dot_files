@@ -17,3 +17,6 @@ Git settings and aliases
 
 # Hg (Mercurial)
 Hg settings and aliases
+
+# Emacs
+Emacs configuration file (init.el) and scripts for installing plugins
