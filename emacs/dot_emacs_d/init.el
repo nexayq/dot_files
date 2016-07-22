@@ -2,23 +2,39 @@
     ; https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org
 
 ;; Emacs shortcuts
+    ;; C-x o - go to next window
+    ;; C-x 0 - close current window
+    ;; C-x 1 - zoom(show only) current window
+        ;; https://blasphemousbits.wordpress.com/2007/05/04/learning-emacs-part-4-buffers-windows-and-frames/
     ;; C-x C-s - save file (:w)
     ;; C-x C-c - close emacs (:qa)
     ;; C-x C-c - close emacs (:qa)
-    ;; C-x 0 - close current buffer
     ;; C-s - search forward (/)
     ;;       keep pressing C-s for next match
     ;; C-r - search backward (?)
     ;; F10 - Select toolbar (File, Edit, ...)
     ;; C-g - Cancel
+    ;; C-x } - Resize split horizontally
+        ;; https://ftp.gnu.org/old-gnu/Manuals/emacs-20.7/html_chapter/emacs_20.html
+    ;; C-u 10 C-x } - Resize 10 times split horizontally
+    ;; C-x z - Repeat last command
+        ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Repeating.html
+    ;; C-x C-+ - Zoom in, enlarge (bigger) fonts, - to reduce fonts
+    ;; C-x C-0 - Reset zoom, reset font size
+        ;; http://stackoverflow.com/a/5533251/2450748
 ;; org-mode
+    ;; Shift-<up/down> - Set priority to [#A], [#B], [#C] or no priority
     ;; C-c C-c - Update [X], [/], [%] percentage TODO and checkboxes
     ;; C-c C-e - Export to some format (html, latex, pdf, ...)
 
 ;; Meta-x
     ;; Instead of "Alt+x" this is on my PC "Esc+x"
 
-;; Install at least Emacs 24, too difficult to install melpa packages on Emacs
+;; Dont use Emacs 23 (or any <24)
+    ; Too difficult to install melpa packages
+        ; http://batsov.com/articles/2012/02/19/package-management-in-emacs-the-good-the-bad-and-the-ugly/
+
+;; Install at least Emacs 24, too difficult to install melpa packages on older Emacs (<=23)
     ;; Install on Ubuntu
         ; sudo add-apt-repository ppa:ubuntu-elisp/ppa
         ; sudo apt-get update
@@ -78,7 +94,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
+    (dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
 
 ;; set font DejaVu Sans
 
@@ -136,6 +152,25 @@
         scroll-conservatively 9999
         scroll-step 1)
 
+;; Neotree - neotree
+    ; when used with evil mode, first go to insert mode 'i',
+    ; otherwise Enter wont open directory!
+    (add-to-list 'load-path "~/Notes/org/")
+    (require 'neotree)
+    (global-set-key [f8] 'neotree-toggle)
+        ; https://www.youtube.com/watch?v=NKtocCAWxiE
+    ; C-c C-c - Change root directory
+    ; g - refresh list
+    ; A - maximize/minimize NeoTree window
+    ; H - show/hide hidden files
+    ; C-c C-n - Create file or directory
+    ; C-c C-d - Delete file or directory
+    ; C-c C-r - Rename file or directory
+
+;; dirtree
+    (require 'dirtree)
+    ; (global-set-key [f2] 'dirtree)
+
 ;;;;;;;;;;;;;;;;;; /Packages ;;;;;;;;;;;;;;;;;;;;
 
     ;; remap / to /\c - no need, emacs search case insensitive great
@@ -160,7 +195,7 @@
         ;; http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/
 
 ;; Autoindent next line
-    (define-key global-map (kbd "RET") 'newline-and-indent)
+    ; (define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;; Show matching parenthesis
     (show-paren-mode t)
@@ -196,3 +231,4 @@
 ;; Show relative line numbers - need package 'linum-relative'
     ; (linum-mode)
     ; (linum-relative-global-mode)
+
