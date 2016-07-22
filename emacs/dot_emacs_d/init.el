@@ -204,9 +204,9 @@
     (setq make-backup-files nil)
 
 ;; Remember cursor position of saved file
-    (setq save-place-file "~/.emacs.d/saveplace")
-    (setq-default save-place t)
-    (require 'saveplace)
+    ; (setq save-place-file "~/.emacs.d/saveplace")
+    ; (setq-default save-place t)
+    ; (require 'saveplace)
 
 ;; Toggle whitespace
     (defun nk-toggle-show-trailing-whitespace ()
