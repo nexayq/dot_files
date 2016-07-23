@@ -2,6 +2,8 @@
     ; https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org
 
 ;; Emacs shortcuts
+  ;; get help for key
+  ;; C-h k
     ;; C-x o - go to next window
     ;; C-x 0 - close current window
     ;; C-x 1 - zoom(show only) current window
@@ -171,6 +173,15 @@
     (require 'dirtree)
     ; (global-set-key [f2] 'dirtree)
 
+;; evil-leader
+    (require 'evil-leader)
+    (global-evil-leader-mode)
+    (evil-leader/set-leader "SPC")
+  ; (setq evil-leader/in-all-states 1)
+
+;; ace-window
+    (global-set-key (kbd "C-q") 'ace-window)
+
 ;;;;;;;;;;;;;;;;;; /Packages ;;;;;;;;;;;;;;;;;;;;
 
     ;; remap / to /\c - no need, emacs search case insensitive great
@@ -200,8 +211,9 @@
 ;; Show matching parenthesis
     (show-paren-mode t)
 
-;; Dont create backup files
+;; Dont create backup files, disable autosave
     (setq make-backup-files nil)
+    (setq auto-save-default nil)
 
 ;; Remember cursor position of saved file
     ; (setq save-place-file "~/.emacs.d/saveplace")
@@ -232,3 +244,35 @@
     ; (linum-mode)
     ; (linum-relative-global-mode)
 
+;; Always folow symlinks (symbolic links)
+    (setq vc-follow-symlinks t)
+        ; http://stackoverflow.com/a/30900018/2450748
+
+;; Zoom only one window
+    (evil-leader/set-key
+       "zz"  'delete-other-windows ;; C-w o
+       )
+
+;; Delete window
+    (evil-leader/set-key
+       "w"  'delete-window ;; C-w 0
+       )
+
+;; Save last session
+     (desktop-save-mode 1)
+        ; http://stackoverflow.com/a/803828/2450748
+
+;; Comment/uncomment line or region
+    (defun so-toggle-comment-on-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+        (interactive)
+        (let (beg end)
+            (if (region-active-p)
+                (setq beg (region-beginning) end (region-end))
+                (setq beg (line-beginning-position) end (line-end-position)))
+            (comment-or-uncomment-region beg end)))
+        ; http://stackoverflow.com/a/9697222/2450748
+
+    (evil-leader/set-key
+       "SPC"  'so-toggle-comment-on-line ;;
+       )

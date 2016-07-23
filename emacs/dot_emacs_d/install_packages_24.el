@@ -30,7 +30,7 @@
 (setq package-list
     '(evil  org ox-twbs color-theme-sanityinc-tomorrow
       powerline rainbow-delimiters smooth-scrolling
-      neotree dirtree ))
+      neotree dirtree evil-leader ace-window ))
 
 ; (setq package-list
     ; '(python-environment deferred epc
