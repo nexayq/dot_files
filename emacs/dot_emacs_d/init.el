@@ -298,7 +298,6 @@
               line ": " (message) line-end))
       :modes verilog-mode)
 
-     (add-to-list 'flycheck-checkers 'verilator_linter)
      (flycheck-add-mode 'verilator_linter 'verilog-mode)
 
     ;; iverilog_linter
@@ -322,13 +321,20 @@
                 ; "warning" line-end)
 
      ; (setq flycheck-iverilog-executable "iverilog -v")
-
-     (add-to-list 'flycheck-checkers 'iverilog_linter)
      (flycheck-add-mode 'iverilog_linter 'verilog-mode)
+
+      ; Configure checkers order, last one is default
+     (add-to-list 'flycheck-checkers 'iverilog_linter)
+     (add-to-list 'flycheck-checkers 'verilator_linter)
         ; http://emacs.stackexchange.com/a/12118/12727
 
-
-
+      ; Disable checkers you do not want to use
+        ; (setq-default flycheck-disabled-checkers '(iverilog_linter))
+        ; (eval-after-load 'flycheck
+          ; '(flycheck-add-mode 'html-tidy 'web-mode))
+        ; (flycheck-checkers . 'verilator_linter)))
+        ;; (flycheck-disabled-checkers 'iverilog_linter)
+        ;; (setq-default flycheck-veril "c++11")
 
      ; (setq flycheck-iverilog-executable "iverilog -v")
 
