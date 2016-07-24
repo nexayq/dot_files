@@ -16,8 +16,8 @@
 
 (require 'package)
 
-; (add-to-list 'package-archives
-             ; '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+;; (add-to-list 'package-archives
+             ;; '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
 
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
@@ -30,7 +30,8 @@
 (setq package-list
     '(evil  org ox-twbs color-theme-sanityinc-tomorrow
       powerline rainbow-delimiters smooth-scrolling
-      neotree dirtree evil-leader ace-window ))
+      neotree dirtree evil-leader ace-window window-numbering
+      flycheck helm helm-swoop company evil-org ))
 
 ; (setq package-list
     ; '(python-environment deferred epc
