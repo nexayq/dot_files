@@ -230,7 +230,7 @@ endif
         " - If you want parser for verilog, download "verilator"
         " - Support - "https://github.com/scrooloose/syntastic/wiki/Verilog:---verilator"
         " Parse as SystemVerilog files
-            let g:syntastic_verilog_compiler_options = "-Wall"
+            let g:syntastic_verilog_compiler_options = "-Wall -sv"
             " let g:syntastic_verilog_compiler = "iverilog"
             " let g:syntastic_verilog_compiler = "verilator"
 
