@@ -216,6 +216,8 @@ endif
         " syntastic does basic QuickFix stuffs, and integrates nicely with Powerline
         Plugin 'scrooloose/syntastic'
 
+        " Check syntax when opening a file
+        let g:syntastic_check_on_open = 1
 
         " Show warnings for C files
         let g:syntastic_c_compiler_options = "-Wall"
@@ -228,7 +230,7 @@ endif
         " - If you want parser for verilog, download "verilator"
         " - Support - "https://github.com/scrooloose/syntastic/wiki/Verilog:---verilator"
         " Parse as SystemVerilog files
-            let g:syntastic_verilog_compiler_options = "-sv"
+            let g:syntastic_verilog_compiler_options = "-Wall"
             " let g:syntastic_verilog_compiler = "iverilog"
             " let g:syntastic_verilog_compiler = "verilator"
 
@@ -281,6 +283,7 @@ endif
 
         " Close
         " <C-g> or "q" in normal mode, "Q" to close all Unite windows
+        " [ - Go back one directory, up to the pwd, cannot go to root / for example (if it is not pwd=/)
 
         " <C-j> - auto preview
 
@@ -578,7 +581,7 @@ endif
 
         let g:yankring_history_dir = g:nk_vim_dir
         let g:yankring_history_file = 'yankring_history'
-        noremap <leader>yr :YRShow<CR>
+        noremap <leader>yy :YRShow<CR>
         " "0p - paste last yanked register
             " So in the above example, the text from the initial example is moved into the default register,
             " and then replaced there by the deleted text.
@@ -714,6 +717,8 @@ endif
             " ":help fugitive"
 
             " ":Gdiff" - show diff against repo file
+            " ":Gvdiff" - force vertical diff files
+                " https://github.com/tpope/vim-fugitive/issues/508#issuecomment-47018347
             " ":Gstatus" - show current status: modified files, branch ahead/behind
                 " "D" - show diff for selected file
                 " "-" - stage/unstage files
@@ -726,6 +731,55 @@ endif
 
     " Markdown plugin
         Plugin 'plasticboy/vim-markdown'
+
+    " Vimux
+        Plugin 'benmills/vimux'
+
+        let g:VimuxHeight = "40"
+        let g:VimuxOrientation = "h"
+        let VimuxUseNearest = 1
+
+        noremap <leader>rc :VimuxPromptCommand<CR>
+        noremap <leader>rr :VimuxRunLastCommand<CR>
+        noremap <leader>rs :VimuxInterruptRunner<CR>
+        noremap <leader>rz :VimuxZoomRunner<CR>
+        noremap <leader>re :VimuxInspectRunner<CR>
+
+    " vim-cellmode
+        Plugin 'julienr/vim-cellmode'
+
+        " let g:cellmode_tmux_sessionname='ipython'  " Will try to automatically pickup tmux session
+        " let g:cellmode_tmux_windowname='ipython'
+        let g:cellmode_tmux_sessionname=''  " Will try to automatically pickup tmux session
+        let g:cellmode_tmux_windowname=''
+        let g:cellmode_tmux_panenumber='1'
+
+        let g:cellmode_screen_sessionname='ipython'
+        let g:cellmode_screen_window='0'
+
+        " Default mappings - contribute
+        " let g:cellmode_default_mappings='0'
+
+        " Plugin works only in terminal mode
+        if !has("gui_running")
+
+            " Unmap set plugin mappings to default
+            " Workaround for now
+            " autocmd VimEnter * unmap <C-c>
+            " autocmd VimEnter * unmap <C-b>
+            " autocmd VimEnter * unmap <C-g>
+                " http://vi.stackexchange.com/a/785/8539
+
+            " Custom plugin mappings
+            vnoremap <leader>pp :call RunTmuxPythonChunk()<CR>
+            nnoremap <leader>pp :call RunTmuxPythonCell(0)<CR>
+            noremap <leader>pa :call RunTmuxPythonAllCellsAbove()<CR><CR>
+            noremap <leader>ps :let g:cellmode_tmux_panenumber='1'<Left>
+
+        endif
+
+    " vim-ipython
+        " Plugin 'ivanov/vim-ipython'
 
     " Bash support
         " Plugin 'vim-scripts/bash-support.vim'
@@ -1641,18 +1695,19 @@ endif
 " Search buffers directories
     " Search remap for case insensitive search
     nnoremap / /\c
-    nnoremap <leader>// /\c
+    " nnoremap <leader>// /\c
     nnoremap <leader>/c :nohlsearch<CR>
     " /ref/ https://medium.com/hacking-and-gonzo/10-vim-tricks-you-should-know-6393842b3537#.3pxco1r77
     "       http://dougblack.io/words/a-good-vimrc.html
     " /ref/ http://stackoverflow.com/a/2287449/2450748
-    nnoremap <leader>/b :bufdo! /\c
+    nnoremap <leader>// :bufdo! /\c
     nnoremap <leader>/d :Grep  *<Left><Left>
     " nnoremap /w :call NK_SearchWord()
     " nnoremap /w "zyiw:execute "Grep ".@z." *"
     "# Search word under cursor in current directory
     nnoremap <leader>/g :Grep <C-R><C-W> *
-    nnoremap <leader>/w :Grep <C-R><C-W> %:p --no-filename
+    nnoremap <leader>// :Grep  %:p --no-filename<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+    nnoremap <leader>/w :Grep <C-R><C-W> %:p --no-filename<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
         " /ref/ http://vim.wikia.com/wiki/Word_under_cursor_for_command
 
     function! NK_SearchWord()
@@ -1696,9 +1751,9 @@ endif
     nnoremap <leader>ub :bufdo! undo<CR>
     nnoremap <leader>uw :windo! undo<CR>
 
-    nnoremap <leader>rr :redo<CR>
-    nnoremap <leader>rb :bufdo! redo<CR>
-    nnoremap <leader>rw :windo! redo<CR>
+    nnoremap <leader>UR :redo<CR>
+    nnoremap <leader>UB :bufdo! redo<CR>
+    nnoremap <leader>UW :windo! redo<CR>
 
 " Autocomplete background color
     highlight Pmenu    guibg=darkcyan guifg=white gui=bold
@@ -2294,3 +2349,5 @@ endif
     " ignore case
         " set diffopt+=icase
 
+" Always diff vertical
+    set diffopt+=vertical
