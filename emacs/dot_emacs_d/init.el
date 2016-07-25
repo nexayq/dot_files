@@ -577,6 +577,10 @@
        ; "ws"  'split-window-below ;;
        )
 
+    ; split window to the right
+    (setq evil-vsplit-window-right 1)
+    (setq evil-split-window-below 1)
+
     ; (evil-ex-define-cmd "sp[lit]" 'split-window-below-and-focus)
     ; (evil-ex-define-cmd "vs[plit]" 'split-window-right-and-focus)
 
