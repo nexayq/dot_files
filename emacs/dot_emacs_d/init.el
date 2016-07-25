@@ -32,11 +32,20 @@
         ; :eval-region
 
 ;; Emacs shortcuts
+
+  ;; show help for current mode
+      ;; C-h m
+  ;; show all keybindings for current mode
+      ;; C-h b
+            ; http://stackoverflow.com/a/7135416/2450748
   ;; get help for key
       ;; C-h k
   ;; get help for function
       ;; C-h f
+  ;; get help for variable
+      ;; C-h v
 
+    ;; C-y   - Paste
     ;; C-x o - go to next window
     ;; C-x 0 - close current window
     ;; C-x 1 - zoom(show only) current window
@@ -85,7 +94,7 @@
 ;; set color theme, no startup screen
     ;; :customize-themes - change color theme
 
-;; ===================== Install packages ============================
+;; <<<<<<<<<<<<<<<<<<< Install packages <<<<<<<<<<<<<<<<<<<<<<<
 
 ; Add melpa repositories by running script install_packages.el
     ; C-x C-f ~/.emacs.d/install_packages_24.el
@@ -114,7 +123,10 @@
     '(evil  org ox-twbs color-theme-sanityinc-tomorrow
       powerline rainbow-delimiters smooth-scrolling
       neotree dirtree evil-leader ace-window window-numbering
-      flycheck helm helm-swoop company evil-org ))
+      flycheck helm helm-swoop company evil-org popwin 
+      zoom-window ))
+
+; magit - requires git >= 1.9.5 :(, vc as an alternative
 
 ; (setq package-list
     ; '(python-environment deferred epc
@@ -137,9 +149,20 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-;; \\\\\\\\\\\\\\\\\\\\\ Install packages \\\\\\\\\\\\\\\\\\\\\\\\\\\\
+;; >>>>>>>>>>>>>>>>>>>> Install packages >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ;; org-mode
+    ; Examples how to write org files:
+        ; https://github.com/fniessen/refcard-org-mode
+
+    ; Set org-mode options
+    ; http://orgmode.org/manual/Export-settings.html
+        ; SETUPFILE for HTML exporting
+            ; #+SETUPFILE: ~/.emacs.d/org-mode/org-html-themes/setup/theme-readtheorg.setup
+        ; Don't use header numbering 1.1.3. (just use 1.)
+            ; #+OPTIONS: H:1
+                ; http://tex.stackexchange.com/a/52617
+
     ; Ignore underscores
         (setq org-export-with-sub-superscripts nil)
             ; http://stackoverflow.com/a/701201/2450748
@@ -189,7 +212,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
+    (color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
 
 ;; set font DejaVu Sans
 
@@ -220,11 +243,15 @@
 
     ; Fix for org mode in terminal
     (setq evil-want-C-i-jump nil)
+
         ; http://stackoverflow.com/a/22922161/2450748
     (require 'evil)
     (evil-mode 1)
 
-;; Color theme - color-theme-sanityinc-tomorrow
+
+;; Color theme
+    ; Many color themes
+        ; https://github.com/emacs-jp/replace-colorthemes
     ; (require 'tangotango)
     ; (load-theme 'tangotango t)
     ;; Different color themes for GUI and terminal
@@ -234,6 +261,12 @@
             (load-theme 'sanityinc-tomorrow-bright))
         (load-theme 'wombat))
     ; (load-theme 'wombat)
+    ; (load-theme 'railscast t t)
+    ; (enable-theme 'railscast)
+    ; (load-theme 'clarity t t)
+    ; (enable-theme 'clarity)
+    ; (load-theme 'sanityinc-tomorrow-bright)
+    ; (enable-theme 'sanityinc-tomorrow-bright)
     ; (add-hook 'org-mode-hook 'color-theme-sanityinc-tomorrow)
 
 ;; Powerline - powerline_evil
@@ -255,7 +288,6 @@
 ;; Neotree - neotree
     ; when used with evil mode, first go to insert mode 'i',
     ; otherwise Enter wont open directory!
-    (add-to-list 'load-path "~/Notes/org/")
     (require 'neotree)
     ; (global-set-key [f8] 'neotree-toggle)
     (evil-leader/set-key
@@ -280,7 +312,20 @@
   ; (setq evil-leader/in-all-states 1)
 
 ;; ace-window
-    ; (global-set-key (kbd "C-q") 'ace-window)
+    ; (global-set-key (kbd "M-p") 'ace-window)
+
+    ; (evil-leader/set-key
+       ; ""  'ace-window ;;
+       ; )
+
+;; zoom-window
+    (require 'zoom-window)
+
+    (evil-leader/set-key
+       "zz"  'zoom-window-zoom ;;
+       )
+    ; (global-set-key (kbd "C-x C-z") 'zoom-window-zoom)
+    (setq zoom-window-mode-line-color "DarkGreen")
 
 ;; window-numbering
     ; (window-numbering-mode 1)
@@ -397,6 +442,19 @@
     (require 'helm-config)
     (helm-mode 1)
 
+    ; configure where helm window is shown
+    ; https://www.reddit.com/r/emacs/comments/2z7nbv/lean_helm_window/
+        (setq helm-display-header-line nil) ;; t by default
+
+        (set-face-attribute 'helm-source-header nil :height 0.1)
+
+        (helm-autoresize-mode 1)
+        (setq helm-autoresize-max-height 30)
+        (setq helm-autoresize-min-height 30)
+
+        (setq helm-split-window-in-side-p t)
+        ; (setq helm-split-window-in-side-p nil)
+
     (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ;; rebind tab to run persistent actio
 
     ; C-l - Go up one level
@@ -428,7 +486,18 @@
     (require 'evil-org)
     (evil-org-mode 1)
 
-;;;;;;;;;;;;;;;;;; /Packages ;;;;;;;;;;;;;;;;;;;;
+;; popwin
+    (require 'popwin)
+    (popwin-mode 1)
+
+    ; Work nice with helm
+        ; https://gist.github.com/syl20bnr/5516054
+        (setq display-buffer-function 'popwin:display-buffer)
+        (push '("^\*helm .+\*$" :regexp t) popwin:special-display-config)
+        (push '("^\*helm-.+\*$" :regexp t) popwin:special-display-config)
+        ; (setq helm-split-window-preferred-function 'ignore)
+
+;; ---------------- Packages ------------------
 
     ;; remap / to /\c - no need, emacs search case insensitive great
     ;; (define-key evil-operator-state-map "w" "iw")
@@ -495,15 +564,21 @@
     (setq vc-follow-symlinks t)
         ; http://stackoverflow.com/a/30900018/2450748
 
-;; Zoom only one window
+;; Zoom only one window - added unzoom with package 'zoom-window'
+    ; (evil-leader/set-key
+       ; "zz"  'delete-other-windows ;; C-w o
+       ; )
+
+;; Delete window, split window
     (evil-leader/set-key
-       "zz"  'delete-other-windows ;; C-w o
+       "w"  'delete-window      ;; C-w 0
+       ; "we"  'split-window-right ;; 
+       ; "we"  'split-right ;; 
+       ; "ws"  'split-window-below ;;
        )
 
-;; Delete window
-    (evil-leader/set-key
-       "w"  'delete-window ;; C-w 0
-       )
+    ; (evil-ex-define-cmd "sp[lit]" 'split-window-below-and-focus)
+    ; (evil-ex-define-cmd "vs[plit]" 'split-window-right-and-focus)
 
 ;; Save last session
      (desktop-save-mode 1)
@@ -523,3 +598,59 @@
     (evil-leader/set-key
        "SPC"  'so-toggle-comment-on-line ;;
        )
+
+;; vc bindings
+    ; https://www.emacswiki.org/emacs/VersionControl
+    (evil-leader/set-key
+       "gd"  'vc-diff          ;; diff current file
+       "gu"  'vc-revert        ;; undo current file to original (vcs)
+       )
+
+;; verilog-mode
+    ; Show Verilog menu - really important
+        ; :menu-bar-open
+            ; http://stackoverflow.com/a/191377/2450748
+
+    ;; show help for current mode
+        ;; C-h m
+    ;; show all keybindings for current mode
+        ;; C-h b
+
+    ; C-c C-t h - Generate header
+        ; http://emacs.stackexchange.com/a/10149/12727
+
+;; vhdl-mode
+    ; Show VHDL menu - really important
+        ; :menu-bar-open
+            ; http://stackoverflow.com/a/191377/2450748
+
+      ;; show help for current mode
+          ;; C-h m
+      ;; show all keybindings for current mode
+          ;; C-h b
+
+    ; Tutorials
+        ; https://www.microlab.ti.bfh.ch/bachelor/f/BTF4220/digital_electronics_2/public/digital/emacsTemplates.pdf
+
+    ;; Show hierarchy
+        ; VHDL -> Speedbar
+
+    ; (global-font-lock-mode 1)
+    ; (autoload 'vhdl-mode "vhdl-mode" "VHDL Editing Mode" t)
+    ; (setq vhdl-electric-mode t)
+    ; (setq vhdl-stutter-mode t)
+
+    ; C-c C-t C-h  - generate header
+    ; C-c C-t en - generates entity template
+    ; C-c C-t ar - architecture
+    ; C-c C-t si - signal
+    ; C-c C-t it - if then
+    ; C-c C-t el - else
+    ; C-c C-t ei - elsif
+
+    ; :vhdl-beautify-buffer - Autoindents VHDL code
+
+    ; Show statistics for lines of code, comments, ...
+        ; VHDL -> Statistics buffer
+            ; Open buffer "*Messages*" to see the output
+
