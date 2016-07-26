@@ -277,7 +277,7 @@
             (load-theme 'sanityinc-tomorrow-bright))
         (load-theme 'wombat))
     ; Set terminal background color to black
-    (add-to-list 'default-frame-alist '(background-color . "#000000"))
+    (add-to-list 'default-frame-alist '(background-color . "000000"))
         ; http://stackoverflow.com/a/11419691/2450748
     ; (set-background-color "#000000")
     ; (load-theme 'wombat)
@@ -312,10 +312,10 @@
     ; (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ; ;; Smooth scrolling
-    ; (require 'smooth-scrolling)
-    ; (setq scroll-margin 5
-        ; scroll-conservatively 9999
-        ; scroll-step 1)
+    (require 'smooth-scrolling)
+    (setq scroll-margin 5
+        scroll-conservatively 9999
+        scroll-step 1)
 
 ;; Neotree - neotree
     ; when used with evil mode, first go to insert mode 'i',
