@@ -133,7 +133,7 @@
       powerline powerline-evil rainbow-delimiters smooth-scrolling
       neotree dirtree evil-leader ace-window window-numbering
       flycheck helm helm-swoop company evil-org popwin
-      zoom-window sr-speedbar ))
+      zoom-window sr-speedbar desktop+ ))
 
 ; multiple-cursors
 ; magit - requires git >= 1.9.5 :(, vc as an alternative
@@ -223,7 +223,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
+    (desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
 
 ;; set font DejaVu Sans
 
@@ -546,6 +546,42 @@
     (evil-leader/set-key
        "tt"  'sr-speedbar-toggle          ;; show file hierarchy
        )
+
+;; desktop+
+    ; (setq server-use-tcp t)
+    (server-start) ; run emacs server
+
+    (require 'desktop+)
+    (setq nk-session-dir "~/.emacs-local/sessions/")
+    (setq-default desktop+-base-dir nk-session-dir)
+
+    ; (setq nk-session-dir "~/.emacs_local/sessions/")
+    ; (setq nk-session-name "PRB3")
+    ; (setq-default desktop+-base-dir nk_session-dir)
+
+    (defun nk-create-load-session (session-name session-dir)
+        "Load session or create session SESSION-NAME in SESSION-DIR if it doesn't exist."
+            " (nk-create-load-session nk-session-dir nk-session-name) "
+                " Session directory"
+                (setq session-path (concat session-dir session-name))
+                (if (file-exists-p session-path);if
+                    (progn
+                        (message (concat "Session already exists, loading session: " session-path) ) ; then
+                        (desktop+-load session-name))
+                  (message (concat "Creating new session: " session-name)) ; else
+                  (make-directory session-path 'parents)
+                  (desktop+-create session-name)))
+
+    (defun nk-load-session (session-name)
+        (nk-create-load-session session-name nk-session-dir))
+
+    ; (defvar desktop+-base-dir "~/.emacs_sessions/"
+    ; "Base directory for desktop files.")
+
+    ; Must use M-x, with : it wont call desktop+ functions!
+    ; Create new session (desktop+)
+        ; M-x desktop+-create
+
 ;; >>>>>>>>>>>>>>>> Packages >>>>>>>>>>>>>>>>>>
 
     ;; remap / to /\c - no need, emacs search case insensitive great
@@ -669,7 +705,7 @@
     ; (evil-ex-define-cmd "vs[plit]" 'split-window-right-and-focus)
 
 ;; Save last session
-     (desktop-save-mode 1)
+     ; (desktop-save-mode 1)
         ; http://stackoverflow.com/a/803828/2450748
 
 ;; Comment/uncomment line or region
