@@ -95,6 +95,11 @@
     ;; :customize-themes - change color theme
 
 ;; <<<<<<<<<<<<<<<<<<< Lisp <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    ; quote ' - used mostly for functions, means value of function
+    ;           do not use ' for variable, unless for setting it (setq)
+    ; Examples:
+        ; (concat "Creating new session: " session-name_variable)
+
     ; Set variable
         ; (setq evil-vsplit-window-right 1)
 
@@ -550,6 +555,12 @@
 ;; desktop+
     (setq server-use-tcp t)
         ; http://www.tychoish.com/posts/running-multiple-emacs-daemons-on-a-single-system/
+
+    ; When you kill emacs, check that all are servers are killed
+        ; > ps -ef | grep emacs
+        ; > kill -9 6078 # example
+    ; If some session has ".emacs.desktop.lock" that means emacs is still running that session
+        ; ~/.emacs-local/sessions/TRY/.emacs.desktop.lock (6078)
     (server-start) ; run emacs server
     (if (daemonp)
         (add-hook 'after-make-frame-functions
@@ -557,6 +568,12 @@
                 (select-frame frame)
                 (load-theme 'sanityinc-tomorrow-bright t)))
         (load-theme 'sanityinc-tomorrow-bright t))
+
+    (evil-leader/set-key
+       "nn"  'desktop+-load          ;; load session
+       "nc"  'desktop+-create        ;; create new session
+       "ns"  'desktop+-save          ;; create new session
+       )
 
     (require 'desktop+)
     (setq nk-session-dir "~/.emacs-local/sessions/")
