@@ -548,8 +548,15 @@
        )
 
 ;; desktop+
-    ; (setq server-use-tcp t)
+    (setq server-use-tcp t)
+        ; http://www.tychoish.com/posts/running-multiple-emacs-daemons-on-a-single-system/
     (server-start) ; run emacs server
+    (if (daemonp)
+        (add-hook 'after-make-frame-functions
+            (lambda (frame)
+                (select-frame frame)
+                (load-theme 'sanityinc-tomorrow-bright t)))
+        (load-theme 'sanityinc-tomorrow-bright t))
 
     (require 'desktop+)
     (setq nk-session-dir "~/.emacs-local/sessions/")
