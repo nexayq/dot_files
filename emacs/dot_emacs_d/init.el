@@ -464,6 +464,23 @@
 
      ; (setq flycheck-iverilog-executable "iverilog -v")
 
+    ; Flycheck rule for GHDL:
+        ; https://gist.github.com/MasWag/4b74f9ac8f1014a73246
+    (flycheck-define-checker vhdl-ghdl
+      "A VHDL syntax checker using ghdl."
+      :command ("ghdl" "-s" "--std=93" "--ieee=synopsys" "-fexplicit" source)
+      :error-patterns
+      ((error line-start (file-name) ":" line ":" column
+          ": " (message) line-end))
+      :modes vhdl-mode)
+    (flycheck-set-checker-executable 'vhdl-ghdl)
+
+    (add-hook 'vhdl-mode-hook
+              '(lambda ()
+                 (setq flycheck-checker 'vhdl-ghdl)
+    (flycheck-mode 1)))
+
+
 ;; helm
     ;; (require 'helm)
     (require 'helm-config)
@@ -730,9 +747,6 @@
           ;; C-h m
       ;; show all keybindings for current mode
           ;; C-h b
-    ; Flycheck rule for GHDL:
-        ; https://gist.github.com/MasWag/4b74f9ac8f1014a73246
-
     ; Tutorials
         ; https://www.microlab.ti.bfh.ch/bachelor/f/BTF4220/digital_electronics_2/public/digital/emacsTemplates.pdf
 
