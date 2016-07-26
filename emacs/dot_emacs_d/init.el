@@ -94,6 +94,15 @@
 ;; set color theme, no startup screen
     ;; :customize-themes - change color theme
 
+;; <<<<<<<<<<<<<<<<<<< Lisp <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    ; Set variable
+        ; (setq evil-vsplit-window-right 1)
+
+    ; Check variable value
+        ; evil-vsplit-window-right
+
+;; >>>>>>>>>>>>>>>>>>> Lisp >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 ;; <<<<<<<<<<<<<<<<<<< Install packages <<<<<<<<<<<<<<<<<<<<<<<
 
 ; Add melpa repositories by running script install_packages.el
@@ -114,7 +123,7 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
 
-; (add-to-list 'package-archives 
+; (add-to-list 'package-archives
              ; '("marmalade" . "https://marmalade-repo.org/packages/"))
 
 ; list the packages you want
@@ -123,8 +132,8 @@
     '(evil  org ox-twbs color-theme-sanityinc-tomorrow
       powerline rainbow-delimiters smooth-scrolling
       neotree dirtree evil-leader ace-window window-numbering
-      flycheck helm helm-swoop company evil-org popwin 
-      zoom-window ))
+      flycheck helm helm-swoop company evil-org popwin
+      zoom-window sr-speedbar ))
 
 ; magit - requires git >= 1.9.5 :(, vc as an alternative
 
@@ -148,6 +157,9 @@
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
+
+; sr-speedbar
+    (require 'sr-speedbar)
 
 ;; >>>>>>>>>>>>>>>>>>>> Install packages >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -497,7 +509,11 @@
         (push '("^\*helm-.+\*$" :regexp t) popwin:special-display-config)
         ; (setq helm-split-window-preferred-function 'ignore)
 
-;; ---------------- Packages ------------------
+;; sr-speedbar
+    (evil-leader/set-key
+       "tt"  'sr-speedbar-toggle          ;; show file hierarchy
+       )
+;; >>>>>>>>>>>>>>>> Packages >>>>>>>>>>>>>>>>>>
 
     ;; remap / to /\c - no need, emacs search case insensitive great
     ;; (define-key evil-operator-state-map "w" "iw")
@@ -543,7 +559,10 @@
       (setq show-trailing-whitespace (not show-trailing-whitespace)))
 
 ;; Launch terminal from emacs
-    ; :shell (M-x shell)
+    ; :ansi-termi - fully supported terminal (up/down works)
+    ; :shell (M-x shell) - inferior terminal (up/down does not work)
+    ; :eshell - Emacs lisp shell, shell written in lisp (up/down works)
+        ; https://www.masteringemacs.org/article/running-shells-in-emacs-overview
 
 ;; Launch emacs from terminal
     ; export TERM=xterm-256color
@@ -572,12 +591,12 @@
 ;; Delete window, split window
     (evil-leader/set-key
        "w"  'delete-window      ;; C-w 0
-       ; "we"  'split-window-right ;; 
-       ; "we"  'split-right ;; 
+       ; "we"  'split-window-right ;;
+       ; "we"  'split-right ;;
        ; "ws"  'split-window-below ;;
        )
 
-    ; split window to the right
+    ; :vsplit window to the right, :split to down
     (setq evil-vsplit-window-right 1)
     (setq evil-split-window-below 1)
 
