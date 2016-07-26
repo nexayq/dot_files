@@ -634,6 +634,23 @@
         ; :menu-bar-open
             ; http://stackoverflow.com/a/191377/2450748
 
+    ; Tutorials/Examples
+        ; http://rcir.sjtu.edu.cn/en/~cgliu/resource/ppt/emacs_verilog.pdf
+
+    ;; Example:
+
+        ; module try_mod (/*AUTOARG*/) ;
+           ; input  a;
+           ; input  b;
+           ; output c;
+           ; /*AUTOWIRE*/
+           ; /*AUTOREG*/
+
+           ; always @ ( /*AUTOSENSE*/) begin
+             ; c = a & b
+           ; end
+        ; endmodule // try_mod
+
     ;; show help for current mode
         ;; C-h m
     ;; show all keybindings for current mode
@@ -641,6 +658,19 @@
 
     ; C-c C-t h - Generate header
         ; http://emacs.stackexchange.com/a/10149/12727
+
+    (add-hook 'verilog-mode-hook
+        ; verilog-sk-*
+              (lambda ()
+                        (evil-leader/set-key "th" 'verilog-sk-header)
+                        (evil-leader/set-key "tm" 'verilog-sk-module)
+                        (evil-leader/set-key "ti" 'verilog-sk-input)
+                        (evil-leader/set-key "to" 'verilog-sk-output)
+                        ; C-c C-a - expand AUTOARG, AUTOWIRE, AUTOREG, AUTOSENSE, ...
+                        ; C-c C-k - undo expand of AUTOARG, AUTOWIRE, AUTOREG, AUTOSENSE, ...
+                        (evil-leader/set-key "ts" 'verilog-sk-state-machine)
+                        (evil-leader/set-key "ta" 'verilog-sk-always)
+               ))
 
 ;; vhdl-mode
     ; Show VHDL menu - really important
@@ -651,6 +681,8 @@
           ;; C-h m
       ;; show all keybindings for current mode
           ;; C-h b
+    ; Flycheck rule for GHDL:
+        ; https://gist.github.com/MasWag/4b74f9ac8f1014a73246
 
     ; Tutorials
         ; https://www.microlab.ti.bfh.ch/bachelor/f/BTF4220/digital_electronics_2/public/digital/emacsTemplates.pdf
@@ -677,3 +709,36 @@
         ; VHDL -> Statistics buffer
             ; Open buffer "*Messages*" to see the output
 
+    ; http://stackoverflow.com/a/14230685/2450748
+    ; (add-hook 'vhdl-mode-hook
+              ; (lambda () (evil-leader/set-key "th" 'vhdl-template-header)))
+                    ; http://stackoverflow.com/a/14230685/2450748
+
+    ; (add-hook 'vhdl-mode-hook
+              ; (lambda () (evil-leader/set-key "te" 'vhdl-template-entity)))
+
+    ; http://stackoverflow.com/a/14230685/2450748
+    (add-hook 'vhdl-mode-hook
+        ; vhdl-template-*
+              (lambda ()
+                        (evil-leader/set-key "th" 'vhdl-template-header)
+                        (evil-leader/set-key "tn" 'vhdl-compose-new-component)
+                        (evil-leader/set-key "tp" 'vhdl-template-port)
+                        (evil-leader/set-key "tf" 'vhdl-template-for-generate)
+                        (evil-leader/set-key "te" 'vhdl-template-entity)
+                        (evil-leader/set-key "ta" 'vhdl-template-architecture)
+                        (evil-leader/set-key "ti" 'vhdl-template-component-inst)
+               ))
+
+    (evil-leader/set-key
+       "gd"  'vc-diff          ;; diff current file
+       "gu"  'vc-revert        ;; undo current file to original (vcs)
+       )
+
+;; sr-speedbar - like Tagbar in vim
+    ; o - expand hierarchy
+
+;; Add verilog mode to the speedbar
+    (require 'speedbar)
+    (speedbar-add-supported-extension '(".v" ".sv" ".svh" ))
+        ; http://www.veripool.org/issues/1025-Verilog-mode-Integration-with-the-speedbar
