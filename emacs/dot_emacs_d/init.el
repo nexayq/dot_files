@@ -130,11 +130,12 @@
 
 (setq package-list
     '(evil  org ox-twbs color-theme-sanityinc-tomorrow
-      powerline rainbow-delimiters smooth-scrolling
+      powerline powerline-evil rainbow-delimiters smooth-scrolling
       neotree dirtree evil-leader ace-window window-numbering
       flycheck helm helm-swoop company evil-org popwin
       zoom-window sr-speedbar ))
 
+; multiple-cursors
 ; magit - requires git >= 1.9.5 :(, vc as an alternative
 
 ; (setq package-list
@@ -158,8 +159,6 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-; sr-speedbar
-    (require 'sr-speedbar)
 
 ;; >>>>>>>>>>>>>>>>>>>> Install packages >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -272,6 +271,10 @@
             (require 'color-theme-sanityinc-tomorrow)
             (load-theme 'sanityinc-tomorrow-bright))
         (load-theme 'wombat))
+    ; Set terminal background color to black
+    (add-to-list 'default-frame-alist '(background-color . "#000000"))
+        ; http://stackoverflow.com/a/11419691/2450748
+    ; (set-background-color "#000000")
     ; (load-theme 'wombat)
     ; (load-theme 'railscast t t)
     ; (enable-theme 'railscast)
@@ -283,19 +286,31 @@
 
 ;; Powerline - powerline_evil
     (require 'powerline)
-    ; (powerline-default-theme)
+    ; ; (powerline-default-theme)
     ; (powerline-vim-theme)
-    (powerline-center-evil-theme)
+    ; (powerline-center-evil-theme)
+    ; (set-face-attribute 'mode-line nil
+                        ; :foreground "Black"
+                        ; :background "DarkOrange"
+                        ; :box nil)
+    (require 'powerline-evil)
+    ; (powerline-evil-center-color-theme)
+    ; (powerline-evil-vim-theme)
+    (powerline-evil-vim-color-theme)
 
-;; Rainbow parenthesis - rainbow-delimiters
-    (require 'rainbow-delimiters)
-    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+;; Spaceline
+    ; (require 'spaceline-config)
+    ; (spaceline-spacemacs-theme)
 
-;; Smooth scrolling
-    (require 'smooth-scrolling)
-    (setq scroll-margin 5
-        scroll-conservatively 9999
-        scroll-step 1)
+; ;; Rainbow parenthesis - rainbow-delimiters
+    ; (require 'rainbow-delimiters)
+    ; (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+; ;; Smooth scrolling
+    ; (require 'smooth-scrolling)
+    ; (setq scroll-margin 5
+        ; scroll-conservatively 9999
+        ; scroll-step 1)
 
 ;; Neotree - neotree
     ; when used with evil mode, first go to insert mode 'i',
@@ -510,6 +525,7 @@
         ; (setq helm-split-window-preferred-function 'ignore)
 
 ;; sr-speedbar
+    (require 'sr-speedbar)
     (evil-leader/set-key
        "tt"  'sr-speedbar-toggle          ;; show file hierarchy
        )
@@ -546,6 +562,8 @@
     (setq make-backup-files nil)
     (setq auto-save-default nil)
         ; https://www.emacswiki.org/emacs/AutoSave
+    (setq backup-directory-alist '(("." . "~/emacs-backups")))
+        ; http://stackoverflow.com/a/1199346/2450748
 
 ;; Remember cursor position of saved file
     ; (setq save-place-file "~/.emacs.d/saveplace")
@@ -553,10 +571,40 @@
     ; (require 'saveplace)
 
 ;; Toggle whitespace
-    (defun nk-toggle-show-trailing-whitespace ()
-      "Toggle show-trailing-whitespace between t and nil"
+    ; (defun tf-toggle-show-trailing-whitespace ()
+      ; "Toggle show-trailing-whitespace between t and nil"
+      ; (interactive)
+      ; (setq show-trailing-whitespace (not show-trailing-whitespace)))
+            ; ; http://stackoverflow.com/a/11701899/2450748
+
+    (setq whitespace-style (quote
+       ( face trailing tabs)))
+
+    ; Show trailing whitespaces by default
+        (whitespace-mode)
+
+    (evil-leader/set-key
+       ; "zw"  'tf-toggle-show-trailing-whitespace      ;; show trailing spaces
+       "zw"  'whitespace-mode      ;; toggle trailing spaces
+     )
+
+;; Retab
+    ; indent-region
+    ; indent-buffer
+
+    (defun indent-buffer ()
       (interactive)
-      (setq show-trailing-whitespace (not show-trailing-whitespace)))
+      (save-excursion
+        (indent-region (point-min) (point-max) nil)))
+
+    (evil-leader/set-key
+       "zt"  'indent-buffer     ;; retab selected region
+     )
+
+;; Delete trailing whitespace
+    (evil-leader/set-key
+       "k"  'delete-trailing-whitespace      ;; delete trailing spaces
+     )
 
 ;; Launch terminal from emacs
     ; :ansi-termi - fully supported terminal (up/down works)
@@ -662,15 +710,16 @@
     (add-hook 'verilog-mode-hook
         ; verilog-sk-*
               (lambda ()
-                        (evil-leader/set-key "th" 'verilog-sk-header)
-                        (evil-leader/set-key "tm" 'verilog-sk-module)
-                        (evil-leader/set-key "ti" 'verilog-sk-input)
-                        (evil-leader/set-key "to" 'verilog-sk-output)
+                        (evil-leader/set-key
+                                "th" 'verilog-sk-header
+                                "tm" 'verilog-sk-module
+                                "ti" 'verilog-sk-input
+                                "to" 'verilog-sk-output
                         ; C-c C-a - expand AUTOARG, AUTOWIRE, AUTOREG, AUTOSENSE, ...
                         ; C-c C-k - undo expand of AUTOARG, AUTOWIRE, AUTOREG, AUTOSENSE, ...
-                        (evil-leader/set-key "ts" 'verilog-sk-state-machine)
-                        (evil-leader/set-key "ta" 'verilog-sk-always)
-               ))
+                                "ts" 'verilog-sk-state-machine
+                                "ta" 'verilog-sk-always
+               )))
 
 ;; vhdl-mode
     ; Show VHDL menu - really important
@@ -721,14 +770,15 @@
     (add-hook 'vhdl-mode-hook
         ; vhdl-template-*
               (lambda ()
-                        (evil-leader/set-key "th" 'vhdl-template-header)
-                        (evil-leader/set-key "tn" 'vhdl-compose-new-component)
-                        (evil-leader/set-key "tp" 'vhdl-template-port)
-                        (evil-leader/set-key "tf" 'vhdl-template-for-generate)
-                        (evil-leader/set-key "te" 'vhdl-template-entity)
-                        (evil-leader/set-key "ta" 'vhdl-template-architecture)
-                        (evil-leader/set-key "ti" 'vhdl-template-component-inst)
-               ))
+                        (evil-leader/set-key
+                                "th" 'vhdl-template-header
+                                "tn" 'vhdl-compose-new-component
+                                "tp" 'vhdl-template-port
+                                "tf" 'vhdl-template-for-generate
+                                "te" 'vhdl-template-entity
+                                "ta" 'vhdl-template-architecture
+                                "ti" 'vhdl-template-component-inst
+               )))
 
     (evil-leader/set-key
        "gd"  'vc-diff          ;; diff current file
