@@ -49,6 +49,10 @@
     " " Save clipboard on exit
             " autocmd VimLeave * call system("xclip -selection clipboard", getreg('+'))
 
+    " " Show line numbers
+        " set number
+        " set relativenumber
+
 " Basic vim setup - Linux and Win>>>
 
 " TODO
