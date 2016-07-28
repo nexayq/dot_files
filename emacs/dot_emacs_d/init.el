@@ -4,6 +4,14 @@
     ; https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org
     ; https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-evil.el
 
+;; package.el for emacs 23
+    ; http://git.savannah.gnu.org/gitweb/?p=emacs.git;a=blob_plain;hb=ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09;f=lisp/emacs-lisp/package.el
+
+    ; (when
+        ; (load
+         ; (expand-file-name "~/.emacs.d/package.el")))
+    ; https://www.emacswiki.org/emacs/ELPA_
+
 ;; Run in terminal
     ; > emacs -nw
         ; or
@@ -264,20 +272,34 @@
     (require 'evil)
     (evil-mode 1)
 
-
 ;; Color theme
     ; Many color themes
         ; https://github.com/emacs-jp/replace-colorthemes
     ; (require 'tangotango)
     ; (load-theme 'tangotango t)
     ;; Different color themes for GUI and terminal
-    (if (display-graphic-p)
-        (progn
-            (require 'color-theme-sanityinc-tomorrow)
-            (load-theme 'sanityinc-tomorrow-bright))
-        (load-theme 'wombat))
+    ; (if (display-graphic-p)
+        ; (progn
+            ; (require 'color-theme-sanityinc-tomorrow)
+            ; (load-theme 'sanityinc-tomorrow-bright))
+        ; (load-theme 'wombat)
+        ; (add-to-list 'default-frame-alist '(background-color . "000000")))
+    ; when terminal emacs is running set background color to 0 (black)
+    (unless (or (display-graphic-p) (daemonp))
+        (add-to-list 'default-frame-alist '(background-color . "000000")))
+
+    ; if server daemon is running
+    (if (daemonp)
+        (add-hook 'after-make-frame-functions
+            (lambda (frame)
+                (select-frame frame)
+                (load-theme 'sanityinc-tomorrow-bright t)))
+        (load-theme 'sanityinc-tomorrow-bright t))
+
+    ; (load-theme 'wombat)
+
     ; Set terminal background color to black
-    (add-to-list 'default-frame-alist '(background-color . "000000"))
+    ; (add-to-list 'default-frame-alist '(background-color . "000000"))
         ; http://stackoverflow.com/a/11419691/2450748
     ; (set-background-color "#000000")
     ; (load-theme 'wombat)
@@ -562,12 +584,6 @@
     ; If some session has ".emacs.desktop.lock" that means emacs is still running that session
         ; ~/.emacs-local/sessions/TRY/.emacs.desktop.lock (6078)
     (server-start) ; run emacs server
-    (if (daemonp)
-        (add-hook 'after-make-frame-functions
-            (lambda (frame)
-                (select-frame frame)
-                (load-theme 'sanityinc-tomorrow-bright t)))
-        (load-theme 'sanityinc-tomorrow-bright t))
 
     (evil-leader/set-key
        "nn"  'desktop+-load          ;; load session
@@ -578,6 +594,18 @@
     (require 'desktop+)
     (setq nk-session-dir "~/.emacs-local/sessions/")
     (setq-default desktop+-base-dir nk-session-dir)
+
+;; Save last session
+     ; (setq desktop-base-file-name "proba_cstm")
+     (setq desktop-path (list nk-session-dir))
+     (setq desktop-dirname nk-session-dir)
+     ; ; (setq desktop-save-mode 1)
+     ; (setq desktop-save t)
+     ; (desktop-save-mode 1)
+     ; ; (desktop-read)
+     ; ; (add-hook 'emacs-startup-hook 'desktop-read)
+        ; https://www.emacswiki.org/emacs?action=browse;oldid=DeskTop;id=Desktop
+        ; http://stackoverflow.com/a/4485083/2450748
 
     ; (setq nk-session-dir "~/.emacs_local/sessions/")
     ; (setq nk-session-name "PRB3")
@@ -598,6 +626,8 @@
 
     (defun nk-load-session (session-name)
         (nk-create-load-session session-name nk-session-dir))
+
+    ; (add-hook 'kill-emacs-hook (lambda () (desktop+-save)))
 
     ; (defvar desktop+-base-dir "~/.emacs_sessions/"
     ; "Base directory for desktop files.")
@@ -729,6 +759,9 @@
     ; (evil-ex-define-cmd "vs[plit]" 'split-window-right-and-focus)
 
 ;; Save last session
+     ; (setq desktop-base-file-name "proba")
+     ; (setq desktop-path '("~/.emacs.d/"))
+     ; (setq desktop-dirname "~/.emacs.d/")
      ; (desktop-save-mode 1)
         ; http://stackoverflow.com/a/803828/2450748
 
