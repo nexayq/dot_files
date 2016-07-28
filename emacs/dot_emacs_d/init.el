@@ -146,7 +146,7 @@
       powerline powerline-evil rainbow-delimiters smooth-scrolling
       neotree dirtree evil-leader ace-window window-numbering
       flycheck helm helm-swoop company evil-org popwin
-      zoom-window sr-speedbar desktop+ ))
+      zoom-window sr-speedbar desktop+ workgroups2 ))
 
 ; multiple-cursors
 ; magit - requires git >= 1.9.5 :(, vc as an alternative
@@ -270,6 +270,11 @@
 
         ; http://stackoverflow.com/a/22922161/2450748
     (require 'evil)
+
+    ; remap ; to :
+    (define-key evil-normal-state-map (kbd ";") 'evil-ex)
+        ; https://www.emacswiki.org/emacs/Evil
+
     (evil-mode 1)
 
 ;; Color theme
@@ -585,11 +590,11 @@
         ; ~/.emacs-local/sessions/TRY/.emacs.desktop.lock (6078)
     (server-start) ; run emacs server
 
-    (evil-leader/set-key
-       "nn"  'desktop+-load          ;; load session
-       "nc"  'desktop+-create        ;; create new session
-       "ns"  'desktop+-save          ;; create new session
-       )
+    ; (evil-leader/set-key
+       ; "nn"  'desktop+-load          ;; load session
+       ; "nc"  'desktop+-create        ;; create new session
+       ; "ns"  'desktop+-save          ;; create new session
+       ; )
 
     (require 'desktop+)
     (setq nk-session-dir "~/.emacs-local/sessions/")
@@ -635,6 +640,38 @@
     ; Must use M-x, with : it wont call desktop+ functions!
     ; Create new session (desktop+)
         ; M-x desktop+-create
+
+;; workgroups2
+    (require 'workgroups2)
+    ; (setq wg-prefix-key '(nil))
+
+    (evil-leader/set-key
+       "nc"  'wg-create-workgroup
+       ; "nn"  'wg-reload-session      ;;
+       ; "nn"  'wg-save-session      ;;
+       "ns"  'wg-save-session      ;;
+       "nr"  'wg-rename-workgroup
+       "no"  'wg-switch-to-workgroup
+       ; "nk"  'wg-kill-workgroup
+       "nn"  'wg-open-session
+       ; "nn"  'wg-reload-session      ;;
+     )
+
+    ;; What to do on Emacs exit / workgroups-mode exit?
+    (setq wg-emacs-exit-save-behavior           'save)      ; Options: 'save 'ask nil
+    (setq wg-workgroups-mode-exit-save-behavior 'save)      ; Options: 'save 'ask nil
+
+    (setq wg-session-file "~/.emacs-local/workgroups")
+    ; (wg-find-session-file "~/.emacs-local/workspace_old")
+    (wg-open-session "~/.emacs-local/workgroups")
+    ; (run-with-timer 1 (* 1 60) 'wg-save-session)
+    ; (add-hook 'kill-emacs-hook (lambda () (wg-save-session)))
+
+    (workgroups-mode 1)
+
+
+    ; (add-hook 'kill-emacs-hook (lambda () (wg-save-session)))
+    ; (run-with-timer 0 (* 1 60) 'wg-save-session)
 
 ;; >>>>>>>>>>>>>>>> Packages >>>>>>>>>>>>>>>>>>
 
