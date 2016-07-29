@@ -414,11 +414,26 @@ endif
         " dd    -> delete file
         " H     -> open shell, exit shell by typing "exit"
 
+        " links are collapsed when toggled, than use <leader>er (read vimfiller buffer)
+
         let g:vimfiler_as_default_explorer = 1
 
         noremap <leader>ee :VimFiler           -buffer-name=@cwd_vf     -no-quit -split -direction= -simple<CR>
-        noremap <leader>ew :VimFilerCurrentDir -buffer-name=@cwd_vf     -no-quit -split -direction= -simple<CR>
+        " Open previous tree, doesn't collapse symbolic links
+        noremap <leader>er :call NK_OpenVertBuffer("@cwd_vf")<CR>
+        " noremap <leader>er :vsp "@cwd"<CR>
+        " noremap <leader>ee :VimFiler           -buffer-name=@cwd_vf     -no-quit -split -direction= -simple -toggle<CR>
+        noremap <leader>ew :VimFilerCurrentDir -buffer-name=@cwd_cf     -no-quit -split -direction= -simple<CR>
         noremap <leader>eb :VimFilerBufferDir  -buffer-name=@buffer_vf  -no-quit -split -direction= -simple<CR>
+
+        " Open custom buffer in vsplit
+        function! NK_OpenVertBuffer(name_part)
+            let buffer_num=bufnr(a:name_part)
+            execute "vert sb ".buffer_num
+        endfunc
+
+        " return buffer number of buffer with name @cwd_vf
+            " :echo bufnr('@cwd_vf')
 
         " nnoremap <silent><buffer><expr> <C-x>     unite#do_action('cd')
         " nnoremap <C-x> <Plug>(vimfiler_switch_to_history_directory)
