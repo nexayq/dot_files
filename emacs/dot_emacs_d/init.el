@@ -611,7 +611,7 @@
     (defun nk-server-start (custom-server)
         ; (nk-server-start "abe")
         (setq server-name custom-server)
-        (server-start) ; run emacs server)
+        (server-start) ; run emacs server
         (setq wg-session-file (concat "~/.emacs-local/sessions/" custom-server))
         ; (setq wg-session-file "~/.emacs-local/sessions/proba")
         (workgroups-mode 1)
