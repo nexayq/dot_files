@@ -2388,3 +2388,11 @@ endif
 " Remap ; to :
     nnoremap ; :
     " nnoremap : ;
+
+" Disable sound and visual bell
+    set noerrorbells visualbell t_vb=
+    autocmd GUIEnter * set visualbell t_vb=
+    " set noerrorbells
+    " set t_vb=
+    " set novisualbell
+        " http://vim.wikia.com/wiki/Disable_beeping
