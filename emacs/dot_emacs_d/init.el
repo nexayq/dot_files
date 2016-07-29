@@ -580,7 +580,7 @@
        )
 
 ;; desktop+
-    (setq server-use-tcp t)
+    ; (setq server-use-tcp t)
         ; http://www.tychoish.com/posts/running-multiple-emacs-daemons-on-a-single-system/
 
     ; When you kill emacs, check that all are servers are killed
@@ -588,7 +588,6 @@
         ; > kill -9 6078 # example
     ; If some session has ".emacs.desktop.lock" that means emacs is still running that session
         ; ~/.emacs-local/sessions/TRY/.emacs.desktop.lock (6078)
-    (server-start) ; run emacs server
 
     ; (evil-leader/set-key
        ; "nn"  'desktop+-load          ;; load session
@@ -596,52 +595,34 @@
        ; "ns"  'desktop+-save          ;; create new session
        ; )
 
-    (require 'desktop+)
-    (setq nk-session-dir "~/.emacs-local/sessions/")
-    (setq-default desktop+-base-dir nk-session-dir)
-
-;; Save last session
-     ; (setq desktop-base-file-name "proba_cstm")
-     (setq desktop-path (list nk-session-dir))
-     (setq desktop-dirname nk-session-dir)
-     ; ; (setq desktop-save-mode 1)
-     ; (setq desktop-save t)
-     ; (desktop-save-mode 1)
-     ; ; (desktop-read)
-     ; ; (add-hook 'emacs-startup-hook 'desktop-read)
-        ; https://www.emacswiki.org/emacs?action=browse;oldid=DeskTop;id=Desktop
-        ; http://stackoverflow.com/a/4485083/2450748
-
-    ; (setq nk-session-dir "~/.emacs_local/sessions/")
-    ; (setq nk-session-name "PRB3")
-    ; (setq-default desktop+-base-dir nk_session-dir)
-
-    (defun nk-create-load-session (session-name session-dir)
-        "Load session or create session SESSION-NAME in SESSION-DIR if it doesn't exist."
-            " (nk-create-load-session nk-session-dir nk-session-name) "
-                " Session directory"
-                (setq session-path (concat session-dir session-name))
-                (if (file-exists-p session-path);if
-                    (progn
-                        (message (concat "Session already exists, loading session: " session-path) ) ; then
-                        (desktop+-load session-name))
-                  (message (concat "Creating new session: " session-name)) ; else
-                  (make-directory session-path 'parents)
-                  (desktop+-create session-name)))
-
-    (defun nk-load-session (session-name)
-        (nk-create-load-session session-name nk-session-dir))
-
-    ; (add-hook 'kill-emacs-hook (lambda () (desktop+-save)))
-
-    ; (defvar desktop+-base-dir "~/.emacs_sessions/"
-    ; "Base directory for desktop files.")
-
-    ; Must use M-x, with : it wont call desktop+ functions!
-    ; Create new session (desktop+)
-        ; M-x desktop+-create
+    ; (require 'desktop+)
 
 ;; workgroups2
+    ; Setting up Emacs server
+        ; https://www.gnu.org/software/emacs/manual/html_node/emacs/Emacs-Server.html
+        ; https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html#emacsclient-Options
+
+    ; (setq server-name "foo")
+
+    ;; run server from command line after server name is specified (also from command line)
+    (setq server-socket-dir "~/.emacs-local/server")
+
+    (defun nk-server-start (custom-server)
+        ; (nk-server-start "abe")
+        (setq server-name custom-server)
+        (server-start) ; run emacs server)
+        (setq wg-session-file (concat "~/.emacs-local/sessions/" custom-server))
+        ; (setq wg-session-file "~/.emacs-local/sessions/proba")
+        (workgroups-mode 1)
+        (wg-switch-to-workgroup custom-server)
+        )
+    ; Run file in specific server (foo)
+        ; emacsclient -n callback.sh -s ~/.emacs-local/server/foo
+
+    ; Show server name in title bar
+    (setq frame-title-format '("" "%b @ " server-name))
+        ; https://www.emacswiki.org/emacs/FrameTitle
+
     (require 'workgroups2)
     ; (setq wg-prefix-key '(nil))
 
@@ -651,9 +632,9 @@
        ; "nn"  'wg-save-session      ;;
        "nn"  'wg-save-session      ;;
        "nr"  'wg-rename-workgroup
-       "nm"  'wg-switch-to-workgroup
+       "no"  'wg-switch-to-workgroup
        ; "nk"  'wg-kill-workgroup
-       "no"  'wg-open-session
+       ; "no"  'wg-open-session
        "na"  'wg-switch-to-workgroup-at-index-0
        "ns"  'wg-switch-to-workgroup-at-index-1
        "nd"  'wg-switch-to-workgroup-at-index-2
@@ -661,21 +642,64 @@
        ; "nn"  'wg-reload-session      ;;
      )
 
-    ;; What to do on Emacs exit / workgroups-mode exit?
+    ; ;; What to do on Emacs exit / workgroups-mode exit?
     (setq wg-emacs-exit-save-behavior           'save)      ; Options: 'save 'ask nil
     (setq wg-workgroups-mode-exit-save-behavior 'save)      ; Options: 'save 'ask nil
 
-    (setq wg-session-file "~/.emacs-local/workgroups")
-    ; (wg-find-session-file "~/.emacs-local/workspace_old")
-    (wg-open-session "~/.emacs-local/workgroups")
+    ; ; (wg-find-session-file "~/.emacs-local/workspace_old")
+    ; (wg-open-session "~/.emacs-local/workgroups")
     ; (run-with-timer 1 (* 1 60) 'wg-save-session)
     ; (add-hook 'kill-emacs-hook (lambda () (wg-save-session)))
 
-    (workgroups-mode 1)
 
 
     ; (add-hook 'kill-emacs-hook (lambda () (wg-save-session)))
     ; (run-with-timer 0 (* 1 60) 'wg-save-session)
+
+;; Save last session
+    ; (setq nk-session-dir "~/.emacs-local/sessions/")
+    ; (setq-default desktop+-base-dir nk-session-dir)
+     ; ; (setq desktop-base-file-name "proba_cstm")
+     ; (setq desktop-path (list nk-session-dir))
+     ; (setq desktop-dirname nk-session-dir)
+     ; ; ; (setq desktop-save-mode 1)
+     ; ; (setq desktop-save t)
+     ; ; (desktop-save-mode 1)
+     ; ; ; (desktop-read)
+     ; ; ; (add-hook 'emacs-startup-hook 'desktop-read)
+        ; ; https://www.emacswiki.org/emacs?action=browse;oldid=DeskTop;id=Desktop
+        ; ; http://stackoverflow.com/a/4485083/2450748
+
+    ; ; (setq nk-session-dir "~/.emacs_local/sessions/")
+    ; ; (setq nk-session-name "PRB3")
+    ; ; (setq-default desktop+-base-dir nk_session-dir)
+
+    ; ;; unused - workgroups2 used instead
+    ; (defun nk-create-load-session (session-name session-dir)
+        ; "Load session or create session SESSION-NAME in SESSION-DIR if it doesn't exist."
+            ; " (nk-create-load-session nk-session-dir nk-session-name) "
+                ; " Session directory"
+                ; (setq session-path (concat session-dir session-name))
+                ; (if (file-exists-p session-path);if
+                    ; (progn
+                        ; (message (concat "Session already exists, loading session: " session-path) ) ; then
+                        ; (desktop+-load session-name))
+                  ; (message (concat "Creating new session: " session-name)) ; else
+                  ; (make-directory session-path 'parents)
+                  ; (desktop+-create session-name)))
+
+    ; ;; unused - workgroups2 used instead
+    ; (defun nk-load-session (session-name)
+        ; (nk-create-load-session session-name nk-session-dir))
+
+    ; (add-hook 'kill-emacs-hook (lambda () (desktop+-save)))
+
+    ; (defvar desktop+-base-dir "~/.emacs_sessions/"
+    ; "Base directory for desktop files.")
+
+    ; Must use M-x, with : it wont call desktop+ functions!
+    ; Create new session (desktop+)
+        ; M-x desktop+-create
 
 ;; >>>>>>>>>>>>>>>> Packages >>>>>>>>>>>>>>>>>>
 
