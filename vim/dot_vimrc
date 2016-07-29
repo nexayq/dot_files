@@ -800,6 +800,13 @@ endif
 
         endif
 
+    " Open Quickfix in custom window
+        Plugin 'yssl/QFEnter'
+            " https://github.com/yssl/QFEnter
+
+        " <Enter>         - Open an item under cursor in the previously focused window
+        " <leader><Enter> - Open in vertical split
+
     " conque-shell terminal emulator
         " Plugin 'vim-scripts/Conque-Shell'
 
