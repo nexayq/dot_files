@@ -649,11 +649,15 @@
        "nc"  'wg-create-workgroup
        ; "nn"  'wg-reload-session      ;;
        ; "nn"  'wg-save-session      ;;
-       "ns"  'wg-save-session      ;;
+       "nn"  'wg-save-session      ;;
        "nr"  'wg-rename-workgroup
-       "no"  'wg-switch-to-workgroup
+       "nm"  'wg-switch-to-workgroup
        ; "nk"  'wg-kill-workgroup
-       "nn"  'wg-open-session
+       "no"  'wg-open-session
+       "na"  'wg-switch-to-workgroup-at-index-0
+       "ns"  'wg-switch-to-workgroup-at-index-1
+       "nd"  'wg-switch-to-workgroup-at-index-2
+       "nf"  'wg-switch-to-workgroup-at-index-3
        ; "nn"  'wg-reload-session      ;;
      )
 
