@@ -599,6 +599,7 @@
 
 ;; workgroups2
     ; Setting up Emacs server
+        ; http://stackoverflow.com/a/38655619/2450748 - My sessions
         ; https://www.gnu.org/software/emacs/manual/html_node/emacs/Emacs-Server.html
         ; https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html#emacsclient-Options
 
