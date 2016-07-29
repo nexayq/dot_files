@@ -365,8 +365,18 @@
               ; (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-enter)
               (define-key evil-normal-state-local-map (kbd "t") 'neotree-enter)
               (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
-              (define-key evil-normal-state-local-map (kbd "RET") 'neotree-change-root)))
-        ; https://www.emacswiki.org/emacs/NeoTree
+              (define-key evil-normal-state-local-map (kbd "'") 'neotree-enter)
+              ; (define-key evil-normal-state-local-map (kbd "RET") 'neotree-change-root)
+              (define-key evil-normal-state-local-map (kbd "RET") 'nk-neotree-enter)
+              ))
+        ; ; https://www.emacswiki.org/emacs/NeoTree
+    (defun nk-neotree-enter ()
+      (interactive)
+      (neotree-enter)
+      (neotree-change-root)
+      )
+        ; http://stackoverflow.com/a/27264339/2450748
+        ; https://www.gnu.org/software/emacs/manual/html_node/elisp/Using-Interactive.html
 
     (custom-set-faces
      '(col-highlight ((t (:background "color-233"))))
