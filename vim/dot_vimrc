@@ -53,6 +53,9 @@
         " set number
         " set relativenumber
 
+    " " Remap ; to :
+        " nnoremap ; :
+
 " Basic vim setup - Linux and Win>>>
 
 " TODO
@@ -513,7 +516,7 @@ endif
 
     " Grep
         Plugin 'yegappan/grep'
-        let Grep_Default_Options = '-i -R'
+        let Grep_Default_Options = '-R'
         " or use built in :cw
         " :grep promena *
         " :cw
@@ -781,6 +784,9 @@ endif
             noremap <leader>ps :let g:cellmode_tmux_panenumber='1'<Left>
 
         endif
+
+    " conque-shell terminal emulator
+        " Plugin 'vim-scripts/Conque-Shell'
 
     " vim-ipython
         " Plugin 'ivanov/vim-ipython'
@@ -1704,14 +1710,15 @@ endif
     " /ref/ https://medium.com/hacking-and-gonzo/10-vim-tricks-you-should-know-6393842b3537#.3pxco1r77
     "       http://dougblack.io/words/a-good-vimrc.html
     " /ref/ http://stackoverflow.com/a/2287449/2450748
-    nnoremap <leader>// :bufdo! /\c
-    nnoremap <leader>/d :Grep  *<Left><Left>
+    " nnoremap <leader>// :bufdo! /\c
+    nnoremap <leader>/d :Grep  -i *<Left><Left>
     " nnoremap /w :call NK_SearchWord()
     " nnoremap /w "zyiw:execute "Grep ".@z." *"
     "# Search word under cursor in current directory
-    nnoremap <leader>/g :Grep <C-R><C-W> *
-    nnoremap <leader>// :Grep  %:p --no-filename<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-    nnoremap <leader>/w :Grep <C-R><C-W> %:p --no-filename<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+    nnoremap <leader>/g :Grep -i <C-R><C-W> *
+    nnoremap <leader>/. :Grep -i  %:p --no-filename<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+    " nnoremap <leader>/w :Grep -i <C-R><C-W> %:p --no-filename<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+    nnoremap <leader>// :GrepBuffer -i<Space>
         " /ref/ http://vim.wikia.com/wiki/Word_under_cursor_for_command
 
     function! NK_SearchWord()
@@ -2355,3 +2362,7 @@ endif
 
 " Always diff vertical
     set diffopt+=vertical
+
+" Remap ; to :
+    nnoremap ; :
+    " nnoremap : ;
