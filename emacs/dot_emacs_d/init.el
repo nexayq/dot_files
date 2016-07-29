@@ -370,6 +370,7 @@
               (define-key evil-normal-state-local-map (kbd "RET") 'nk-neotree-enter)
               ))
         ; ; https://www.emacswiki.org/emacs/NeoTree
+
     (defun nk-neotree-enter ()
       (interactive)
       (neotree-enter)
@@ -377,6 +378,11 @@
       )
         ; http://stackoverflow.com/a/27264339/2450748
         ; https://www.gnu.org/software/emacs/manual/html_node/elisp/Using-Interactive.html
+    ; interactive explained
+        ; Without (interactive), it can only be called programmatically,
+        ; not from M-x (or via key-binding).
+            ; http://stackoverflow.com/a/379171/2450748
+            ; http://stackoverflow.com/a/760718/2450748
 
     (custom-set-faces
      '(col-highlight ((t (:background "color-233"))))
@@ -992,3 +998,8 @@
     (require 'speedbar)
     (speedbar-add-supported-extension '(".v" ".sv" ".svh" ))
         ; http://www.veripool.org/issues/1025-Verilog-mode-Integration-with-the-speedbar
+
+;; disable bell and flashing
+    ; (setq visible-bell 1)
+    (setq ring-bell-function 'ignore)
+        ; https://www.emacswiki.org/emacs/AlarmBell
