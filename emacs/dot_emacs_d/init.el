@@ -359,6 +359,23 @@
     ; C-c C-n - Create file or directory
     ; C-c C-d - Delete file or directory
     ; C-c C-r - Rename file or directory
+    (add-hook 'neotree-mode-hook
+            (lambda ()
+              ; (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+              ; (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-enter)
+              (define-key evil-normal-state-local-map (kbd "t") 'neotree-enter)
+              (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+              (define-key evil-normal-state-local-map (kbd "RET") 'neotree-change-root)))
+        ; https://www.emacswiki.org/emacs/NeoTree
+
+    (custom-set-faces
+     '(col-highlight ((t (:background "color-233"))))
+     '(hl-line ((t (:background "color-233"))))
+     '(lazy-highlight ((t (:background "black" :foreground "white" :underline t))))
+     '(neo-dir-link-face ((t (:foreground "cyan"))))
+     '(neo-file-link-face ((t (:foreground "white")))))
+    (custom-set-variables)
+        ; https://github.com/jaypei/emacs-neotree/issues/56
 
 ;; dirtree
     (require 'dirtree)
