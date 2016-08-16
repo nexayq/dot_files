@@ -200,6 +200,43 @@ endif
         " Buffer line extension
         let g:airline#extensions#bufferline#enabled = 0
 
+        " Dont show mode when window is inactive
+        let g:airline_inactive_collapse=0
+
+        " let g:airline_theme = 'dark'
+        " let g:airline_theme = 'sol'
+
+        " Fix horizontal split color
+        let g:airline_theme_patch_func = 'AirlineThemePatch'
+        function! AirlineThemePatch(palette)
+            " if g:airline_theme == 'base16' && g:colors_name == 'base16-eighties'
+            " let better_ui_colors = ['#515151', '#a09f93', 19, 20]
+            " let better_ui_colors = ['#000000', '#239b56', 19, 20]
+            " let better_ui_colors = ['#000000', '#a09f93', 19, 20]
+            if has("gui_running")
+                " for gui only 2 first numbers are important
+                let better_ui_colors = ['#000000', '#f2f3f4', 19, 20]
+                " Choose colors:
+                    " http://htmlcolorcodes.com/
+            else
+                " for terminal only 2 last numbers are important
+                " 16 for black letters, 255 for white background
+                let better_ui_colors = [128, 128, 16, 255]
+                " Choose colors:
+                    " http://stackoverflow.com/a/16748521/2450748
+            endif
+            " let a:palette['normal']['airline_c'] = better_ui_colors
+            " let a:palette['normal']['airline_x'] = better_ui_colors
+            " let a:palette['inactive_modified']['airline_c'] = [ '#a70200', '', 88, '']
+            for section in keys(a:palette['inactive'])
+              if section != 'airline_warning'
+                let a:palette['inactive'][section] = better_ui_colors
+              endif
+            endfor
+            " endif
+        endfunction
+            " https://github.com/nikhgupta/dotfiles/blob/0436567e93651f960d747d0cf18b378aacbf4ce0/vimrc#L448
+
         " Show current working directory on the right side - https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt#L219
         " let g:airline_section_b = '%.40{getcwd()}'
         " let g:airline_section_y = g:airline_section_b
@@ -2396,3 +2433,10 @@ endif
     " set t_vb=
     " set novisualbell
         " http://vim.wikia.com/wiki/Disable_beeping
+
+" Horizontal split color, status line for inactive window
+    " hi StatusLineNC guibg=yellow guifg=green
+    " hi StatusLineNC                ctermfg=2     ctermbg=8     cterm=NONE
+    " exe "hi! StatusLineNC"   .s:fmt_none   .s:fg_red .s:bg_base02 .s:fmt_revbb
+    " exe "hi! StatusLineNC guibg=yellow guifg=green
+
