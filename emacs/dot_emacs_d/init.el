@@ -75,16 +75,6 @@
     ;; C-x C-0 - Reset zoom, reset font size
         ;; http://stackoverflow.com/a/5533251/2450748
 
-;; org-mode
-    ;; Link to file [[~/.tmp.txt]]
-        ; [[~/tmp.txt]]
-
-    ;; Shift-<up/down> - Set priority to [#A], [#B], [#C] or no priority
-
-    ;; C-c C-c - Update [X], [/], [%] percentage TODO and checkboxes
-
-    ;; C-c C-e - Export to some format (html, latex, pdf, ...)
-
 ;; Meta-x
     ;; Instead of "Alt+x" this is on my PC "Esc+x"
 
@@ -146,7 +136,8 @@
       powerline powerline-evil rainbow-delimiters smooth-scrolling
       neotree dirtree evil-leader ace-window window-numbering
       flycheck helm helm-swoop company evil-org popwin
-      zoom-window sr-speedbar desktop+ workgroups2 ))
+      zoom-window sr-speedbar desktop+ workgroups2 drag-stuff
+      evil-numbers ))
 
 ; multiple-cursors
 ; magit - requires git >= 1.9.5 :(, vc as an alternative
@@ -176,16 +167,32 @@
 ;; >>>>>>>>>>>>>>>>>>>> Install packages >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ;; org-mode
+
+    ;; Link to file [[~/.tmp.txt]]
+        ; [[~/tmp.txt]]
+
+    ;; Shift-<up/down> - Set priority to [#A], [#B], [#C] or no priority
+
+    ;; C-c C-c - Update [X], [/], [%] percentage TODO and checkboxes
+
+    ;; C-c C-e - Export to some format (html, latex, pdf, ...)
+
     ; Examples how to write org files:
         ; https://github.com/fniessen/refcard-org-mode
 
     ; Set org-mode options
     ; http://orgmode.org/manual/Export-settings.html
+
         ; SETUPFILE for HTML exporting
             ; #+SETUPFILE: ~/.emacs.d/org-mode/org-html-themes/setup/theme-readtheorg.setup
+
         ; Don't use header numbering 1.1.3. (just use 1.)
             ; #+OPTIONS: H:1
                 ; http://tex.stackexchange.com/a/52617
+
+        ; Expand all at startup
+            ; #+STARTUP: showeverything
+                ; http://orgmode.org/manual/Initial-visibility.html
 
     ; Ignore underscores
         (setq org-export-with-sub-superscripts nil)
@@ -236,7 +243,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
+    (drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
 
 ;; set font DejaVu Sans
 
@@ -245,7 +252,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "DejaVu Sans Mono")))))
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
+ '(col-highlight ((t (:background "color-233"))))
+ '(hl-line ((t (:background "color-233"))))
+ '(lazy-highlight ((t (:background "black" :foreground "white" :underline t))))
+ '(neo-dir-link-face ((t (:foreground "cyan"))))
+ '(neo-file-link-face ((t (:foreground "white")))))
 
 
 ;; Add melpa packages
@@ -267,8 +279,8 @@
 
     ; Fix for org mode in terminal
     (setq evil-want-C-i-jump nil)
-
         ; http://stackoverflow.com/a/22922161/2450748
+
     (require 'evil)
 
     ; remap ; to :
@@ -384,13 +396,8 @@
             ; http://stackoverflow.com/a/379171/2450748
             ; http://stackoverflow.com/a/760718/2450748
 
-    (custom-set-faces
-     '(col-highlight ((t (:background "color-233"))))
-     '(hl-line ((t (:background "color-233"))))
-     '(lazy-highlight ((t (:background "black" :foreground "white" :underline t))))
-     '(neo-dir-link-face ((t (:foreground "cyan"))))
-     '(neo-file-link-face ((t (:foreground "white")))))
-    (custom-set-variables)
+
+
         ; https://github.com/jaypei/emacs-neotree/issues/56
 
 ;; dirtree
@@ -734,6 +741,27 @@
     ; Must use M-x, with : it wont call desktop+ functions!
     ; Create new session (desktop+)
         ; M-x desktop+-create
+
+;; drag-stuff
+    (require 'drag-stuff)
+    (drag-stuff-global-mode 1)
+
+    ; (global-set-key [M-k] 'drag-stuff-up)
+    ; (global-set-key [M-j] 'drag-stuff-down)
+
+    (define-key evil-normal-state-map (kbd "K") nil)
+    (define-key evil-normal-state-map (kbd "J") nil)
+    (define-key evil-normal-state-map (kbd "K") 'drag-stuff-up)
+    (define-key evil-normal-state-map (kbd "J") 'drag-stuff-down)
+
+    (define-key org-mode-map (kbd "K") nil)
+    (define-key org-mode-map (kbd "J") nil)
+
+
+;; evil-numbers
+    (require 'evil-numbers)
+    (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+    (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
 
 ;; >>>>>>>>>>>>>>>> Packages >>>>>>>>>>>>>>>>>>
 
