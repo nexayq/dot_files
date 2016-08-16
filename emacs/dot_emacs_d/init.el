@@ -751,8 +751,12 @@
 
     (define-key evil-normal-state-map (kbd "K") nil)
     (define-key evil-normal-state-map (kbd "J") nil)
+    (define-key evil-visual-state-map (kbd "K") nil)
+    (define-key evil-visual-state-map (kbd "J") nil)
     (define-key evil-normal-state-map (kbd "K") 'drag-stuff-up)
     (define-key evil-normal-state-map (kbd "J") 'drag-stuff-down)
+    (define-key evil-visual-state-map (kbd "K") 'drag-stuff-up)
+    (define-key evil-visual-state-map (kbd "J") 'drag-stuff-down)
 
     (define-key org-mode-map (kbd "K") nil)
     (define-key org-mode-map (kbd "J") nil)
