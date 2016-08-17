@@ -4,6 +4,14 @@
     ; https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org
     ; https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-evil.el
 
+;; Issues
+    ; vertical split under Xfce
+        ; Solution: run "emacs" instead of "emacs-snapshot"
+            ; sudo vim /usr/share/applications/emacs-snapshot.desktop
+            ; Replace "emacs-snapshot" with "emacs"
+        ; emacs-snapshot is development version of emacs so it probably has some bugs
+            ; http://askubuntu.com/a/12216/242730
+
 ;; package.el for emacs 23
     ; http://git.savannah.gnu.org/gitweb/?p=emacs.git;a=blob_plain;hb=ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09;f=lisp/emacs-lisp/package.el
 
