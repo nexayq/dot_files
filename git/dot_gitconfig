@@ -63,7 +63,11 @@
 [format]
     ; pretty = format:%h %Cblue%ad%Creset %ae %Cgreen%s%Creset
     pretty = format:%C(yellow)%h %Cblue%ad %Cgreen%aN%Cred%d %Creset%s
-    ; http://stackoverflow.com/a/9463536/2450748
+        ; http://stackoverflow.com/a/9463536/2450748
+
+[commit]
+    template = ~/nk_custom/git/commit_template.txt
+        ; https://github.com/Matt-Deacalion/arch-dotfiles/blob/master/.gitconfig#L39-L40
 
 [alias]
     ci       = commit -v
