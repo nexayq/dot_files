@@ -2441,7 +2441,7 @@ endif
     " exe "hi! StatusLineNC guibg=yellow guifg=green
 
 " Custom parameters for current PC OS
-    let g:nk_custom_config = $HOME."/vimcustom.vim"
+    let g:nk_custom_config = $HOME."/nk_custom/vim/vimcustom.vim"
 
     if filereadable(g:nk_custom_config)
         exec "source ".g:nk_custom_config
