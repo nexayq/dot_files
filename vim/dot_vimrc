@@ -221,7 +221,8 @@ endif
             else
                 " for terminal only 2 last numbers are important
                 " 16 for black letters, 255 for white background
-                let better_ui_colors = [128, 128, 16, 255]
+                " let better_ui_colors = [128, 128, 16, 255]
+                let better_ui_colors = [0, 0, 16, 255]
                 " Choose colors:
                     " http://stackoverflow.com/a/16748521/2450748
             endif
