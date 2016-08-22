@@ -66,7 +66,11 @@
         ; http://stackoverflow.com/a/9463536/2450748
 
 [commit]
-    ; template = ~/nk_custom/git/commit_template.txt
+    template = ~/nk_custom/git/commit_template.txt
+    ; template = "! if [[ -f ~/nk_custom/git/commit_template.txt ]]; then RET='~/nk_custom/git/commit_template.txt'; else ED='proba'; fi; $RET"
+; [include]
+    ; path = ~/nk_custom/git/gitconfig
+
         ; https://github.com/Matt-Deacalion/arch-dotfiles/blob/master/.gitconfig#L39-L40
 
 [alias]
