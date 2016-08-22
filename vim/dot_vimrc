@@ -2031,7 +2031,7 @@ endif
     nnoremap <leader>[p :call <SID>JumpPrompt()<CR>
 
 " SystemVerilog highlight as verilog
-    autocmd BufNewFile,BufRead *.sv,*.vh,*.svh   set syntax=verilog
+    autocmd BufNewFile,BufRead *.sv,*.vh,*.svh   set ft=verilog
     " /ref/ http://stackoverflow.com/a/11666247/2450748
 
 " Reload file when it changes from externall application
@@ -2482,3 +2482,6 @@ endif
     command! ZoomToggle call s:ZoomToggle()
     nnoremap <silent> <leader>zz :ZoomToggle<CR>
         " http://stackoverflow.com/a/26551079/2450748
+
+" gitconfig syntax
+    autocmd BufNewFile,BufRead gitconfig set ft=gitconfig
