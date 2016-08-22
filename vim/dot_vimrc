@@ -1009,7 +1009,7 @@ endif
     endfunction
 
     " Save session
-    function! NK_SaveSession()
+    function! NK_SaveSession(nk_echo)
         let server      = v:servername
         if has('nvim')
             " neovim at the moment doesn't support clientserver like vim
@@ -1028,13 +1028,15 @@ endif
         if argc() != 0
             execute "argd *"
         endif
-        echo "Session saved to: ".session
+        if a:nk_echo
+            echo "Session saved to: ".session
+        endif
     endfunction
 
     " Save during quit
     function! NK_QuitSaveAll()
         call NK_BookmarkSave()
-        call NK_SaveSession()
+        call NK_SaveSession(1)
     endfunc
 
 
@@ -1076,12 +1078,22 @@ endif
     endfunc
 
     " Load during enter
+    let g:nk_vim_loaded = 0
     function! NK_EnterLoadAll()
         call NK_LoadSession()
         " call NK_BookmarkLoad()
         call NK_SetUndoDir()
         " call NK_SetBackupSwapDirs()
         call NK_DeleteVimfilerBuffers()
+        let g:nk_vim_loaded = 1
+    endfunc
+
+    let g:nk_new_buff = 0
+    function NK_AutoSaveSession()
+        if g:nk_vim_loaded
+            let g:nk_new_buff = 1
+            call NK_SaveSession(0)
+        endif
     endfunc
 
     "  function! NK_EnterSessionLoad()
@@ -1105,6 +1117,7 @@ endif
     "  endfunc
 
     autocmd VimLeave * call NK_QuitSaveAll()
+    autocmd BufAdd * call NK_AutoSaveSession()
     autocmd VimEnter * nested call NK_EnterLoadAll()
 
 " Regex(regex) examples, regular expressions
