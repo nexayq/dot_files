@@ -1118,6 +1118,7 @@ endif
 
     autocmd VimLeave * call NK_QuitSaveAll()
     autocmd BufAdd * call NK_AutoSaveSession()
+    " autocmd BufReadPost * call NK_AutoSaveSession()
     autocmd VimEnter * nested call NK_EnterLoadAll()
 
 " Regex(regex) examples, regular expressions
@@ -2162,7 +2163,7 @@ endif
         " http://usevim.com/2012/07/06/vim101-completion/
 
 " Zoom only one window
-    nnoremap <leader>zz :on<CR>
+    " nnoremap <leader>zz :on<CR>
 
 " Exchange : and ; keys
     " noremap ; :
@@ -2465,3 +2466,19 @@ endif
         " set guifont=Monospace\ 12
         " echo 'Custom settings loaded'
     endif
+
+" Zoom / Unzooom Restore window
+    function! s:ZoomToggle() abort
+        if exists('t:zoomed') && t:zoomed
+            execute t:zoom_winrestcmd
+            let t:zoomed = 0
+        else
+            let t:zoom_winrestcmd = winrestcmd()
+            resize
+            vertical resize
+            let t:zoomed = 1
+        endif
+    endfunction
+    command! ZoomToggle call s:ZoomToggle()
+    nnoremap <silent> <leader>zz :ZoomToggle<CR>
+        " http://stackoverflow.com/a/26551079/2450748
