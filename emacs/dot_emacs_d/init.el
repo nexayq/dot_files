@@ -145,7 +145,7 @@
       neotree dirtree evil-leader ace-window window-numbering
       flycheck helm helm-swoop company evil-org popwin
       zoom-window sr-speedbar desktop+ workgroups2 drag-stuff
-      evil-numbers ))
+      evil-numbers projectile ))
 
 ; multiple-cursors
 ; magit - requires git >= 1.9.5 :(, vc as an alternative
@@ -251,7 +251,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
+    (helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
 
 ;; set font DejaVu Sans
 
@@ -563,33 +563,100 @@
 
 ;; helm
     ;; (require 'helm)
-    (require 'helm-config)
-    (helm-mode 1)
+    ; (require 'helm-config)
+    ; (helm-mode 1)
+
 
     ; configure where helm window is shown
     ; https://www.reddit.com/r/emacs/comments/2z7nbv/lean_helm_window/
-        (setq helm-display-header-line nil) ;; t by default
+        ; (setq helm-display-header-line nil) ;; t by default
 
-        (set-face-attribute 'helm-source-header nil :height 0.1)
+        ; (set-face-attribute 'helm-source-header nil :height 0.1)
 
-        (helm-autoresize-mode 1)
-        (setq helm-autoresize-max-height 30)
-        (setq helm-autoresize-min-height 30)
+        ; (helm-autoresize-mode 1)
+        ; (setq helm-autoresize-max-height 30)
+        ; (setq helm-autoresize-min-height 30)
 
-        (setq helm-split-window-in-side-p t)
-        ; (setq helm-split-window-in-side-p nil)
+        ; (setq helm-split-window-in-side-p t)
+        ; ; (setq helm-split-window-in-side-p nil)
 
-    (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ;; rebind tab to run persistent actio
+    ; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ;; rebind tab to run persistent actio
+
+    ; (defcustom helm-for-files-preferred-list
+      ; '(helm-source-buffers-list
+        ; helm-source-recentf
+        ; helm-source-bookmarks
+        ; helm-source-file-cache
+        ; helm-source-files-in-current-dir
+        ; ; helm-source-locate
+        ; )
+      ; "Your preferred sources to find files."
+      ; :type '(repeat (choice symbol))
+    ; :group 'helm-files)
 
     ; C-l - Go up one level
 
+    ; helm-for-files to search current directory only
+    ; (setq helm-ff-skip-boring-files nil)
+    ; (setq helm-for-files-preferred-list
+        ; '(
+            ; helm-source-files-in-current-dir
+            ; helm-source-recentf
+            ; helm-source-buffers-list
+        ; )
+    ; )
+        ; ; https://github.com/emacs-helm/helm/issues/216
+
+    ; (evil-leader/set-key
+       ; "q"   'helm-M-x            ;; search emacs functions
+       ; "//"  'helm-swoop          ;; search current file
+       ; "b"   'helm-buffers-list   ;; list buffers
+       ; "yy"  'helm-show-kill-ring ;; list last deletitions
+       ; ; "ff"  'helm-cmd-t          ;; open new file
+       ; "fg"  'helm-ls-git-ls      ;; open new file for git project
+       ; ; "ff"  'helm-find-files     ;; open new file
+       ; "ff"  'helm-for-files     ;; open new file
+       ; )
+
+;; ido
+    (require 'ido)
+    (ido-mode t)
+
+    ;; Ignore ** buffers
+    (defvar ido-dont-ignore-buffer-names '("*scratch*" "*eshell*" "*shell*"))
+    (defun ido-ignore-most-star-buffers (name)
+    "This function make ido ignore NAME buffers with star except those of previous variable."
+    (and
+    (string-match-p "^*" name)
+    (not (member name ido-dont-ignore-buffer-names))))
+    (setq ido-ignore-buffers (list "\\` " #'ido-ignore-most-star-buffers))
+        ; https://github.com/emacs-helm/helm/issues/1191
+
     (evil-leader/set-key
-       "q"   'helm-M-x            ;; search emacs functions
-       "//"  'helm-swoop          ;; search current file
-       "b"   'helm-buffers-list   ;; list buffers
-       "yy"  'helm-show-kill-ring ;; list buffers
-       "ff"  'helm-find-files     ;; open new file
+       ; "q"   'helm-M-x            ;; search emacs functions
+       ; "//"  'helm-swoop          ;; search current file
+       "r"   'ido-switch-buffer   ;; list buffers
+       ; "yy"  'helm-show-kill-ring ;; list last deletitions
+       ; ; "ff"  'helm-cmd-t          ;; open new file
+       ; "ff"  'projectile-find-file      ;; open new file for git project
+       "ff"  'projectile-find-file      ;; open new file for git project or ".projectile"
+       "ft"  'ido-find-file      ;; open new file, find using tree
+       ; "ff"  'helm-find-files     ;; open new file
+       ; "ff"  'helm-for-files     ;; open new file
        )
+
+    ;; Search files recursive
+        ;; <leader>ft, M-f (ido-find-file)
+        ;; -> find ".org" files recursive, type:
+            ; "**.org"
+
+        ; https://www.reddit.com/r/emacs/comments/23b2ai/how_do_i_make_ido_or_something_else_recursively/cgy32r7
+
+;; projectile
+    (require 'projectile)
+    ; (setq projectile-indexing-method 'alien)
+    (setq projectile-enable-caching t)
+    (projectile-global-mode)
 
 ;; company
     (require 'company)
@@ -775,7 +842,7 @@
     (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
     (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
 
-;; >>>>>>>>>>>>>>>> Packages >>>>>>>>>>>>>>>>>>
+;; {{{{{{{{{{{{{{{{{{ Packages {{{{{{{{{{{{{{{{{
 
     ;; remap / to /\c - no need, emacs search case insensitive great
     ;; (define-key evil-operator-state-map "w" "iw")
