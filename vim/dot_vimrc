@@ -2485,3 +2485,9 @@ endif
 
 " gitconfig syntax
     autocmd BufNewFile,BufRead gitconfig set ft=gitconfig
+
+" start gvim maximized
+    " set lines=999 columns=999
+
+" delete lines that start with specific string (#3)
+    ":g/^#3/d
