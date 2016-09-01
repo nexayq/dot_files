@@ -453,6 +453,7 @@ endif
         " dd    -> delete file
         " H     -> open shell, exit shell by typing "exit"
 
+
         " links are collapsed when toggled, than use <leader>er (read vimfiller buffer)
 
         let g:vimfiler_as_default_explorer = 1
@@ -1056,6 +1057,12 @@ endif
                 echo 'Session opened: '.session
             endif
         endif
+
+        " Filter specific files, useful for org mode
+        if  server == "TODO"
+            let g:vimfiler_ignore_pattern = ['^\.', '\.html$', '\.pdf', '\.tex']
+        endif
+
     endfunction
         " http://www.ibm.com/developerworks/library/l-vim-script-1/
 
@@ -1121,8 +1128,14 @@ endif
     " autocmd BufReadPost * call NK_AutoSaveSession()
     autocmd VimEnter * nested call NK_EnterLoadAll()
 
+" Copy from command mode
+    " Press "q:" in normal mode
+
 " Regex(regex) examples, regular expressions
     " \v - Turn on magic, dont have to escape special characters for regex * ( [
+
+    " Find lines that dont! contain string (7z), negative match
+        " \v^((.*7z.*)@!.)*$
 
     " Find specific word, not preceded or followed by letters
         " \v<primer>
@@ -1327,40 +1340,37 @@ endif
 
     " Saves the session to session dir. Creates session dir if it doesn't
     " yet exist. Sessions are named after servername paameter
-        function! SaveSession()
+        " function! SaveSession()
+            " " get the server (session) name
+            " let s = v:servername
 
-            " get the server (session) name
-            let s = v:servername
+            " " create session dir if needed
+            " if !isdirectory(g:session_dir)
+                " call mkdir(g:session_dir, "p")
+            " endif
 
-            " create session dir if needed
-            if !isdirectory(g:session_dir)
-                call mkdir(g:session_dir, "p")
-            endif
+            " " let session_nk = ".g:session_dir."/".s.".session.vim"
 
-            " let session_nk = ".g:session_dir."/".s.".session.vim"
+            " " save session using the server name
+            " execute "mksession! ".g:session_dir."/".s.".session.vim"
 
-            " save session using the server name
-            execute "mksession! ".g:session_dir."/".s.".session.vim"
+            " echo 'Session saved!'
+        " endfunc
 
-            echo 'Session saved!'
-        endfunc
+        " function! OpenSession()
+            " " check if file names were passed as arguments
+            " " echo 'abcd'
+            " " if argc() == 0
+                " " echo 'kude'
+                " let sn = v:servername
+                " let file = g:session_dir."/".sn.".session.vim"
 
-        function! OpenSession()
-
-            " check if file names were passed as arguments
-            " echo 'abcd'
-            " if argc() == 0
-                " echo 'kude'
-                let sn = v:servername
-                let file = g:session_dir."/".sn.".session.vim"
-
-                " if session file exists, load it
-                if filereadable(file)
-                    execute "source ".file
-                    echo 'Session opened!'
-                endif
-            "endif
-        endfunc
+                " " if session file exists, load it
+                " if filereadable(file)
+                    " execute "source ".file
+                    " echo 'Session opened!'
+                " endif
+        " endfunc
 
     " Fast save and open session
         " nnoremap <leader>n :call SaveSession()<CR>
