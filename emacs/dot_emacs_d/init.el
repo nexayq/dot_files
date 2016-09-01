@@ -145,7 +145,8 @@
       neotree dirtree evil-leader ace-window window-numbering
       flycheck helm helm-swoop company evil-org popwin
       zoom-window sr-speedbar desktop+ workgroups2 drag-stuff
-      evil-numbers projectile ))
+      evil-numbers projectile ; ido-ubiquitous
+      ))
 
 ; multiple-cursors
 ; magit - requires git >= 1.9.5 :(, vc as an alternative
@@ -388,6 +389,7 @@
               (define-key evil-normal-state-local-map (kbd "'") 'neotree-enter)
               ; (define-key evil-normal-state-local-map (kbd "RET") 'neotree-change-root)
               (define-key evil-normal-state-local-map (kbd "RET") 'nk-neotree-enter)
+              (define-key evil-normal-state-local-map (kbd ".") 'neotree-hidden-file-toggle)
               ))
         ; ; https://www.emacswiki.org/emacs/NeoTree
 
@@ -407,6 +409,14 @@
 
 
         ; https://github.com/jaypei/emacs-neotree/issues/56
+
+    ; filter generated files when in org mode
+    ; (defun nk-org-mode-setup
+        ; (setq neo-hidden-regexp-list
+            ; '("^\\." "\\.html" "\\.pdf" "\\.tex"))
+    ; )
+
+    ; (add-hook 'org-mode-hook 'nk-org-mode-setup)
 
 ;; dirtree
     (require 'dirtree)
@@ -562,8 +572,8 @@
 
 
 ;; helm
-    ;; (require 'helm)
-    ; (require 'helm-config)
+    (require 'helm)
+    (require 'helm-config)
     ; (helm-mode 1)
 
 
@@ -621,6 +631,7 @@
 ;; ido
     (require 'ido)
     (ido-mode t)
+    (ido-everywhere t)
 
     ;; Ignore ** buffers
     (defvar ido-dont-ignore-buffer-names '("*scratch*" "*eshell*" "*shell*"))
@@ -684,8 +695,8 @@
     ; Work nice with helm
         ; https://gist.github.com/syl20bnr/5516054
         (setq display-buffer-function 'popwin:display-buffer)
-        (push '("^\*helm .+\*$" :regexp t) popwin:special-display-config)
-        (push '("^\*helm-.+\*$" :regexp t) popwin:special-display-config)
+        ; (push '("^\*helm .+\*$" :regexp t) popwin:special-display-config)
+        ; (push '("^\*helm-.+\*$" :regexp t) popwin:special-display-config)
         ; (setq helm-split-window-preferred-function 'ignore)
 
 ;; sr-speedbar
@@ -721,17 +732,30 @@
     ; (setq server-name "foo")
 
     ;; run server from command line after server name is specified (also from command line)
+
+    ; filter generated files when in org mode
+    (defun nk-org-mode-setup ()
+        (setq neo-hidden-regexp-list
+            '("^\\." "\\.html" "\\.pdf" "\\.tex"))
+    )
+
     (setq server-socket-dir "~/.emacs-local/server")
 
     (defun nk-server-start (custom-server)
         ; (nk-server-start "abe")
         (setq server-name custom-server)
+
+        (if (string= server-name "todo")
+            (nk-org-mode-setup)
+        )
+
         (server-start) ; run emacs server
         (setq wg-session-file (concat "~/.emacs-local/sessions/" custom-server))
         ; (setq wg-session-file "~/.emacs-local/sessions/proba")
         (workgroups-mode 1)
         (wg-switch-to-workgroup custom-server)
-        )
+
+    )
     ; Run file in specific server (foo)
         ; emacsclient -n callback.sh -s ~/.emacs-local/server/foo
 
@@ -990,6 +1014,9 @@
     ; https://www.emacswiki.org/emacs/VersionControl
     (evil-leader/set-key
        "gd"  'vc-diff          ;; diff current file
+       "gs"  'vc-dir           ;; Show changed files
+            ; "=" - show diff for current file
+            ; "D" - show diff for all files
        "gu"  'vc-revert        ;; undo current file to original (vcs)
        )
 
@@ -1110,3 +1137,11 @@
     ; (setq visible-bell 1)
     (setq ring-bell-function 'ignore)
         ; https://www.emacswiki.org/emacs/AlarmBell
+
+;; edif vertical split for diff
+    (setq ediff-split-window-function 'split-window-horizontally)
+    (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+    (evil-leader/set-key
+       "zd"  'ediff          ;; diff current file
+       )
