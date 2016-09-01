@@ -176,6 +176,56 @@
 ;; >>>>>>>>>>>>>>>>>>>> Install packages >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ;; org-mode
+    (require 'org)
+
+    ; color source code
+    (setq org-src-fontify-natively t)
+    (setq org-src-tab-acts-natively t)
+
+    ; (set-default 'truncate-lines nil)
+    (setq toggle-truncate-lines t)
+
+    ; default settings for org files
+        ; http://orgmode.org/mnual/In_002dbuffer-settings.html
+    ; expand all sub topics at startup
+    (setq org-startup-folded "showeverything")
+
+    ; hide leading stars
+    (setq org-hide-leading-stars 1)
+
+    ; #+STARTUP: indent
+    ; indent topics of next level by 2
+    (setq org-startup-indented 1)
+
+    ; #+OPTIONS H:1
+    ; headings subsections numbering 4.1.1 or just 1
+    (setq org-export-headline-levels 1)
+
+    ; #+OPTIONS: num:nil
+    ; no numbers for topics
+    (setq org-export-with-section-numbers nil)
+
+    ; html themes
+    ; in order to use local html themes you need to copy "styles" directory where your html is generated
+
+    ; for example
+        ; > cd dir_with_org_file
+        ; > ln -s ~/.emacs.d/org-mode/org-html-themes/styles/ styles
+    ; Put this in org file:
+        ; #+SETUPFILE: ~/.emacs.d/org-mode/org-html-themes/setup/theme-readtheorg-local.setup
+
+    (setq org-publish-project-alist
+          '(("html"
+             :base-directory "~/org-export/"
+             :base-extension "org"
+             :publishing-directory "~/org-export/publish"
+             :publishing-function org-publish-org-to-html)
+            ("pdf"
+             :base-directory "~/org-export/"
+             :base-extension "org"
+             :publishing-directory "~/org-export/publish"
+             :publishing-function org-publish-org-to-pdf)
+            ("all" :components ("html" "pdf"))))
 
     ;; Link to file [[~/.tmp.txt]]
         ; [[~/tmp.txt]]
@@ -283,6 +333,7 @@
     ;; u - mark for update
 
 ;; Enable evil mode - evil
+    (require 'evil)
     ;; Use ":" instead of "M-x"
         ;; https://www.reddit.com/r/emacs/comments/41760i/meta_doesnt_work_in_evil_mode_mac_emacs/cz08x9q?st=iqwpzs42&sh=3875bd5e
 
@@ -290,11 +341,15 @@
     (setq evil-want-C-i-jump nil)
         ; http://stackoverflow.com/a/22922161/2450748
 
-    (require 'evil)
 
     ; remap ; to :
     (define-key evil-normal-state-map (kbd ";") 'evil-ex)
         ; https://www.emacswiki.org/emacs/Evil
+
+    ; write buffer with ":W"
+    (evil-ex-define-cmd "W" 'save-buffer)
+    (evil-ex-define-cmd "Q" 'save-buffers-kill-terminal)
+    (evil-ex-define-cmd "Qa" 'save-buffers-kill-terminal)
 
     (evil-mode 1)
 
@@ -695,8 +750,8 @@
     ; Work nice with helm
         ; https://gist.github.com/syl20bnr/5516054
         (setq display-buffer-function 'popwin:display-buffer)
-        ; (push '("^\*helm .+\*$" :regexp t) popwin:special-display-config)
-        ; (push '("^\*helm-.+\*$" :regexp t) popwin:special-display-config)
+        (push '("^\*ido .+\*$" :regexp t) popwin:special-display-config)
+        (push '("^\*ido-.+\*$" :regexp t) popwin:special-display-config)
         ; (setq helm-split-window-preferred-function 'ignore)
 
 ;; sr-speedbar
@@ -736,7 +791,7 @@
     ; filter generated files when in org mode
     (defun nk-org-mode-setup ()
         (setq neo-hidden-regexp-list
-            '("^\\." "\\.html" "\\.pdf" "\\.tex"))
+            '("^\\." "\\.html" "\\.pdf" "\\.tex" "styles"))
     )
 
     (setq server-socket-dir "~/.emacs-local/server")
