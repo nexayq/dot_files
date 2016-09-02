@@ -1,4 +1,5 @@
 ;; Great init.el files
+    ; https://dl.dropboxusercontent.com/u/3968124/sacha-emacs.html
     ; https://github.com/gopar/.emacs.d/blob/master/init.el
     ; https://github.com/aaronbieber/dotfiles/tree/master/configs/emacs.d
     ; https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org
@@ -145,8 +146,10 @@
       neotree dirtree evil-leader ace-window window-numbering
       flycheck helm helm-swoop company evil-org popwin
       zoom-window sr-speedbar desktop+ workgroups2 drag-stuff
-      evil-numbers projectile ; ido-ubiquitous
-      ))
+      evil-numbers projectile ))
+
+; local packages
+; (add-to-list 'load-path "~/.emacs.d/local_packages/org-publish/")
 
 ; multiple-cursors
 ; magit - requires git >= 1.9.5 :(, vc as an alternative
@@ -219,7 +222,7 @@
              :base-directory "~/org-export/"
              :base-extension "org"
              :publishing-directory "~/org-export/publish"
-             :publishing-function org-publish-org-to-html)
+             :publishing-function org-html-publish-to-html)
             ("pdf"
              :base-directory "~/org-export/"
              :base-extension "org"
