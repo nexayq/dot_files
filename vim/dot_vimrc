@@ -184,6 +184,9 @@ endif
     " Avoid a name conflict with L9
     "Plugin 'user/L9', {'name': 'newL9'}
 
+
+" <<<<< Plugins <<<<<
+
     "Airline plugin
         Plugin 'vim-airline/vim-airline'
         " Enable the list of buffers
@@ -846,6 +849,13 @@ endif
 
         " <Enter>         - Open an item under cursor in the previously focused window
         " <leader><Enter> - Open in vertical split
+
+    " org mode
+        Plugin 'jceb/vim-orgmode'
+        " Plugin 'hsitz/VimOrganizer'
+
+
+" >>>>> Plugins >>>>>
 
     " conque-shell terminal emulator
         " Plugin 'vim-scripts/Conque-Shell'
