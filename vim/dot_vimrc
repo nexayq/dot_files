@@ -1060,7 +1060,7 @@ endif
 
         " Filter specific files, useful for org mode
         if  server == "TODO"
-            let g:vimfiler_ignore_pattern = ['^\.', '\.html$', '\.pdf', '\.tex']
+            let g:vimfiler_ignore_pattern = ['^\.', '\.html$', '\.pdf', '\.tex', 'styles']
         endif
 
     endfunction
