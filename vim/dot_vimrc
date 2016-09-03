@@ -224,9 +224,15 @@ endif
             else
                 " for terminal only 2 last numbers are important
                 " 16 for black letters, 255 for white background
-                let better_ui_colors = [128, 128, 16, 255]
+                
                 " For newer vim versions might be problem with 128, use [0, 0, ...] then
                 " let better_ui_colors = [0, 0, 16, 255]
+                if v:version >= 704 && has('patch2143')
+					let better_ui_colors = [0, 0, 16, 255]
+                else
+					let better_ui_colors = [128, 128, 16, 255]
+                endif	
+                
                 " Choose colors:
                     " http://stackoverflow.com/a/16748521/2450748
             endif
