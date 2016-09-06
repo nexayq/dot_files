@@ -448,6 +448,7 @@
               ; (define-key evil-normal-state-local-map (kbd "RET") 'neotree-change-root)
               (define-key evil-normal-state-local-map (kbd "RET") 'nk-neotree-enter)
               (define-key evil-normal-state-local-map (kbd ".") 'neotree-hidden-file-toggle)
+              (define-key evil-normal-state-local-map (kbd "C-l") 'neotree-refresh)
               ))
         ; ; https://www.emacswiki.org/emacs/NeoTree
 
