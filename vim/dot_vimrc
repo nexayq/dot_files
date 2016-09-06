@@ -2517,3 +2517,7 @@ endif
 
 " delete lines that start with specific string (#3)
     ":g/^#3/d
+
+" Load .vimrc when using sudo
+    " > sudo -E vim /etc/some_conf_file
+        " https://coderwall.com/p/xvryda/use-your-own-vimrc-when-using-sudo
