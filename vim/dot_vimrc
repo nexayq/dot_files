@@ -224,15 +224,15 @@ endif
             else
                 " for terminal only 2 last numbers are important
                 " 16 for black letters, 255 for white background
-                
+
                 " For newer vim versions might be problem with 128, use [0, 0, ...] then
                 " let better_ui_colors = [0, 0, 16, 255]
                 if v:version >= 704 && has('patch2143')
-					let better_ui_colors = [0, 0, 16, 255]
+                    let better_ui_colors = [0, 0, 16, 255]
                 else
-					let better_ui_colors = [128, 128, 16, 255]
-                endif	
-                
+                    let better_ui_colors = [128, 128, 16, 255]
+                endif
+
                 " Choose colors:
                     " http://stackoverflow.com/a/16748521/2450748
             endif
@@ -784,6 +784,24 @@ endif
             nnoremap <leader>gs :Gstatus<CR>
             nnoremap <leader>gd :Gdiff<CR>
                 " http://stackoverflow.com/a/28916959/2450748
+            nnoremap <leader>gh :Glog<CR><CR><CR>:vsp<CR> <C-w><C-w>:cnext<CR>:windo diffthis<CR>
+            " noremap [g :cnext<CR><C-w><C-w>:cprev<CR>:windo diffthis<CR>
+            noremap [g :2wincmd w<CR>:cc<CR><C-w><C-w>:cnext<CR>:windo diffthis<CR>
+            " noremap ]g :cprev<CR><C-w><C-w>:cnext<CR>:windo diffthis<CR>
+            noremap ]g :2wincmd w<CR>:cc<CR>:1wincmd w<CR>:cprev<CR><C-w><C-r>:windo diffthis<CR>
+            noremap [G :2wincmd w<CR>:cfirst<CR><C-w><C-w>:cnext<CR>:windo diffthis<CR>
+            noremap ]G :2wincmd w<CR>:clast<CR>:1wincmd w<CR>:cprev<CR><C-w><C-r>:windo diffthis<CR>
+            " :diffthis - do this on two windows to compare only specified windows
+                " http://stackoverflow.com/a/4385554/2450748
+            " Get whole Log for specific branch
+                " :Glog bAtomic2
+
+            nnoremap <leader>co :copen<CR>
+            noremap ]q :cnext<CR>
+            noremap [q :cprev<CR>
+            noremap [Q :cfirst<CR>
+            noremap ]Q :clast<CR>
+            noremap [w :copen<CR>
 
             " ":help fugitive"
 
