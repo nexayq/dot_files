@@ -784,15 +784,91 @@ endif
             nnoremap <leader>gs :Gstatus<CR>
             nnoremap <leader>gd :Gdiff<CR>
                 " http://stackoverflow.com/a/28916959/2450748
-            nnoremap <leader>gh :Glog<CR><CR><CR>:vsp<CR> <C-w><C-w>:cnext<CR>:windo diffthis<CR>:ZoomToggle<CR>
+            " nnoremap <leader>gh :Glog<CR><CR><CR>:vsp<CR> <C-w><C-w>:cnext<CR>:windo diffthis<CR>:let t:nk_git_log = 1<CR>
             " use ZoomToggle when needed - <leader>zz
             " noremap [g :cnext<CR><C-w><C-w>:cprev<CR>:windo diffthis<CR>
-            noremap [g :2wincmd w<CR>:cc<CR><C-w><C-w>:cnext<CR>:windo diffthis<CR>
-            noremap ]g :1wincmd w<CR>:cc<CR>:2wincmd w<CR>:cprev<CR>:windo diffthis<CR>
+            " noremap [g :2wincmd w<CR>:cc<CR><C-w><C-w>:cnext<CR>:windo diffthis<CR>
+            noremap [g :call NK_GitOlderDiff()<CR>
+            " noremap ]g :1wincmd w<CR>:cprev<CR>:2wincmd w<CR>:cprev<CR>:windo diffthis<CR>
+            noremap ]g :call NK_GitNewerDiff()<CR>
             " noremap ]g :cprev<CR><C-w><C-w>:cnext<CR>:windo diffthis<CR>
             " noremap ]g :2wincmd w<CR>:cc<CR>:1wincmd w<CR>:cprev<CR><C-w><C-r>:windo diffthis<CR>
-            noremap [G :2wincmd w<CR>:cfirst<CR><C-w><C-w>:cnext<CR>:windo diffthis<CR>
-            noremap ]G :1wincmd w<CR>:clast<CR>:2wincmd w<CR>:cprev<CR>:windo diffthis<CR>
+            noremap [G :2wincmd w<CR>:cfirst<CR><C-w><C-w>:cnext<CR>:windo diffthis<CR>:let t:nk_git_older = 0<CR>
+            noremap ]G :1wincmd w<CR>:clast<CR>:2wincmd w<CR>:cprev<CR>:windo diffthis<CR>:let t:nk_git_newer = 0<CR>
+
+            function! NK_GitDiff()
+                silent Glog
+                vsp
+                wincmd w
+                cnext
+                windo diffthis
+                let t:nk_git_diff=1
+            endfunction
+
+            function! NK_GitOlderDiff()
+                if exists('t:nk_git_diff') && t:nk_git_diff
+                    if exists('t:nk_git_newer') && t:nk_git_newer
+                        2wincmd w
+                        cnext
+                        wincmd w
+                        cnext
+                        windo diffthis
+                        let t:nk_git_newer = 0
+                        let t:nk_git_older = 1
+                    else
+                        let t:nk_git_older = 1
+                        2wincmd w
+                        cc
+                        wincmd w
+                        try
+                            cnext
+                        catch /^Vim\%((\a\+)\)\=:E553/
+                            echo "NK:First commit!"
+                            2wincmd w
+                            cprev
+                            let t:nk_git_older = 0
+                        endtry
+                        windo diffthis
+                    endif
+                else
+                    let t:nk_git_older = 1
+                    call NK_GitDiff()
+                endif
+            endfunction
+
+            function! NK_GitNewerDiff()
+                if exists('t:nk_git_diff') && t:nk_git_diff
+                    if exists('t:nk_git_older') && t:nk_git_older
+                        1wincmd w
+                        cprev
+                        2wincmd w
+                        cprev
+                        windo diffthis
+                        let t:nk_git_older = 0
+                        let t:nk_git_newer = 1
+                    else
+                        let t:nk_git_newer = 1
+                        1wincmd w
+                        cc
+                        2wincmd w
+                        try
+                            cprev
+                        catch /^Vim\%((\a\+)\)\=:E553/
+                            echo "NK: Latest commit!"
+                            1wincmd w
+                            cnext
+                            2wincmd w
+                            let t:nk_git_newer = 0
+                        endtry
+                        " https://github.com/scrooloose/syntastic/issues/32#issuecomment-40273385
+                        windo diffthis
+                    endif
+                else
+                    call NK_GitDiff()
+                    let t:nk_git_older = 1
+                endif
+            endfunction
+
             " :diffthis - do this on two windows to compare only specified windows
                 " http://stackoverflow.com/a/4385554/2450748
             " Get whole Log for specific branch
@@ -1196,7 +1272,7 @@ endif
     " let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 " Map Enter in normal mode to new line
-    nnoremap <S-CR> o<Esc>
+    " nnoremap <S-CR> o<Esc>
 
 " Delete to the begining of line and go up to the end of previous line
     " d0 - delete to the begining of line
