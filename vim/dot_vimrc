@@ -793,8 +793,28 @@ endif
             noremap ]g :call NK_GitNewerDiff()<CR>
             " noremap ]g :cprev<CR><C-w><C-w>:cnext<CR>:windo diffthis<CR>
             " noremap ]g :2wincmd w<CR>:cc<CR>:1wincmd w<CR>:cprev<CR><C-w><C-r>:windo diffthis<CR>
-            noremap [G :2wincmd w<CR>:cfirst<CR><C-w><C-w>:cnext<CR>:windo diffthis<CR>:let t:nk_git_older = 0<CR>
-            noremap ]G :1wincmd w<CR>:clast<CR>:2wincmd w<CR>:cprev<CR>:windo diffthis<CR>:let t:nk_git_newer = 0<CR>
+            " noremap [G :2wincmd w<CR>:cfirst<CR><C-w><C-w>:cnext<CR>:windo diffthis<CR>:let t:nk_git_older = 0<CR>
+            " noremap ]G :1wincmd w<CR>:clast<CR>:2wincmd w<CR>:cprev<CR>:windo diffthis<CR>:let t:nk_git_newer = 0<CR>
+            noremap [G :call NK_GitDiffLast()<CR>
+            noremap ]G :call NK_GitDiffFirst()<CR>
+
+            function! NK_GitDiffLast()
+                2wincmd w
+                cfirst
+                wincmd w
+                cnext
+                windo diffthis
+                let t:nk_git_older = 0
+            endfunction
+
+            function! NK_GitDiffFirst()
+                1wincmd w
+                clast
+                2wincmd w
+                cprev
+                windo diffthis
+                let t:nk_git_newer = 0
+            endfunction
 
             function! NK_GitDiff()
                 silent Glog
