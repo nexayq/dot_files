@@ -796,7 +796,7 @@ endif
             " Get whole Log for specific branch
                 " :Glog bAtomic2
 
-            nnoremap <leader>co :copen<CR>
+            " nnoremap <leader>co :copen<CR>
             noremap ]q :cnext<CR>
             noremap [q :cprev<CR>
             noremap [Q :cfirst<CR>
@@ -2149,6 +2149,7 @@ endif
         " :windo setlocal wrap<
     nnoremap <leader>zd :windo diffthis<CR>
     nnoremap <leader>zD :windo diffoff<CR>
+    nnoremap <leader>\ :diffthis<CR>
     " /ref/ http://vimcasts.org/episodes/comparing-buffers-with-vimdiff/
     " Show only differences
         " set diffopt=filler,context:0
