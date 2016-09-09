@@ -773,7 +773,7 @@ endif
 
     " Async make, dispatch
         Plugin 'tpope/vim-dispatch'
-        noremap <leader>ll :Dispatch make all<CR>
+        " noremap <leader>ll :Dispatch make all<CR>
         " :Dispatch! make all
             " https://vimeo.com/63116209
             " http://tilvim.com/2014/03/13/dispatch.html
@@ -932,7 +932,7 @@ endif
         let VimuxUseNearest = 1
 
         noremap <leader>lc :VimuxPromptCommand<CR>
-        noremap <leader>lr :VimuxRunLastCommand<CR>
+        noremap <leader>ll :VimuxRunLastCommand<CR>
         noremap <leader>ls :VimuxInterruptRunner<CR>
         noremap <leader>lz :VimuxZoomRunner<CR>
         noremap <leader>le :VimuxInspectRunner<CR>
