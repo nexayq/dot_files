@@ -1,0 +1,76 @@
+
+# Keyboard shortcuts
+    xfce4-popup-whiskermenu  "Super L"
+    amixer set Master 5%-    "XF86AudioLowerVolume"
+    amixer set Master 5%+    "XF86AudioRaiseVolume"
+    amixer set Master toggle "XF86AudioMute"
+
+# Install Ubuntu fonts
+    > sudo pacman -S ttf-ubuntu-font-family
+
+# Set fonts and Anti-aliasing
+    Default Font:
+        Ubuntu : Regular : 11
+
+    Appearance -> Fonts -> Rendering
+        check "Enable anti-aliasing"
+        Hinting         : "Slight"
+        Sub-pixel order : "None"
+
+# Window Manager font (up in title bar)
+    Window Manager -> Title font: Ubuntu 11
+
+# Mozilla Fonts
+    Preferences -> Content
+        Default font : Ubuntu
+        Size         : 16
+
+# Terminal font (xfce4-terminal)
+    Edit -> Preferences -> Appearance
+        Font -> Monospace:Regular:12
+
+# Icon set, icon themes
+    git clone https://github.com/manjaro/menda-icon-themes
+    > sudo cp menda-icon-themes/Menda-Circle/ /usr/share/icons -r
+    > sudo gtk-update-icon-cache /usr/share/icons/Menda-Circle/
+
+# Appearance - theme and icon theme
+    Appearance ->
+        Style -> Adwaita
+        Icons -> Menda-Circle
+
+# Window manager borders - Manjaro Dark
+    > git clone https://github.com/manjaro/artwork-menda
+    > sudo cp -r artwork-menda/Menda-Dark/ /usr/share/themes/
+    Window Manager -> Style : "Menda"
+
+# Show shadows under pop-up windows
+    Window Manager Tweaks -> Compositor ->
+        "Show shadows under popup windows"
+
+# Install cairo-dock and plugins
+    > sudo pacman -S cairo-dock
+    > sudo pacman -S cairo-dock-plug-ins
+
+    # Enable display compositing
+        Window Manager Tweaks -> Compositor ->
+            "Enable display compositing"
+
+    # Configure cairo-dock
+        Behaviour ->
+            Position on the screen:
+                "Top"
+            Visibility:
+                "Keep the dock hidden"
+            Taskbar:
+                 "Separated"
+                 "Before the launchers"
+
+        Shortkeys
+            Control from keyboard: ` (grave)
+
+# Install screensaver
+    > sudo pacman -S xscreensaver
+
+# Orage time format
+    %d %B %X
