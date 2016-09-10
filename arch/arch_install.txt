@@ -297,6 +297,12 @@
         > downgrade networkmanager
             # choose version "1.0.10-1"
 
+# Mask/disable unused swap partitions so other OSes can hibernate correctly
+    > systemctl mask dev-sda1.swap
+    > sudo vim /etc/fstab
+        # Delete unused swap partitions
+
+
 # Install "yaourt", add yaourt repositories
     # Add yaourt repositories
         > sudo vim /etc/pacman.conf
