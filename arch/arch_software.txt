@@ -8,6 +8,12 @@ sudo pacman -S git
 sudo pacman -S tmux
 sudo pacman -S htop
 
+### HP printer ###
+sudo pacman -S hplip
+sudo pacman -S python-pyqt5
+# connect printer and then run
+# > hp-setup
+
 #####
 # sudo pacman -S ttf-ubuntu-font-family
 sudo pacman -S bash-completion
