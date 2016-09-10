@@ -2,8 +2,12 @@
 # Keyboard shortcuts
     xfce4-popup-whiskermenu  "Super L"
     amixer set Master 5%-    "XF86AudioLowerVolume"
+    amixer set Master 5%-    "Ctrl+Alt+["
     amixer set Master 5%+    "XF86AudioRaiseVolume"
+    amixer set Master 5%+    "Ctrl+Alt+]"
     amixer set Master toggle "XF86AudioMute"
+    xbacklight -dec 10       "Ctrl+Alt+;"
+    xbacklight -inc 10       "Ctrl+Alt+'"
 
 # Install Ubuntu fonts
     > sudo pacman -S ttf-ubuntu-font-family
