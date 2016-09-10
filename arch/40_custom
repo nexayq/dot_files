@@ -1,0 +1,233 @@
+#!/bin/sh
+exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+
+# CentOS 7
+menuentry 'NK_CentOS Linux 7 (Core), with Linux 3.10.0-229.el7.x86_64' --class rhel fedora --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-simple-centos_6' {
+    load_video
+    set gfxpayload=keep
+    insmod gzio
+    insmod part_gpt
+    insmod ext2
+    set root='hd0,gpt15'
+    if [ x$feature_platform_search_hint = xy ]; then
+    search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt15 --hint-efi=hd0,gpt15 --hint-baremetal=ahci0,gpt15 --hint='hd0,gpt15'  6e206fa6-fe8c-41c7-9805-606f1095f717
+    else
+    search --no-floppy --fs-uuid --set=root 6e206fa6-fe8c-41c7-9805-606f1095f717
+    fi
+    linux16 /boot/vmlinuz-3.10.0-229.el7.x86_64 root=UUID=6e206fa6-fe8c-41c7-9805-606f1095f717 ro crashkernel=auto nomodeset rhgb quiet
+    initrd16 /boot/initramfs-3.10.0-229.el7.x86_64.img
+}
+
+# Manjaro Linux
+menuentry 'NK_Manjaro Linux' --class manjaro --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-dd7c59ad-6b3d-4282-b520-a78def0025ff' {
+	savedefault
+	load_video
+	set gfxpayload=keep
+	insmod gzio
+	insmod part_gpt
+	insmod ext2
+	set root='hd0,gpt11'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt11 --hint-efi=hd0,gpt11 --hint-baremetal=ahci0,gpt11  dd7c59ad-6b3d-4282-b520-a78def0025ff
+	else
+	  search --no-floppy --fs-uuid --set=root dd7c59ad-6b3d-4282-b520-a78def0025ff
+	fi
+	echo	'Loading Linux 4.6.2-1-MANJARO x64 ...'
+	linux	/boot/vmlinuz-4.6-x86_64 root=UUID=dd7c59ad-6b3d-4282-b520-a78def0025ff rw  resume=UUID=b23d115a-d81d-40b6-8545-143982cce47b quiet splash
+	echo	'Loading initial ramdisk ...'
+	initrd	/boot/intel-ucode.img /boot/initramfs-4.6-x86_64.img
+}
+
+# Manjaro Linux 3.18
+menuentry 'NK_3.18_Manjaro Linux' --class manjaro --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-manjaro_3.18' {
+	savedefault
+	load_video
+	set gfxpayload=keep
+	insmod gzio
+	insmod part_gpt
+	insmod ext2
+	set root='hd0,gpt11'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt11 --hint-efi=hd0,gpt11 --hint-baremetal=ahci0,gpt11  dd7c59ad-6b3d-4282-b520-a78def0025ff
+	else
+	  search --no-floppy --fs-uuid --set=root dd7c59ad-6b3d-4282-b520-a78def0025ff
+	fi
+	echo	'Loading Linux 3.18-MANJARO x64 ...'
+	linux	/boot/vmlinuz-3.18-x86_64  root=UUID=dd7c59ad-6b3d-4282-b520-a78def0025ff rw  resume=UUID=b23d115a-d81d-40b6-8545-143982cce47b quiet splash
+	echo	'Loading initial ramdisk ...'
+	initrd	/boot/intel-ucode.img /boot/initramfs-3.18-x86_64.img
+}
+
+# Manjaro Linux 4.1
+menuentry 'NK_4.1_Manjaro Linux' --class manjaro --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-dd7c59ad-6b3d-4282-b520-a78def0025ff' {
+	savedefault
+	load_video
+	set gfxpayload=keep
+	insmod gzio
+	insmod part_gpt
+	insmod ext2
+	set root='hd0,gpt11'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt11 --hint-efi=hd0,gpt11 --hint-baremetal=ahci0,gpt11  dd7c59ad-6b3d-4282-b520-a78def0025ff
+	else
+	  search --no-floppy --fs-uuid --set=root dd7c59ad-6b3d-4282-b520-a78def0025ff
+	fi
+	echo	'Loading Linux 4.1-MANJARO x64 ...'
+	linux	/boot/vmlinuz-4.1-x86_64  root=UUID=dd7c59ad-6b3d-4282-b520-a78def0025ff rw  resume=UUID=b23d115a-d81d-40b6-8545-143982cce47b quiet splash
+	echo	'Loading initial ramdisk ...'
+	initrd	/boot/intel-ucode.img /boot/initramfs-4.1-x86_64.img
+}
+
+# Manjaro Linux 4.4
+menuentry 'NK_4.4_Manjaro Linux' --class manjaro --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-manjaro_4.4' {
+	savedefault
+	load_video
+	set gfxpayload=keep
+	insmod gzio
+	insmod part_gpt
+	insmod ext2
+	set root='hd0,gpt11'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt11 --hint-efi=hd0,gpt11 --hint-baremetal=ahci0,gpt11  dd7c59ad-6b3d-4282-b520-a78def0025ff
+	else
+	  search --no-floppy --fs-uuid --set=root dd7c59ad-6b3d-4282-b520-a78def0025ff
+	fi
+	echo	'Loading Linux 4.4-MANJARO x64 ...'
+	linux	/boot/vmlinuz-4.4-x86_64  root=UUID=dd7c59ad-6b3d-4282-b520-a78def0025ff rw  resume=UUID=b23d115a-d81d-40b6-8545-143982cce47b quiet splash
+	echo	'Loading initial ramdisk ...'
+	initrd	/boot/intel-ucode.img /boot/initramfs-4.4-x86_64.img
+}
+
+# Manjaro Linux 4.5 - deleted!
+# menuentry 'NK_4.5_Manjaro Linux' --class manjaro --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-manjaro_4.5' {
+	# savedefault
+	# load_video
+	# set gfxpayload=keep
+	# insmod gzio
+	# insmod part_gpt
+	# insmod ext2
+	# set root='hd0,gpt11'
+	# if [ x$feature_platform_search_hint = xy ]; then
+	  # search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt11 --hint-efi=hd0,gpt11 --hint-baremetal=ahci0,gpt11  dd7c59ad-6b3d-4282-b520-a78def0025ff
+	# else
+	  # search --no-floppy --fs-uuid --set=root dd7c59ad-6b3d-4282-b520-a78def0025ff
+	# fi
+	# echo	'Loading Linux 4.5-MANJARO x64 ...'
+	# linux	/boot/vmlinuz-4.5-x86_64  root=UUID=dd7c59ad-6b3d-4282-b520-a78def0025ff rw  resume=UUID=b23d115a-d81d-40b6-8545-143982cce47b quiet splash
+	# echo	'Loading initial ramdisk ...'
+	# initrd	/boot/intel-ucode.img /boot/initramfs-4.5-x86_64.img
+# }
+
+# Manjaro Linux 4.6 Tux_on_Ice
+menuentry 'NK_4.6_Tux-on-Ice_Manjaro Linux' --class manjaro --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-manjaro_4.6_tux-on-ice' {
+	savedefault
+	load_video
+	set gfxpayload=keep
+	insmod gzio
+	insmod part_gpt
+	insmod ext2
+	set root='hd0,gpt11'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt11 --hint-efi=hd0,gpt11 --hint-baremetal=ahci0,gpt11  dd7c59ad-6b3d-4282-b520-a78def0025ff
+	else
+	  search --no-floppy --fs-uuid --set=root dd7c59ad-6b3d-4282-b520-a78def0025ff
+	fi
+	echo	'Loading Linux 4.6_Tux-on-Ice_MANJARO x64 ...'
+	linux	/boot/vmlinuz-linux-ice  root=UUID=dd7c59ad-6b3d-4282-b520-a78def0025ff rw  resume=UUID=b23d115a-d81d-40b6-8545-143982cce47b splash
+	echo	'Loading initial ramdisk ...'
+	initrd	/boot/intel-ucode.img /boot/initramfs-linux-ice.img
+}
+
+# Manjaro Linux 4.7
+# menuentry 'NK_4.7_Manjaro Linux' --class manjaro --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-manjaro_4.7' {
+	# savedefault
+	# load_video
+	# set gfxpayload=keep
+	# insmod gzio
+	# insmod part_gpt
+	# insmod ext2
+	# set root='hd0,gpt11'
+	# if [ x$feature_platform_search_hint = xy ]; then
+	  # search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt11 --hint-efi=hd0,gpt11 --hint-baremetal=ahci0,gpt11  dd7c59ad-6b3d-4282-b520-a78def0025ff
+	# else
+	  # search --no-floppy --fs-uuid --set=root dd7c59ad-6b3d-4282-b520-a78def0025ff
+	# fi
+	# echo	'Loading Linux 4.7-MANJARO x64 ...'
+	# linux	/boot/vmlinuz-4.7-x86_64  root=UUID=dd7c59ad-6b3d-4282-b520-a78def0025ff rw  resume=UUID=b23d115a-d81d-40b6-8545-143982cce47b splash
+	# echo	'Loading initial ramdisk ...'
+	# initrd	/boot/intel-ucode.img /boot/initramfs-4.7-x86_64.img
+# }
+
+# Manjaro Linux 4.7-acpi
+menuentry 'NK_4.7_Manjaro Linux-acpi' --class manjaro --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-manjaro_4.7-acpi' {
+    savedefault
+    load_video
+    set gfxpayload=keep
+    insmod gzio
+    insmod part_gpt
+    insmod ext2
+    set root='hd0,gpt11'
+    if [ x$feature_platform_search_hint = xy ]; then
+      search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt11 --hint-efi=hd0,gpt11 --hint-baremetal=ahci0,gpt11  dd7c59ad-6b3d-4282-b520-a78def0025ff
+    else
+      search --no-floppy --fs-uuid --set=root dd7c59ad-6b3d-4282-b520-a78def0025ff
+    fi
+    echo	'Loading Linux 4.7-MANJARO x64 ...'
+    linux	/boot/vmlinuz-4.7-x86_64  root=UUID=dd7c59ad-6b3d-4282-b520-a78def0025ff rw  resume=UUID=b23d115a-d81d-40b6-8545-143982cce47b splash acpi_osi=Linux acpi_backlight=vendor
+    echo	'Loading initial ramdisk ...'
+    initrd	/boot/intel-ucode.img /boot/initramfs-4.7-x86_64.img
+}
+
+# Linux Mint 18
+menuentry 'NK_Linux Mint 18 Cinnamon 64-bit' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-linux_mint_18_4.5' {
+	recordfail
+	savedefault
+	load_video
+	gfxmode $linux_gfx_mode
+	insmod gzio
+	if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi
+	insmod part_gpt
+	insmod ext2
+	set root='hd0,gpt21'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt21 --hint-efi=hd0,gpt21 --hint-baremetal=ahci0,gpt21  279f8969-5b1d-4314-b37c-6a8da7162f52
+	else
+	  search --no-floppy --fs-uuid --set=root 279f8969-5b1d-4314-b37c-6a8da7162f52
+	fi
+	# linux	/vmlinuz-4.5.2-040502-generic root=UUID=9bc3be8e-6371-4771-986f-453662e1e0b4 ro resume=UUID=b23d115a-d81d-40b6-8545-143982cce47b quiet splash $vt_handoff
+	linux	/vmlinuz-4.5.2-040502-generic root=UUID=9bc3be8e-6371-4771-986f-453662e1e0b4 ro  quiet splash $vt_handoff
+	initrd	/initrd.img-4.5.2-040502-generic
+}
+
+# Arch
+# menuentry 'NK_Arch (on /dev/sda4)' --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-nk-arch-1' {
+	# savedefault
+	# insmod part_gpt
+	# insmod ext2
+	# set root='hd0,gpt4'
+	# if [ x$feature_platform_search_hint = xy ]; then
+	  # search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt4 --hint-efi=hd0,gpt4 --hint-baremetal=ahci0,gpt4  dd28f29b-7704-4a5f-adff-a37ef17c3f62
+	# else
+	  # search --no-floppy --fs-uuid --set=root dd28f29b-7704-4a5f-adff-a37ef17c3f62
+	# fi
+	# linux /boot/vmlinuz-linux root=UUID=dd28f29b-7704-4a5f-adff-a37ef17c3f62 rw quiet resume=/dev/sda9
+	# initrd /boot/initramfs-linux.img
+# }
+
+
+menuentry 'NK_Arch-acpi (on /dev/sda4)' --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-nk-arch-acpi' {
+	savedefault
+	insmod part_gpt
+	insmod ext2
+	set root='hd0,gpt4'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt4 --hint-efi=hd0,gpt4 --hint-baremetal=ahci0,gpt4  dd28f29b-7704-4a5f-adff-a37ef17c3f62
+	else
+	  search --no-floppy --fs-uuid --set=root dd28f29b-7704-4a5f-adff-a37ef17c3f62
+	fi
+	linux /boot/vmlinuz-linux root=UUID=dd28f29b-7704-4a5f-adff-a37ef17c3f62 rw quiet resume=/dev/sda9 acpi_osi=Linux acpi_backlight=vendor
+	initrd /boot/initramfs-linux.img
+}
