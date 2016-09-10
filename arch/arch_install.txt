@@ -1,0 +1,321 @@
+
+# Tutorials
+    # Antoun Sawires videos
+        https://www.youtube.com/watch?v=E1k_H8n-ALo
+        https://www.youtube.com/watch?v=XxEczHwHqgs
+        https://www.youtube.com/watch?v=Si47Ces_cTk
+
+    # Lifehacker guide
+        http://lifehacker.com/5680453/build-a-killer-customized-arch-linux-installation-and-learn-all-about-linux-in-the-process
+
+    # Linux Scoop video
+        https://www.youtube.com/watch?v=3TB6KYsUyj4
+
+    # Arch Wiki
+        https://wiki.archlinux.org/index.php/installation_guide
+
+# WiFi connection - Do this only if you don't have ethernet cable connected
+# Connect to available WiFi network
+    > wifi-menu
+
+# Check your internet connection
+    > ping 8.8.8.8
+
+# Create Disk partitions
+    # Check partitions
+        > lsblk
+            - Flash drive was on "/dev/sda" and hdd is on "/dev/sdb", so we will be using "/dev/sdb" for installation
+
+    # Create new partitions using cfdisk tool
+        > cfdisk /dev/sdb
+
+            New: 40G  /      (sdb4)
+            New: 30G  /home  (sdb8)
+            New: 8.3G [SWAP] (sdb9)
+
+    # Write new partition table
+        [Write]
+
+    # Check if partitions are ok
+        > lsblk /dev/sdb
+            - "/"      on "dev/sdb4"
+            - "/home"  on "dev/sdb8"
+            - "[SWAP]" on "dev/sdb9"
+
+    # Create ext4 and swap partitions
+        > mkfs.ext4 /dev/sdb4
+        > mkfs.ext4 /dev/sdb8
+        > mkswap    /dev/sdb9
+
+# Mount disk partitions to "/mnt"
+    > mount /dev/sdb4 /mnt
+        # mkdir for home partition mount
+    > mkdir -p /mnt/home
+    > ls -R /mnt
+    > mount /dev/sdb8 /mnt/home
+        # turn on swap
+    > swapon /dev/sdb9
+        # check mounts
+    > lsblk /dev/sdb
+
+# Install base system
+    # install base packages into mounted root partition
+        > pacstrap -i /mnt base base-devel
+
+# Generate fstab - what partitions to load during boot
+    > genfstab -U -p /mnt >> /mnt/etc/fstab
+        # check if file "fstab" is generated properly
+    $ vim /mnt/etc/fstab
+
+# Change root (chroot) to your new system and specify "bash" as your shell
+    > arch-chroot /mnt /bin/bash
+    # Prompt will add square brackets around PS1
+    [root@archiso /]
+    # Tip: "vim" is not installed in base system so from now on you will have to use "vi" instead
+
+# Specify date formats, timezone, ...
+    # Set en_US for your formats
+        > vi /etc/locale.gen
+            - find and uncomment line:
+            en_US.UTF-8 UTF8
+    # Generate local configs
+        > locale-gen
+        > echo LANG=en_US.UTF-8 > /etc/locale.conf
+
+    # Set timezone and clock
+        # Check available timezones
+            $ ls /usr/share/zoneinfo
+            $ ls /usr/share/zoneinfo/Europe
+
+        # Set timezone to Europe/Belgrade
+            > ln -s /usr/share/zoneinfo/Europe/Belgrade /etc/localtime
+
+        # Synchronize hardware RTC (Real-Time Clock)
+            > hwclock --systohc --utc
+
+# Set hostname for your machine
+    > echo necony > /etc/hostname
+        # check hostname
+    $ vi /etc/hostname
+
+    # change "/etc/hosts" file
+    > vi /etc/hosts
+        #<ip-address>   <hostname.domain.org>   <hostname>
+        127.0.0.1       localhost.localdomain   necony
+        ::1             localhost.localdomain   necony
+
+# Setup ethernet - do this only if you are using ethernet and not wifi!
+    # Check available internet devices
+        $ ip link
+
+    # Run ethernet service whenever system starts
+        $ systemctl enable dhcpcd@enp8s0.service
+
+# Setup WiFi
+    # Install programs to setup wireless connection
+        > pacman -S wireless_tools # basic wireless tool
+        > pacman -S wpa_supplicant # basic wireless tool
+        > pacman -S wpa_actiond    # autoconnect to wifi
+        > pacman -S dialog         # for "wifi-menu" app
+        > pacman -S iw
+        $ pacman -S wpa_supplicant_gui
+
+    # Enter your credentials for wifi network - after reboot wifi will be connected to this WiFi network
+        > wifi-menu
+
+    # Run WiFi service whenever system starts
+        # > systemctl enable net-auto-wireless.service
+        > systemctl enable netctl-auto@wlp7s0.service
+
+# Setup pacman repositories
+    # Enable "multilib" repositories
+        > vi /etc/pacman.conf
+            Uncomment:
+                [multilib]
+                Include = /etc/pacman.d/mirrorlist
+
+    # Update/refresh pacman repository list
+        > pacman -Sy
+
+# User accounts
+    # Set root password
+        > passwd
+
+    # Create normal user account
+        > useradd -m -g users -G wheel,storage,power -s /bin/bash necony
+
+            # https://wiki.archlinux.org/index.php/users_and_groups
+            # "wheel" group
+                Administration group, commonly used to give access to the "sudo" and "su" utilities.
+                It can also be used to gain full read access to journal files
+
+            # "storage" group
+                Access to removable drives such as USB hard drives, flash/jump drives, MP3 players;
+                enables the user to mount storage devices.
+
+            # "power" group
+                Currently unused
+
+    # Set password for new user
+        > passwd necony
+
+    # Install "sudo" program
+        > pacman -S sudo
+
+    # Add "wheel" group to sudoers list
+        > export EDITOR=vi
+        > visudo
+            Uncomment wheel group:
+                %wheel ALL=(ALL) ALL
+
+        # Check file
+            > vi /etc/sudoers
+
+# Install bootloader and GRUB
+    # Install boot and GRUB programs
+        > pacman -S grub-bios
+        > pacman -S os-prober
+        > pacman -S efibootmgr
+
+    # Make grub config
+        > grub-mkconfig -o /boot/grub/grub.cfg
+
+    # Install grub to your system
+        > grub-install --recheck /dev/sdb
+            # default target is "i386-pc"
+            # or
+        > grub-install --target=i386-pc --recheck /dev/sdb
+
+    # Reboot your computer and try to login
+        > exit
+        > umount -R /mnt
+        > poweroff
+        - Remove USB/CD ISO and then power on the computer
+
+    # Login to your normal user account
+        user: necony
+        pass: ******
+
+# Install X-Windowing system and graphics driver
+    # Install xorg
+        > sudo pacman -S xorg
+            "Enter" to select all packages,
+            "Enter" to select default graphics libs - "1) mesa-libgl"
+
+        > sudo pacman -S xorg-server
+        > sudo pacman -S xorg-server-utils
+        > sudo pacman -S xorg-xinit
+        > sudo pacman -S xorg-twm
+        > sudo pacman -S xterm
+
+# Install touchpad drivers
+    > sudo pacman -S xf86-input-synaptics
+
+# Install sound
+    > sudo pacman -S pulseaudio
+    > sudo pacman -S alsa-utils
+    > sudo pacman -S pulseaudio-alsa
+
+# Install XFCE desktop environment
+    # Install xfce packages
+        > sudo pacman -S xfce4
+        > sudo pacman -S xfce4-goodies
+
+    # Set XFCE as default desktop environment
+        > vi ~/.xinitrc
+            # <<< ~/.xinitrc
+                exec startxfce4
+            # >>> ~/.xinitrc
+
+    # Install some light display manager
+        > sudo pacman -S lxdm
+
+    # Enable "lxdm" service
+        > sudo systemctl enable lxdm.service -f
+            # https://wiki.manjaro.org/index.php/Install_Display_Managers
+
+    # Try to run desktop environment
+        > startx
+
+    # Reboot your system
+        > reboot
+
+# Install gvim
+    > sudo pacman -S gvim
+
+# Setup synaptics drivers - WATCHOUT - If you mess up this config Xorg wont start after reboot !!!
+    1 finger  click - left click   (LMB)
+    2 fingers click - right click  (RMB)
+    3 fingers click - middle click (MMB)
+
+    # WATCHOUT - If you mess up this config Xorg wont start after reboot !!!
+    > sudo vim /usr/share/X11/xorg.conf.d/70-synaptics.conf
+            # <<< /usr/share/X11/xorg.conf.d/70-synaptics.conf
+                ...
+                # NK options
+                Section "InputClass"
+                    Identifier "NK - Enable touchpad clicks"
+                    Option "TapButton1" "1"
+                    Option "TapButton2" "3"
+                    Option "TapButton3" "2"
+                EndSection
+            # >>> /usr/share/X11/xorg.conf.d/70-synaptics.conf
+
+    # Reboot computer to check if config file is OK - will Xorg server start
+    # and test mouse button clicks
+        > reboot
+
+# Install "downgrade" package, needed for "network-manager-applet"
+    > sudo pacman -S downgrade
+
+# Choose any WiFi network from system tray - install "NetworkManager"
+    # http://unix.stackexchange.com/a/292196
+
+    # Install NetworkManager packages
+        > sudo pacman -S networkmanager
+            # Install gnome-keyring for passwords
+        > sudo pacman -S gnome-keyring
+        > sudo pacman -S network-manager-applet
+
+    # Disable autoconnection service, because it clashes with "NetworkManager.service"
+        > sudo systemctl disable netctl-auto@wlp7s0.service
+
+    # Enable "NetworkManager" and "wpa_supplicant" services
+        > sudo systemctl enable NetworkManager.service
+        > sudo systemctl enable wpa_supplicant.service
+
+    # Add your user to "network" group
+        > sudo gpasswd -a necony network
+            # Check groups
+        $ vim /etc/group
+
+    # Downgrade network-manager-applet, I have issues with newer versions
+    # Issue: After return from suspend I can't choose WiFi network from applet
+        # Downgrade to version "1.0.10-1"
+        > downgrade network-manager-applet
+            # choose version "1.0.10-1"
+        > downgrade networkmanager
+            # choose version "1.0.10-1"
+
+# Install "yaourt", add yaourt repositories
+    # Add yaourt repositories
+        > sudo vim /etc/pacman.conf
+            # <<< /etc/pacman.conf
+                ...
+                [archlinuxfr]
+                SigLevel = Never
+                Server = http://repo.archlinux.fr/$arch
+            # >>> /etc/pacman.conf
+
+    # Update list of repositories
+        > sudo pacman -Sy
+
+    # Install "yaourt"
+        > sudo pacman -S yaourt
+
+    # http://www.ostechnix.com/install-yaourt-arch-linux/
+
+# Enable "pacman" colorized output
+    > sudo vim -E /etc/pacman.conf
+        uncomment:
+            Color
