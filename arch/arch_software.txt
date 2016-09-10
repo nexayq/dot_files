@@ -1,0 +1,54 @@
+#!/bin/bash
+
+#####
+sudo pacman -S firefox
+sudo pacman -S flashplugin
+sudo pacman -S gvim
+sudo pacman -S git
+sudo pacman -S tmux
+sudo pacman -S htop
+
+#####
+# sudo pacman -S ttf-ubuntu-font-family
+sudo pacman -S bash-completion
+sudo pacman -S cairo-dock
+sudo pacman -S cairo-dock-plug-ins
+sudo pacman -S xscreensaver
+sudo pacman -S downgrade
+
+#####
+sudo pacman -S tree
+sudo pacman -S geany
+sudo pacman -S guvcview
+sudo pacman -S libreoffice-still
+sudo pacman -S vlc
+# use vlc for audio also : "---" icon for playlists
+yaourt pcloud --noconfirm
+sudo pacman -S neovim
+
+#####
+sudo pacman -S xclip
+sudo pacman -S keepassx
+sudo pacman -S chromium
+sudo pacman -S steam
+yaourt steam-fonts --noconfirm
+# https://forum.manjaro.org/t/steam-doesnt-launch/623/16
+
+#####
+sudo pacman -S emacs
+sudo pacman -S archey3
+sudo pacman -S cups-pdf
+# systemctl start org.cups.cupsd.service
+# systemctl enable org.cups.cupsd.service
+# sudo gpasswd -a necony sys
+# Files are printed at "/var/spool/cups-pdf/"
+sudo pacman -S qpdfview
+sudo pacman -S inxi
+# inxi -Fx # system info
+
+#####
+sudo pacman -S terminator
+sudo pacman -S redshift
+# sudo pacman -S python-gobject
+yaourt google-earth --noconfirm
+sudo pacman -S kodi
