@@ -21,6 +21,7 @@ sudo pacman -S cairo-dock
 sudo pacman -S cairo-dock-plug-ins
 sudo pacman -S xscreensaver
 sudo pacman -S downgrade
+sudo pacman -S gparted
 
 #####
 sudo pacman -S tree
@@ -28,7 +29,10 @@ sudo pacman -S geany
 sudo pacman -S guvcview
 sudo pacman -S libreoffice-still
 sudo pacman -S vlc
+sudo pacman -S qt4 # for vlc
+sudo pacman -S libcdio # for vlc
 # use vlc for audio also : "---" icon for playlists
+sudo pacman -S rsync
 yaourt pcloud --noconfirm
 sudo pacman -S neovim
 
@@ -56,6 +60,7 @@ sudo pacman -S inxi
 #####
 sudo pacman -S terminator
 sudo pacman -S redshift
-# sudo pacman -S python-gobject
+sudo pacman -S python-gobject
+sudo pacman -S python-xdg
 yaourt google-earth --noconfirm
 sudo pacman -S kodi
