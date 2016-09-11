@@ -265,37 +265,6 @@
     # and test mouse button clicks
         > reboot
 
-# Install Radeon graphics driver
-    > pacman -S xf86-video-intel
-    > pacman -S xf86-video-ati
-
-    > sudo pacman -S mesa-vdpau
-
-    # Add radeon as default graphics driver, intel is loaded by default
-    > sudo vim /etc/X11/xorg.conf.d/20-intel.conf
-        # <<< 20-intel.conf
-        Section "Device"
-            Identifier "Intel Graphics"
-            Driver     "Intel"
-        EndSection
-        # >>> 20-intel.conf
-
-    > sudo vim /etc/X11/xorg.conf.d/20-radeon.conf
-        # <<< 20-radeon.conf
-            Section "Device"
-                Identifier "Radeon"
-                Driver "radeon"
-            EndSection
-        # >>> 20-radeon.conf
-
-        # Reboot and check if both(radeon, intel) are present (drivers: radeon,intel)
-    > reboot
-    > sudo pacman -S inxi
-    > inxi -Fx
-    # Graphics:  Card-1: Intel Haswell-ULT Integrated Graphics Controller bus-ID: 00:02.0
-               # Card-2: Advanced Micro Devices [AMD/ATI] Jet PRO [Radeon R5 M230] bus-ID: 09:00.0
-               Display Server: X.Org 1.18.4 drivers: radeon,intel Resolution: 1366x768@60.01hz
-               # GLX Renderer: Mesa DRI Intel Haswell Mobile GLX Version: 3.0 Mesa 12.0.1 Direct Rendering: Yes
 
 # Install "downgrade" package, needed for "network-manager-applet"
     > sudo pacman -S downgrade
@@ -358,8 +327,60 @@
         uncomment:
             Color
 
-# Suspend/hibernate
-    > sudo pm-suspend
+# Install Radeon graphics driver
+    > pacman -S xf86-video-intel
+    > pacman -S xf86-video-ati
+
+    > sudo pacman -S mesa-vdpau
+
+    # Add radeon as default graphics driver, intel is loaded by default
+    > sudo vim /etc/X11/xorg.conf.d/20-intel.conf
+        # <<< 20-intel.conf
+        Section "Device"
+            Identifier "Intel Graphics"
+            Driver     "Intel"
+            Option     "TearFree"    "true"
+        EndSection
+        # >>> 20-intel.conf
+
+    > sudo vim /etc/X11/xorg.conf.d/20-radeon.conf
+        # <<< 20-radeon.conf
+            Section "Device"
+                Identifier "Radeon"
+                Driver "radeon"
+                # Option "TearFree" "on"
+                # Option	"EXAVSync" "off"
+            EndSection
+        # >>> 20-radeon.conf
+
+        # Reboot and check if both(radeon, intel) are present (drivers: radeon,intel)
+    > reboot
+    > sudo pacman -S inxi
+    > inxi -Fx
+    # Graphics:  Card-1: Intel Haswell-ULT Integrated Graphics Controller bus-ID: 00:02.0
+               # Card-2: Advanced Micro Devices [AMD/ATI] Jet PRO [Radeon R5 M230] bus-ID: 09:00.0
+               Display Server: X.Org 1.18.4 drivers: radeon,intel Resolution: 1366x768@60.01hz
+               # GLX Renderer: Mesa DRI Intel Haswell Mobile GLX Version: 3.0 Mesa 12.0.1 Direct Rendering: Yes
+
+# Window Compositing
+    - Dont use "Compiz Compositor", use "compton" instead
+    - Issue with "compiz" is youtube video tearing (vsync) after suspend
+
+    # Install compton
+        > sudo pacman -S compton
+
+    # Always start compton at startup
+        # https://www.youtube.com/watch?v=VB95mCPgG4U
+        # http://steamcommunity.com/sharedfiles/filedetails/?l=german&id=274438424
+        # https://www.youtube.com/watch?v=ceX18O9pvLs
+        Session and Startup -> Application Autostart -> Add :
+            Name: Compton
+            Description: # compton --backend glx --paint-on-overlay --vsync opengl-swc
+            Command: compton -b --backend xrender --vsync opengl
+
+    # Check tearing/vsync
+        https://www.youtube.com/watch?v=ceX18O9pvLs
+
+# Hibernate
     > sudo pm-hibernate
-    # Don't use "systemctl suspend"  - video horizontal lines (vsync)
     # Don't use "systemctl hibernate - slower system after resume
