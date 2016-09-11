@@ -266,7 +266,10 @@
         > reboot
 
 # Install Radeon graphics driver
-    > pacman -S xf86-video-ati xf86-video-intel
+    > pacman -S xf86-video-intel
+    > pacman -S xf86-video-ati
+
+    > sudo pacman -S mesa-vdpau
 
     # Add radeon as default graphics driver, intel is loaded by default
     > sudo vim /etc/X11/xorg.conf.d/20-radeon.conf
