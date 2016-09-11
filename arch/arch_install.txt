@@ -265,6 +265,27 @@
     # and test mouse button clicks
         > reboot
 
+# Install Radeon graphics driver
+    > pacman -S xf86-video-ati xf86-video-intel
+
+    # Add radeon as default graphics driver, intel is loaded by default
+    > sudo vim /etc/X11/xorg.conf.d/20-radeon.conf
+        # <<< 20-radeon.conf
+            Section "Device"
+                Identifier "Radeon"
+                Driver "radeon"
+            EndSection
+        # >>> 20-radeon.conf
+
+        # Reboot and check if both(radeon, intel) are present (drivers: radeon,intel)
+    > reboot
+    > sudo pacman -S inxi
+    > inxi -Fx
+    # Graphics:  Card-1: Intel Haswell-ULT Integrated Graphics Controller bus-ID: 00:02.0
+               # Card-2: Advanced Micro Devices [AMD/ATI] Jet PRO [Radeon R5 M230] bus-ID: 09:00.0
+               Display Server: X.Org 1.18.4 drivers: radeon,intel Resolution: 1366x768@60.01hz
+               # GLX Renderer: Mesa DRI Intel Haswell Mobile GLX Version: 3.0 Mesa 12.0.1 Direct Rendering: Yes
+
 # Install "downgrade" package, needed for "network-manager-applet"
     > sudo pacman -S downgrade
 
