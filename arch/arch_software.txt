@@ -8,6 +8,9 @@ sudo pacman -S git
 sudo pacman -S tmux
 sudo pacman -S htop
 
+### Volume notification ###
+yaourt xfce4-pulseaudio-plugin
+
 ### HP printer ###
 sudo pacman -S hplip
 sudo pacman -S python-pyqt5
