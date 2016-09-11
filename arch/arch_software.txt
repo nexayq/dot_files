@@ -33,6 +33,7 @@ yaourt pcloud --noconfirm
 sudo pacman -S neovim
 
 #####
+sudo pacman -S ncdu
 sudo pacman -S xclip
 sudo pacman -S keepassx
 sudo pacman -S chromium
