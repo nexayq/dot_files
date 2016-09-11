@@ -272,6 +272,14 @@
     > sudo pacman -S mesa-vdpau
 
     # Add radeon as default graphics driver, intel is loaded by default
+    > sudo vim /etc/X11/xorg.conf.d/20-intel.conf
+        # <<< 20-intel.conf
+        Section "Device"
+            Identifier "Intel Graphics"
+            Driver     "Intel"
+        EndSection
+        # >>> 20-intel.conf
+
     > sudo vim /etc/X11/xorg.conf.d/20-radeon.conf
         # <<< 20-radeon.conf
             Section "Device"
@@ -349,3 +357,9 @@
     > sudo vim -E /etc/pacman.conf
         uncomment:
             Color
+
+# Suspend/hibernate
+    > sudo pm-suspend
+    > sudo pm-hibernate
+    # Don't use "systemctl suspend"  - video horizontal lines (vsync)
+    # Don't use "systemctl hibernate - slower system after resume
