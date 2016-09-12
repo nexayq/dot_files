@@ -403,5 +403,3 @@
 # Hibernate
     > sudo -v && lxdm -c USER_SWITCH && sudo pm-hibernate
     # Don't use "systemctl hibernate - slower system after resume
-
-
