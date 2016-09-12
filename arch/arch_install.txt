@@ -363,24 +363,45 @@
                # GLX Renderer: Mesa DRI Intel Haswell Mobile GLX Version: 3.0 Mesa 12.0.1 Direct Rendering: Yes
 
 # Window Compositing
-    - Dont use "Compiz Compositor", use "compton" instead
-    - Issue with "compiz" is youtube video tearing (vsync) after suspend
+    Use "Compiz Compositor" and install "ccsm"
 
-    # Install compton
-        > sudo pacman -S compton
+    > yaourt ccsm --noconfirm
 
-    # Always start compton at startup
-        # https://www.youtube.com/watch?v=VB95mCPgG4U
-        # http://steamcommunity.com/sharedfiles/filedetails/?l=german&id=274438424
-        # https://www.youtube.com/watch?v=ceX18O9pvLs
-        Session and Startup -> Application Autostart -> Add :
-            Name: Compton
-            Description: # compton --backend glx --paint-on-overlay --vsync opengl-swc
-            Command: compton -b --backend xrender --vsync opengl
+    # Settings to disable flickering/tearing/vsync on Youtube
+        # https://www.youtube.com/watch?v=Sw7s5M3fgcE
+            ccsm -> General Options -> Display Settings ->
+                Uncheck "Detect Refresh Rate"
+                Refresh rate: 120
+                Outputs:      1366x768
+                Check "Sync To VBlank"
+
+    !!! DONT INSTALL AND USE "xscreensaver"
+        IT MESSES UP Youtube videos flickering/tearing/vsync !!!
 
     # Check tearing/vsync
         https://www.youtube.com/watch?v=ceX18O9pvLs
 
+    # - Dont use "Compiz Compositor", use "compton" instead
+    # - Issue with "compiz" is youtube video tearing (vsync) after suspend
+
+    # # Install compton
+        # > sudo pacman -S compton
+
+    # # Always start compton at startup
+        # # https://www.youtube.com/watch?v=VB95mCPgG4U
+        # # http://steamcommunity.com/sharedfiles/filedetails/?l=german&id=274438424
+        # # https://www.youtube.com/watch?v=ceX18O9pvLs
+        # Session and Startup -> Application Autostart -> Add :
+            # Name: Compton
+            # Description: # compton --backend glx --paint-on-overlay --vsync opengl-swc
+            # Command: compton -b --backend xrender --vsync opengl
+
+
+# Suspend
+    > lxdm -c USER_SWITCH && systemctl suspend
+
 # Hibernate
-    > sudo pm-hibernate
+    > sudo -v && lxdm -c USER_SWITCH && sudo pm-hibernate
     # Don't use "systemctl hibernate - slower system after resume
+
+
