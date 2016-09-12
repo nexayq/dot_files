@@ -398,8 +398,21 @@
 
 
 # Suspend
-    > lxdm -c USER_SWITCH && systemctl suspend
+    > i3lock -c 117864 && systemctl suspend # 4
+    # > lxdm -c USER_SWITCH && systemctl suspend
 
 # Hibernate
-    > sudo -v && lxdm -c USER_SWITCH && sudo pm-hibernate
+    > sudo pm-hibernate
+    # <<< /etc/pm/sleep.d/20_custom_firefox
+        #!/bin/bash
+        case "${1}" in
+            thaw)
+                DISPLAY=:0.0 ; export DISPLAY
+                # su necony -c '(firefox &); lxdm -c USER_SWITCH;'
+                su necony -c '(setsid firefox &); i3lock -c 117864; '
+        ;;
+        esac
+    # >>> /etc/pm/sleep.d/20_custom_firefox
+
+    # > sudo -v && lxdm -c USER_SWITCH && sudo pm-hibernate
     # Don't use "systemctl hibernate - slower system after resume

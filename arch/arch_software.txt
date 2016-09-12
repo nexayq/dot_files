@@ -24,6 +24,7 @@ sudo pacman -S cairo-dock
 sudo pacman -S cairo-dock-plug-ins
 sudo pacman -S downgrade
 sudo pacman -S gparted
+sudo pacman -S i3lock
 
 #####
 sudo pacman -S tree
