@@ -22,7 +22,6 @@ sudo pacman -S python-pyqt5
 sudo pacman -S bash-completion
 sudo pacman -S cairo-dock
 sudo pacman -S cairo-dock-plug-ins
-sudo pacman -S xscreensaver
 sudo pacman -S downgrade
 sudo pacman -S gparted
 
