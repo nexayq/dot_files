@@ -19,10 +19,11 @@ git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt -
 cd $HOME
 ln -s $CONFIG_DIR/dot_files/tmux/dot_tmux.conf .tmux.conf
 ln -s $CONFIG_DIR/dot_files/vim/dot_vimrc .vimrc
+# ln -s .vimrc .config/nvim/init.vim
 ln -s $CONFIG_DIR/dot_files/git/dot_gitconfig .gitconfig
 ln -s $CONFIG_DIR/dot_files/git/dot_git-prompt-colors.sh .git-prompt-colors.sh
 ln -s $CONFIG_DIR/config/bash/callback.sh callback.sh
-ln -s .vimrc .config/nvim/init.vim
+ln -s $CONFIG_DIR/config/dir_colors/dot_dir_colors .dir_colors
 
 # Tweaks
 cd $HOME
