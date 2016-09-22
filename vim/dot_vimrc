@@ -2644,3 +2644,7 @@ endif
 " Load .vimrc when using sudo
     " > sudo -E vim /etc/some_conf_file
         " https://coderwall.com/p/xvryda/use-your-own-vimrc-when-using-sudo
+
+" Execute vim command from bash shell
+    " vim +PluginInstall +qall
+        " http://stackoverflow.com/a/12834450/2450748
