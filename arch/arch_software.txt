@@ -67,3 +67,6 @@ sudo pacman -S python-gobject
 sudo pacman -S python-xdg
 yaourt google-earth --noconfirm
 sudo pacman -S kodi
+
+#####
+yaourt viber
