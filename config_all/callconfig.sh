@@ -28,6 +28,9 @@
     rm callconfig.sh
     ln -s $CONFIG_DIR/dot_files/config_all/callconfig.sh callconfig.sh
 
+# Vim - install plugins
+    vim +PluginInstall +qa
+
 # Tweaks
     cd $HOME
     touch .nk_history
