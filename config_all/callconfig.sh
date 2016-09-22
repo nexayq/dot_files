@@ -25,6 +25,9 @@
     ln -s $CONFIG_DIR/config/bash/callback.sh callback.sh
     ln -s $CONFIG_DIR/config/dir_colors/dot_dir_colors .dir_colors
 
+    rm callconfig.sh
+    ln -s $CONFIG_DIR/dot_files/config_all/callconfig.sh callconfig.sh
+
 # Tweaks
     cd $HOME
     touch .nk_history
