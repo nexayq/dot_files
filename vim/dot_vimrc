@@ -280,7 +280,7 @@ endif
         " Show warnings for CPP files
         let g:syntastic_cpp_compiler_options = "-Wall"
 
-        let g:syntastic_error_symbol = "!"
+        " let g:syntastic_error_symbol = "!"
 
         " - If you want parser for verilog, download "verilator"
         " - Support - "https://github.com/scrooloose/syntastic/wiki/Verilog:---verilator"
@@ -487,7 +487,7 @@ endif
         " nnoremap <silent><buffer><expr> <C-x>     unite#do_action('cd')
         " nnoremap <C-x> <Plug>(vimfiler_switch_to_history_directory)
         autocmd FileType vimfiler nunmap <buffer> <C-j>
-        autocmd FileType vimfiler nmap  h <Plug>(vimfiler_switch_to_history_directory)
+        " autocmd FileType vimfiler nmap  h <Plug>(vimfiler_switch_to_history_directory)
         " autocmd FileType vimfiler nunmap <buffer> <CR>
         autocmd FileType vimfiler nunmap <buffer> <Space>
         autocmd FileType vimfiler nmap  s <Plug>(vimfiler_toggle_mark_current_line)
