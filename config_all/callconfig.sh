@@ -31,6 +31,12 @@
 # Vim - install plugins
     vim +PluginInstall +qa
 
+# GitHub username and email
+    cd $CONFIG_DIR/dot_files
+    git config user.name nexayq
+    git config user.email nexayq@users.noreply.github.com
+    cd -
+
 # Tweaks
     cd $HOME
     touch .nk_history
