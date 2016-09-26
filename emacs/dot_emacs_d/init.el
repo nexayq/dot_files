@@ -182,11 +182,11 @@
     (require 'org)
 
     ;; org-mode keyboard shortcuts
-    (add-hook 'org-mode-hook
-            (lambda ()
-              (define-key evil-normal-state-local-map (kbd ">") 'evil-shift-right)
-              (define-key evil-normal-state-local-map (kbd "<") 'evil-shift-left)
-              ))
+    ; (add-hook 'org-mode-hook
+            ; (lambda ()
+              ; (define-key evil-normal-state-local-map (kbd ">") 'evil-shift-right)
+              ; (define-key evil-normal-state-local-map (kbd "<") 'evil-shift-left)
+              ; ))
 
     ; color source code
     (setq org-src-fontify-natively t)
