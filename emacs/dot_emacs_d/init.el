@@ -181,9 +181,18 @@
 ;; org-mode
     (require 'org)
 
+    ;; org-mode keyboard shortcuts
+    (add-hook 'org-mode-hook
+            (lambda ()
+              (define-key evil-normal-state-local-map (kbd ">") 'evil-shift-right)
+              (define-key evil-normal-state-local-map (kbd "<") 'evil-shift-left)
+              ))
+
     ; color source code
     (setq org-src-fontify-natively t)
-    (setq org-src-tab-acts-natively t)
+    ; (setq org-src-tab-acts-natively t)
+    ; (org-indent-mode t)
+    ; (setq org-support-shift-select 'always)
 
     ; (set-default 'truncate-lines nil)
     (setq toggle-truncate-lines t)
