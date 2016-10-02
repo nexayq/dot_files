@@ -1,4 +1,8 @@
 
+# Tutorials
+    # Screen vs tmux
+        # https://www.youtube.com/watch?v=QxTse5Elq8s
+
 # Create screen session
     # > screen -S gen
 
