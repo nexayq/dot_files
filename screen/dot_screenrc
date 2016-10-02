@@ -67,7 +67,7 @@
 # Change panel with mouse
     mousetrack on
 
-# Split shortcut in PWD
+# Split shortcuts
     bind E eval "split"    "focus" "screen 1"
     bind e eval "split -v" "focus" "screen 1"
     # bind E stuff "screen 1 bash^M"
@@ -90,7 +90,6 @@
         bind j focus down
         bind k focus up
         bind l focus right
-
 
     # ignore case on searches in copy-mode
         ignorecase on
