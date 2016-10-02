@@ -1,0 +1,111 @@
+
+# Create screen session
+    # > screen -S gen
+
+# Retach to existing session
+    # > screen -r gen
+
+# kill all screeens
+    # nk_kill SCREEN
+
+# kill screen session
+    # screen -S gen -X quit
+    # screen -S 10713 -X quit
+
+# Dont blink
+    vbell "off"
+        # http://superuser.com/a/342458
+
+# Don't display the copyright page
+    startup_message off
+
+# "Alt + a" as an escape key in GNU Screen
+    # reset escape key to the default
+    escape ^Aa
+
+    # auxiliary register
+    register S ^A
+
+    # Alt + space produces ^A and acts as an escape key
+    bindkey "^[a" process S
+
+# bigger scrollback
+    defscrollback 4096
+
+# Start Window at 1
+    bind c screen 1
+    bind ^c screen 1
+    bind 0 select 10
+    screen 1
+        # https://wiki.archlinux.org/index.php/GNU_Screen
+
+# pretty statusbar
+    # https://wiki.archlinux.org/index.php/GNU_Screen
+    hardstatus off
+    hardstatus alwayslastline
+    # hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n-%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W} %c %{g}]'
+    hardstatus alwayslastline '%{= kG}[ %{G}%H %{g}] %{=b}%{G} %{b}%w %=%{kG}%C%A %D,%d/%m/%y'
+        # https://rravikumar.wordpress.com/2012/03/01/my-screenrc-file/
+
+# Rename window with ,
+    bind ',' title
+
+# Resize panes
+    bind = resize =
+    bind + resize +1
+    bind - resize -1
+    bind z resize max
+
+# Reload .screenrc
+    bind r eval "source $HOME/.screenrc" "echo '.screenrc reloaded!'"
+        # http://serverfault.com/a/326384/339237
+
+# Change panel with mouse
+    mousetrack on
+
+# Split shortcut in PWD
+    bind E eval "split"    "focus" "screen 1"
+    bind e eval "split -v" "focus" "screen 1"
+    # bind E stuff "screen 1 bash^M"
+    # bind ^x stuff "screen -X chdir \$PWD;screen^M"
+    # http://stackoverflow.com/a/33241923/2450748
+
+# kill pane with x
+    bind x eval "remove"
+
+# navigating regions with Ctrl-arrows
+    bindkey "^[[1;5D" focus left
+    bindkey "^[[1;5C" focus right
+    bindkey "^[[1;5A" focus up
+    bindkey "^[[1;5B" focus down
+    # https://gist.github.com/joaopizani/2718397
+
+# https://xaizek.github.io/2015-11-08/switching-from-tmux-to-gnu-screen/
+    # vim-like navigation between windows
+        bind h focus left
+        bind j focus down
+        bind k focus up
+        bind l focus right
+
+
+    # ignore case on searches in copy-mode
+        ignorecase on
+
+    # wait up to three seconds before hiding last message (default is 5 seconds)
+        msgwait 3
+
+    # enable alternative screen
+        altscreen on
+
+    # Copy mode
+        # v - start selection
+        # y - start line-wise selection
+        # J - scroll down
+        # K - scroll up
+        markkeys "^M=v:y=V:^E=J:^Y=K"
+
+    # > - copy selection to system clipboard
+        bindkey -m > eval "stuff ' '" writebuf "exec sh -c 'xclip -selection clipboard < /tmp/screen-exchange'"
+
+    # create new layout with a shell prompt
+        # bind l eval 'layout new' 'screen 1'
