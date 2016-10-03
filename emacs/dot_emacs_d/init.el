@@ -188,6 +188,10 @@
               ; (define-key evil-normal-state-local-map (kbd "<") 'evil-shift-left)
               ; ))
 
+    (setq org-todo-keywords
+           '((sequence "TODO" "PP" "|" "DONE" )))
+    ; http://orgmode.org/guide/Multi_002dstate-workflows.html
+
     ; color source code
     (setq org-src-fontify-natively t)
     ; (setq org-src-tab-acts-natively t)
