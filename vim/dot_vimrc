@@ -1010,8 +1010,13 @@ endif
             " :hardcopy > file.ps
         " Print to printer
             " :hardcopy
-        " Print to HTML
+        " Print to HTML and then to pdf
+            " :colorscheme morning " to print with thite background
             " :TOhtml
+            " :w
+            " " print file
+            " :source ~/.vimrc " to restore colors
+                " http://stackoverflow.com/a/25389081/2450748
                 " http://stackoverflow.com/a/8557573/2450748
 
     " Syntax for mercurial
