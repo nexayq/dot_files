@@ -112,3 +112,8 @@
 
     # create new layout with a shell prompt
         # bind l eval 'layout new' 'screen 1'
+
+# Fix issue with permissions
+    # Directory '/var/run/screen' must have mode 775.
+        # > export SCREENDIR=$HOME/.loc_screen
+    # http://unix.stackexchange.com/a/95898/156466
