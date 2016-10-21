@@ -1011,7 +1011,9 @@ endif
         " Print to printer
             " :hardcopy
         " Print to HTML and then to pdf
-            " :colorscheme morning " to print with thite background
+            " :hi Normal ctermbg=white ctermfg=black " to print with thite background
+                " :colorscheme morning " to print with thite background
+            " :hi Error NONE " dont highligh errors
             " :TOhtml
             " :w
             " " print file
