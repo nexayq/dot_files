@@ -227,8 +227,10 @@ endif
 
                 " For newer vim versions might be problem with 128, use [0, 0, ...] then
                 " let better_ui_colors = [0, 0, 16, 255]
-                if v:version >= 704 && has('patch2143')
-                    let better_ui_colors = [0, 0, 16, 255]
+                if v:version >= 704
+                " if v:version >= 704 && has('patch2143')
+                    " let better_ui_colors = [0, 0, 16, 255]
+                    let better_ui_colors = ["White", "White", 16, 255]
                 else
                     let better_ui_colors = [128, 128, 16, 255]
                 endif
