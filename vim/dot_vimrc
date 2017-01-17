@@ -642,12 +642,15 @@ endif
         " *'NERDCreateDefaultMappings'*
         " /ref/ http://ruderich.org/simon/config/vimrc
         map <leader><leader> <plug>NERDCommenterToggle
+        " map <leader>bb <plug>NERDCommenterAltDelims
         " map ,t <plug>NERDCommenterToggleComment
         " map ,omg <plug>NERDCommenterComment
         let g:NERDCreateDefaultMappings = 0
         let g:NERDSpaceDelims = 1
-        " let g:NERDRemoveAltComs = 1
-        " let NERD_c_alt_style=0
+        let g:NERDRemoveAltComs = 1
+        " let g:NERDComAltDelim = 1
+        " let g:NERD_c_alt_style=1
+        let g:NERDAltDelims_c = 1
 
     " Yank Ring
         Plugin 'vim-scripts/YankRing.vim'
