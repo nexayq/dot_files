@@ -90,7 +90,7 @@
         " - Install "gvim" or "vim-X11"
         " - Install "Vundle" or "Neobundle"
             " - Vundle - "https://github.com/VundleVim/Vundle.vim"
-                " - "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.v"
+                " - "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
                 " - Copy your custom vimrc to "~/.vimrc"
                 " - Run "gvim" and run command ":PluginInstall"
                 " - Restart "gvim"
