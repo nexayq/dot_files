@@ -507,7 +507,9 @@ endif
 
     " SuperTab
         Plugin 'ervandew/supertab'
-        let g:SuperTabDefaultCompletionType = 'context'
+        " let g:SuperTabDefaultCompletionType = 'context'
+        " python omni complete hangs in Vim - fix:
+        let g:SuperTabDefaultCompletionType = "<c-n>"
         " let b:SuperTabDisabled = 1
 
     " vim-move - Move lines up down
@@ -986,6 +988,35 @@ endif
         Plugin 'jceb/vim-orgmode'
         " Plugin 'hsitz/VimOrganizer'
 
+    " Hg plugin - Vim mercenary
+        Bundle 'phleet/vim-mercenary'
+        " Plugin 'jlfwong/vim-mercenary'
+
+    " python-mode
+        " Plugin 'python-mode/python-mode'
+        " let g:pymode_rope_completion = 1
+        " let g:pymode_rope_complete_on_dot = 1
+        " let g:pymode_rope_completion_bind = '<C-Space>'
+
+    " jedi-vim
+        " Plugin 'davidhalter/jedi-vim'
+            " " Installation
+                " " > pip install jedi
+
+            " Disable default keybindings:
+                " https://github.com/davidhalter/jedi-vim/issues/213
+
+            " " let g:jedi#auto_initialization = 0
+
+            " let g:jedi#popup_on_dot = 1
+            " let g:jedi#completions_command = "<Tab>"
+            " let g:jedi#goto_command = "<Nop>"
+            " let g:jedi#goto_assignments_command = "<Nop>"
+            " let g:jedi#documentation_command = "<Nop>"
+            " let g:jedi#rename_command = "<Nop>"
+            " let g:jedi#usages_command = "<Nop>"
+
+            " let g:jedi#completions_command = "<Tab>"
 
 " >>>>> Plugins >>>>>
 
@@ -1033,9 +1064,6 @@ endif
         " Plugin 'Shougo/neocomplete.vim'
         " let g:neocomplete#enable_at_startup = 1
 
-    " Hg plugin - Vim mercenary
-        Bundle 'phleet/vim-mercenary'
-        " Plugin 'jlfwong/vim-mercenary'
 
     " Bufferline bottom
         " Plugin 'bling/vim-bufferline'
@@ -1090,15 +1118,11 @@ endif
         " Plugin 'mileszs/ack.vim'
         " https://www.youtube.com/watch?v=knSFZCKMy20
 
-
-
     "NERDTRee
         " Plugin 'scrooloose/nerdTree'
         " http://vi.stackexchange.com/questions/3930/cannot-install-nerdtree-pluging-with-vundle
         " nmap <C-N> :NERDTreeToggle <Bar> wincmd =<CR>
         " autocmd VimEnter * NERDTree
-
-
 
     "Vimfiler
         " Plugin 'Shougo/vimfiler.vim'
