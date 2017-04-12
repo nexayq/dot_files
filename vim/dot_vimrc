@@ -508,8 +508,9 @@ endif
     " SuperTab
         Plugin 'ervandew/supertab'
         " let g:SuperTabDefaultCompletionType = 'context'
-        " python omni complete hangs in Vim - fix:
+        " python (Gtk) omnicomplete <C-x><C-o> hangs in Vim - fix:
         let g:SuperTabDefaultCompletionType = "<c-n>"
+            " https://github.com/Shougo/neocomplcache.vim/issues/181
         " let b:SuperTabDisabled = 1
 
     " vim-move - Move lines up down
