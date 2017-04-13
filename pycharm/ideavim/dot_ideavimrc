@@ -1,0 +1,22 @@
+
+" Set leader key
+let mapleader=" "
+
+" Map ; to :
+nnoremap ; :
+
+" Case insensitive
+command W w
+command Q q
+command Qa qa
+
+" Show line numbers
+set number
+set relativenumber
+
+" Clear search
+" nnoremap <leader>/c :nohlsearch<CR>
+
+" Incremental search
+" set incsearch
+
