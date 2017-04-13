@@ -1,4 +1,7 @@
 
+" References
+    " http://stackoverflow.com/a/33988035/2450748
+
 " Set leader key
 let mapleader=" "
 
