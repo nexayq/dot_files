@@ -1,6 +1,8 @@
 
-" References
-    " http://stackoverflow.com/a/33988035/2450748
+" See list of pycharm actions (copy, cut, custom commands ...)
+    " :actionlist
+    " map <leader>c :action $Copy<CR>
+        " http://stackoverflow.com/a/33988035/2450748
 
 " Set leader key
 let mapleader=" "
