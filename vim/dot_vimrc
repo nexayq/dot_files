@@ -776,7 +776,7 @@ endif
             " :DirDiff dir_a/ dir_b/
 
     " Syntax for wikidoc
-        Plugin 'vim-scripts/Wikidoc-syntax-highlighting'
+        " Plugin 'vim-scripts/Wikidoc-syntax-highlighting'
 
     " Syntax for plantuml
         Plugin 'aklt/plantuml-syntax'
@@ -934,6 +934,11 @@ endif
     " Markdown plugin
         Plugin 'plasticboy/vim-markdown'
 
+    " Vim Wiki plugin
+        " https://www.youtube.com/watch?v=ONh95PNBW-Q
+        Plugin 'vimwiki/vimwiki'
+            let g:vimwiki_default_mappings='0'
+
     " Vimux
         Plugin 'benmills/vimux'
 
@@ -990,6 +995,12 @@ endif
     " org mode
         Plugin 'jceb/vim-orgmode'
         " Plugin 'hsitz/VimOrganizer'
+            let g:org_todo_keywords=['TODO(t)', '|', 'DONE(d)', '|', 'PP(f)']
+            " let g:org_todo_keywords = [['TODO(t)', '|', 'DONE(d)'],
+                  " \ ['REPORT(r)', 'BUG(b)', 'KNOWNCAUSE(k)', '|', 'FIXED(f)'],
+            " \ ['CANCELED(c)']]
+    " vim-zim
+        " Plugin 'jakykong/vim-zim'
 
     " Hg plugin - Vim mercenary
         Bundle 'phleet/vim-mercenary'
