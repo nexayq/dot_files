@@ -939,6 +939,9 @@ endif
         Plugin 'vimwiki/vimwiki'
             let g:vimwiki_default_mappings='0'
 
+        noremap <leader>tt :VimwikiIndex<CR>
+        autocmd FileType vimwiki noremap <buffer> <leader><leader> :VimwikiToggleListItem<CR>
+
     " Vimux
         Plugin 'benmills/vimux'
 
