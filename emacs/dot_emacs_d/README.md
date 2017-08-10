@@ -1,4 +1,8 @@
 
+# Setup Emacs
+    Copy "SW_Ubuntu/02m_Text_Editors/02e_Emacs/dot_emacs_d" 
+    into "~/.emacs.d"
+
 # Config
     Put "init.el" into "~/.emacs.d/init.el"
 
