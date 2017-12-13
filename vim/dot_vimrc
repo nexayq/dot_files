@@ -307,9 +307,11 @@ endif
                 " https://github.com/scrooloose/syntastic#faqcheckers
 
         " bash checker - ShellCheck
+            let g:syntastic_quiet_messages = {
+                        \ "regex":  [ "SC2086", "SC2046", "SC2038", "SC2033", "SC2034" ] }
 
         " Enable Syntastic warnings by default
-            let g:syntastic_quiet_messages = {}
+            " let g:syntastic_quiet_messages = {}
 
             " Toggle Syntastic warnings
             function! NK_ToggleSyntasticWarnings()
