@@ -99,6 +99,7 @@
                 " - $ sh ./install.sh
             " - Syntastic
                 " - If you want parser for verilog, download "verilator"
+                " - If you want parser for bash, install "shellcheck"
                 " - Support - "https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers"
 
     " Windows
@@ -297,13 +298,41 @@ endif
                 " /ref/ http://stackoverflow.com/a/21434697/2450748
                 " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
                 " nnoremap <F11> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-                nnoremap <leader>zss :SyntasticToggleMode<CR>
+                nnoremap <leader>zss :SyntasticToggleMode<CR>:e<CR>
                 nnoremap <leader>zsc :SyntasticCheck<CR>
 
         " python checker
             let g:syntastic_python_checkers = ['python']
             " let g:syntastic_python_checkers = ['pylint']
                 " https://github.com/scrooloose/syntastic#faqcheckers
+
+        " bash checker - ShellCheck
+
+        " Disable Syntastic warnings by default
+            let g:syntastic_quiet_messages = {
+                \ "level":  "warnings"}
+
+            " Toggle Syntastic warnings
+            function! NK_ToggleSyntasticWarnings()
+                if exists('t:nk_warnings') && t:nk_warnings
+                    " Dont show warnings
+                    let t:nk_warnings = 0
+                    let g:syntastic_quiet_messages = {
+                        \ "level":  "warnings"}
+                    SyntasticReset
+                    :e
+                else
+                    " Show warnings
+                    let t:nk_warnings = 1
+                    let g:syntastic_quiet_messages = {}
+                    SyntasticReset
+                    :e
+                endif
+            endfunc
+
+            nnoremap <leader>; :call NK_ToggleSyntasticWarnings()<CR>
+
+        " autocmd VimEnter * call NK_NoSyntasticWarnings()
 
     " CtrlP
    " Plugin 'kien/ctrlp.vim'
