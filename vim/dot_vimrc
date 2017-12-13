@@ -308,9 +308,8 @@ endif
 
         " bash checker - ShellCheck
 
-        " Disable Syntastic warnings by default
-            let g:syntastic_quiet_messages = {
-                \ "level":  "warnings"}
+        " Enable Syntastic warnings by default
+            let g:syntastic_quiet_messages = {}
 
             " Toggle Syntastic warnings
             function! NK_ToggleSyntasticWarnings()
