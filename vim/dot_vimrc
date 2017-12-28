@@ -1025,6 +1025,9 @@ endif
         " <Enter>         - Open an item under cursor in the previously focused window
         " <leader><Enter> - Open in vertical split
 
+    " Bitbake syntax
+        Plugin 'kergoth/vim-bitbake'
+
     " org mode
         Plugin 'jceb/vim-orgmode'
         " Plugin 'hsitz/VimOrganizer'
