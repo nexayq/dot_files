@@ -688,11 +688,11 @@ endif
         let g:NERDAltDelims_c = 1
 
     " Yank Ring
-        Plugin 'vim-scripts/YankRing.vim'
+        " Plugin 'vim-scripts/YankRing.vim'
 
-        let g:yankring_history_dir = g:nk_vim_dir
-        let g:yankring_history_file = 'yankring_history'
-        noremap <leader>yy :YRShow<CR>
+        " let g:yankring_history_dir = g:nk_vim_dir
+        " let g:yankring_history_file = 'yankring_history'
+        " noremap <leader>yy :YRShow<CR>
         " "0p - paste last yanked register
             " So in the above example, the text from the initial example is moved into the default register,
             " and then replaced there by the deleted text.
@@ -2734,3 +2734,7 @@ endif
 " Execute vim command from bash shell
     " vim +PluginInstall +qall
         " http://stackoverflow.com/a/12834450/2450748
+
+" Enable pasting of the same content multiple times
+    xnoremap p "0p
+    " List previous yanks/copy with ":reg" command
