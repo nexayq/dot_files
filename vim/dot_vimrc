@@ -2737,4 +2737,5 @@ endif
 
 " Enable pasting of the same content multiple times
     xnoremap p "0p
+    xnoremap P "0P
     " List previous yanks/copy with ":reg" command
