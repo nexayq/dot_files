@@ -2739,3 +2739,11 @@ endif
     xnoremap p "0p
     xnoremap P "0P
     " List previous yanks/copy with ":reg" command
+
+" Save files (write) to specific files from terminal
+" Execute vim commands from terminal
+" # Allow rw access to files only, without messing up directories sticky bit
+    " # Files that don't have permissions that others can write to them (o!=rw),
+    " # write to it from vim so you become owner and them allow others to write to it
+        " > find -type f -user nemanjak ! -perm -o=rw -exec sh -c 'vim {} -c ":w" -c "qa!"' \; -exec chmod o+rw {} \;
+
