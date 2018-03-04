@@ -704,7 +704,7 @@ endif
         " Additional languages
         " https://github.com/majutsushi/tagbar/wiki
 
-        nnoremap <leader>zt :TagbarToggle<CR>
+        nnoremap <leader>tt :TagbarToggle<CR>
 
         " Vim built in - Use "[i" to show variable declaration
         let g:tagbar_autofocus = 1
@@ -969,7 +969,7 @@ endif
         Plugin 'vimwiki/vimwiki'
             let g:vimwiki_default_mappings='0'
 
-        noremap <leader>tt :VimwikiIndex<CR>
+        " noremap <leader>tt :VimwikiIndex<CR>
         autocmd FileType vimwiki noremap <buffer> <leader><leader> :VimwikiToggleListItem<CR>
 
     " Vimux
