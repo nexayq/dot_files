@@ -318,7 +318,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (better-defaults elpy helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
+    (ein better-defaults elpy helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
 
 ;; set font DejaVu Sans
 
@@ -1230,3 +1230,9 @@
                         (evil-leader/set-key
                                 "pp" 'elpy-shell-send-region-or-buffer
                )))
+
+;; emacs ipython notebook
+    (require 'ein)
+
+;; pdb debugger setup
+    (setq gud-pdb-command-name "python -m pdb")
