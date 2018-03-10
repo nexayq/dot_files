@@ -311,14 +311,40 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   (vector "#eaeaea" "#d54e53" "#b9ca4a" "#e7c547" "#7aa6da" "#c397d8" "#70c0b1" "#424242"))
  '(custom-safe-themes
    (quote
-    ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" default)))
+    ("4c8372c68b3eab14516b6ab8233de2f9e0ecac01aaa859e547f902d27310c0c3" "57d7e8b7b7e0a22dc07357f0c30d18b33ffcbb7bcd9013ab2c9f70748cfa4838" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" default)))
+ '(fci-rule-color "#424242")
  '(inhibit-startup-screen t)
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (ein better-defaults elpy helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
+    (sublime-themes railscasts-theme ## solarized-theme solidity-mode color-theme ein better-defaults elpy helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow)))
+ '(show-paren-mode t)
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#d54e53")
+     (40 . "#e78c45")
+     (60 . "#e7c547")
+     (80 . "#b9ca4a")
+     (100 . "#70c0b1")
+     (120 . "#7aa6da")
+     (140 . "#c397d8")
+     (160 . "#d54e53")
+     (180 . "#e78c45")
+     (200 . "#e7c547")
+     (220 . "#b9ca4a")
+     (240 . "#70c0b1")
+     (260 . "#7aa6da")
+     (280 . "#c397d8")
+     (300 . "#d54e53")
+     (320 . "#e78c45")
+     (340 . "#e7c547")
+     (360 . "#b9ca4a"))))
+ '(vc-annotate-very-old-color nil))
 
 ;; set font DejaVu Sans
 
@@ -327,10 +353,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "PfEd" :slant normal :weight normal :height 120 :width normal))))
  '(col-highlight ((t (:background "color-233"))))
- '(hl-line ((t (:background "color-233"))))
- '(lazy-highlight ((t (:background "black" :foreground "white" :underline t))))
  '(neo-dir-link-face ((t (:foreground "cyan"))))
  '(neo-file-link-face ((t (:foreground "white")))))
 
@@ -386,14 +410,20 @@
         (add-to-list 'default-frame-alist '(background-color . "000000")))
 
     ; if server daemon is running
-    (if (daemonp)
-        (add-hook 'after-make-frame-functions
-            (lambda (frame)
-                (select-frame frame)
-                (load-theme 'sanityinc-tomorrow-bright t)))
-        (load-theme 'sanityinc-tomorrow-bright t))
+    ; (if (daemonp)
+        ; (add-hook 'after-make-frame-functions
+            ; (lambda (frame)
+                ; (select-frame frame)
+                ; (load-theme 'sanityinc-tomorrow-bright t)))
+        ; (load-theme 'sanityinc-tomorrow-bright t))
 
     ; (load-theme 'wombat)
+    ; (load-theme 'desert)
+    (load-theme 'clarity)
+    ; (set-background-color "#000000")
+    ; (set-face-background 'fringe "#000000")
+    ; (set-face-attribute 'linum nil :background "black")
+    ; (set-face-background 'linum "#000000")
 
     ; Set terminal background color to black
     ; (add-to-list 'default-frame-alist '(background-color . "000000"))
@@ -416,7 +446,7 @@
     ; (set-face-attribute 'mode-line nil
                         ; :foreground "Black"
                         ; :background "DarkOrange"
-                        ; :box nil)
+                        ; :height 200)
     (require 'powerline-evil)
     ; (powerline-evil-center-color-theme)
     ; (powerline-evil-vim-theme)
@@ -945,6 +975,7 @@
 
 ;; Show line numbers
     (global-linum-mode t)
+    ; (linum-relative-global-mode)
     ;; Show line numbers separated in terminal
     (if (not (display-graphic-p))
         (setq linum-format "%3d "))
@@ -1236,3 +1267,18 @@
 
 ;; pdb debugger setup
     (setq gud-pdb-command-name "python -m pdb")
+
+;; choose color theme
+    ; (load-file "~/.emacs.d/themes/color-theme-desert.el")
+    ; (set-face-foreground 'font-lock-string-face "red")
+    ; (set-face-foreground 'font-lock-string-face "light blue")
+    ; (set-face-foreground 'font-lock-comment-face "blue")
+    ;; Please set your themes directory to 'custom-theme-load-path
+    ; (add-to-list 'custom-theme-load-path
+                 ; (file-name-as-directory "~/.emacs.d/themes/replace-colorthemes"))
+
+    ;; load your favorite theme
+    ; (require 'railscasts-theme)
+            ; (load-theme 'railscasts-theme)
+    ; (load-theme 'railscasts-theme)
+    ; (enable-theme 'railscast-theme)
