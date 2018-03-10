@@ -318,7 +318,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
+    (better-defaults elpy helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow))))
 
 ;; set font DejaVu Sans
 
@@ -1217,3 +1217,16 @@
     (evil-leader/set-key
        "zd"  'ediff          ;; diff current file
        )
+;; elpy for python
+    (require 'elpy)
+    (elpy-enable)
+
+    (setq python-shell-interpreter "ipython"
+          python-shell-interpreter-args "-i --simple-prompt")
+
+    (add-hook 'python-mode-hook
+        ; verilog-sk-*
+              (lambda ()
+                        (evil-leader/set-key
+                                "pp" 'elpy-shell-send-region-or-buffer
+               )))

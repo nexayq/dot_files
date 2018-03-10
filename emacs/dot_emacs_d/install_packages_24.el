@@ -31,7 +31,7 @@
     '(evil  org ox-twbs color-theme-sanityinc-tomorrow
       powerline rainbow-delimiters smooth-scrolling
       neotree dirtree evil-leader ace-window window-numbering
-      flycheck helm helm-swoop company evil-org ))
+      flycheck helm helm-swoop company evil-org elpy))
 
 ; (setq package-list
     ; '(python-environment deferred epc
