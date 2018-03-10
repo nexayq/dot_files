@@ -321,7 +321,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (sublime-themes railscasts-theme ## solarized-theme solidity-mode color-theme ein better-defaults elpy helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow)))
+    (imenu-list ecb sublime-themes railscasts-theme ## solarized-theme solidity-mode color-theme ein better-defaults elpy helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow)))
  '(show-paren-mode t)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
@@ -1282,3 +1282,7 @@
             ; (load-theme 'railscasts-theme)
     ; (load-theme 'railscasts-theme)
     ; (enable-theme 'railscast-theme)
+
+;; imenu-list - like tagbar
+    (evil-leader/set-key
+        "tt" 'imenu-list-smart-toggle)
