@@ -399,15 +399,19 @@
     ; (require 'tangotango)
     ; (load-theme 'tangotango t)
     ;; Different color themes for GUI and terminal
-    ; (if (display-graphic-p)
-        ; (progn
+    (if (not (display-graphic-p))
+        (progn
             ; (require 'color-theme-sanityinc-tomorrow)
             ; (load-theme 'sanityinc-tomorrow-bright))
+            (set-background-color "#000000")
+            (set-foreground-color "#FFFFFF")))
         ; (load-theme 'wombat)
         ; (add-to-list 'default-frame-alist '(background-color . "000000")))
     ; when terminal emacs is running set background color to 0 (black)
     (unless (or (display-graphic-p) (daemonp))
         (add-to-list 'default-frame-alist '(background-color . "000000")))
+
+    (add-to-list 'default-frame-alist '(foreground-color . "#FFFFFF"))
 
     ; if server daemon is running
     ; (if (daemonp)
@@ -671,6 +675,11 @@
               '(lambda ()
                  (setq flycheck-checker 'vhdl-ghdl)
     (flycheck-mode 1)))
+
+    ;; python disable checker - use elpy
+    ; (add-hook 'python-mode-hook
+              ; '(lambda ()
+                 ; (setq flycheck-checker 'python-pycompile)))
 
 
 ;; helm
