@@ -321,7 +321,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (imenu-list ecb sublime-themes railscasts-theme ## solarized-theme solidity-mode color-theme ein better-defaults elpy helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow)))
+    (yasnippet yasnippet-snippets imenu-list ecb sublime-themes railscasts-theme ## solarized-theme solidity-mode color-theme ein better-defaults elpy helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow)))
  '(show-paren-mode t)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
@@ -1301,3 +1301,19 @@
 
 ;; turn on semantic-mode by default
     (semantic-mode 1)
+
+;; turn on snippets
+    (require 'yasnippet)
+    (require 'yasnippet-snippets)
+    (yas-global-mode 1)
+    ; (use-package yasnippet
+        ; :ensure t
+        ; :init
+            ; (yas-global-mode 1))
+
+;; find tags and definitions
+    ; (require 'ggtags)
+    ; (add-hook 'c-mode-common-hook
+              ; (lambda ()
+                ; (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+                  ; (ggtags-mode 1))))
