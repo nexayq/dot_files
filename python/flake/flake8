@@ -1,0 +1,3 @@
+[flake8]
+ignore = E116, E226, C0103
+max-line-length = 99
