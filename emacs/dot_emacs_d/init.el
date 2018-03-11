@@ -468,7 +468,7 @@
 
 ;; Neotree - neotree
     ; when used with evil mode, first go to insert mode 'i',
-    ; otherwise Enter wont open directory!
+    ; otherwise 'Enter' wont open directory!
     (require 'neotree)
     ; (global-set-key [f8] 'neotree-toggle)
     (evil-leader/set-key
@@ -803,6 +803,8 @@
 
 ;; sr-speedbar
     (require 'sr-speedbar)
+    ; when used with evil mode, first go to insert mode 'i',
+    ; otherwise 'Enter' wont open directory!
     (evil-leader/set-key
        "tt"  'sr-speedbar-toggle          ;; show file hierarchy
        )
@@ -1287,3 +1289,6 @@
     (require 'imenu-list)
     (evil-leader/set-key
         "tt" 'imenu-list-smart-toggle)
+
+;; turn on semantic-mode by default
+    (semantic-mode 1)
