@@ -1323,11 +1323,28 @@
 
     (defun nk-print-fun-def ()
         (interactive)
+        (save-excursion
+            (setq nk-word (current-word))
+            (beginning-of-buffer)
+            (word-search-forward nk-word)
+            (message "%s" (buffer-substring-no-properties
+                           (line-beginning-position) (line-end-position)))))
+
+    (defun nk-try ()
+        (interactive)
+        (setq nk-word (current-word))
+        (beginning-of-buffer)
+        (word-search-forward nk-word))
+
+    ; (defun nk-print-fun-def ()
+        ; (interactive)
+        ; (isearch-forward-word (word-at-point)))
         ; (goto-char (beginning-of-buffer))
         ; (re-search-forward (thing-at-point 'word) nil t))
-        (occur (thing-at-point 'word)))
+        ; (occur (thing-at-point 'word)))
 
-    (define-key evil-normal-state-map (kbd "[ i") 'nk-print-fun-def)
+    (define-key evil-normal-state-map (kbd "[i") 'nk-print-fun-def)
+    (define-key evil-normal-state-map (kbd "[[") 'nk-try)
     ; (evil-leader/set-key
         ; "[i" 'nk-print-fun-def)
 
