@@ -1317,3 +1317,15 @@
               ; (lambda ()
                 ; (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
                   ; (ggtags-mode 1))))
+
+;; print function definition
+
+    (defun nk-print-fun-def ()
+        (interactive)
+        ; (goto-char (beginning-of-buffer))
+        ; (re-search-forward (thing-at-point 'word) nil t))
+        (occur (thing-at-point 'word)))
+
+    (define-key evil-normal-state-map (kbd "[ i") 'nk-print-fun-def)
+    ; (evil-leader/set-key
+        ; "[i" 'nk-print-fun-def)
