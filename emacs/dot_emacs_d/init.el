@@ -1274,8 +1274,8 @@
                                 "pp" 'elpy-shell-send-region-or-buffer
                )))
 
-;; emacs ipython notebook
-    (require 'ein)
+; ;; emacs ipython notebook
+    ; (require 'ein)
 
 ;; pdb debugger setup
     (setq gud-pdb-command-name "python -m pdb")
@@ -1304,9 +1304,9 @@
     (semantic-mode 1)
 
 ;; turn on snippets
-    (require 'yasnippet)
-    (require 'yasnippet-snippets)
-    (yas-global-mode 1)
+    ; (require 'yasnippet)
+    ; (require 'yasnippet-snippets)
+    ; (yas-global-mode 1)
     ; (use-package yasnippet
         ; :ensure t
         ; :init
