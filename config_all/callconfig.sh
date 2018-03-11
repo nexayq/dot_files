@@ -25,6 +25,11 @@
     ln -s $CONFIG_DIR/config/bash/callback.sh callback.sh
     ln -s $CONFIG_DIR/config/dir_colors/dot_dir_colors .dir_colors
 
+    cd $HOME/.config
+    ln -s $CONFIG_DIR/dot_files/python/flake/flake8 flake8
+
+    cd $HOME
+
     # rm callconfig.sh
     # ln -s $CONFIG_DIR/dot_files/config_all/callconfig.sh callconfig.sh
 
