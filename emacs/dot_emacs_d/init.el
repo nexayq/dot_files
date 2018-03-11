@@ -476,7 +476,8 @@
     (require 'neotree)
     ; (global-set-key [f8] 'neotree-toggle)
     (evil-leader/set-key
-        "ee" 'neotree-toggle)
+        "ee" 'neotree-toggle
+        "eb" 'neotree-find)
         ; https://www.youtube.com/watch?v=NKtocCAWxiE
     ; C-c C-c - Change root directory
     ; g - refresh list
