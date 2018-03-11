@@ -752,8 +752,8 @@
        ; "yy"  'helm-show-kill-ring ;; list last deletitions
        ; ; "ff"  'helm-cmd-t          ;; open new file
        ; "ff"  'projectile-find-file      ;; open new file for git project
-       "ff"  'projectile-find-file      ;; open new file for git project or ".projectile"
-       "ft"  'ido-find-file      ;; open new file, find using tree
+       "ft"  'projectile-find-file      ;; open new file for git project or ".projectile"
+       "ff"  'ido-find-file      ;; open new file, find using tree
        ; "ff"  'helm-find-files     ;; open new file
        ; "ff"  'helm-for-files     ;; open new file
        )
@@ -1284,5 +1284,6 @@
     ; (enable-theme 'railscast-theme)
 
 ;; imenu-list - like tagbar
+    (require 'imenu-list)
     (evil-leader/set-key
         "tt" 'imenu-list-smart-toggle)
