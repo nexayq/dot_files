@@ -1330,3 +1330,30 @@
     (define-key evil-normal-state-map (kbd "[ i") 'nk-print-fun-def)
     ; (evil-leader/set-key
         ; "[i" 'nk-print-fun-def)
+
+;; print file name of current buffer
+    (defun show-file-name ()
+      "Show the full path file name in the minibuffer."
+      (interactive)
+      (message (buffer-file-name)))
+
+    (defun my-put-file-name-on-clipboard ()
+      "Put the current file name on the clipboard"
+      (interactive)
+      (let ((filename (if (equal major-mode 'dired-mode)
+                          default-directory
+                        (buffer-file-name))))
+        (when filename
+          (with-temp-buffer
+            (insert filename)
+            (clipboard-kill-region (point-min) (point-max)))
+          (message filename))))
+
+    (defun nk-show-copy-file-path ()
+      (interactive)
+      (show-file-name)
+      (my-put-file-name-on-clipboard))
+
+    (evil-leader/set-key
+        "xf" 'nk-show-copy-file-path)
+        ; "eb" 'neotree-find)
