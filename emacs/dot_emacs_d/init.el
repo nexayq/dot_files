@@ -1423,7 +1423,7 @@
 
     ;; set breakpoint at current line
     (evil-leader/set-key
-        "dd" 'gud-tbreak)
+        "dd" 'gud-break)
 
     ;; setup debug view (6 windows)
     (setq
