@@ -1449,3 +1449,12 @@
     (evil-leader/set-key
         "ss"  'nk-replace-string
         "sww" 'nk-replace-string-cursor)
+
+;; eval-region for elisp
+    (defun nk-eval-elisp (beginning end)
+      (interactive "r")
+      (if (use-region-p)
+        (eval-region beginning end)))
+
+    (evil-leader/set-key
+        "qq"  'nk-eval-elisp)
