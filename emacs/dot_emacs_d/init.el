@@ -812,12 +812,12 @@
         ; (setq helm-split-window-preferred-function 'ignore)
 
 ;; sr-speedbar
-    (require 'sr-speedbar)
-    ; when used with evil mode, first go to insert mode 'i',
-    ; otherwise 'Enter' wont open directory!
-    (evil-leader/set-key
-       "tt"  'sr-speedbar-toggle          ;; show file hierarchy
-       )
+    ; (require 'sr-speedbar)
+    ; ; when used with evil mode, first go to insert mode 'i',
+    ; ; otherwise 'Enter' wont open directory!
+    ; (evil-leader/set-key
+       ; "tt"  'sr-speedbar-toggle          ;; show file hierarchy
+       ; )
 
 ;; desktop+
     ; (setq server-use-tcp t)
@@ -1298,7 +1298,18 @@
 ;; imenu-list - like tagbar
     (require 'imenu-list)
     (evil-leader/set-key
-        "tt" 'imenu-list-smart-toggle)
+        "tt" 'imenu-list-smart-toggle
+        "ta" 'nk-semantic-mode-toggle)
+    ; (setq imenu-list-idle-update-delay-time 5)
+    ; use <SPACE> to stay in tag window while jumping to functions
+
+
+    ;; can slow down emacs!
+    (defun nk-semantic-mode-toggle ()
+      (interactive)
+      (if (not semantic-mode)
+          (semantic-mode 1)
+       (semantic-mode 0)))
 
 ;; turn on semantic-mode by default
 ;; can slow down emacs! drastically - cpp files for example
@@ -1310,7 +1321,7 @@
     ; ; (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
     ; (global-semanticdb-minor-mode 1)
     ; (global-semantic-idle-scheduler-mode 1)
-    ; (semantic-mode 0)
+    ; (semantic-mode 1)
 
 ;; turn on snippets
     ; (require 'yasnippet)
