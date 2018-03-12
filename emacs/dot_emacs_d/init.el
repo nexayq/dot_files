@@ -1264,8 +1264,8 @@
     (require 'elpy)
     (elpy-enable)
 
-    (setq python-shell-interpreter "ipython"
-          python-shell-interpreter-args "-i --simple-prompt")
+    (setq python-shell-interpreter "ipython3"
+          python-shell-interpreter-args "-i")
 
     (add-hook 'python-mode-hook
         ; verilog-sk-*
