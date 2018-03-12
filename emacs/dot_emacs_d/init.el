@@ -1433,3 +1433,6 @@
          ;; Non-nil means display source file containing the main routine at startup
          gdb-show-main t
      )
+
+;; run emacs lisp (elisp) commands in emacs - run "ielm"
+    ;; :ielm
