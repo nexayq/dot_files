@@ -1301,7 +1301,16 @@
         "tt" 'imenu-list-smart-toggle)
 
 ;; turn on semantic-mode by default
-    (semantic-mode 1)
+;; can slow down emacs! drastically - cpp files for example
+    ; (add-hook 'speedbar-load-hook (lambda () (require 'semantic/sb)))
+    ; (require 'cedet-global)
+    ; (require 'cc-mode)
+    ; (require 'semantic)
+    ; ; (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+    ; ; (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+    ; (global-semanticdb-minor-mode 1)
+    ; (global-semantic-idle-scheduler-mode 1)
+    ; (semantic-mode 0)
 
 ;; turn on snippets
     ; (require 'yasnippet)
