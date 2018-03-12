@@ -1451,10 +1451,24 @@
         "sww" 'nk-replace-string-cursor)
 
 ;; eval-region for elisp
-    (defun nk-eval-elisp (beginning end)
+    (defun nk-eval-elisp-region (beginning end)
       (interactive "r")
       (if (use-region-p)
         (eval-region beginning end)))
 
-    (evil-leader/set-key
-        "qq"  'nk-eval-elisp)
+    ; (defun nk-eval-elisp-line
+      ; (interactive)
+        ; (call-interactively 'eval-last-sexp))
+
+    (defun nk-eval-elisp-line()
+      (interactive)
+        (save-excursion
+            (move-end-of-line nil)
+            (call-interactively 'eval-last-sexp)))
+
+    (define-key evil-normal-state-map (kbd "SPC q q") 'nk-eval-elisp-line)
+    (define-key evil-visual-state-map (kbd "SPC q q") 'nk-eval-elisp-region)
+
+    ; (evil-leader/set-key
+        ; "qq" evil-visual-state-map 'nk-eval-elisp-region
+        ; "qq" evil-normal-state-map 'nk-eval-elisp-line)
