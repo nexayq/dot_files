@@ -1436,15 +1436,19 @@
 
 ;; run emacs lisp (elisp) commands in emacs - run "ielm"
     ;; :ielm
-    (defun nk-replace-string ()
+    (defun nk-replace-string()
         (interactive)
-        (evil-ex "%s,,,g")
-        )
+        (minibuffer-with-setup-hook
+            (lambda () (backward-char 3))
+            (evil-ex "%s,,,g")))
+        ; https://stackoverflow.com/a/22795728/2450748
 
     (defun nk-replace-string-cursor ()
         (interactive)
-        (evil-ex (concatenate 'string "%s," (current-word) ",,gc"))
-        )
+        (minibuffer-with-setup-hook
+            (lambda () (backward-char 3))
+            (evil-ex (concatenate 'string "%s," (current-word) ",,gc"))))
+        ; https://stackoverflow.com/a/22795728/2450748
 
     (evil-leader/set-key
         "ss"  'nk-replace-string
