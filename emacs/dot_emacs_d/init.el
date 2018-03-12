@@ -1443,7 +1443,7 @@
             (evil-ex "%s,,,g")))
         ; https://stackoverflow.com/a/22795728/2450748
 
-    (defun nk-replace-string-cursor ()
+    (defun nk-replace-string-cursor()
         (interactive)
         (minibuffer-with-setup-hook
             (lambda () (backward-char 3))
