@@ -26,7 +26,7 @@
     ln -s $CONFIG_DIR/config/dir_colors/dot_dir_colors .dir_colors
 
     # Python config
-    ln -s $CONFIG_DIR/config/python/pylint/dot_pylintrc .pylintrc
+    ln -s $CONFIG_DIR/dot_files/python/pylint/dot_pylintrc .pylintrc
     cd $HOME/.config
     ln -s $CONFIG_DIR/dot_files/python/flake/flake8 flake8
     cd $HOME
