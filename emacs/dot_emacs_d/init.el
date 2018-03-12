@@ -1394,3 +1394,42 @@
     (evil-leader/set-key
         "xf" 'nk-show-copy-file-path)
         ; "eb" 'neotree-find)
+
+;; gbd setup
+    ;; compile source code with -g flag - debugging
+        ;; g++ ./b.cpp -o b.out -g
+
+    ;; from emacs run gdb
+        ;; :gdb -i=mi b.out
+
+    ;; specify file for debugging in gdb
+        ;; file b.out
+
+    ;; set breakpoints in file from gdb (line 31)
+        ;; click on left side of code to select debug point
+            ;; or
+        ;; (gdb) break b.cpp:31
+            ;; or
+        ;; use <leader>dd to specify temp debug line - one session only
+
+    ;; run your program from gdb
+        ;; r
+
+    ;; go to next instruction
+        ;; n
+
+    ;; continue program execution
+        ;; c
+
+    ;; set breakpoint at current line
+    (evil-leader/set-key
+        "dd" 'gud-tbreak)
+
+    ;; setup debug view (6 windows)
+    (setq
+         ;; use gdb-many-windows by default
+         gdb-many-windows t
+
+         ;; Non-nil means display source file containing the main routine at startup
+         gdb-show-main t
+     )
