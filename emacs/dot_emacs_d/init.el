@@ -1464,13 +1464,15 @@
       ; (interactive)
         ; (call-interactively 'eval-last-sexp))
 
-    (defun nk-eval-elisp-line()
+    (defun nk-eval-elisp-function()
       (interactive)
-        (save-excursion
-            (move-end-of-line nil)
-            (call-interactively 'eval-last-sexp)))
+          (goto-char (search-forward ")"))
+          (left-char)
+        ; (save-excursion
+            ; (move-end-of-line nil)
+            (call-interactively 'eval-last-sexp))
 
-    (define-key evil-normal-state-map (kbd "SPC q q") 'nk-eval-elisp-line)
+    (define-key evil-normal-state-map (kbd "SPC q q") 'nk-eval-elisp-function)
     (define-key evil-visual-state-map (kbd "SPC q q") 'nk-eval-elisp-region)
 
     ; (evil-leader/set-key
