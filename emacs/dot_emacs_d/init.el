@@ -1466,14 +1466,25 @@
 
     (defun nk-eval-elisp-function()
       (interactive)
-          (goto-char (search-forward ")"))
-          (left-char)
+          (goto-char (search-backward "("))
+          ;; match pair closed parentheses
+          (evil-jump-item)
+          ;; (left-char)
         ; (save-excursion
             ; (move-end-of-line nil)
+          ; (evil-forward-WORD-end nil)
             (call-interactively 'eval-last-sexp))
+
+    (defun nk-eval-elisp-sexp()
+      (interactive)
+          ; (goto-char (search-forward-regexp ")\\|\s\\|$"))
+          ; (goto-char (search-forward-regexp "[0-9a-zA-Z_-]+"))
+          ;; (left-char 1)
+          (call-interactively 'eval-last-sexp))
 
     (define-key evil-normal-state-map (kbd "SPC q q") 'nk-eval-elisp-function)
     (define-key evil-visual-state-map (kbd "SPC q q") 'nk-eval-elisp-region)
+    (define-key evil-normal-state-map (kbd "SPC q w") 'nk-eval-elisp-sexp)
 
     ; (evil-leader/set-key
         ; "qq" evil-visual-state-map 'nk-eval-elisp-region
