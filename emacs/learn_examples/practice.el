@@ -1,4 +1,3 @@
-
 ;; https://www.youtube.com/watch?v=2z-YBsd5snY
 
 ;; USE HELP - it is great!
@@ -115,3 +114,8 @@ path-separator
         (save-excursion
             (move-end-of-line nil)   ;; proba
             (call-interactively 'eval-last-sexp)))
+
+    (string-equal (string (char-after (point))) ")")
+
+
+((string (char-after 1)))
