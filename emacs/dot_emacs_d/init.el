@@ -1493,3 +1493,6 @@
     ; (evil-leader/set-key
         ; "qq" evil-visual-state-map 'nk-eval-elisp-region
         ; "qq" evil-normal-state-map 'nk-eval-elisp-line)
+
+;; save location of cursor (point) of closed file
+    (save-place-mode t)
