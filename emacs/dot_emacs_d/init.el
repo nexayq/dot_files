@@ -1013,6 +1013,7 @@
 ;; Dont create backup files, disable autosave
     (setq make-backup-files nil)
     (setq auto-save-default nil)
+    (setq create-lockfiles nil)
         ; https://www.emacswiki.org/emacs/AutoSave
     (setq backup-directory-alist '(("." . "~/emacs-backups")))
         ; http://stackoverflow.com/a/1199346/2450748
