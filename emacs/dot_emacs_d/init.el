@@ -1341,7 +1341,6 @@
                   ; (ggtags-mode 1))))
 
 ;; print function definition
-
     (defun nk-print-fun-def ()
         (interactive)
         (save-excursion
