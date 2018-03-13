@@ -1,7 +1,10 @@
 
 ;; ===================================================
 
-;; https://www.youtube.com/watch?v=2z-YBsd5snY
+;; An Introduction to Emacs Lisp - YouTube
+    ;; https://www.youtube.com/watch?v=2z-YBsd5snY
+;; An Introduction to Emacs Lisp - Webpage, PDF
+    ;; https://harryrschwartz.com/2014/04/08/an-introduction-to-emacs-lisp.html
 
 ;; USE HELP - it is great!
 ;; C-h f -> Functions help
