@@ -1466,9 +1466,12 @@
 
     (defun nk-eval-elisp-function()
       (interactive)
-          (goto-char (search-backward "("))
+      (if (not (string-equal (string (char-after (point))) ")"))
+        (progn
+          (if (not (string-equal (string (char-after (point))) "("))
+              (goto-char (search-backward "(")))
           ;; match pair closed parentheses
-          (evil-jump-item)
+          (evil-jump-item)))
           ;; (left-char)
         ; (save-excursion
             ; (move-end-of-line nil)
