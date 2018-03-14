@@ -1494,3 +1494,7 @@
 
 ;; save location of cursor (point) of closed file
     (save-place-mode t)
+
+;; change "yes or no" to "y or n"
+    (fset 'yes-or-no-p 'y-or-n-p)
+        ; http://pages.sachachua.com/.emacs.d/Sacha.html#org2509ed6
