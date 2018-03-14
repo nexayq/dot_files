@@ -1170,14 +1170,14 @@
         ; verilog-sk-*
               (lambda ()
                         (evil-leader/set-key
-                                "th" 'verilog-sk-header
-                                "tm" 'verilog-sk-module
-                                "ti" 'verilog-sk-input
-                                "to" 'verilog-sk-output
+                                "-h" 'verilog-sk-header
+                                "-m" 'verilog-sk-module
+                                "-i" 'verilog-sk-input
+                                "-o" 'verilog-sk-output
                         ; C-c C-a - expand AUTOARG, AUTOWIRE, AUTOREG, AUTOSENSE, ...
                         ; C-c C-k - undo expand of AUTOARG, AUTOWIRE, AUTOREG, AUTOSENSE, ...
-                                "ts" 'verilog-sk-state-machine
-                                "ta" 'verilog-sk-always
+                                "-s" 'verilog-sk-state-machine
+                                "-a" 'verilog-sk-always
                )))
 
 ;; vhdl-mode
@@ -1227,13 +1227,13 @@
         ; vhdl-template-*
               (lambda ()
                         (evil-leader/set-key
-                                "th" 'vhdl-template-header
-                                "tn" 'vhdl-compose-new-component
-                                "tp" 'vhdl-template-port
-                                "tf" 'vhdl-template-for-generate
-                                "te" 'vhdl-template-entity
-                                "ta" 'vhdl-template-architecture
-                                "ti" 'vhdl-template-component-inst
+                                "-h" 'vhdl-template-header
+                                "-n" 'vhdl-compose-new-component
+                                "-p" 'vhdl-template-port
+                                "-f" 'vhdl-template-for-generate
+                                "-e" 'vhdl-template-entity
+                                "-a" 'vhdl-template-architecture
+                                "-i" 'vhdl-template-component-inst
                )))
 
     (evil-leader/set-key
@@ -1269,7 +1269,6 @@
           python-shell-interpreter-args "-i")
 
     (add-hook 'python-mode-hook
-        ; verilog-sk-*
               (lambda ()
                         (evil-leader/set-key
                                 "pp" 'elpy-shell-send-region-or-buffer
