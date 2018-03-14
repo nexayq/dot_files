@@ -1,4 +1,6 @@
 ;; Great init.el files
+    ; https://github.com/hrs/dotfiles/blob/master/emacs/.emacs.d/configuration.org
+    ; http://pages.sachachua.com/.emacs.d/Sacha.html
     ; https://dl.dropboxusercontent.com/u/3968124/sacha-emacs.html
     ; https://github.com/gopar/.emacs.d/blob/master/init.el
     ; https://github.com/aaronbieber/dotfiles/tree/master/configs/emacs.d
