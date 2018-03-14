@@ -7,6 +7,7 @@
     ;; https://harryrschwartz.com/2014/04/08/an-introduction-to-emacs-lisp.html
 ;; Emacs dotfiles
     ;; https://github.com/hrs/dotfiles/blob/master/emacs/.emacs.d/configuration.org
+    ;; http://pages.sachachua.com/.emacs.d/Sacha.html
 
 ;; USE HELP - it is great!
 ;; C-h f -> Functions help
@@ -175,8 +176,18 @@
     (factorial 50)
     (factorial 100)
 
+;; anonymous functions (functions with no name)
+;; lambda() - pointer to a function
+;; lambda is the symbol for an anonymous function, a function without a name
+;; function defined inline
+(lambda (y) (* y y))
+((lambda (y) (* y y)) 5)
+((lambda (number) (* 7 number)) 3)
 
-      
+;; bind lambda function to some name - similar to defun
+(fset 'square-again (lambda (y) (* y y)))
+(square-again 10)
+
 
 ;;; practice starts here
 
