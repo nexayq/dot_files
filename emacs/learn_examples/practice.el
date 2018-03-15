@@ -58,6 +58,9 @@
     (car '(1 2 3))
 ;; rest elements of list (all except first) - cdr (contents of decrement part of the register)
     (cdr '(1 2 3))
+;; add element to the front of list - push, modifies variable
+    (setq bla-list '(1 5 8))
+    (push 0 bla-list)
 
 ;; empty list, same as nil
     '()
@@ -267,6 +270,70 @@
     ;; built in tutorials for elisp
     (info "(eintr) Top")
     (info "(elisp) Top")
+
+;; =====================================================
+;; https://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html
+
+    ;; insert text in buffer after cursor (point)
+    (insert "Hi there") 
+    (setq myname "Yuns")
+    (insert "Hi " myname)
+
+    ;; switch to another buffer
+    (switch-to-buffer-other-window "*scratch*")
+    ;; write something in another buffer
+    (progn
+        (switch-to-buffer-other-window "*scratch*")
+        (insert "Hi scratch buffer"))
+    ;; delete content from *scratch* buffer
+    (progn
+        (switch-to-buffer-other-window "*scratch*")
+        (erase-buffer))
+    ;; go to next window (rotates at the end)
+    (other-window 1)
+
+    ;; read something from user - minibuffer
+    (read-from-minibuffer "Enter some text:")
+    (setq number_a (read-from-minibuffer "Enter some number:"))
+    (message (format "You entered number %s" number_a))
+
+    ;; write and replace text in *scratch* buffer
+    (progn
+        ;; go to buffer scratch in other window (horizontal split)
+        (switch-to-buffer-other-frame "*scratch*")
+        ;; delete content of scratch buffer
+        (erase-buffer)
+        ;; insert some text in scratch buffer
+        (insert "bla Bla truc\n blabla bre bla")
+        ;; go to next window (split) - this file, practice.el
+        (other-window 1))
+
+    (progn
+        ;; go to buffer scratch in other window (horizontal split)
+        (switch-to-buffer-other-frame "*scratch*")
+        ;; go to the beggining of scratch buffer
+        (goto-char (point-min))
+        ;; search and replace string "bla" with "PRO", supress search failed
+        ;; search-forward returns nil when there are are no more matches in file
+        (while (search-forward "bla" nil t)
+          (replace-match "PRO"))
+          ;; go to next window (split) - this file, practice.el
+          (other-window 1))
+
+        ;; Lowercase matched string - "PRO"
+        (progn
+            ;; go to buffer scratch in other window (horizontal split)
+            (switch-to-buffer-other-frame "*scratch*")
+            ;; go to the beggining of scratch buffer
+            (goto-char (point-min))
+            ;; search regex "PRO[a-zA-Z]" and bold that text
+            ;; search-forward returns nil when there are are no more matches in file
+            (while (re-search-forward "PRO" nil t)
+              ;; C-h f add-text-properties
+              (replace-match (downcase (match-string 0)) t))
+                ;; (insert "-bre")))
+            ;; go to next window (split) - this file, practice.el
+            (other-window 1))
 
 ;;; practice starts here
 
