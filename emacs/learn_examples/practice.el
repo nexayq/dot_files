@@ -5,6 +5,8 @@
     ;; https://www.youtube.com/watch?v=2z-YBsd5snY
 ;; An Introduction to Emacs Lisp - Webpage, PDF
     ;; https://harryrschwartz.com/2014/04/08/an-introduction-to-emacs-lisp.html
+;; Learn Emacs Lisp in 15 minutes
+    ;; https://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html
 ;; Emacs dotfiles
     ;; https://github.com/hrs/dotfiles/blob/master/emacs/.emacs.d/configuration.org
     ;; http://pages.sachachua.com/.emacs.d/Sacha.html
@@ -104,18 +106,18 @@
 
 ;; functions
     (defun say-hello()
-    (message "hello!"))
-    ;; call function
-    (say-hello)
+        (message "hello!"))
+        ;; call function
+        (say-hello)
 
     (defun square(x)
-    (* x x))
+        (* x x))
 
     (square 5)
 
     (defun distance-try()
-    (sqrt (+ (square (- (car '(4 2)) (car '(3 5))))
-            (square (- (nth 1 '(4 2)) (nth 1 '(3 5)))))))
+        (sqrt (+ (square (- (car '(4 2)) (car '(3 5))))
+                (square (- (nth 1 '(4 2)) (nth 1 '(3 5)))))))
 
     ;; (+ (square (- (car '(4 2)) (car '(5 3))))
     ;; (square (- (cdr '(4 2)) (cdr '(5 3))))
@@ -125,8 +127,8 @@
     (distance-try)
 
     (defun distance(p1 p2)
-    (sqrt (+ (square (- (nth 0 p2) (nth 0 p1)))
-            (square (- (nth 1 p2) (nth 1 p1))))))
+        (sqrt (+ (square (- (nth 0 p2) (nth 0 p1)))
+                (square (- (nth 1 p2) (nth 1 p1))))))
 
 
     (distance '(3 5) '(4 2))
@@ -145,6 +147,8 @@
 
      (even-or-odd 3)
      (even-or-odd 4)
+     (setq blb '2)
+     (even-or-odd blb)
 
      ;; cond is like switch/case in other languages
      (setq n 2)
@@ -180,14 +184,88 @@
 ;; lambda() - pointer to a function
 ;; lambda is the symbol for an anonymous function, a function without a name
 ;; function defined inline
-(lambda (y) (* y y))
-((lambda (y) (* y y)) 5)
-((lambda (number) (* 7 number)) 3)
+    (lambda (y) (* y y))
+    ((lambda (y) (* y y)) 5)
+    ((lambda (number) (* 7 number)) 3)
 
-;; bind lambda function to some name - similar to defun
-(fset 'square-again (lambda (y) (* y y)))
-(square-again 10)
+    ;; bind lambda function to some name - similar to defun
+        (fset 'square-again (lambda (y) (* y y)))
+        (square-again 10)
 
+;; call function on multiple elements
+;; 'something - means dont evaluate, just pass it as argument
+    (mapcar 'upcase '("foo" "bar" "zez"))
+
+    ;; check if integer is odd - oddp function, return t or nil
+    (oddp 3)
+    (oddp 4)
+
+    ; remove elements that are not odd from list, odd elements stay
+    (remove-if-not 'oddp '(0 1 2 3 4 5))
+    ; remove elements that are odd from list
+    (remove-if 'oddp '(0 1 2 3 4 5))
+
+;; sort function example
+    (defun quick-sort (list)
+        "Sort the `list' using quicksort algorithm"
+        (if (null list)
+            '()
+            (let* ((pivot (car list))
+                (rest (cdr list))
+                (lesser (remove-if-not
+                    (lambda (x) (<= x pivot)) rest))
+                (greater (remove-if-not
+                    (lambda (x) (>= x pivot)) rest)))
+              ;; (list pivot) creates new list with only pivot element
+            (append (quick-sort lesser) (list pivot) (quick-sort greater)))))
+
+    ;; check quick-sort function
+        (quick-sort '(1 3 2))
+        (setq sample-list '(5 3 9 -1 14 2))
+        (quick-sort '(5 3 9 -1 14 2))
+        (quick-sort sample-list)
+        (defvar blsd '(5 3 9 -1 14 2))
+        (quick-sort blsd)
+        (symbol-value 'sample-list)
+
+;; keybindings - keymaps
+    (global-set-key (kbd "C-l") 'sort-lines)
+    1
+    2
+    3
+
+;; check current emacs mode
+    major-mode
+
+;; set keybinding for some special mode - c-mode
+   (add-hook 'c-mode-common-hook
+             (lambda (x)
+               (local-set-key (kbd "<f5>") 'recompile)))
+
+;; built-in documentation
+    (kbd "C-h k")
+
+    ;; describe key press - C-h k
+    (describe-key (kbd "C-h k"))
+
+    ;; search function in doc - C-h a
+    (apropos-command "regex")
+
+    ;; describe function - C-h f
+    (describe-function 'quick-sort)
+
+    ;; describe variable - C-h v
+    (describe-variable 'path-separator)
+
+    ;; describe current mode - C-h m
+    (describe-mode)
+
+    ;; help for help command - C-h C-h
+    (help-for-help)
+
+
+    ;; built in tutorial for elisp
+    (info "(eintr) Top")
 
 ;;; practice starts here
 
