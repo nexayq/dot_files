@@ -264,8 +264,9 @@
     (help-for-help)
 
 
-    ;; built in tutorial for elisp
+    ;; built in tutorials for elisp
     (info "(eintr) Top")
+    (info "(elisp) Top")
 
 ;;; practice starts here
 
