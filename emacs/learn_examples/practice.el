@@ -320,7 +320,7 @@
           ;; go to next window (split) - this file, practice.el
           (other-window 1))
 
-        ;; Lowercase matched string - "PRO"
+        ;; Lowercase matched regex - "PRO[a-zA-Z]"
         (progn
             ;; go to buffer scratch in other window (horizontal split)
             (switch-to-buffer-other-frame "*scratch*")
@@ -328,9 +328,11 @@
             (goto-char (point-min))
             ;; search regex "PRO[a-zA-Z]" and bold that text
             ;; search-forward returns nil when there are are no more matches in file
-            (while (re-search-forward "PRO" nil t)
+            (while (re-search-forward "PRO[a-zA-Z]" nil t)
               ;; C-h f add-text-properties
-              (replace-match (downcase (match-string 0)) t))
+              ;; (replace-match (downcase (match-string 0)) t))
+              ;; C-h f downcase-region
+              (downcase-region (match-beginning 0) (match-end 0)))
                 ;; (insert "-bre")))
             ;; go to next window (split) - this file, practice.el
             (other-window 1))
