@@ -369,6 +369,7 @@
       "Count number of words in *scratch* buffer"
       ;; interactive - appear as global function
       (interactive)
+      ;; (setq nk-orig-table (syntax-table))
       ;; treat abe_123 as one word
       (modify-syntax-entry ?_ "w")
       ;; treat abe-123 as one word
@@ -386,6 +387,8 @@
         ;; return to previous window - practice.el
         (other-window 1)
         (print (format "Number of words in *scratch* buffer: %d" sum-count))
+        ;; return default behaviour for word
+        ;; (set-syntax-table nk-orig-table)
         ;; function return value is sum-count
         sum-count))
 
