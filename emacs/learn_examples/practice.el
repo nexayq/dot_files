@@ -369,17 +369,18 @@
       "Count number of words in *scratch* buffer"
       ;; interactive - appear as global function
       (interactive)
-      ;; (setq nk-orig-table (syntax-table))
-      ;; treat abe_123 as one word
-      (modify-syntax-entry ?_ "w")
-      ;; treat abe-123 as one word
-      (modify-syntax-entry ?- "w")
+      ;; (set-syntax-table nk-default-table)
+      ;; (setq nk-default-table (make-syntax-table)))
       ;; go to *scratch* buffer in other window
       (switch-to-buffer-other-window "*scratch*")
       (let ((sum-count 0))
         ;; remember where cursor (point) was and return
         ;; there after evaluating body inside save-excursion
         (save-excursion
+            ;; treat abe_123 as one word, only for this counting (excursion)
+            (modify-syntax-entry ?_ "w")
+            ;; treat abe-123 as one word, only for this counting (excursion)
+            (modify-syntax-entry ?- "w") 
             ;; go to the beginning of buffer
             (goto-char (point-min))
                 (while (forward-word)
@@ -387,8 +388,9 @@
         ;; return to previous window - practice.el
         (other-window 1)
         (print (format "Number of words in *scratch* buffer: %d" sum-count))
-        ;; return default behaviour for word
-        ;; (set-syntax-table nk-orig-table)
+        ;; return default behaviour for word and emacs lisp highlighting
+        ;; (set-syntax-table nk-default-table)
+        ;; (emacs-lisp-mode)
         ;; function return value is sum-count
         sum-count))
 
