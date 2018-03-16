@@ -323,7 +323,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (yasnippet yasnippet-snippets imenu-list ecb sublime-themes railscasts-theme ## solarized-theme solidity-mode color-theme ein better-defaults elpy helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow)))
+    (company-jedi jedi yasnippet yasnippet-snippets imenu-list ecb sublime-themes railscasts-theme ## solarized-theme solidity-mode color-theme ein better-defaults elpy helm-ls-git helm-cmd-t drag-stuff desktop+ color-theme-modern popwin dirtree neotree ox-twbs smooth-scrolling rainbow-delimiters powerline evil color-theme-sanityinc-tomorrow)))
  '(show-paren-mode t)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
@@ -1275,6 +1275,12 @@
                         (evil-leader/set-key
                                 "pp" 'elpy-shell-send-region-or-buffer
                )))
+
+    ;; use company-jedi package for python autocomplete
+    (defun my/python-mode-hook ()
+      (add-to-list 'company-backends 'company-jedi))
+
+    (add-hook 'python-mode-hook 'my/python-mode-hook)
 
 ; ;; emacs ipython notebook
     ; (require 'ein)
