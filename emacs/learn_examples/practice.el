@@ -337,6 +337,15 @@
             ;; go to next window (split) - this file, practice.el
             (other-window 1))
 
+;; loop through list
+    (setq abe-list '("pita" "pizza" "persun" "pire"))
+    ;; print elements that start with string "pi"
+    (dolist (jelo abe-list)
+      (if (string= (substring jelo 0 2) "pi")
+          ;; message only prints one at a time;
+          ;; print prints all lines in minibuffer
+          (print jelo)))
+
 ;;; practice starts here
 
     (defun nk-eval-elisp-function()
