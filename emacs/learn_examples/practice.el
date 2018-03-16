@@ -378,12 +378,13 @@
         ;; there after evaluating body inside save-excursion
         (save-excursion
             ;; treat abe_123 as one word, only for this counting (excursion)
-            (modify-syntax-entry ?_ "w")
+            ;; (modify-syntax-entry ?_ "w")
             ;; treat abe-123 as one word, only for this counting (excursion)
-            (modify-syntax-entry ?- "w") 
+            ;; (modify-syntax-entry ?- "w")
             ;; go to the beginning of buffer
             (goto-char (point-min))
-                (while (forward-word)
+                ;; forward symbol counts abe_123 as one word, unlike forward-word
+                (while (forward-symbol 1)
                     (setq sum-count (+ sum-count 1))))
         ;; return to previous window - practice.el
         (other-window 1)
