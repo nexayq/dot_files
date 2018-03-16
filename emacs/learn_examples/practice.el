@@ -337,6 +337,8 @@
             ;; go to next window (split) - this file, practice.el
             (other-window 1))
 
+;; Elisp Tutorial - Part 3 Looping and Local Variables
+    ;; https://www.youtube.com/watch?v=VqCSbDqHziM
 ;; loop through list
     (setq abe-list '("pita" "pizza" "persun" "pire"))
     ;; print elements that start with string "pi"
@@ -345,6 +347,20 @@
           ;; message only prints one at a time;
           ;; print prints all lines in minibuffer
           (print jelo)))
+
+;; sum even numbers in list
+    (defun sum-evens(numbers-list)
+    "Sum even numbers in list"
+    (let ((sum 0))
+        (dolist (elm numbers-list)
+            (when (= (mod elm 2) 0)
+                (setq sum (+ sum elm))))
+        ;; last thing function evaluates is function return value
+        sum))
+
+    (sum-evens '(2 3 6))
+    (setq ki-list '(1 3 10 20 5 4))
+    (sum-evens ki-list)
 
 ;;; practice starts here
 
