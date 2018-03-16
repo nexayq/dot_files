@@ -398,6 +398,53 @@
     ;; call function to count words in *scratch* buffer
     (nk/count-words)
 
+;; Elisp Tutorial - Part 5 Creating a minor mode
+    ;; https://www.youtube.com/watch?v=QaX3AaK3_Lk
+
+;; minor mode to capitalize true and false keywords
+    ;; define words we want to capitalize in list
+    (defvar nk/words-to-capitalize '("true" "false")
+        "Words to capitalize")
+
+    (defun nk/check-and-capitalize()
+      "Capitalize true and false statements"
+      ;; if character entered is "e" (last character of true and false)
+      ;; last-command-event is last character entered
+      ;; 101 is decimal ASCII code for character "e"
+      (if (= last-command-event 101)
+          (nk/capitalize-true-false)))
+
+    (defun nk/capitalize-true-false()
+    ;; go back after capitalizing needed words
+    (save-excursion
+      ;; copy word backward from "e" to start of word
+      (copy-region-as-kill (point) (progn (backward-sexp) (point)))
+      ;; if copied word is in list of keywords (true, false) then capitalize it
+      (when (member (current-kill 0) nk/words-to-capitalize)
+        (capitalize-word 1))
+      ;; remove element from keyring in order to keep keyring clean
+      (setq kill-ring (cdr kill-ring))))
+
+    ;; define new minor mode
+    (define-minor-mode nk-mode/true-false-capitalize
+        "Automatically capitalize true and false"
+        ;; lighter is text shown above minibuffer (down)
+        ;; add space in front so you dont have connected strings
+        ;; when multiple lighters are used
+        :lighter " True/False"
+        ;; define add and remove hooks
+
+        (if nk-mode/true-false-capitalize
+            (add-hook 'post-self-insert-hook
+                      'nk/check-and-capitalize nil t)
+          (remove-hook 'post-self-insert-hook
+                       'nk/check-and-capitalize t)))
+
+    ;; start new custom minor mode
+    ;;   :nk-mode/true-false-capitalize
+    True
+    False
+
 
 ;;; practice starts here
 
