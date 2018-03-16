@@ -431,7 +431,7 @@
         ;; lighter is text shown above minibuffer (down)
         ;; add space in front so you dont have connected strings
         ;; when multiple lighters are used
-        :lighter " True/False"
+        :lighter "NK Bool"
         ;; define add and remove hooks
 
         (if nk-mode/true-false-capitalize
