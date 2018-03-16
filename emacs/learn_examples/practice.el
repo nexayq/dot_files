@@ -362,6 +362,37 @@
     (setq ki-list '(1 3 10 20 5 4))
     (sum-evens ki-list)
 
+;; Elisp Tutorial - Part 4 Interactive Functions
+    ;; https://www.youtube.com/watch?v=KwBRpS9Bs4U
+;; interactive function - appears as a call in minibuffer - :nk/count-words
+    (defun nk/count-words()
+      "Count number of words in *scratch* buffer"
+      ;; interactive - appear as global function
+      (interactive)
+      ;; treat abe_123 as one word
+      (modify-syntax-entry ?_ "w")
+      ;; treat abe-123 as one word
+      (modify-syntax-entry ?- "w")
+      ;; go to *scratch* buffer in other window
+      (switch-to-buffer-other-window "*scratch*")
+      (let ((sum-count 0))
+        ;; remember where cursor (point) was and return
+        ;; there after evaluating body inside save-excursion
+        (save-excursion
+            ;; go to the beginning of buffer
+            (goto-char (point-min))
+                (while (forward-word)
+                    (setq sum-count (+ sum-count 1))))
+        ;; return to previous window - practice.el
+        (other-window 1)
+        (print (format "Number of words in *scratch* buffer: %d" sum-count))
+        ;; function return value is sum-count
+        sum-count))
+
+    ;; call function to count words in *scratch* buffer
+    (nk/count-words)
+
+
 ;;; practice starts here
 
     (defun nk-eval-elisp-function()
