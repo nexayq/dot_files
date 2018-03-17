@@ -548,6 +548,10 @@ endif
         endfunction
 
         autocmd InsertCharPre * call OpenCompletion()
+
+        " Suppress message that Completion Pattern was not found
+        setlocal shortmess+=c
+
         " python (Gtk) omnicomplete <C-x><C-o> hangs in Vim - fix:
             " https://github.com/Shougo/neocomplcache.vim/issues/181
             " https://groups.google.com/forum/#!topic/vim_dev/WBkdF269lyI
