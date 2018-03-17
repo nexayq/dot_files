@@ -540,14 +540,37 @@ endif
         " let g:SuperTabDefaultCompletionType = 'context'
         let g:SuperTabDefaultCompletionType = "<c-n>"
 
-        " Run OmniComplete when '.' is pressed in python files
+        " Run OmniComplete when "." is pressed in python files (and if it is not number before dot)
         function! OpenCompletion()
-            if !pumvisible() && ((v:char == '.') && (&omnifunc != '') && (&filetype == "python"))
-                call feedkeys("\<C-x>\<C-o>", "n")
+            if !pumvisible() && ((&filetype == "python") && (&omnifunc != '') && (v:char == '.'))
+                if NK_not_number_before_dot()
+                    call feedkeys("\<C-x>\<C-o>", "n")
+                endif
             endif
         endfunction
         " https://stackoverflow.com/a/47967462/2450748
         autocmd InsertCharPre * call OpenCompletion()
+
+        " Check if word before "." is number - example "34." -> dont run omnicompletion
+        function! NK_not_number_before_dot()
+            " Get current cursor position
+            let save_pos = getpos(".")
+            " Go left one character
+            call setpos('.', [0, save_pos[1], save_pos[2]-1, 0])
+            " Get word under cursor
+            let current_word=expand("<cword>")
+            " Restore cursor position to previous position
+            call setpos('.', save_pos)
+                " echo "Word: ".current_word."".type(current_word)
+                " echo "Word: ".current_word
+            " If current word is not number return 1
+            if current_word !~# '^\d\+$'
+                " echo "Not Number!"
+                return 1
+            endif
+            " https://stackoverflow.com/a/15849609/2450748
+        endfunc
+        " nnoremap <leader>pp :call NK_not_number_before_dot()<CR>
 
         " Suppress message that Completion Pattern was not found
         setlocal shortmess+=c
