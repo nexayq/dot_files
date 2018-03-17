@@ -1068,8 +1068,6 @@ endif
 
             " let g:jedi#completions_command = "<Tab>"
 
-" >>>>> Plugins >>>>>
-
     " conque-shell terminal emulator
         " Plugin 'vim-scripts/Conque-Shell'
 
@@ -1079,6 +1077,15 @@ endif
     " Bash support
         " Plugin 'vim-scripts/bash-support.vim'
         " https://github.com/vim-scripts/bash-support.vim
+
+
+    " Cpp OmniComplete
+        " Plugin 'vim-scripts/OmniCppComplete'
+
+    " Clang cpp omnicomplete
+        Plugin 'Rip-Rip/clang_complete'
+
+" >>>>> Plugins >>>>>
 
     " Print file
         " Plugin 'vim-scripts/Printer-Dialog'
