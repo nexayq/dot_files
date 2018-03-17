@@ -1018,6 +1018,7 @@ endif
         let g:VimuxOrientation = "v"
         let VimuxUseNearest = 1
 
+        " lc - launch command
         noremap <leader>lc :VimuxPromptCommand<CR>
         noremap <leader>ll :VimuxRunLastCommand<CR>
         noremap <leader>ls :VimuxInterruptRunner<CR>
