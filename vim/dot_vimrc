@@ -540,13 +540,13 @@ endif
         " let g:SuperTabDefaultCompletionType = 'context'
         let g:SuperTabDefaultCompletionType = "<c-n>"
 
-        " Run Omni Complete when '.' is pressed in python files
+        " Run OmniComplete when '.' is pressed in python files
         function! OpenCompletion()
             if !pumvisible() && ((v:char == '.') && (&omnifunc != '') && (&filetype == "python"))
                 call feedkeys("\<C-x>\<C-o>", "n")
             endif
         endfunction
-
+        " https://stackoverflow.com/a/47967462/2450748
         autocmd InsertCharPre * call OpenCompletion()
 
         " Suppress message that Completion Pattern was not found
