@@ -538,8 +538,17 @@ endif
     " SuperTab
         Plugin 'ervandew/supertab'
         " let g:SuperTabDefaultCompletionType = 'context'
-        " python (Gtk) omnicomplete <C-x><C-o> hangs in Vim - fix:
         let g:SuperTabDefaultCompletionType = "<c-n>"
+
+        " Run Omni Complete when '.' is pressed in python files
+        function! OpenCompletion()
+            if !pumvisible() && ((v:char == '.') && (&omnifunc != '') && (&filetype == "python"))
+                call feedkeys("\<C-x>\<C-o>", "n")
+            endif
+        endfunction
+
+        autocmd InsertCharPre * call OpenCompletion()
+        " python (Gtk) omnicomplete <C-x><C-o> hangs in Vim - fix:
             " https://github.com/Shougo/neocomplcache.vim/issues/181
             " https://groups.google.com/forum/#!topic/vim_dev/WBkdF269lyI
             " http://stackoverflow.com/a/2245120/2450748
