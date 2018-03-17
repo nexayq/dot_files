@@ -551,6 +551,7 @@ endif
 
         " Suppress message that Completion Pattern was not found
         setlocal shortmess+=c
+            " https://stackoverflow.com/a/37988742/2450748
 
         " python (Gtk) omnicomplete <C-x><C-o> hangs in Vim - fix:
             " https://github.com/Shougo/neocomplcache.vim/issues/181
