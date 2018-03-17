@@ -540,6 +540,8 @@ endif
         " let g:SuperTabDefaultCompletionType = 'context'
         let g:SuperTabDefaultCompletionType = "<c-n>"
 
+        inoremap <C-k> <C-x><C-o>
+
         " Run OmniComplete when "." is pressed in python files (and if it is not number before dot)
         function! OpenCompletion()
             if !pumvisible() && ((&filetype == "python") && (&omnifunc != '') && (v:char == '.'))
@@ -1743,7 +1745,7 @@ endif
 
 " Go to next/previous buffer
     noremap <C-j> :bn!<CR>
-    noremap <C-k> :bp!<CR>
+    " noremap <C-k> :bp!<CR>
 
     noremap <C-Down> :bn!<CR>
     noremap <C-Up>   :bp!<CR>
