@@ -975,8 +975,8 @@ endif
     " Vimux
         Plugin 'benmills/vimux'
 
-        let g:VimuxHeight = "40"
-        let g:VimuxOrientation = "h"
+        let g:VimuxHeight = "30"
+        let g:VimuxOrientation = "v"
         let VimuxUseNearest = 1
 
         noremap <leader>lc :VimuxPromptCommand<CR>
