@@ -1000,22 +1000,22 @@ endif
         noremap <leader>le :VimuxInspectRunner<CR>
 
     " vim-cellmode
-        Plugin 'julienr/vim-cellmode'
+        " Plugin 'julienr/vim-cellmode'
 
-        " let g:cellmode_tmux_sessionname='ipython'  " Will try to automatically pickup tmux session
-        " let g:cellmode_tmux_windowname='ipython'
-        let g:cellmode_tmux_sessionname=''  " Will try to automatically pickup tmux session
-        let g:cellmode_tmux_windowname=''
-        let g:cellmode_tmux_panenumber='1'
+        " " let g:cellmode_tmux_sessionname='ipython'  " Will try to automatically pickup tmux session
+        " " let g:cellmode_tmux_windowname='ipython'
+        " let g:cellmode_tmux_sessionname=''  " Will try to automatically pickup tmux session
+        " let g:cellmode_tmux_windowname=''
+        " let g:cellmode_tmux_panenumber='1'
 
-        let g:cellmode_screen_sessionname='ipython'
-        let g:cellmode_screen_window='0'
+        " let g:cellmode_screen_sessionname='ipython'
+        " let g:cellmode_screen_window='0'
 
         " Default mappings - contribute
         " let g:cellmode_default_mappings='0'
 
         " Plugin works only in terminal mode
-        if !has("gui_running")
+        " if !has("gui_running")
 
             " Unmap set plugin mappings to default
             " Workaround for now
@@ -1025,12 +1025,12 @@ endif
                 " http://vi.stackexchange.com/a/785/8539
 
             " Custom plugin mappings
-            vnoremap <leader>pp :call RunTmuxPythonChunk()<CR>
-            nnoremap <leader>pp :call RunTmuxPythonCell(0)<CR>
-            noremap <leader>pa :call RunTmuxPythonAllCellsAbove()<CR><CR>
-            noremap <leader>ps :let g:cellmode_tmux_panenumber='1'<Left>
+            " vnoremap <leader>pp :call RunTmuxPythonChunk()<CR>
+            " nnoremap <leader>pp :call RunTmuxPythonCell(0)<CR>
+            " noremap <leader>pa :call RunTmuxPythonAllCellsAbove()<CR><CR>
+            " noremap <leader>ps :let g:cellmode_tmux_panenumber='1'<Left>
 
-        endif
+        " endif
 
     " Open Quickfix in custom window
         Plugin 'yssl/QFEnter'
