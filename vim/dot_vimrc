@@ -1746,7 +1746,7 @@ endif
 
 " Go to next/previous buffer
     noremap <C-j> :bn!<CR>
-    " noremap <C-k> :bp!<CR>
+    nnoremap <C-k> :bp!<CR>
 
     noremap <C-Down> :bn!<CR>
     noremap <C-Up>   :bp!<CR>
