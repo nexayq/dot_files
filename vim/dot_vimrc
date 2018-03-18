@@ -1005,8 +1005,8 @@ endif
 
     " Vim Wiki plugin
         " https://www.youtube.com/watch?v=ONh95PNBW-Q
-        Plugin 'vimwiki/vimwiki'
-            let g:vimwiki_default_mappings='0'
+        " Plugin 'vimwiki/vimwiki'
+            " let g:vimwiki_default_mappings='0'
 
         " noremap <leader>tt :VimwikiIndex<CR>
         autocmd FileType vimwiki noremap <buffer> <leader><leader> :VimwikiToggleListItem<CR>
