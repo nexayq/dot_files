@@ -1100,7 +1100,7 @@ endif
             let g:jedi#completions_enabled = 0
             let g:jedi#auto_vim_configuration = 0
 
-            let g:jedi#documentation_command = "<leader>lh"
+            let g:jedi#documentation_command = "<leader>lq"
             let g:jedi#max_doc_height = 30
 
             let g:jedi#popup_on_dot = 0
