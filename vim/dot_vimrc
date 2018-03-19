@@ -86,6 +86,44 @@
     " :map
 
 " Installation
+    " Build from source, compile vim
+
+        " Download vim git repo and cd to it:
+            " > git clone https://github.com/vim/vim
+            " > cd vim
+
+        " Checkout wanted version
+            " > git checkout v7.4.314
+
+        " Configure with wanted features, set --prefix=/opt/vim/vim74314
+            " ./configure --enable-perlinterp --enable-python3interp --enable-rubyinterp --enable-cscope --enable-gui=auto --enable-gtk2-check --enable-gnome-check --with-features=huge --enable-multibyte --with-x --with-compiledby="xorpd" --with-python3-config-dir=/usr/lib/python3.4/config-3.4m-x86_64-linux-gnu --enable-luainterp=yes --enable-tclinterp=yes --prefix=/opt/vim/vim74314
+
+        " Compile source files - make
+            " > make
+
+        " Test if everything is ok - do this
+            " > make test
+            " > echo $?
+
+        " Install vim into /opt/vim/vim74314
+            " > make install
+
+        " Create symbolic links in /usr/bin
+            " > cd /usr/bin
+            " > sudo mv vim vim74
+            " > sudo mv gvim gvim74
+            " > sudo mv gvimdiff gvimdiff74
+            " > sudo mv vimdiff vimdiff74
+
+            " > cp /opt/vim/vim74314/bin/vim vim74314
+            " > ln -s vim74314 vim
+            " > ln -s vim gvim
+            " > ln -s vim vimdiff
+            " > ln -s vim gvimdiff
+
+        " https://stackoverflow.com/a/30449124/2450748
+        " https://gist.github.com/webgefrickel/5f86346208be23a523e0c4ad7674dca7
+
     " Linux
         " - Install "gvim" or "vim-X11"
         " - Install "Vundle" or "Neobundle"
