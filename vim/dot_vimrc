@@ -2805,5 +2805,8 @@ endif
         " > find -type f -user nemanjak ! -perm -o=rw -exec sh -c 'vim {} -c ":w" -c "qa!"' \; -exec chmod o+rw {} \;
 
 " Omni complete for python3 by default (not python2) for all python files
-    autocmd FileType python set omnifunc=python3complete#Complete
+
+    if has('python3')
+        autocmd FileType python set omnifunc=python3complete#Complete
+    endif
         " https://stackoverflow.com/questions/41578873/can-omnicomplete-in-vim-for-python-3-complete-function-names-or-just-methods
