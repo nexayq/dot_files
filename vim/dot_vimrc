@@ -2196,10 +2196,10 @@ endif
     vnoremap <leader>d "_d
 
 " Fix backspace on windows
-    if has("win32") || has("win16")
+    " if has("win32") || has("win16")
         set backspace=2
         set backspace=indent,eol,start
-    endif
+    " endif
 
 " Set font in windows
     if has("win32") || has("win16")
