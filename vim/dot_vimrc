@@ -2805,7 +2805,6 @@ endif
         " > find -type f -user nemanjak ! -perm -o=rw -exec sh -c 'vim {} -c ":w" -c "qa!"' \; -exec chmod o+rw {} \;
 
 " Omni complete for python3 by default (not python2) for all python files
-
     if has('python3')
         autocmd FileType python set omnifunc=python3complete#Complete
     endif
