@@ -575,8 +575,12 @@ endif
         " nnoremap <leader>pp :call NK_not_number_before_dot()<CR>
 
         " Suppress message that Completion Pattern was not found
-        setlocal shortmess+=c
-            " https://stackoverflow.com/a/37988742/2450748
+
+        " if v:version >= 704
+        if v:version >= 704 && has('patch314')
+            setlocal shortmess+=c
+                " https://stackoverflow.com/a/37988742/2450748
+        endif
 
         " python (Gtk) omnicomplete <C-x><C-o> hangs in Vim - fix:
             " https://github.com/Shougo/neocomplcache.vim/issues/181
