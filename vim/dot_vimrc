@@ -1061,7 +1061,7 @@ endif
         let VimuxUseNearest = 1
 
         " lc - launch command
-        noremap <leader>lc :VimuxPromptCommand<CR>
+        noremap <leader>lc :VimuxPromptCommand expand("%:t") <CR> <Home>
         noremap <leader>ll :VimuxRunLastCommand<CR>
         noremap <leader>ls :VimuxInterruptRunner<CR>
         noremap <leader>lz :VimuxZoomRunner<CR>
