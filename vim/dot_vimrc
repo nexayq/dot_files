@@ -1173,6 +1173,13 @@ endif
     " Clang cpp omnicomplete
         Plugin 'Rip-Rip/clang_complete'
 
+        " Set "libclang.so" path or link it
+            " let g:clang_library_path = "/usr/lib/llvm-3.5/lib/libclang-3.5.so.1"
+                " or
+            " > cd /usr/lib
+            " > sudo ln -s llvm-3.5/lib/libclang-3.5.so.1 libclang.so
+
+
 " >>>>> Plugins >>>>>
 
     " Print file
