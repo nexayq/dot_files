@@ -10,3 +10,5 @@ In atom go to "Edit -> Preferences -> Install -> Package -> package_sync"
 Install packages from "~/.atom/packages.cson" :
 
 Packages -> Package Sync -> Sync Packages
+
+Restart Atom and enjoy!
