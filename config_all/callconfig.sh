@@ -29,6 +29,7 @@
     cd $HOME/.atom
     ln -s $CONFIG_DIR/dot_files/atom/config.cson config.cson
     ln -s $CONFIG_DIR/dot_files/atom/packages.cson packages.cson
+    ln -s $CONFIG_DIR/dot_files/atom/keymap.cson keymap.cson
     cd $HOME
 
     # Python config
