@@ -2,13 +2,12 @@
 Install and run Atom
 
 # Load your config and install your packages
-Copy "config.cson" and "packages.cson" to "~/.atom/"
+1) Copy "config.cson" and "packages.cson" to "~/.atom/"
 
-In atom go to "Edit -> Preferences -> Install -> Package -> package_sync"
+2) In atom go to "Edit -> Preferences -> Install -> Package -> package_sync"
 
-
-Install packages from "~/.atom/packages.cson" :
+3) Install packages from "~/.atom/packages.cson" :
 
 Packages -> Package Sync -> Sync Packages
 
-Restart Atom and enjoy!
+4) Restart Atom and enjoy!
