@@ -12,4 +12,5 @@ packages: [
   "platformio-ide-terminal"
   "script"
   "vim-mode-plus"
+  "ex-mode"
 ]
