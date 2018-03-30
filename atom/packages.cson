@@ -1,0 +1,15 @@
+packages: [
+  "alpenglow-monokai-atom-syntax"
+  "atom-monokai"
+  "autocomplete-python"
+  "busy-signal"
+  "file-icons"
+  "intentions"
+  "linter"
+  "linter-flake8"
+  "linter-ui-default"
+  "package-sync"
+  "platformio-ide-terminal"
+  "script"
+  "vim-mode-plus"
+]

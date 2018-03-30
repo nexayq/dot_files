@@ -1,0 +1,34 @@
+"*":
+  "autocomplete-plus":
+    minimumWordLength: 2
+  "autocomplete-python":
+    fuzzyMatcher: false
+    useKite: false
+  core:
+    disabledPackages: [
+      "autocomplete-snippets"
+    ]
+    telemetryConsent: "limited"
+    themes: [
+      "one-dark-ui"
+      "atom-dark-syntax"
+    ]
+  editor:
+    tabLength: 4
+  "exception-reporting":
+    userId: "82a26126-5c31-4531-b32c-a1877d4677e0"
+  "linter-flake8": {}
+  "linter-ui-default":
+    panelHeight: 163
+    showPanel: true
+  "package-sync":
+    createOnChange: true
+    forceOverwrite: true
+  "platformio-ide-terminal":
+    ansiColors:
+      normal:
+        blue: "#86a5e4"
+      zBright:
+        brightBlue: "#86a5e4"
+    iconColors:
+      blue: "#6666ae"
