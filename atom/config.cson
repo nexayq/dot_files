@@ -21,9 +21,7 @@
   "linter-ui-default":
     panelHeight: 163
     showPanel: true
-  "package-sync":
-    createOnChange: true
-    forceOverwrite: true
+  "package-sync": {}
   "platformio-ide-terminal":
     ansiColors:
       normal:

@@ -11,3 +11,6 @@ Install and run Atom
 Packages -> Package Sync -> Sync Packages
 
 4) Restart Atom and enjoy!
+
+# Atom packages available
+https://atom.io/packages
