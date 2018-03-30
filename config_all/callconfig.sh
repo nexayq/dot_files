@@ -5,6 +5,7 @@
     CONFIG_DIR=config_nk
     mkdir -p $CONFIG_DIR
     mkdir -p .config/nvim
+    mkdir -p .atom
 
 # Clone repos
     cd $HOME/$CONFIG_DIR
@@ -24,6 +25,11 @@
     ln -s $CONFIG_DIR/dot_files/git/dot_git-prompt-colors.sh .git-prompt-colors.sh
     ln -s $CONFIG_DIR/config/bash/callback.sh callback.sh
     ln -s $CONFIG_DIR/config/dir_colors/dot_dir_colors .dir_colors
+    # Atom config
+    cd $HOME/.atom
+    ln -s $CONFIG_DIR/dot_files/atom/config.cson config.cson
+    ln -s $CONFIG_DIR/dot_files/atom/packages.cson packages.cson
+    cd $HOME
 
     # Python config
     ln -s $CONFIG_DIR/dot_files/python/pylint/dot_pylintrc .pylintrc
