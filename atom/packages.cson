@@ -13,4 +13,5 @@ packages: [
   "script"
   "vim-mode-plus"
   "ex-mode"
+  "language-viml"
 ]
