@@ -32,8 +32,13 @@
 # http://flight-manual.atom.io/using-atom/sections/basic-customization/#configuring-with-cson
 
 # NK Custom
-    # See command names (ex. pane:close) :
-        # Edit -> Preferences -> Keybindings
+
+# Packages
+    # Rainbow parenthesis
+        # > apm install johngeorgewright/atom-rainbow
+
+# See command names (ex. pane:close) :
+    # Edit -> Preferences -> Keybindings
 
 'atom-text-editor.vim-mode-plus:not(.insert-mode)':
     # https://atom.io/packages/keystroke
