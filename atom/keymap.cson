@@ -32,7 +32,8 @@
 # http://flight-manual.atom.io/using-atom/sections/basic-customization/#configuring-with-cson
 
 # NK Custom
-    # Edit -> Preferences -> Keybindings
+    # See command names (ex. pane:close) :
+        # Edit -> Preferences -> Keybindings
 
 'atom-text-editor.vim-mode-plus:not(.insert-mode)':
     # https://atom.io/packages/keystroke
