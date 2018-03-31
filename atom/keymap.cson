@@ -33,6 +33,15 @@
 
 # NK Custom
 
+# Tips:
+    # Save session in Atom
+        # Always open Atom from terminal:
+            # > atom ~/a.py
+
+        # Next time when you run:
+            # > atom ~/a.py
+                # session will be restored
+
 # Packages
     # Rainbow parenthesis
         # > apm install johngeorgewright/atom-rainbow
