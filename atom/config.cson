@@ -29,3 +29,5 @@
         brightBlue: "#86a5e4"
     iconColors:
       blue: "#6666ae"
+  welcome:
+    showOnStartup: false
