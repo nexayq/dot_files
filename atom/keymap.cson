@@ -40,3 +40,9 @@
     # Toggle line comments - 'space space'
     'space space': 'editor:toggle-line-comments'
 
+    # Close pane - 'space w'
+    'space w': 'pane:close'
+
+    # Focus panes - 'space 2' - next, 'space 1' - previous
+    'space 2': 'window:focus-next-pane'
+    'space 1': 'window:focus-previous-pane'
