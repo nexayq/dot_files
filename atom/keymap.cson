@@ -50,3 +50,8 @@
 
     # Show Atom preferences pallete settings/commands
     'space p': 'command-palette:toggle'
+
+# override default key bindings
+'.workspace .editor:not(.mini)':
+  'ctrl-j': 'pane:show-next-item'
+  'ctrl-k': 'pane:show-previous-item'
