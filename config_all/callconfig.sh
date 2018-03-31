@@ -27,15 +27,15 @@
     ln -s $CONFIG_DIR/config/dir_colors/dot_dir_colors .dir_colors
     # Atom config
     cd $HOME/.atom
-    ln -s $CONFIG_DIR/dot_files/atom/config.cson config.cson
-    ln -s $CONFIG_DIR/dot_files/atom/packages.cson packages.cson
-    ln -s $CONFIG_DIR/dot_files/atom/keymap.cson keymap.cson
+    ln -s ../$CONFIG_DIR/dot_files/atom/config.cson config.cson
+    ln -s ../$CONFIG_DIR/dot_files/atom/packages.cson packages.cson
+    ln -s ../$CONFIG_DIR/dot_files/atom/keymap.cson keymap.cson
     cd $HOME
 
     # Python config
     ln -s $CONFIG_DIR/dot_files/python/pylint/dot_pylintrc .pylintrc
     cd $HOME/.config
-    ln -s $CONFIG_DIR/dot_files/python/flake/flake8 flake8
+    ln -s ../$CONFIG_DIR/dot_files/python/flake/flake8 flake8
     cd $HOME
 
     # rm callconfig.sh
