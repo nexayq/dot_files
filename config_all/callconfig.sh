@@ -25,12 +25,6 @@
     ln -s $CONFIG_DIR/dot_files/git/dot_git-prompt-colors.sh .git-prompt-colors.sh
     ln -s $CONFIG_DIR/config/bash/callback.sh callback.sh
     ln -s $CONFIG_DIR/config/dir_colors/dot_dir_colors .dir_colors
-    # Atom config
-    cd $HOME/.atom
-    ln -s ../$CONFIG_DIR/dot_files/atom/config.cson config.cson
-    ln -s ../$CONFIG_DIR/dot_files/atom/packages.cson packages.cson
-    ln -s ../$CONFIG_DIR/dot_files/atom/keymap.cson keymap.cson
-    cd $HOME
 
     # Python config
     ln -s $CONFIG_DIR/dot_files/python/pylint/dot_pylintrc .pylintrc
@@ -40,6 +34,9 @@
 
     # rm callconfig.sh
     # ln -s $CONFIG_DIR/dot_files/config_all/callconfig.sh callconfig.sh
+
+# Atom config
+    source $CONFIG_DIR/dot_files/atom/config_atom.sh
 
 # Vim - install plugins
     vim +PluginInstall +qa
