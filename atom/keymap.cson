@@ -46,3 +46,6 @@
     # Focus panes - 'space 2' - next, 'space 1' - previous
     'space 2': 'window:focus-next-pane'
     'space 1': 'window:focus-previous-pane'
+
+    # Show Atom preferences pallete settings/commands
+    'space p': 'command-palette:toggle'
