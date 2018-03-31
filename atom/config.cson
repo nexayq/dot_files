@@ -20,7 +20,6 @@
   "linter-flake8": {}
   "linter-ui-default":
     panelHeight: 163
-    showPanel: true
   "package-sync": {}
   "platformio-ide-terminal":
     ansiColors:
