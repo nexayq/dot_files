@@ -4,10 +4,15 @@
   "autocomplete-python":
     fuzzyMatcher: false
     useKite: false
+  "bracket-matcher":
+    autocompleteBrackets: false
   core:
     disabledPackages: [
       "autocomplete-snippets"
       "file-icons"
+    ]
+    packagesWithKeymapsDisabled: [
+      "bracket-matcher"
     ]
     telemetryConsent: "limited"
     themes: [
