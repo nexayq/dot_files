@@ -14,4 +14,5 @@ packages: [
   "vim-mode-plus"
   "ex-mode"
   "language-viml"
+  "cursor-history"
 ]

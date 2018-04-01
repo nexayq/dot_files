@@ -43,3 +43,8 @@
 '.workspace .editor:not(.mini)':
   'ctrl-j': 'pane:show-next-item'
   'ctrl-k': 'pane:show-previous-item'
+
+# workspace shortcuts
+'atom-workspace':
+  'ctrl-i': 'cursor-history:next'
+  'ctrl-o': 'cursor-history:prev'
