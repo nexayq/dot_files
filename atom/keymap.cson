@@ -2,6 +2,9 @@
 # NK Custom
 
 # Tips:
+    # Inspect what packages loads slow
+        # Packages -> Timecop -> Show
+
     # Save session in Atom
         # Always open Atom from terminal:
             # > atom ~/a.py
