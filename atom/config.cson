@@ -7,6 +7,7 @@
   core:
     disabledPackages: [
       "autocomplete-snippets"
+      "file-icons"
     ]
     telemetryConsent: "limited"
     themes: [

@@ -3,7 +3,7 @@ packages: [
   "atom-monokai"
   "autocomplete-python"
   "busy-signal"
-  "file-icons"
+# "file-icons"
   "intentions"
   "linter"
   "linter-flake8"
