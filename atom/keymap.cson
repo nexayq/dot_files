@@ -36,6 +36,9 @@
     # Show Atom preferences pallete settings/commands
     'space p': 'command-palette:toggle'
 
+    # Run script
+    'space l l': 'script:run'
+
 # override default key bindings
 '.workspace .editor:not(.mini)':
   'ctrl-j': 'pane:show-next-item'
