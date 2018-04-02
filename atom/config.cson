@@ -12,6 +12,7 @@
     ]
     packagesWithKeymapsDisabled: [
       "bracket-matcher"
+      "fuzzy-finder"
     ]
     telemetryConsent: "limited"
     themes: [
@@ -22,6 +23,8 @@
     tabLength: 4
   "exception-reporting":
     userId: "82a26126-5c31-4531-b32c-a1877d4677e0"
+  "fuzzy-finder":
+    searchAllPanes: true
   "linter-flake8": {}
   "linter-ui-default":
     panelHeight: 163
