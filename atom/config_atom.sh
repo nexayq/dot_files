@@ -12,4 +12,5 @@
     ln -s ../$CONFIG_DIR/dot_files/atom/packages.cson packages.cson
     ln -s ../$CONFIG_DIR/dot_files/atom/keymap.cson keymap.cson
     ln -s ../$CONFIG_DIR/dot_files/atom/init.coffee init.coffee
+    ln -s ../$CONFIG_DIR/dot_files/atom/styles.less styles.less
     cd $HOME
