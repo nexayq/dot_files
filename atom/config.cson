@@ -27,6 +27,7 @@
   "linter-flake8": {}
   "linter-ui-default":
     panelHeight: 163
+  "linter-vhdl": {}
   "package-sync": {}
   "platformio-ide-terminal":
     ansiColors:
@@ -38,3 +39,6 @@
       blue: "#6666ae"
   welcome:
     showOnStartup: false
+".source.vhdl":
+  editor:
+    tabType: "soft"

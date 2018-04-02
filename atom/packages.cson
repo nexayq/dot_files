@@ -15,4 +15,5 @@ packages: [
   "ex-mode"
   "language-viml"
   "cursor-history"
+  "language-vhdl"
 ]
