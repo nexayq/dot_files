@@ -39,6 +39,9 @@
     # Run script
     'space l l': 'script:run'
 
+    # Open buffer, search name
+    'space r': 'fuzzy-finder:toggle-buffer-finder'
+
 # override default key bindings
 '.workspace .editor:not(.mini)':
   'ctrl-j': 'pane:show-next-item'
