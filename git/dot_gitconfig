@@ -80,6 +80,7 @@
     logr     = log --date=relative --all
     co       = checkout
     st       = status -s
+    mod      = ls-files -m
     br       = branch
     ; in       = !git fetch && git log ..origin/master
     ; for current branch only
