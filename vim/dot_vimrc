@@ -330,6 +330,12 @@ endif
             " let g:syntastic_verilog_compiler = "iverilog"
             " let g:syntastic_verilog_compiler = "verilator"
 
+        " Set VHDL linter/compiler
+            " if executable('xvhdl')
+                " let g:syntastic_vhdl_checkers = ['xvhdl']
+                " let g:syntastic_vhdl_compiler = "xvhdl"
+            " endif
+
         "Disable syntastic check
             " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
             " :SyntasticToggleMode
