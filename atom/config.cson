@@ -9,7 +9,6 @@
   core:
     disabledPackages: [
       "autocomplete-snippets"
-      "file-icons"
     ]
     packagesWithKeymapsDisabled: [
       "bracket-matcher"
