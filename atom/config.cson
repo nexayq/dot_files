@@ -20,6 +20,7 @@
       "atom-dark-syntax"
     ]
   editor:
+    scrollPastEnd: true
     tabLength: 4
   "exception-reporting":
     userId: "82a26126-5c31-4531-b32c-a1877d4677e0"
