@@ -37,6 +37,8 @@
         brightBlue: "#86a5e4"
     iconColors:
       blue: "#6666ae"
+  script:
+    cwdBehavior: "Directory of the script"
   welcome:
     showOnStartup: false
 ".source.vhdl":
