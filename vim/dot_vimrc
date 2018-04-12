@@ -2057,12 +2057,14 @@ endif
     nnoremap <leader>3 :3wincmd w<CR>
     nnoremap <leader>4 :4wincmd w<CR>
     nnoremap <leader>5 :5wincmd w<CR>
+    nnoremap <leader>6 :6wincmd w<CR>
 
     nnoremap <leader><k1> :1wincmd w<CR>
     nnoremap <leader><k2> :2wincmd w<CR>
     nnoremap <leader><k3> :3wincmd w<CR>
     nnoremap <leader><k4> :4wincmd w<CR>
     nnoremap <leader><k5> :5wincmd w<CR>
+    nnoremap <leader><k6> :6wincmd w<CR>
 
     " C-W L -> move window to far right
     " C-W H -> move window to far left
