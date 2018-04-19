@@ -2103,8 +2103,7 @@ endif
     " sw Only works for one line, not for V
     vnoremap <leader>sw  : s,\%V<C-R><C-W>,<C-R><C-W>,g<Left><Left>
     " Substitute Windows EOL (^M) with Unix EOL, or just hide "^M"
-    " noremap <leader>se :%s,\r,\r,g<CR>
-    noremap <leader>se :%s,,,g<CR>
+    noremap <leader>se :%s,\r,\r,g<CR>
     noremap <leader>he :e ++ff=dos<CR>
     noremap <leader>HE :e ++ff=unix<CR>
     " Substitute paths, use ',' instead of '/' as separator
