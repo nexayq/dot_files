@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+
+# Usage: ./nk_music_download 5
+# Limitations: Only 100 videos can be downloaded
+
+import sys
+import os
+from bs4 import BeautifulSoup
+import requests
+
+def getPlaylistLinks(url):
+    i = 0
+    sourceCode = requests.get(url).text
+    soup = BeautifulSoup(sourceCode, 'html.parser')
+    domain = 'https://www.youtube.com'
+    for link in soup.find_all("a", {"dir": "ltr"}):
+        href = link.get('href')
+        if href.startswith('/watch?'):
+            print(link.string.strip())
+            print(domain + href + '\n')
+            #  youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" https://www.youtube.com/watch?v=IlVJNrzf_uI&index=97&list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi
+            os.system('youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" {0}'.format(domain + href))
+            i = i + 1
+            if i >= int(sys.argv[1]):
+                break
+
+getPlaylistLinks('https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi')
