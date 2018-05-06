@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 # Using youtube-dl to download playlist items:
-    #  youtube-dl --playlist-start 1 --playlist-end 50 --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi
+    # > youtube-dl --playlist-start 1 --playlist-end 50 --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi
 
-# Usage: ./nk_music_download 5
+# Usage: ./nk_music_download 5 7
 # Limitations: Only 100 videos can be downloaded
 
 # Reference: https://gist.github.com/fffaraz/f3dcf48ae93b6c04adb9d74b1de711e5
@@ -33,13 +33,16 @@ def getPlaylistLinks(url):
     for link in soup.find_all("a", {"dir": "ltr"}):
         href = link.get('href')
         if href.startswith('/watch?'):
-            print(link.string.strip())
-            print(domain + href + '\n')
+            #  print(link.string.strip())
+            #  print(domain + href + '\n')
             #  youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" https://www.youtube.com/watch?v=IlVJNrzf_uI&index=97&list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi
-            os.system('youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" {0}'.format(domain + href))
-            nk_wait_process_exit("youtube-dl")
             i = i + 1
             if i >= int(sys.argv[1]):
+                print(link.string.strip())
+                print(domain + href + '\n')
+                os.system('youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" {0}'.format(domain + href))
+                nk_wait_process_exit("youtube-dl")
+            if i >= int(sys.argv[2]):
                 break
 
 getPlaylistLinks('https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi')
