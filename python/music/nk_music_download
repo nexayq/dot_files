@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# Using youtube-dl to download playlist items:
+    #  youtube-dl --playlist-start 1 --playlist-end 50 --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi
+
 # Usage: ./nk_music_download 5
 # Limitations: Only 100 videos can be downloaded
 
