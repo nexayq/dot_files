@@ -17,7 +17,7 @@ import requests
 def nk_wait_process_exit(window):
     ret = 0
     while ret == 0:
-        ret = os.system('ps -ef | grep -v "grep" | tail -n +1 | grep -i {0} -q'.format(window))
+        ret = os.system('ps -ef | grep -v "grep" | grep -i {0} -q'.format(window))
         # https://stackoverflow.com/a/22101965/2450748
         #  print("loading " + window)
         time.sleep(1)
