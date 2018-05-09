@@ -4,6 +4,7 @@
     # > youtube-dl --playlist-start 1 --playlist-end 50 --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi
 
 # Usage: ./nk_music_download 5 7
+# Usage: ./nk_music_download 3
 # Limitations: Only 100 videos can be downloaded
 
 # Reference: https://gist.github.com/fffaraz/f3dcf48ae93b6c04adb9d74b1de711e5
@@ -48,7 +49,11 @@ def getPlaylistLinks(url):
                 print(domain + href + '\n')
                 os.system('youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" {0}'.format(domain + href))
                 nk_wait_process_exit("youtube-dl")
-            if i >= int(sys.argv[2]):
+            #  print("NK num_args:" + str(len(sys.argv)))
+            if len(sys.argv) >= 3:
+                if i >= int(sys.argv[2]):
+                    break
+            elif i >= int(sys.argv[1]):
                 break
 
 getPlaylistLinks('https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi')
