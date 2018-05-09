@@ -49,11 +49,10 @@ def getPlaylistLinks(url):
                 print(domain + href + '\n')
                 os.system('youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" {0}'.format(domain + href))
                 nk_wait_process_exit("youtube-dl")
-            #  print("NK num_args:" + str(len(sys.argv)))
-            if len(sys.argv) >= 3:
-                if i >= int(sys.argv[2]):
+                if len(sys.argv) < 3:
                     break
-            elif i >= int(sys.argv[1]):
+            #  print("NK num_args:" + str(len(sys.argv)))
+            if i >= int(sys.argv[2]):
                 break
 
 getPlaylistLinks('https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi')
