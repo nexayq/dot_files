@@ -32,7 +32,8 @@ def nk_wait_process_exit(window):
 #  nk_wait_process_exit("youtube-dl")
 #  nk_wait_window_load("gedit")
 
-def getPlaylistLinks(url):
+# download songs/videos from playlist
+def downloadPlaylistLinks(url):
     i = 0
     sourceCode = requests.get(url).text
     soup = BeautifulSoup(sourceCode, 'html.parser')
@@ -56,4 +57,21 @@ def getPlaylistLinks(url):
             elif i >= int(sys.argv[1]):
                 break
 
-getPlaylistLinks('https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi')
+
+# print help
+if len(sys.argv) < 2 or sys.argv[1] == "-h" \
+                     or sys.argv[1] == "--help":
+    print("""
+    > nk_music_download start_index [stop_index]
+
+    Example usages:
+        Download playlist songs from 5 to 7:
+            > nk_music_download 5 7
+
+        Download playlist song 3:
+            > nk_music_download 3
+    """)
+    exit(1)
+
+# download songs/videos from playlist
+downloadPlaylistLinks('https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi')
