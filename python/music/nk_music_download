@@ -67,6 +67,10 @@ if len(sys.argv) < 2 or sys.argv[1] == "-h" \
 
         Download playlist song 3:
             > nk_music_download 3
+
+    Limitations: Maximum of 100 songs/videos can be downloaded!
+                 start_index must be lower or equal to 100!
+                 stop_index  must be lower or equal to 100!
     """)
     exit(1)
 
