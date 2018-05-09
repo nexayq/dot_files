@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+# Get newest youtube-dl version
+    #  cd ~/local_bin
+    #  wget https://yt-dl.org/downloads/latest/youtube-dl
+    #  chmod +x youtube-dl
+    #  # check youtube-dl version
+    #  youtube-dl --version
+
 # Using youtube-dl to download playlist items:
     # > youtube-dl --playlist-start 1 --playlist-end 50 --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi
 
