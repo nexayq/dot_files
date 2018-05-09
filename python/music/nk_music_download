@@ -43,11 +43,11 @@ def downloadPlaylistLinks(url):
         if href.startswith('/watch?'):
             #  print(link.string.strip())
             #  print(domain + href + '\n')
-            #  youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" https://www.youtube.com/watch?v=IlVJNrzf_uI&index=97&list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi
             i = i + 1
             if i >= int(sys.argv[1]):
                 print(link.string.strip())
                 print(domain + href + '\n')
+                #  youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" https://www.youtube.com/watch?v=IlVJNrzf_uI&index=97&list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi
                 os.system('youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" {0}'.format(domain + href))
                 nk_wait_process_exit("youtube-dl")
                 #  print("NK num_args:" + str(len(sys.argv)))
