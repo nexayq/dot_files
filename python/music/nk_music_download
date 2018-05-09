@@ -50,12 +50,9 @@ def downloadPlaylistLinks(url):
                 print(domain + href + '\n')
                 os.system('youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" {0}'.format(domain + href))
                 nk_wait_process_exit("youtube-dl")
-            #  print("NK num_args:" + str(len(sys.argv)))
-            if len(sys.argv) >= 3:
-                if i >= int(sys.argv[2]):
+                #  print("NK num_args:" + str(len(sys.argv)))
+                if len(sys.argv) < 3 or i >= int(sys.argv[2]):
                     break
-            elif i >= int(sys.argv[1]):
-                break
 
 
 # print help
