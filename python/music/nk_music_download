@@ -11,8 +11,10 @@
     # > youtube-dl --playlist-start 1 --playlist-end 50 --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi
 
 # Usage: ./nk_music_download 5 7
+# Usage: ./nk_music_download 5 7 -d
 # Usage: ./nk_music_download 3
-# Limitations: Only 100 videos can be downloaded
+# Usage: ./nk_music_download 3 -d
+# Limitations: Only 100 songs can be downloaded
 
 # Reference: https://gist.github.com/fffaraz/f3dcf48ae93b6c04adb9d74b1de711e5
 
@@ -37,10 +39,9 @@ def nk_wait_process_exit(window):
         time.sleep(1)
 
 #  nk_wait_process_exit("youtube-dl")
-#  nk_wait_window_load("gedit")
 
-# download songs/videos from playlist
-def downloadPlaylistLinks(url):
+# download songs from playlist
+def downloadPlaylistLinks(url, download, songs_range, links):
     i = 0
     sourceCode = requests.get(url).text
     soup = BeautifulSoup(sourceCode, 'html.parser')
@@ -51,35 +52,143 @@ def downloadPlaylistLinks(url):
             #  print(link.string.strip())
             #  print(domain + href + '\n')
             i = i + 1
+            #  print(songs_range)
             if i >= int(sys.argv[1]):
-                print(link.string.strip())
-                print(domain + href + '\n')
-                #  youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" https://www.youtube.com/watch?v=IlVJNrzf_uI&index=97&list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi
-                os.system('youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" {0}'.format(domain + href))
-                nk_wait_process_exit("youtube-dl")
+                # print song name
+                if i < 10:
+                    # add extra space for one digit song numbers for alignment
+                    print(str(i) + '.  ' + link.string.strip())
+                else:
+                    print(str(i) + '. ' + link.string.strip())
+
+                # print youtube link
+                if download or links:
+                    print(domain + href)
+
+                # download song from playlist
+                if download:
+                    #  youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" https://www.youtube.com/watch?v=IlVJNrzf_uI&index=97&list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi
+                    os.system('youtube-dl --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" {0}'.format(domain + href))
+                    nk_wait_process_exit("youtube-dl")
+                    print()
+
                 #  print("NK num_args:" + str(len(sys.argv)))
-                if len(sys.argv) < 3 or i >= int(sys.argv[2]):
+                if songs_range:
+                    if i >= int(sys.argv[2]):
+                        break
+                else:
                     break
 
 
 # print help
-if len(sys.argv) < 2 or sys.argv[1] == "-h" \
-                     or sys.argv[1] == "--help":
+def print_help():
     print("""
-    > nk_music_download start_index [stop_index]
+    > nk_music_download start_index [stop_index] [-d] [-l]
 
     Example usages:
-        Download playlist songs from 5 to 7:
+        List (print only) playlist songs from 5 to 7:
             > nk_music_download 5 7
 
-        Download playlist song 3:
+        Download playlist songs from 5 to 7:
+            > nk_music_download 5 7 -d
+
+        List (print only) playlist songs from 5 to 7 with youtube links:
+            > nk_music_download 5 7 -l
+
+        List (print only) playlist song 3:
             > nk_music_download 3
 
-    Limitations: Maximum of 100 songs/videos can be downloaded!
+        Download playlist song 3:
+            > nk_music_download 3 -d
+
+        List (print only) playlist song 3 with youtube link:
+            > nk_music_download 3 -l
+
+    Limitations: Maximum of 100 songs can be downloaded!
                  start_index must be lower or equal to 100!
                  stop_index  must be lower or equal to 100!
     """)
+
+
+# parse arguments
+def parse_args():
+    download      = False
+    songs_range   = False
+    links         = False
+    help_needed   = False
+    invalid_param = False
+    args_num      = 0
+
+    for i in range(1, len(sys.argv)):
+        # download songs
+        if (sys.argv[i] == '-d'):
+            download = True
+
+        # print links
+        if (sys.argv[i] == '-l'):
+            links = True
+
+        # count number of integer parameters
+        if (sys.argv[i].isdigit()):
+            args_num += 1
+
+        # check if user entered invalid parameter
+        if ((not sys.argv[i].isdigit()) and \
+             sys.argv[i] != '-l' and \
+             sys.argv[i] != '-d'):
+            invalid_param = True
+
+    # outside of for loop
+    #  print(args_num)
+    if args_num == 2:
+        songs_range = True
+
+    # check if printing of help is needed
+    if len(sys.argv) < 2 or \
+       len(sys.argv) > 5 or \
+       invalid_param == True or \
+       args_num > 2 or \
+       sys.argv[1] == "-h" or \
+       sys.argv[1] == "--help":
+           help_needed = True
+
+    # return values
+    return help_needed, download, songs_range, links
+
+
+# parse user arguments
+help_needed, download, songs_range, links = parse_args()
+
+# print help if needed and exit
+if help_needed:
+    print_help()
     exit(1)
 
-# download songs/videos from playlist
-downloadPlaylistLinks('https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi')
+# print message for download instructions
+def download_msg():
+    print()
+    print("NK: In order to download files run:")
+
+    # print "> nk_music_download 1 2 -d"
+    print('    > nk_music_download', end=' ')
+    # print user input
+    for i in range(1, len(sys.argv)):
+        # dont print link(-l) flag
+        if sys.argv[i] != '-l':
+            print(sys.argv[i], end=' ')
+    # print download(-d) flag
+    print('-d')
+
+# print additional messages when needed
+def print_additional_msg(download):
+    if not download:
+        download_msg()
+
+# print help if something goes wrong
+try:
+    # download songs from playlist
+    downloadPlaylistLinks('https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi', download, songs_range, links)
+    print_additional_msg(download)
+except:
+    # print help
+    print_help()
