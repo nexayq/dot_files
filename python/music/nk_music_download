@@ -23,6 +23,8 @@ import os
 import time
 from bs4 import BeautifulSoup
 import requests
+import glob
+import subprocess
 
 def nk_wait_process_exit(window):
     ret = 0
@@ -79,11 +81,45 @@ def downloadPlaylistLinks(url, download, songs_range, links):
                 else:
                     break
 
+# get songs names
+def get_songs():
+    songs = []
+    songs = sorted(glob.glob("*.mp3"))
+    return songs
+
+# print songs duration
+def print_duration():
+    songs = get_songs()
+
+    for song_name in songs:
+        minutes_duration = subprocess.check_output('mp3info -p "%m:%s" "{0}"'.format(song_name), shell=True);
+        print( str(song_name) + ' - ' + str(minutes_duration.decode("utf-8")) )
+
+# split mixes
+def split_mixes():
+    # get songs
+    songs = get_songs()
+    songs_duration = []
+
+    # extract mp3 duration
+    for song_name in songs:
+        minutes_duration = subprocess.check_output('mp3info -p "%m" "{0}"'.format(song_name), shell=True);
+        songs_duration.append(int(minutes_duration))
+
+    #  for i in range(0,len(songs)):
+        #  print( str(songs[i]) + ' - ' + str(songs_duration[i]) )
+
+    # split mixes
+    for i in range(0,len(songs)):
+        if songs_duration[i] >= 12:
+            os.system('mp3splt -t 8.0 "{0}"'.format(songs[i]))
+            os.system('rm "{0}"'.format(songs[i]))
+
 
 # print help
 def print_help():
     print("""
-    > nk_music_download start_index [stop_index] [-d] [-l]
+    > nk_music_download start_index [stop_index] [-d] [-l] [-s] [-p]
 
     Example usages:
         List (print only) playlist songs from 5 to 7:
@@ -104,6 +140,15 @@ def print_help():
         List (print only) playlist song 3 with youtube link:
             > nk_music_download 3 -l
 
+        Split mixes(songs longer than 12 minutes) into 8 minutes parts:
+            > nk_music_download -s
+
+        Print songs duration:
+            > nk_music_download -p
+
+        Download playlist songs from 5 to 7:
+            > nk_music_download 5 7 -d
+
     Limitations: Maximum of 100 songs can be downloaded!
                  start_index must be lower or equal to 100!
                  stop_index  must be lower or equal to 100!
@@ -117,6 +162,10 @@ def parse_args():
     links         = False
     help_needed   = False
     invalid_param = False
+    split         = False
+    only_split    = False
+    print_songs   = False
+    only_print    = False
     args_num      = 0
 
     for i in range(1, len(sys.argv)):
@@ -128,13 +177,28 @@ def parse_args():
         if (sys.argv[i] == '-l'):
             links = True
 
+        # split mixes
+        if (sys.argv[i] == '-s'):
+            split = True
+            if(len(sys.argv) == 2):
+                only_split = True
+
+        # print duration
+        if (sys.argv[i] == '-p'):
+            print_songs = True
+            if(len(sys.argv) == 2):
+                only_print = True
+
         # count number of integer parameters
         if (sys.argv[i].isdigit()):
             args_num += 1
 
+
         # check if user entered invalid parameter
         if ((not sys.argv[i].isdigit()) and \
              sys.argv[i] != '-l' and \
+             sys.argv[i] != '-s' and \
+             sys.argv[i] != '-p' and \
              sys.argv[i] != '-d'):
             invalid_param = True
 
@@ -145,7 +209,6 @@ def parse_args():
 
     # check if printing of help is needed
     if len(sys.argv) < 2 or \
-       len(sys.argv) > 5 or \
        invalid_param == True or \
        args_num > 2 or \
        sys.argv[1] == "-h" or \
@@ -153,15 +216,16 @@ def parse_args():
            help_needed = True
 
     # return values
-    return help_needed, download, songs_range, links
+    return help_needed, download, songs_range, links, split, only_split, print_songs, only_print
 
 
 # parse user arguments
-help_needed, download, songs_range, links = parse_args()
+help_needed, download, songs_range, links, split, only_split, print_songs, only_print = parse_args()
 
 # print help if needed and exit
 if help_needed:
     print_help()
+    #  print_duration()
     exit(1)
 
 # print message for download instructions
@@ -186,9 +250,25 @@ def print_additional_msg(download):
 
 # print help if something goes wrong
 try:
-    # download songs from playlist
-    downloadPlaylistLinks('https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi', download, songs_range, links)
-    print_additional_msg(download)
+    # if only split mixes(-s) option is specified
+    if only_split:
+        split_mixes()
+    # if only print songs option is specified
+    elif only_print:
+        print_duration()
+    # download songs
+    else:
+        # download songs from playlist
+        downloadPlaylistLinks('https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi', download, songs_range, links)
+        print_additional_msg(download)
+
+    # split mixes
+    if split and (not only_split):
+        split_mixes()
+
+    # print duration
+    if print_songs and (not only_print):
+        print_duration()
 except:
-    # print help
+    #  print help
     print_help()
