@@ -151,7 +151,7 @@ def print_help():
         Split mixes(songs longer than 12 minutes) into 8 minutes parts:
             > nk_music_download -s
 
-        Print songs duration:
+        Print local (downloaded) songs duration:
             > nk_music_download -p
 
         Download playlist songs from 5 to 7:
