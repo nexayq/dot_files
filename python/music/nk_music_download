@@ -158,8 +158,8 @@ def print_help():
             > nk_music_download 5 7 -d
 
     Limitations: Maximum of 100 songs can be downloaded!
-                 start_index must be lower than or equal to 100!
-                 stop_index  must be lower than or equal to 100!
+                 start_index must be less than or equal to 100!
+                 stop_index  must be less than or equal to 100!
     """)
 
 
