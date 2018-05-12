@@ -92,8 +92,13 @@ def print_duration():
     songs = get_songs()
 
     for song_name in songs:
-        minutes_duration = subprocess.check_output('mp3info -p "%m:%s" "{0}"'.format(song_name), shell=True);
-        print( str(song_name) + ' - ' + str(minutes_duration.decode("utf-8")) )
+        #  minutes_duration = subprocess.check_output('mp3info -p "%m:%02s" "{0}"'.format(song_name), shell=True);
+        seconds_duration = subprocess.check_output('soxi -D "{0}"'.format(song_name), shell=True);
+        seconds_duration = float(str(seconds_duration.decode("utf-8")).strip())
+        minutes_part = int(seconds_duration//60)
+        seconds_part = int(seconds_duration - minutes_part*60)
+        #  print( str(song_name) + ' - ' + str(minutes_duration.decode("utf-8")) )
+        print( str(song_name) + ' - ' + str(minutes_part).zfill(2) + ':' + str(seconds_part).zfill(2) )
 
 # split mixes
 def split_mixes():
@@ -103,8 +108,11 @@ def split_mixes():
 
     # extract mp3 duration
     for song_name in songs:
-        minutes_duration = subprocess.check_output('mp3info -p "%m" "{0}"'.format(song_name), shell=True);
-        songs_duration.append(int(minutes_duration))
+        seconds_duration = subprocess.check_output('soxi -D "{0}"'.format(song_name), shell=True);
+        seconds_duration = float(str(seconds_duration.decode("utf-8")).strip())
+        minutes_part = int(seconds_duration//60)
+        #  minutes_duration = subprocess.check_output('mp3info -p "%m" "{0}"'.format(song_name), shell=True);
+        songs_duration.append(int(minutes_part))
 
     #  for i in range(0,len(songs)):
         #  print( str(songs[i]) + ' - ' + str(songs_duration[i]) )
@@ -247,6 +255,8 @@ def download_msg():
 def print_additional_msg(download):
     if not download:
         download_msg()
+
+#  print_duration()
 
 # print help if something goes wrong
 try:
