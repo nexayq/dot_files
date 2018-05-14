@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# Needed packages
+    # > sudo apt install sox libsox-fmt-mp3 libsox-fmt-all mp3splt
+
 # Get newest youtube-dl version
     #  cd ~/local_bin
     #  wget https://yt-dl.org/downloads/latest/youtube-dl
