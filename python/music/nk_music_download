@@ -130,7 +130,7 @@ def split_mixes():
 # print help
 def print_help():
     print("""
-    > nk_music_download start_index [stop_index] [-d] [-l] [-s] [-p]
+    > nk_music_download start_index [stop_index] [-d] [-l] [-s] [-p] [yt playlist link]
 
     Example usages:
         List (print only) playlist songs from 5 to 7:
@@ -150,6 +150,9 @@ def print_help():
 
         List (print only) playlist song 3 with youtube link:
             > nk_music_download 3 -l
+
+        Download 3 songs from custom youtube playlist:
+            > nk_music_download 1 3 https://www.youtube.com/playlist?list=PLKVx4zuArgpx6e2y-chKlosSuckl4Wqn8 -d
 
         Split mixes(songs longer than 12 minutes) into 8 minutes parts:
             > nk_music_download -s
