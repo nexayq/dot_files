@@ -179,6 +179,11 @@ def parse_args():
     only_print    = False
     args_num      = 0
 
+    # default playlist link
+    pl_link = 'https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi'
+    #  pl_link = 'https://www.youtube.com/playlist?list=PLcfgpjzMYTNU94VkgQvfbZ7ieOgAxibtx'
+
+
     for i in range(1, len(sys.argv)):
         # download songs
         if (sys.argv[i] == '-d'):
@@ -204,12 +209,29 @@ def parse_args():
         if (sys.argv[i].isdigit()):
             args_num += 1
 
+        # check if argument is http link (youtube link)
+        if ("http" in sys.argv[i]):
+            pl_link = sys.argv[i]
+            #  print(pl_link)
+
+            # Check if playlist link contains string "playlist"
+            if("playlist" not in pl_link):
+                print('NK: Youtube playlist link must contain string "playlist"!')
+                print('NK: Click on "VIEW FULL PLAYLIST" to get playlist link!')
+                #  print('NK: Provide playlist link and not the link of the first song!')
+                exit(2)
+
+            # Check if playlist link is quoted ""
+            #  if(pl_link[0] != '"' or pl_link[-1] != '"'):
+                #  print('NK: Youtube playlist link must be quoted "https:/www.yotube.com/playlist?list=xyz"')
+                #  exit(3)
 
         # check if user entered invalid parameter
         if ((not sys.argv[i].isdigit()) and \
              sys.argv[i] != '-l' and \
              sys.argv[i] != '-s' and \
              sys.argv[i] != '-p' and \
+             "http" not in sys.argv[i] and \
              sys.argv[i] != '-d'):
             invalid_param = True
 
@@ -227,11 +249,11 @@ def parse_args():
            help_needed = True
 
     # return values
-    return help_needed, download, songs_range, links, split, only_split, print_songs, only_print
+    return help_needed, download, songs_range, links, split, only_split, print_songs, only_print, pl_link
 
 
 # parse user arguments
-help_needed, download, songs_range, links, split, only_split, print_songs, only_print = parse_args()
+help_needed, download, songs_range, links, split, only_split, print_songs, only_print, pl_link = parse_args()
 
 # print help if needed and exit
 if help_needed:
@@ -272,7 +294,7 @@ try:
     # download songs
     else:
         # download songs from playlist
-        downloadPlaylistLinks('https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi', download, songs_range, links)
+        downloadPlaylistLinks(pl_link, download, songs_range, links)
         print_additional_msg(download)
 
     # split mixes
