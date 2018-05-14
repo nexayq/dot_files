@@ -46,7 +46,7 @@ def nk_wait_process_exit(window):
 #  nk_wait_process_exit("youtube-dl")
 
 # download songs from playlist
-def downloadPlaylistLinks(url, download, songs_range, links):
+def downloadPlaylistLinks(url, download, songs_range, range_num, links):
     i = 0
     sourceCode = requests.get(url).text
     soup = BeautifulSoup(sourceCode, 'html.parser')
@@ -58,7 +58,7 @@ def downloadPlaylistLinks(url, download, songs_range, links):
             #  print(domain + href + '\n')
             i = i + 1
             #  print(songs_range)
-            if i >= int(sys.argv[1]):
+            if i >= range_num[0]:
                 # print song name
                 if i < 10:
                     # add extra space for one digit song numbers for alignment
@@ -79,7 +79,7 @@ def downloadPlaylistLinks(url, download, songs_range, links):
 
                 #  print("NK num_args:" + str(len(sys.argv)))
                 if songs_range:
-                    if i >= int(sys.argv[2]):
+                    if i >= range_num[1]:
                         break
                 else:
                     break
@@ -178,6 +178,7 @@ def parse_args():
     print_songs   = False
     only_print    = False
     args_num      = 0
+    range_num     = []
 
     # default playlist link
     pl_link = 'https://www.youtube.com/playlist?list=PLqqxFBxt_EUsLoX4F37iByy0ys4BZT8zi'
@@ -207,6 +208,7 @@ def parse_args():
 
         # count number of integer parameters
         if (sys.argv[i].isdigit()):
+            range_num.append(int(sys.argv[i]))
             args_num += 1
 
         # check if argument is http link (youtube link)
@@ -249,11 +251,11 @@ def parse_args():
            help_needed = True
 
     # return values
-    return help_needed, download, songs_range, links, split, only_split, print_songs, only_print, pl_link
+    return help_needed, download, songs_range, range_num, links, split, only_split, print_songs, only_print, pl_link
 
 
 # parse user arguments
-help_needed, download, songs_range, links, split, only_split, print_songs, only_print, pl_link = parse_args()
+help_needed, download, songs_range, range_num, links, split, only_split, print_songs, only_print, pl_link = parse_args()
 
 # print help if needed and exit
 if help_needed:
@@ -294,7 +296,7 @@ try:
     # download songs
     else:
         # download songs from playlist
-        downloadPlaylistLinks(pl_link, download, songs_range, links)
+        downloadPlaylistLinks(pl_link, download, songs_range, range_num, links)
         print_additional_msg(download)
 
     # split mixes
