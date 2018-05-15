@@ -1185,6 +1185,8 @@ endif
             " > cd /usr/lib
             " > sudo ln -s llvm-3.5/lib/libclang-3.5.so.1 libclang.so
 
+    " Scala highlighting
+        Plugin 'derekwyatt/vim-scala'
 
 " >>>>> Plugins >>>>>
 
@@ -1291,7 +1293,6 @@ endif
     " Session obsession
         " Plugin 'tpope/vim-obsession'
         " https://github.com/tpope/vim-obsession.git
-
 
     " FuzzyFinder
         "    Bundle "L9"
