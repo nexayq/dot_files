@@ -38,6 +38,7 @@
 
     # Run script
     'space l l': 'script:run'
+    # add shebang at the top of your file -> #!/usr/bin/env python3
 
     # Open buffer, search name
     'space r': 'fuzzy-finder:toggle-buffer-finder'
