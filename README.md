@@ -26,3 +26,6 @@ Emacs configuration file (init.el) and scripts for installing plugins
 
 # Screen
 Screen configuration to be tmux-like (~/.screenrc)
+
+# Python
+Python config files and python scripts
