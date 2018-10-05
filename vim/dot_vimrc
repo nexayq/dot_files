@@ -771,7 +771,7 @@ endif
         let g:NERDSpaceDelims = 1
         let g:NERDRemoveAltComs = 1
         " let g:NERDComAltDelim = 1
-        " let g:NERD_c_alt_style=1
+        let g:NERD_c_alt_style=1
         let g:NERDAltDelims_c = 1
 
     " Yank Ring
