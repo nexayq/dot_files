@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Needed packages
-    # > sudo apt install sox libsox-fmt-mp3 libsox-fmt-all mp3splt
+    # > sudo apt install sox libsox-fmt-mp3 libsox-fmt-all mp3splt ffmpeg cutmp3
 
 # Get newest youtube-dl version
     #  cd ~/local_bin
