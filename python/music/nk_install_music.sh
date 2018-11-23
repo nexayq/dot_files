@@ -19,7 +19,7 @@ if [ ! -L "youtube-dl" ]; then
     ln -s ../local_sw/youtube-dl/youtube-dl
 fi
 
-# create link to nk_music_download
+# create link to "nk_music_download" app
 cd $HOME/local_bin/
 if [ ! -L "nk_music_download" ]; then
     ln -s $HOME/$CONFIG_DIR/dot_files/python/music/nk_music_download
