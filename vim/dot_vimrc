@@ -1188,6 +1188,9 @@ endif
     " Scala highlighting
         Plugin 'derekwyatt/vim-scala'
 
+    " Docker highlighting
+        Plugin 'ekalinin/Dockerfile.vim'
+
 " >>>>> Plugins >>>>>
 
     " Print file
