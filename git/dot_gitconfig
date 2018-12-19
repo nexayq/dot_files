@@ -98,9 +98,9 @@
     glog     = log --graph --all --decorate --date=relative
     ; glog     = log --graph --all --decorate --stat
     reb      = !git rebase origin/\"$(git rev-parse --abbrev-ref HEAD)\"
-    nk-diff  = !sh -c 'cd -- ${GIT_PREFIX:-.} && NUM=${1:--1} && git log $NUM --stat -p . | sed \"s|\\x1b\\[[0-9]*m||g\" |& tee /tmp/nk_git_diff.diff | vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" -c \"/+++ \" -c \"norm gg\" - ' -
+    nk-diff  = !sh -c 'cd -- ${GIT_PREFIX:-.} && NUM=${1:--1} && git log $NUM --stat -p . | sed \"s|\\x1b\\[[0-9]*m||g\" > /tmp/nk_git_diff.diff && vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" -c \"/+++ \" -c \"norm gg\" /tmp/nk_git_diff.diff ' -
 
-    tmp   = !sh -c 'cd -- ${GIT_PREFIX:-.} && NUM=${1:--1} && git log $NUM --stat -p . | sed \"s|\\x1b\\[[0-9]*m||g\" |& tee /tmp/nk_git_diff.diff | vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" - ' -
+    tmp   = !sh -c 'cd -- ${GIT_PREFIX:-.} && NUM=${1:--1} && git log $NUM --stat -p . | sed \"s|\\x1b\\[[0-9]*m||g\" > /tmp/nk_git_diff.diff && vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" /tmp/nk_git_diff.diff ' -
     ; https://stackoverflow.com/a/7804313/2450748; https://stackoverflow.com/a/2013573/2450748
     old   = !cd -- ${GIT_PREFIX:-.} && git log -3 --stat -p . | sed 's|\\x1b\\[[0-9]*m||g' | vim -c \"set ft=diff\" -
 
