@@ -1191,6 +1191,10 @@ endif
     " Docker highlighting
         Plugin 'ekalinin/Dockerfile.vim'
 
+    " Terminal color escape codes \033 - /\%x1B[33m
+        Plugin 'vim-scripts/AnsiEsc.vim'
+
+
 " >>>>> Plugins >>>>>
 
     " Print file
@@ -2866,3 +2870,9 @@ endif
         autocmd FileType python set omnifunc=python3complete#Complete
     endif
         " https://stackoverflow.com/questions/41578873/can-omnicomplete-in-vim-for-python-3-complete-function-names-or-just-methods
+
+
+" git alias for log diff, vim pass arguments
+"   > vim -c "set ft=diff" -c "call NK_ToggleWhitespaces()" ~/tmp/a.diff
+
+    " nk-diff  = !sh -c 'cd -- ${GIT_PREFIX:-.} && NUM=${1:--1} && git log $NUM --stat -p . | sed \"s|\\x1b\\[[0-9]*m||g\" |& tee /tmp/nk_git_diff.diff | vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" - ' -
