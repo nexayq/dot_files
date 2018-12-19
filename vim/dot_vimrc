@@ -2876,3 +2876,7 @@ endif
 "   > vim -c "set ft=diff" -c "call NK_ToggleWhitespaces()" ~/tmp/a.diff
 
     " nk-diff  = !sh -c 'cd -- ${GIT_PREFIX:-.} && NUM=${1:--1} && git log $NUM --stat -p . | sed \"s|\\x1b\\[[0-9]*m||g\" |& tee /tmp/nk_git_diff.diff | vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" - ' -
+
+" send keyboard shortcuts from command line
+    " go to top of the file
+        " :norm gg
