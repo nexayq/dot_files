@@ -98,13 +98,28 @@
     glog     = log --graph --all --decorate --date=relative
     ; glog     = log --graph --all --decorate --stat
     reb      = !git rebase origin/\"$(git rev-parse --abbrev-ref HEAD)\"
-    nk-diff  = !sh -c 'cd -- ${GIT_PREFIX:-.} && NUM=${1:--1} && GDIR=${2:-.} && git log $NUM --stat -p $GDIR | sed \"s|\\x1b\\[[0-9]*m||g\" > /tmp/nk_git_diff.diff && vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" -c \"/+++ \" -c \"norm gg\" /tmp/nk_git_diff.diff ' -
+    nk-diff  = "!sh -c 'cd -- ${GIT_PREFIX:-.}; \
+        NUM=\"-1\"; GDIR=\".\"; \
+        [[ $1 == '-*' ]] && NUM=${1:--1}; [[ $2 == '-*' ]] && NUM=${2:--1}; \
+        [[ $1 != '-*' ]] && GDIR=${1:-.}; [ ! -z \"$2\" ] && [[ $2 != '-*' ]] && GDIR=${2:-.}; \
+        echo debug_nk \"$NUM\" \"$GDIR\" > /dev/null; \
+        git log $NUM --stat -p $GDIR | sed \"s|\\x1b\\[[0-9]*m||g\" > /tmp/nk_git_diff.diff && \
+        vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" -c \"silent! /+++ \" -c \"norm gg\" /tmp/nk_git_diff.diff ' -"
         ; > git nk-diff;
         ; > git nk-diff -3
         ; > git nk-diff -3 ../vhdl
+        ; > git nk-diff ../vhdl
 
-    tmp   = !sh -c 'cd -- ${GIT_PREFIX:-.} && NUM=${1:--1} && GDIR=${2:-.} && git log $NUM --stat -p $GDIR | sed \"s|\\x1b\\[[0-9]*m||g\" > /tmp/nk_git_diff.diff && vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" /tmp/nk_git_diff.diff ' -
-    ; https://stackoverflow.com/a/7804313/2450748; https://stackoverflow.com/a/2013573/2450748
+    tmp   = "!sh -c 'cd -- ${GIT_PREFIX:-.}; \
+        NUM=\"-1\"; GDIR=\".\"; \
+        [[ $1 == '-*' ]] && NUM=${1:--1}; [[ $2 == '-*' ]] && NUM=${2:--1}; \
+        [[ $1 != '-*' ]] && GDIR=${1:-.}; [ ! -z \"$2\" ] && [[ $2 != '-*' ]] && GDIR=${2:-.}; \
+        echo debug_nk \"$NUM\" \"$GDIR\"; \
+        git log $NUM --stat -p $GDIR | sed \"s|\\x1b\\[[0-9]*m||g\" > /tmp/nk_git_diff.diff && \
+        vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" -c \"silent! /+++ \" -c \"norm gg\" /tmp/nk_git_diff.diff ' -"
+        ; https://stackoverflow.com/a/7804313/2450748
+        ; https://stackoverflow.com/a/2013573/2450748
+        ; https://vi.stackexchange.com/a/11528/8539
     old   = !cd -- ${GIT_PREFIX:-.} && git log -3 --stat -p . | sed 's|\\x1b\\[[0-9]*m||g' | vim -c \"set ft=diff\" -
 
     ; Debug git alias:
