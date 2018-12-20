@@ -109,6 +109,10 @@
         ; > git nk-diff -3
         ; > git nk-diff -3 ../vhdl
         ; > git nk-diff ../vhdl
+            ; https://stackoverflow.com/a/7804313/2450748
+            ; https://stackoverflow.com/a/2013573/2450748
+            ; https://vi.stackexchange.com/a/11528/8539
+            ; https://stackoverflow.com/a/16136745/2450748
 
     tmp   = "!sh -c 'cd -- ${GIT_PREFIX:-.}; \
         NUM=\"-1\"; GDIR=\".\"; \
@@ -117,9 +121,6 @@
         echo debug_nk \"$NUM\" \"$GDIR\"; \
         git log $NUM --stat -p $GDIR | sed \"s|\\x1b\\[[0-9]*m||g\" > /tmp/nk_git_diff.diff && \
         vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" -c \"silent! /+++ b\" -c \"norm gg\" /tmp/nk_git_diff.diff ' -"
-        ; https://stackoverflow.com/a/7804313/2450748
-        ; https://stackoverflow.com/a/2013573/2450748
-        ; https://vi.stackexchange.com/a/11528/8539
     old   = !cd -- ${GIT_PREFIX:-.} && git log -3 --stat -p . | sed 's|\\x1b\\[[0-9]*m||g' | vim -c \"set ft=diff\" -
 
     ; Debug git alias:
