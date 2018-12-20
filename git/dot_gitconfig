@@ -104,7 +104,7 @@
         [[ $1 != '-*' ]] && GDIR=${1:-.}; [ ! -z \"$2\" ] && [[ $2 != '-*' ]] && GDIR=${2:-.}; \
         echo debug_nk \"$NUM\" \"$GDIR\" > /dev/null; \
         git log $NUM --stat -p $GDIR | sed \"s|\\x1b\\[[0-9]*m||g\" > /tmp/nk_git_diff.diff && \
-        vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" -c \"silent! /+++ \" -c \"norm gg\" /tmp/nk_git_diff.diff ' -"
+        vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" -c \"silent! /+++ b\" -c \"norm gg\" /tmp/nk_git_diff.diff ' -"
         ; > git nk-diff;
         ; > git nk-diff -3
         ; > git nk-diff -3 ../vhdl
@@ -116,7 +116,7 @@
         [[ $1 != '-*' ]] && GDIR=${1:-.}; [ ! -z \"$2\" ] && [[ $2 != '-*' ]] && GDIR=${2:-.}; \
         echo debug_nk \"$NUM\" \"$GDIR\"; \
         git log $NUM --stat -p $GDIR | sed \"s|\\x1b\\[[0-9]*m||g\" > /tmp/nk_git_diff.diff && \
-        vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" -c \"silent! /+++ \" -c \"norm gg\" /tmp/nk_git_diff.diff ' -"
+        vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" -c \"silent! /+++ b\" -c \"norm gg\" /tmp/nk_git_diff.diff ' -"
         ; https://stackoverflow.com/a/7804313/2450748
         ; https://stackoverflow.com/a/2013573/2450748
         ; https://vi.stackexchange.com/a/11528/8539
