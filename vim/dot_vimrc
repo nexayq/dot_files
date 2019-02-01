@@ -56,6 +56,28 @@
     " " Remap ; to :
         " nnoremap ; :
 
+    " " Close current window/pane
+        " nnoremap <leader>w :wincmd c<CR>
+
+    " " Jump through windows fast
+        " nnoremap <leader>1 :1wincmd w<CR>
+        " nnoremap <leader>2 :2wincmd w<CR>
+        " nnoremap <leader>3 :3wincmd w<CR>
+        " nnoremap <leader>4 :4wincmd w<CR>
+        " nnoremap <leader>5 :5wincmd w<CR>
+        " nnoremap <leader>6 :6wincmd w<CR>
+
+        " nnoremap <leader><k1> :1wincmd w<CR>
+        " nnoremap <leader><k2> :2wincmd w<CR>
+        " nnoremap <leader><k3> :3wincmd w<CR>
+        " nnoremap <leader><k4> :4wincmd w<CR>
+        " nnoremap <leader><k5> :5wincmd w<CR>
+        " nnoremap <leader><k6> :6wincmd w<CR>
+
+    " " Open new window split on right side, down side
+        " set splitright
+        " set splitbelow
+
 " Basic vim setup - Linux and Win>>>
 
 " TODO
@@ -2877,6 +2899,18 @@ endif
 
     " nk-diff  = !sh -c 'cd -- ${GIT_PREFIX:-.} && NUM=${1:--1} && git log $NUM --stat -p . | sed \"s|\\x1b\\[[0-9]*m||g\" |& tee /tmp/nk_git_diff.diff | vim -c \"set ft=diff\" -c \"call NK_ToggleWhitespaces()\" - ' -
 
+
 " send keyboard shortcuts from command line
     " go to top of the file
         " :norm gg
+
+
+" fix bad indentating when pasting, fix paste
+    " :set paste
+        " https://superuser.com/a/863124/292101
+
+" Debug vim
+    " create a logfile called "logfile.log",
+    " "-V9" is the logging level and try to reproduce your problem.
+        " > vim -V9logfile.log
+            " https://vi.stackexchange.com/a/3595/8539

@@ -91,7 +91,7 @@
     ; out      = log @{u}..
     out       = !git log origin/\"$(git rev-parse --abbrev-ref HEAD)\"..
     ; git log origin/master..master ; shows all commits that "master" has and
-                                    ; "origin/master" doesn't have
+                                    ; "origin/master" does not have
         ; http://stackoverflow.com/a/24186641/2450748
         ; https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#Commit-Ranges
     outgoing = out
