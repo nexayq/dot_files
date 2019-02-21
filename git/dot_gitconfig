@@ -98,6 +98,8 @@
     glog     = log --graph --all --decorate --date=relative
     ; glog     = log --graph --all --decorate --stat
     reb      = !git rebase origin/\"$(git rev-parse --abbrev-ref HEAD)\"
+
+; nk-diff - shows last N commit patches for current directory!
     nk-diff  = "!sh -c 'cd -- ${GIT_PREFIX:-.}; \
         NUM=\"-1\"; GDIR=\".\"; \
         [[ $1 == '-*' ]] && NUM=${1:--1}; [[ $2 == '-*' ]] && NUM=${2:--1}; \
@@ -136,3 +138,6 @@
 
 [core]
 	filemode = false
+
+; [http]
+	; sslverify = false
