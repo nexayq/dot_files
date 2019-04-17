@@ -96,6 +96,7 @@
         ; https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#Commit-Ranges
     outgoing = out
     glog     = log --graph --all --decorate --date=relative
+    log-full = log --format=medium
     ; glog     = log --graph --all --decorate --stat
     reb      = !git rebase origin/\"$(git rev-parse --abbrev-ref HEAD)\"
 
