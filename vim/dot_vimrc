@@ -771,6 +771,7 @@ endif
         noremap <leader>a1> :Tabularize />.*<CR>
         noremap <leader>a1n :Tabularize /[0-9].*<CR>
         noremap <leader>a1- :Tabularize /- .*<CR>
+        noremap <leader>a/  :Tabularize /\/.* <CR>
             " /ref/ http://stackoverflow.com/questions/11497593/vim-tabular-only-on-the-first-match-on-the-line
             " http://stackoverflow.com/questions/23071787/how-to-match-against-only-first-in-vim-using-tabular-ignoring
 
