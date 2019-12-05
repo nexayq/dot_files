@@ -757,6 +757,7 @@ endif
         noremap <leader>a< :Tabularize /<=<CR>
         noremap <leader>a> :Tabularize /><CR>
         noremap <leader>a- :Tabularize /- <CR>
+        noremap <leader>a\| :Tabularize /\|<CR>
 
         " Align by digits/numbers
         noremap <leader>an :Tabularize /[0-9]<CR>
