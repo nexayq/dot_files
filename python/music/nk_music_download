@@ -125,6 +125,8 @@ def split_mixes():
         if songs_duration[i] >= 12:
             os.system('mp3splt -t 8.0 "{0}"'.format(songs[i]))
             os.system('rm "{0}"'.format(songs[i]))
+            # split one song example 11:31 - 14:45 :
+                # > mp3splt one_song.mp3 11.31 14.45
 
 
 # print help
