@@ -2916,3 +2916,8 @@ endif
     " "-V9" is the logging level and try to reproduce your problem.
         " > vim -V9logfile.log
             " https://vi.stackexchange.com/a/3595/8539
+
+" Flip lines
+    " Select wanted lines in visual mode and run external tac command "!tac"
+        " :'<,'>!tac
+            " https://vim.fandom.com/wiki/Reverse_order_of_lines
