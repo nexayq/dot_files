@@ -2237,6 +2237,7 @@ endif
     " Remove current buffer without removing window
     " nnoremap <leader>q :bn\|bd #<CR>
     nnoremap <leader>q :b 
+        " https://vi.stackexchange.com/a/10803
     nnoremap <leader>w :wincmd c<CR>
     " /ref/ http://stackoverflow.com/questions/4465095/vim-delete-buffer-without-losing-the-split-window
 
