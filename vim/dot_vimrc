@@ -2235,7 +2235,8 @@ endif
 " Delete buffer, close window shortcut
     " nnoremap <leader>w :bd<CR>
     " Remove current buffer without removing window
-    nnoremap <leader>q :bn\|bd #<CR>
+    " nnoremap <leader>q :bn\|bd #<CR>
+    nnoremap <leader>q :b 
     nnoremap <leader>w :wincmd c<CR>
     " /ref/ http://stackoverflow.com/questions/4465095/vim-delete-buffer-without-losing-the-split-window
 
