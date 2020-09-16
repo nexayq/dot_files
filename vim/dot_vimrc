@@ -1218,6 +1218,9 @@ endif
     " Terminal color escape codes \033 - /\%x1B[33m
         Plugin 'vim-scripts/AnsiEsc.vim'
 
+    " Vim calculator
+        Plugin 'gregsexton/VimCalc'
+
 
 " >>>>> Plugins >>>>>
 
