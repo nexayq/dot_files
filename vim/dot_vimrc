@@ -1219,7 +1219,7 @@ endif
         Plugin 'vim-scripts/AnsiEsc.vim'
 
     " Vim calculator
-        Plugin 'gregsexton/VimCalc'
+        Plugin 'fedorenchik/VimCalc3'
 
 
 " >>>>> Plugins >>>>>
