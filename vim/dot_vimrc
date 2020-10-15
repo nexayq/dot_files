@@ -368,7 +368,7 @@ endif
                 nnoremap <leader>zsc :SyntasticCheck<CR>
 
         " python checker
-            let g:syntastic_python_checkers = ['python']
+            let g:syntastic_python_checkers = ['python3']
             " let g:syntastic_python_checkers = ['pylint']
                 " https://github.com/scrooloose/syntastic#faqcheckers
 
