@@ -4,8 +4,8 @@
     cd $HOME
     CONFIG_DIR=config_nk
     mkdir -p $CONFIG_DIR
-    mkdir -p .config/nvim
-    mkdir -p .atom
+    # mkdir -p .config/nvim
+    # mkdir -p .atom
 
 # Clone repos
     cd $HOME/$CONFIG_DIR
@@ -36,10 +36,10 @@
     # ln -s $CONFIG_DIR/dot_files/config_all/callconfig.sh callconfig.sh
 
 # Atom config
-    source $CONFIG_DIR/dot_files/atom/config_atom.sh
+    # source $CONFIG_DIR/dot_files/atom/config_atom.sh
 
 # Vim - install plugins
-    vim +PluginInstall +qa
+    # vim +PluginInstall +qa
 
 # GitHub username and email
     cd $CONFIG_DIR/dot_files
