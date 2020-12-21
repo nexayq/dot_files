@@ -2,15 +2,15 @@
 
 # Make directories
     cd $HOME
-    CONFIG_DIR=config_nk
-    mkdir -p $CONFIG_DIR
+    REPO_DIR=repos
+    mkdir -p $REPO_DIR
     # mkdir -p .config/nvim
     # mkdir -p .atom
 
 # Clone repos
-    cd $HOME/$CONFIG_DIR
+    cd $HOME/$REPO_DIR
     # NK
-    git clone https://bitbucket.org/nexayq/config
+    git clone https://github.com/nexayq/config_nk
     git clone https://github.com/nexayq/dot_files
     # Others
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -18,34 +18,37 @@
 
 # Link files
     cd $HOME
-    ln -s $CONFIG_DIR/dot_files/tmux/dot_tmux.conf .tmux.conf
-    ln -s $CONFIG_DIR/dot_files/vim/dot_vimrc .vimrc
+    ln -s $REPO_DIR/dot_files/tmux/dot_tmux.conf .tmux.conf
+    ln -s $REPO_DIR/dot_files/vim/dot_vimrc .vimrc
     # ln -s .vimrc .config/nvim/init.vim
-    ln -s $CONFIG_DIR/dot_files/git/dot_gitconfig .gitconfig
-    ln -s $CONFIG_DIR/dot_files/git/dot_git-prompt-colors.sh .git-prompt-colors.sh
-    ln -s $CONFIG_DIR/config/bash/callback.sh callback.sh
-    ln -s $CONFIG_DIR/config/dir_colors/dot_dir_colors .dir_colors
+    ln -s $REPO_DIR/dot_files/git/dot_gitconfig .gitconfig
+    ln -s $REPO_DIR/dot_files/git/dot_git-prompt-colors.sh .git-prompt-colors.sh
+    ln -s $REPO_DIR/config_nk/bash/callback.sh callback.sh
+    ln -s $REPO_DIR/config_nk/dir_colors/dot_dir_colors .dir_colors
 
     # Python config
-    ln -s $CONFIG_DIR/dot_files/python/pylint/dot_pylintrc .pylintrc
+    ln -s $REPO_DIR/dot_files/python/pylint/dot_pylintrc .pylintrc
     cd $HOME/.config
-    ln -s ../$CONFIG_DIR/dot_files/python/flake/flake8 flake8
+    ln -s ../$REPO_DIR/dot_files/python/flake/flake8 flake8
     cd $HOME
 
     # rm callconfig.sh
-    # ln -s $CONFIG_DIR/dot_files/config_all/callconfig.sh callconfig.sh
+    # ln -s $REPO_DIR/dot_files/config_all/callconfig.sh callconfig.sh
 
 # Atom config
-    # source $CONFIG_DIR/dot_files/atom/config_atom.sh
+    # source $REPO_DIR/dot_files/atom/config_atom.sh
 
 # Vim - install plugins
     # vim +PluginInstall +qa
 
 # GitHub username and email
-    cd $CONFIG_DIR/dot_files
+    cd $REPO_DIR/config_nk
     git config user.name nexayq
     git config user.email nexayq@users.noreply.github.com
-    cd -
+    cd $REPO_DIR/dot_files
+    git config user.name nexayq
+    git config user.email nexayq@users.noreply.github.com
+    cd $HOME
 
 # Tweaks
     cd $HOME
