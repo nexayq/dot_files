@@ -2673,8 +2673,8 @@ endif
     set mouse=a
 
 " Paste from last yanked register
-    " noremap <leader>pp "0p
-        " http://benmccormick.org/2014/07/28/learning-vim-in-2014-copy-and-paste-the-vim-way/
+    noremap <leader>pp "0p
+        " https://benmccormick.org/2014/07/28/learning-vim-in-2014-copy-and-paste-the-vim-way/
 
 " Open file at specific line/search
     " > vim +70 ~/.bashrc
