@@ -2126,6 +2126,11 @@ endif
         " :call NK_IncrementHex("X","",1)
         " :call NK_IncrementHex("x",4,1)
 
+    " verilog testbench instantination
+    vnoremap <leader>stb : s/^\s*\([^,]*\)/.\1(\1)<CR>
+        " https://www.youtube.com/watch?v=ByagEeiZw94&list=PL3Z0z1uoFF-CElbEpGoRa5ph-TJUzuKnm&index=3
+        " Time: 5:51
+
     function! NK_IncrementHex(small_big, format, increment)
         " :call NK_IncrementHex("X",4,1) " big letters, 4 digits, num+1
         " supports "0xAB" and "7'hAB" (verilog)
