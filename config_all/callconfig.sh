@@ -20,6 +20,10 @@
     cd $HOME
     ln -s $REPO_DIR/dot_files/tmux/dot_tmux.conf .tmux.conf
     ln -s $REPO_DIR/dot_files/vim/dot_vimrc .vimrc
+    # configure custom vim snippets (verilog)
+    cd $HOME/.vim/
+    ln -s $REPO_DIR/dot_files/vim/dot_vim/UltiSnips/
+    cd $HOME
     # ln -s .vimrc .config/nvim/init.vim
     ln -s $REPO_DIR/dot_files/git/dot_gitconfig .gitconfig
     ln -s $REPO_DIR/dot_files/git/dot_git-prompt-colors.sh .git-prompt-colors.sh
