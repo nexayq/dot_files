@@ -330,74 +330,91 @@ endif
 
                 " /ref/ http://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
 
+    " ALE
+        Plugin 'dense-analysis/ale'
+
+    " utilsnips
+        Plugin 'SirVer/ultisnips'
+
+    " vim-snippets
+        Plugin 'honza/vim-snippets'
+
+    " Snippets
+        " Plugin 'Shougo/neosnippet'
+        " Plugin 'vhda/verilog_systemverilog.vim'
+
+    " Try
+        " Plugin 'jmcneal/verilog-support'
+
     " Syntastic - for MS Windows install MinGW c compiler - /ref/ http://sourceforge.net/projects/mingw-w64/?source=typ_redirect
         " syntastic does basic QuickFix stuffs, and integrates nicely with Powerline
-        Plugin 'scrooloose/syntastic'
+        " Plugin 'scrooloose/syntastic'
 
-        " Check syntax when opening a file
-        let g:syntastic_check_on_open = 1
+        " " Check syntax when opening a file
+        " let g:syntastic_check_on_open = 1
 
-        " Show warnings for C files
-        let g:syntastic_c_compiler_options = "-Wall"
+        " " Show warnings for C files
+        " let g:syntastic_c_compiler_options = "-Wall"
 
-        " Show warnings for CPP files
-        let g:syntastic_cpp_compiler_options = "-Wall"
+        " " Show warnings for CPP files
+        " let g:syntastic_cpp_compiler_options = "-Wall"
 
-        " let g:syntastic_error_symbol = "!"
+        " " let g:syntastic_error_symbol = "!"
 
-        " - If you want parser for verilog, download "verilator"
-        " - Support - "https://github.com/scrooloose/syntastic/wiki/Verilog:---verilator"
-        " Parse as SystemVerilog files
-            let g:syntastic_verilog_compiler_options = "-Wall -sv"
-            " let g:syntastic_verilog_compiler = "iverilog"
-            " let g:syntastic_verilog_compiler = "verilator"
+        " " - If you want parser for verilog, download "verilator"
+        " " - Support - "https://github.com/scrooloose/syntastic/wiki/Verilog:---verilator"
+        " " Parse as SystemVerilog files
+            " let g:syntastic_verilog_compiler_options = "-Wall -sv"
+            " " let g:syntastic_verilog_compiler = "iverilog"
+            " " let g:syntastic_verilog_compiler = "verilator"
 
-        " Set VHDL linter/compiler
-            " if executable('xvhdl')
-                " let g:syntastic_vhdl_checkers = ['xvhdl']
-                " let g:syntastic_vhdl_compiler = "xvhdl"
-            " endif
+        " " Set VHDL linter/compiler
+            " " if executable('xvhdl')
+                " " let g:syntastic_vhdl_checkers = ['xvhdl']
+                " " let g:syntastic_vhdl_compiler = "xvhdl"
+            " " endif
 
-        "Disable syntastic check
-            " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-            " :SyntasticToggleMode
-                " /ref/ http://stackoverflow.com/a/21434697/2450748
-                " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-                " nnoremap <F11> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-                nnoremap <leader>zss :SyntasticToggleMode<CR>:e<CR>
-                nnoremap <leader>zsc :SyntasticCheck<CR>
+        " "Disable syntastic check
+            " " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+            " " :SyntasticToggleMode
+                " " /ref/ http://stackoverflow.com/a/21434697/2450748
+                " " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+                " " nnoremap <F11> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+                " nnoremap <leader>zss :SyntasticToggleMode<CR>:e<CR>
+                " " nnoremap <leader>zsc :SyntasticCheck<CR>
+                " nnoremap <leader><Tab> :SyntasticCheck<CR>
 
-        " python checker
-            let g:syntastic_python_checkers = ['python3']
-            " let g:syntastic_python_checkers = ['pylint']
-                " https://github.com/scrooloose/syntastic#faqcheckers
+        " " python checker
+            " let g:syntastic_python_checkers = ['python3']
+            " " let g:syntastic_python_checkers = ['pylint']
+                " " https://github.com/scrooloose/syntastic#faqcheckers
 
-        " bash checker - ShellCheck
-            let g:syntastic_quiet_messages = {
-                        \ "regex":  [ "SC2086", "SC2046", "SC2038", "SC2033", "SC2034" ] }
+        " " bash checker - ShellCheck
+            " let g:syntastic_quiet_messages = {
+                        " \ "regex":  [ "SC2086", "SC2046", "SC2038", "SC2033", "SC2034" ] }
 
-        " Enable Syntastic warnings by default
-            " let g:syntastic_quiet_messages = {}
+        " " Enable Syntastic warnings by default
+            " " let g:syntastic_quiet_messages = {}
 
-            " Toggle Syntastic warnings
-            function! NK_ToggleSyntasticWarnings()
-                if exists('t:nk_warnings') && t:nk_warnings
-                    " Show warnings
-                    let t:nk_warnings = 0
-                    let g:syntastic_quiet_messages = {}
-                    SyntasticReset
-                    :e
-                else
-                    " Dont show warnings
-                    let t:nk_warnings = 1
-                    let g:syntastic_quiet_messages = {
-                        \ "level":  "warnings"}
-                    SyntasticReset
-                    :e
-                endif
-            endfunc
+            " " Toggle Syntastic warnings
+            " function! NK_ToggleSyntasticWarnings()
+                " if exists('t:nk_warnings') && t:nk_warnings
+                    " " Show warnings
+                    " let t:nk_warnings = 0
+                    " let g:syntastic_quiet_messages = {}
+                    " SyntasticReset
+                    " :e
+                " else
+                    " " Dont show warnings
+                    " let t:nk_warnings = 1
+                    " let g:syntastic_quiet_messages = {
+                        " \ "level":  "warnings"}
+                    " SyntasticReset
+                    " :e
+                " endif
+            " endfunc
 
-            nnoremap <leader>; :call NK_ToggleSyntasticWarnings()<CR>
+            " nnoremap <leader>; :call NK_ToggleSyntasticWarnings()<CR>
 
         " autocmd VimEnter * call NK_NoSyntasticWarnings()
 
@@ -653,6 +670,7 @@ endif
             " https://groups.google.com/forum/#!topic/vim_dev/WBkdF269lyI
             " http://stackoverflow.com/a/2245120/2450748
         " let b:SuperTabDisabled = 1
+        " let g:SuperTabDefaultCompletionType = 'context'
 
     " vim-move - Move lines up down
         " Join lines
