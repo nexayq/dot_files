@@ -335,6 +335,8 @@ endif
 
     " utilsnips
         Plugin 'SirVer/ultisnips'
+        " Custom verilog snippets (verilog templates) are added in file:
+        "    ~/.vim/UltiSnips/verilog.snippets
 
     " vim-snippets
         Plugin 'honza/vim-snippets'

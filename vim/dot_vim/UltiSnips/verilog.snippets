@@ -1,0 +1,56 @@
+
+snippet module "Verilog module template" b
+// ${1:Module_description}
+
+module ${2:module_name}
+#(
+    ${3:parameter C_WIDTH = 8},
+    ${4:parameter C_SIZE  = 8}
+)
+(
+    // clock and reset
+    ${5:input wire clk,}
+    ${6:input wire reset_n,}
+
+    // Inputs
+    ${7:input wire enable_i,}
+    ${8:input wire [C_WIDTH-1:0] data_i,}
+
+    // Outputs
+    ${9:output wire done,}
+    ${10:output wire [C_WIDTH-1:0] data_o}
+);
+
+${11:// Local registers}
+reg str_s;
+reg [C_WIDTH-1:0] data_r;
+
+${0:// Implement logic}
+
+endmodule
+endsnippet
+
+snippet fsm "Verilog fsm template" b
+// FSMs
+reg [1:0] fsm_ctrl_r;
+reg [1:0] fsm_ctrl_next;
+localparam IDLE_ST  = 0,
+           RUN_ST   = 1,
+           COUNT_ST = 2,
+           DONE_ST  = 3;
+endsnippet
+
+snippet always "Verilog always template" b
+always @ (posedge clk, negedge reset_n)
+begin
+    if(~reset_n)
+    begin
+        data_r     <= 'b0;
+        fsm_ctrl_r <= IDLE_ST;
+    end
+    else begin
+        data_r     <= data_r + 1'b1;
+        fsm_ctrl_r <= fsm_ctrl_next;
+    end
+end
+endsnippet
