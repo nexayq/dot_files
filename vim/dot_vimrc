@@ -332,6 +332,10 @@ endif
 
     " ALE
         Plugin 'dense-analysis/ale'
+        "!!! IMPORTANT: Install 'verilator' and 'iverilog' for syntax checking
+            " $ sudo apt install verilator
+            " $ sudo apt install iverilog
+
         " Disable virtual text next to text
         let g:ale_virtualtext_cursor = 0
 
