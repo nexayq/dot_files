@@ -332,6 +332,19 @@ endif
 
     " ALE
         Plugin 'dense-analysis/ale'
+        " Disable virtual text next to text
+        let g:ale_virtualtext_cursor = 0
+
+        " Print used linter
+        let g:ale_echo_msg_error_str = 'E'
+        let g:ale_echo_msg_warning_str = 'W'
+        let g:ale_echo_msg_format = '[%severity%] %s [%linter%]'
+
+        " Show available linters and used one for the language - Verilog
+            " - Open verilog file:
+                " $ vim try.v
+            " - Type command ":ALEInfo"
+                " :ALEInfo
 
     " utilsnips
         Plugin 'SirVer/ultisnips'
@@ -2438,7 +2451,7 @@ endif
     nnoremap <leader>[p :call <SID>JumpPrompt()<CR>
 
 " SystemVerilog highlight as verilog
-    autocmd BufNewFile,BufRead *.sv,*.vh,*.svh   set ft=verilog
+    autocmd BufNewFile,BufRead *.v,*.sv,*.vh,*.svh   set ft=verilog
     " /ref/ http://stackoverflow.com/a/11666247/2450748
 
 " Reload file when it changes from externall application
