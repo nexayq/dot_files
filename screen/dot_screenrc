@@ -16,6 +16,9 @@
     # screen -S gen -X quit
     # screen -S 10713 -X quit
 
+# Support 256 colors - slower but shows more colors in vim
+term screen-256colors
+
 # Dont blink
     vbell "off"
         # http://superuser.com/a/342458
