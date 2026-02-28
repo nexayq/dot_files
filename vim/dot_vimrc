@@ -251,7 +251,15 @@ endif
     "Airline plugin
         Plugin 'vim-airline/vim-airline'
         " Enable the list of buffers
+" BIG PERFORMANCE HIT! NOT COMPATIBLE WITH 'GNU SCREEN'!!!
+" It renders slow and you can see flickering while page down
+" When using screen disable tabline completely from vim!
         let g:airline#extensions#tabline#enabled = 1
+        " let g:airline#extensions#tabline#enabled = 0 " use for GNU Screen, must!!!
+" Also when using screen and Vim:
+" Disable screen hardstatus (bottom) status in order to see Airline correctly
+" Always double check performance without your .vimrc as well:
+"    $ vim -u NONE a.v
 
         " Dont show tabs
         " enable/disable displaying tabs, regardless of number. >
@@ -933,9 +941,9 @@ endif
         Plugin 'vim-scripts/BufOnly.vim'
 
     " Colorscheme approximation in terminals
-        " Plugin 'godlygeek/csapprox'
+        Plugin 'godlygeek/csapprox'
 
-        " set t_Co=256
+        set t_Co=256
             " /ref/ https://github.com/spf13/spf13-vim/issues/90
             " let g:CSApprox_hook_post = ['hi Normal  ctermbg=NONE ctermfg=NONE',
                                 " \ 'hi NonText ctermbg=NONE ctermfg=NONE' ]
@@ -1645,8 +1653,24 @@ endif
     if !has('gui_running')
       set t_Co=256
       set t_ut=
-      highlight Normal ctermbg=bg ctermfg=fg
-      highlight NonText ctermbg=bg ctermfg=bg
+      " Workaround for 'screen' app scrolling - set background to black
+      " highlight Normal ctermbg=232
+
+      " highlight NonText ctermbg=bg ctermfg=bg
+      " highligh Normal ctermbg      = 0 guibg = #000000
+      " highligh NonText ctermbg     = 0 guibg = #000000
+      " highligh NormalNC ctermbg    = 0 guibg = #000000
+      " highligh EndOfBuffer ctermbg = 0 guibg = #000000
+      " set background=dark
+    endif
+
+    " Just because of 'screen' app rendering - temp workaround
+    " Background set to black, comments set to darker gray
+    " Not needed when tabline is not used, fixes latency with pagedown
+    if !has('gui_running')
+        " highlight Normal  ctermbg=232
+        " highlight Comment ctermfg=243
+        highlight Comment ctermfg=249
     endif
 
 
