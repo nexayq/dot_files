@@ -933,9 +933,9 @@ endif
         Plugin 'vim-scripts/BufOnly.vim'
 
     " Colorscheme approximation in terminals
-        Plugin 'godlygeek/csapprox'
+        " Plugin 'godlygeek/csapprox'
 
-        set t_Co=256
+        " set t_Co=256
             " /ref/ https://github.com/spf13/spf13-vim/issues/90
             " let g:CSApprox_hook_post = ['hi Normal  ctermbg=NONE ctermfg=NONE',
                                 " \ 'hi NonText ctermbg=NONE ctermfg=NONE' ]
@@ -1259,6 +1259,18 @@ endif
     " Vim calculator
         Plugin 'fedorenchik/VimCalc3'
 
+    " SystemVerilog syntax
+        Plugin 'vhda/verilog_systemverilog.vim'
+        autocmd BufNewFile,BufRead *.v,*.sv,*.vh,*.svh   set ft=verilog_systemverilog
+
+    " Tokyo Night colortheme
+        Plugin 'ghifarit53/tokyonight-vim'
+
+        " set termguicolors
+
+        let g:tokyonight_style = 'night' " available: night, storm
+        let g:tokyonight_enable_italic = 0
+        let g:tokyonight_disable_italic_comment = 1
 
 " >>>>> Plugins >>>>>
 
@@ -1384,6 +1396,7 @@ endif
         "
         " see :h vundle for more details or wiki for FAQ
         " Put your non-Plugin stuff after this line
+
 
 " NK functions
     let g:nk_sessiondir  = g:nk_vim_dir."/sessions"
@@ -1615,20 +1628,34 @@ endif
 
 " Colorscheme
     syntax enable
-    set background=dark
     " colorscheme solarized
     " colorscheme darkblue
     " colorscheme darkspectrum
     " colorscheme aldmeris
 
     colorscheme desert
+    " highlight Normal guibg=#000000
+    " set background=dark
+    hi Comment ctermfg=245
+
+" Set colorscheme - Desert or Tokyo Night
+    " colorscheme tokyonight
+
+    " "Use same color for background and in empty part - tokyo night
+    if !has('gui_running')
+      set t_Co=256
+      set t_ut=
+      highlight Normal ctermbg=bg ctermfg=fg
+      highlight NonText ctermbg=bg ctermfg=bg
+    endif
+
 
     " Set darker background color for windows
     " if has("win32") || has("win16")
     " if has("gui_running")
         " highlight Normal guibg=#191919
     " else
-        highlight Normal guibg=#000000
+        " highlight Nomral guibg=#000000
     " endif
         " highlight Normal guibg=#000000
         " highlight Normal ctermbg=1
@@ -1639,15 +1666,15 @@ endif
 
 
     "Use same color for background and in empty part
-    hi NonText guibg=bg
-    hi NonText guifg=bg
+    " hi NonText guibg=#000000
+    " hi NonText guifg=#000000
     " /ref/ http://stackoverflow.com/a/9406825/2450748
 
     " /ref/ https://github.com/altercation/Vim-colors-solarized
     "       http://ethanschoonover.com/solarized
     "       http://www.vim.org/scripts/script.php?script_id=3673
 
-    hi CursorLine guibg=#424949
+    " hi CursorLine guibg=#424949
 
 " Whitespace characters
     set list
@@ -2455,7 +2482,7 @@ endif
     nnoremap <leader>[p :call <SID>JumpPrompt()<CR>
 
 " SystemVerilog highlight as verilog
-    autocmd BufNewFile,BufRead *.v,*.sv,*.vh,*.svh   set ft=verilog
+    " autocmd BufNewFile,BufRead *.v,*.sv,*.vh,*.svh   set ft=verilog
     " /ref/ http://stackoverflow.com/a/11666247/2450748
 
 " Reload file when it changes from externall application
