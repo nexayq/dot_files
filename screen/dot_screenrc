@@ -47,6 +47,14 @@ term screen-256colors
         # https://wiki.archlinux.org/index.php/GNU_Screen
 
 # pretty statusbar
+# BIG PERFORMANCE HIT! NOT COMPATIBLE WITH 'GNU SCREEN'!!!
+# It renders slow and you can see flickering while page down
+# In Vim disable tabline in Airline and in general! (dont do "set showtabline=2")
+# When using screen disable tabline completely from vim!
+#        let g:airline#extensions#tabline#enabled = 1
+#        " let g:airline#extensions#tabline#enabled = 0 " use for GNU Screen, must!!!
+#  Also when using screen and Vim:
+#  Disable screen hardstatus (bottom) status in order to see Airline correctly
     # https://wiki.archlinux.org/index.php/GNU_Screen
     hardstatus off
     hardstatus alwayslastline
