@@ -250,6 +250,9 @@ endif
 
     "Airline plugin
         Plugin 'vim-airline/vim-airline'
+
+        " Fixate airline theme so that it doesn't change when colortheme is changed
+        let g:airline_theme = 'dark'
         " Enable the list of buffers
 " BIG PERFORMANCE HIT! NOT COMPATIBLE WITH 'GNU SCREEN'!!!
 " It renders slow and you can see flickering while page down
