@@ -1647,7 +1647,7 @@ endif
     colorscheme desert
     " highlight Normal guibg=#000000
     " set background=dark
-    hi Comment ctermfg=245
+    hi Comment ctermfg=245 guifg=#BABABA
 
 " Set colorscheme - Desert or Tokyo Night
     " colorscheme tokyonight
