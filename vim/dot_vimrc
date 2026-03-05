@@ -363,6 +363,8 @@ endif
 
     " utilsnips
         Plugin 'SirVer/ultisnips'
+
+        " let g:UltiSnipsExpandTrigger = "<C-e>"
         " Custom verilog snippets (verilog templates) are added in file:
         "    ~/.vim/UltiSnips/verilog.snippets
 
@@ -1272,7 +1274,8 @@ endif
 
     " SystemVerilog syntax
         Plugin 'vhda/verilog_systemverilog.vim'
-        autocmd BufNewFile,BufRead *.v,*.sv,*.vh,*.svh   set ft=verilog_systemverilog
+        autocmd BufNewFile,BufRead *.v,*.sv,*.vh,*.svh   set ft=verilog
+        autocmd BufNewFile,BufRead *.svh                 set ft=verilog_systemverilog
 
     " Tokyo Night colortheme
         Plugin 'ghifarit53/tokyonight-vim'
