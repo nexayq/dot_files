@@ -3026,3 +3026,19 @@ endif
     " Select wanted lines in visual mode and run external tac command "!tac"
         " :'<,'>!tac
             " https://vim.fandom.com/wiki/Reverse_order_of_lines
+
+" NeoVim specifics
+if has('nvim')
+    " Settings only for Neovim
+
+    " Test OSC52 clipboard in terminal
+    " bash
+    " $ printf "\e52;c;$(printf hello | base64)\a"
+    " csh
+    " $ printf "\e52;c;`printf hello | base64`\a"
+    " Set OSC52 clipboard for SSH connections
+    if exists('$SSH_CONNECTION')
+        let g:clipboard='osc52'
+    endif
+
+endif
