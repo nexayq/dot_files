@@ -3042,3 +3042,33 @@ if has('nvim')
     endif
 
 endif
+
+" Set color scheme, color theme, syntax highlightning
+
+"" Background color
+" If you can set background color through terminal and you can not use "termguicolors",
+" which means you can not use guibg/fg but only ctermbg/fg
+" then set background color through terminal and set in ~/.vimrc:
+" hi Normal ctermbg=NONE
+" check current color and set for keyword under cursor
+" #1A1B26 for tokyo night color scheme
+
+"" Check color used for keyword under the cursor
+" :echo synIDattr(synID(line("."), col("."), 1), "name")
+"    vimLineComment
+" :hi vimLineComment
+"    vimLineComment xxx links to vimComment
+" :hi vimComment
+"    vimComment     xxx links to Comment
+" :hi Comment
+"    Comment        xxx term=bold ctermfg=249 guifg=#BABABA
+
+" Examples:
+" :hi Statement   ctermfg=210
+" :hi Include     ctermfg=210
+" :hi Conditional ctermfg=73
+" :hi Repeat      ctermfg=73
+
+" But it is better to change it in colorscheme directly:
+" $ vim ~/.vim/bundle/tokyonight-vim/colors/tokyonight.vim
+    " Replace all "203" with "210" for example
