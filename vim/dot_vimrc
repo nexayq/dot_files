@@ -3073,6 +3073,14 @@ endif
 " $ vim ~/.vim/bundle/tokyonight-vim/colors/tokyonight.vim
     " Replace all "203" with "210" for example
 
+" Run gvim in terminal mode (to have clipboard and sessions for example)
+    " $ gvim -v
+        " or
+    " $ vimx
+
+" Vim colors for ctermbg, ctermfg, xterm 256 colors
+    " https://www.ditig.com/256-colors-cheat-sheet
+
 " Security
 set nomodeline
 set nomodelineexpr
