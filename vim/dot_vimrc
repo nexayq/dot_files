@@ -3072,3 +3072,7 @@ endif
 " But it is better to change it in colorscheme directly:
 " $ vim ~/.vim/bundle/tokyonight-vim/colors/tokyonight.vim
     " Replace all "203" with "210" for example
+
+" Security
+set nomodeline
+set nomodelineexpr
